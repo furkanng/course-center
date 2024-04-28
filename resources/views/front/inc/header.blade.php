@@ -14,53 +14,30 @@
                             <div class="main-menu main-menu-2 main-menu-border ml-30 pl-30">
                                 <nav id="mobile-menu">
                                     <ul>
-                                        <li class="has-dropdown">
-                                            <a href="index.html">Home</a>
-                                            <ul class="submenu">
-                                                <li><a href="index.html">Home Style 1</a></li>
-                                                <li><a href="index-2.html">Home Style 2</a></li>
-                                                <li><a href="index-3.html">Home Style 3</a></li>
-                                            </ul>
+                                        <li>
+                                            <a href="#">YKS</a>
                                         </li>
                                         <li>
-                                            <a href="about.html">About</a>
-                                        </li>
-                                        <li class="has-dropdown">
-                                            <a href="course-v1.html">Courses</a>
-                                            <ul class="submenu">
-                                                <li><a href="course-v1.html">Course Style 1</a></li>
-                                                <li><a href="course-v2.html">Course Style 2</a></li>
-                                                <li><a href="course-list.html">Course List</a></li>
-                                                <li><a href="course-sidebar.html">Course Sidebar</a></li>
-                                                <li><a href="course-details.html">Course Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="has-dropdown">
-                                            <a href="about.html">Pages</a>
-                                            <ul class="submenu">
-                                                <li><a href="event.html">Our Events</a></li>
-                                                <li><a href="event-details.html">Event Details</a></li>
-                                                <li><a href="team.html">Team</a></li>
-                                                <li><a href="team-details.html">Team Details</a></li>
-                                                <li><a href="error.html">404 Error</a></li>
-                                                <li><a href="my-profile.html">My Profile</a></li>
-                                                <li><a href="my-course.html">My Courses</a></li>
-                                                <li><a href="sign-in.html">Sign In</a></li>
-                                                <li><a href="sign-up.html">Sign Up</a></li>
-                                                <li><a href="cart.html">Cart</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="has-dropdown">
-                                            <a href="blog.html">Blog</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog-details.html">Blog Details</a></li>
-                                            </ul>
+                                            <a href="#">LGS</a>
                                         </li>
                                         <li>
-                                            <a href="contact.html">Contact</a>
+                                            <a href="#">ALES</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">DGS</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">KPSS</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">YDS</a>
+                                        </li>
+                                        <li class="has-dropdown">
+                                            <a href="#">Tümü</a>
+                                            <ul class="submenu">
+                                                <li><a href="#">test</a></li>
+                                                <li><a href="#">test2</a></li>
+                                            </ul>
                                         </li>
                                     </ul>
                                 </nav>
@@ -72,7 +49,7 @@
                             <div class="header__action d-none d-xl-block">
                                 <ul>
                                     <li>
-                                        <a href="sign-in.html">
+                                        <a href="#">
                                             <svg width="15" height="20" viewBox="0 0 15 20" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -91,7 +68,7 @@
                             <div class="header__search header__search-2 d-none d-xl-block">
                                 <form action="#">
                                     <div class="header__search-input">
-                                        <input type="text" placeholder="Search...">
+                                        <input type="text" placeholder="Dershane Bul...">
                                         <button class="header__search-btn">
                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">

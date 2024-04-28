@@ -6,6 +6,6 @@ Route::get('/', function () {
     return view('front.pages.home');
 });
 
-Route::get('/admin', function () {
+Route::get('/yonetim', function () {
     return view('panel.pages.home');
 });
