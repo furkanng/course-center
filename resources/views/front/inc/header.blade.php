@@ -7,36 +7,26 @@
                     <div class="col-xxl-8 col-xl-9 col-lg-10 col-md-6 col-6">
                         <div class="header__bottom-left d-flex align-items-center">
                             <div class="logo">
-                                <a href="index.html">
-                                    <img src="{{asset("front/assets/img/logo/logo-2.png")}}" alt="logo">
+                                <a href="{{route("home")}}">
+                                    <img src="{{asset("images/logo.png")}}" alt="logo">
                                 </a>
                             </div>
                             <div class="main-menu main-menu-2 main-menu-border ml-30 pl-30">
                                 <nav id="mobile-menu">
                                     <ul>
-                                        <li>
-                                            <a href="#">YKS</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">LGS</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">ALES</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">DGS</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">KPSS</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">YDS</a>
-                                        </li>
+                                        @foreach($courses as $course)
+                                            @if($course["menu_status"] == 1)
+                                                <li>
+                                                    <a href="#">{{strtoupper($course["name"])}}</a>
+                                                </li>
+                                            @endif
+                                        @endforeach
                                         <li class="has-dropdown">
                                             <a href="#">Tümü</a>
                                             <ul class="submenu">
-                                                <li><a href="#">test</a></li>
-                                                <li><a href="#">test2</a></li>
+                                                @foreach($courses as $course)
+                                                    <li><a href="#">{{strtoupper($course["name"])}}</a></li>
+                                                @endforeach
                                             </ul>
                                         </li>
                                     </ul>
@@ -49,7 +39,7 @@
                             <div class="header__action d-none d-xl-block">
                                 <ul>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{route("login")}}">
                                             <svg width="15" height="20" viewBox="0 0 15 20" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <path

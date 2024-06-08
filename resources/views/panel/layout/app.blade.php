@@ -32,6 +32,12 @@
         @include("panel.inc.sidebar")
         <!-- partial -->
         <div class="main-panel">
+            @if (session('message'))
+                <x-modal>
+                    {{ session('message') }}
+                </x-modal>
+            @endif
+
             <div class="content-wrapper">
                 @yield('content')
             </div>

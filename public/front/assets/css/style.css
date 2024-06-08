@@ -90,7 +90,7 @@
   --tp-text-14: #56595C;
   --tp-text-15: #a1a2ab;
   --tp-theme-1: #3D6CE7;
-  --tp-theme-2: #258E46;
+  --tp-theme-2: #41bcc7;
   --tp-theme-3: #007A70;
   --tp-border-1: #dedede;
   /**
@@ -125,7 +125,7 @@
 }
 
 /*---------------------------------
-    typography css start 
+    typography css start
 ---------------------------------*/
 body {
   font-family: var(--tp-ff-body);
@@ -308,7 +308,7 @@ input[type=color] {
 }
 
 /*---------------------------------
-    common classes css start 
+    common classes css start
 ---------------------------------*/
 .w-img img {
   width: 100%;
@@ -362,7 +362,7 @@ input[type=color] {
 }
 
 /*----------------------------------------
-    Body Overlay 
+    Body Overlay
 -----------------------------------------*/
 .body-overlay {
   background-color: rgba(var(--tp-common-black), 0.5);

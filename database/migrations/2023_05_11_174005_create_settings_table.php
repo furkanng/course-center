@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('slider', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->increments("id");
             $table->string('title')->nullable();
             $table->string('key')->nullable();
-            $table->string('value')->nullable();
+            $table->longText('value')->nullable();
+            $table->string('type')->nullable();
+            $table->string('group_key')->nullable();
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sidebar');
+        Schema::dropIfExists('settings');
     }
 };

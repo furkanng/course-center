@@ -3,36 +3,33 @@
         <li class="nav-item nav-profile">
             <a href="#" class="nav-link">
                 <div class="nav-profile-image">
-                    <img src="{{asset("panel/assets/images/faces/face1.jpg")}}" alt="profile" />
+                    <img src="{{asset("panel/assets/images/faces/face1.jpg")}}" alt="profile"/>
                     <span class="login-status online"></span>
                     <!--change to offline or busy as needed-->
                 </div>
                 <div class="nav-profile-text d-flex flex-column">
-                    <span class="font-weight-bold mb-2">David Grey. H</span>
+                    <span class="font-weight-bold mb-2">{{auth()->user()->name}}</span>
                     <span class="text-secondary text-small">Project Manager</span>
                 </div>
                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="../index.html">
-                <span class="menu-title">Dashboard</span>
+            <a class="nav-link" href="{{route("panel.home")}}">
+                <span class="menu-title">Yonetim</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                <span class="menu-title">Basic UI Elements</span>
-                <i class="menu-arrow"></i>
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+               aria-controls="ui-basic">
+                <span class="menu-title">Tasarım</span>
                 <i class="mdi mdi-crosshairs-gps menu-icon"></i>
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="../pages/ui-features/buttons.html">Buttons</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../pages/ui-features/dropdowns.html">Dropdowns</a>
+                        <a class="nav-link" href="{{route("panel.frontend.dashboard.index")}}">Önyüz Ayarları</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../pages/ui-features/typography.html">Typography</a>
@@ -42,13 +39,13 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-                <span class="menu-title">Icons</span>
+                <span class="menu-title">Site Yönetimi</span>
                 <i class="mdi mdi-contacts menu-icon"></i>
             </a>
             <div class="collapse" id="icons">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="../pages/icons/font-awesome.html">Font Awesome</a>
+                        <a class="nav-link" href="{{route("panel.manager.course.index")}}">Kurs Yönetimi</a>
                     </li>
                 </ul>
             </div>
