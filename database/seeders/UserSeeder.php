@@ -18,12 +18,13 @@ class UserSeeder extends Seeder
         $defaultData =
             [
                 "id" => 1,
-                "name" => "Alperen Furkan",
+                "name" => "Furkan Güzelgörür",
+                "phone" => "5373664765",
                 "email" => "admin@admin.com",
+                "city" => "Kahramanmaraş",
+                "district" => "onikişubat",
                 "password" => '$2y$10$WGerOaCXGZy2rPNkQ6QYreHCKcp/FotVhwT7CE75L2PFb1Knh5KoO',
                 "role" => "admin",
-
-
             ];
 
         User::query()->insert($defaultData);

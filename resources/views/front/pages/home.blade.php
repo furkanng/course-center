@@ -1,8 +1,7 @@
 @extends('front.layout.app')
 
-@section('title', 'Home Page')
+@section('title', 'Ana Sayfa')
 @section('content')
-
     <!-- offcanvas area start -->
     <div class="offcanvas__area">
         <div class="modal fade" id="offcanvasmodal" tabindex="-1" aria-labelledby="offcanvasmodal" aria-hidden="true">
@@ -92,14 +91,14 @@
     <main>
         <!-- slider area start -->
         <section class="slider__area slider__height-2 include-bg d-flex align-items-center"
-                 data-background="{{asset("front/")}}assets/img/slider/2/slider-2-bg.jpg">
+                 data-background="{{asset("front/assets/img/slider/2/slider-2-bg.jpg")}}">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-xxl-6 col-lg-6">
                         <div class="slider__content-2 mt-30">
-                            <span>{{$data["slider"]["slider_ust_bilgi_yazisi"]}}</span>
-                            <h3 class="slider__title-2">{{$data["slider"]["slider_ana_bilgi_yazisi"]}}</h3>
-                            <p>{{$data["slider"]["slider_alt_bilgi_yazisi"]}}</p>
+                            <span>{{$language["slider_ust_bilgi_yazisi"]}}</span>
+                            <h3 class="slider__title-2">{{$language["slider_ana_bilgi_yazisi"]}}</h3>
+                            <p>{{$language["slider_alt_bilgi_yazisi"]}}</p>
                         </div>
                     </div>
                     <div class="col-xxl-6 col-lg-6">
@@ -112,12 +111,12 @@
                                 <img class="slider__shape-3"
                                      src="{{asset("front/assets/img/slider/2/shape/slider-cap-3.png")}}" alt="">
                             </div>
+
                             <span class="slider__thumb-mask">
-                                   @if($data["slider"]["slider_orta_resim"] !== "")
                                     <img class="slider__shape-4"
-                                         src="{{url($data["slider"]["slider_orta_resim"])}}" alt="">
-                                @endif
-                        </span>
+                                         src="{{$image["slider_resim"] ?? \App\Service\Helper::getNoImage()}}"
+                                         alt="slider">
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -133,10 +132,10 @@
                         <div class="category__wrapper">
                             <div class="section__title-wrapper-2">
                                 <span
-                                    class="section__title-pre-2">{{$data["category"]["category_ust_bilgi_yazisi"]}}</span>
-                                <h3 class="section__title-2 section__title-2-30">{{$data["category"]["category_ana_bilgi_yazisi"]}}</h3>
+                                    class="section__title-pre-2">{{$language["kategori_ust_bilgi_yazisi"]}}</span>
+                                <h3 class="section__title-2 section__title-2-30">{{$language["kategori_ana_bilgi_yazisi"]}}</h3>
                             </div>
-                            <p>{{$data["category"]["category_alt_bilgi_yazisi"]}}</p>
+                            <p>{{$language["kategori_alt_bilgi_yazisi"]}}</p>
                         </div>
                     </div>
                     <div class="col-xxl-8 col-xl-8 col-lg-8">
@@ -146,7 +145,7 @@
                                     @if($course["category_status"] == 1)
                                         <div class="col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
                                             <div class="category__item text-center mb-45">
-                                                <div class="category__icon {{$course["color"]}}">
+                                                <div class="category__icon {{\App\Service\Helper::randColor()}}">
                                                     <a href="course-v1.html">
                                                         {!! $course["svg"]  ?? \App\Service\Helper::defaultSVG()!!}
                                                     </a>
@@ -190,18 +189,19 @@
                         <div class="research__wrapper-2">
                             <div class="section__title-wrapper-2">
                                 <span
-                                    class="section__title-pre-2">{{$data["research"]["research_ust_bilgi_yazisi"]}}</span>
-                                <h3 class="section__title-2">{{$data["research"]["research_ana_bilgi_yazisi"]}}</h3>
+                                    class="section__title-pre-2">{{$language["arastirma_ust_bilgi_yazisi"]}}</span>
+                                <h3 class="section__title-2">{{$language["arastirma_ana_bilgi_yazisi"]}}</h3>
                             </div>
-                            <p>{{$data["research"]["research_alt_bilgi_yazisi"]}}</p>
+                            <p>{{$language["arastirma_alt_bilgi_yazisi"]}}</p>
                             <div class="research__btn-2 mb-70">
                                 <a href="contact.html" class="tp-btn-5 tp-btn-6">Şimdi Keşfet</a>
                             </div>
 
                             <div class="research__download">
-
                                 <div class="research__download-bg include-bg">
-                                    <img src="{{url($data["research"]["research_banner_resim"])}}" alt="">
+                                    <img src="{{$image["arastirma_resim"] ?? \App\Service\Helper::getNoImage()}}"
+                                         style="max-width: 544px; max-height: 200px"
+                                         alt="arastirma">
                                 </div>
                             </div>
                         </div>
@@ -211,34 +211,86 @@
                             <div class="research__features-item d-sm-flex align-items-start mb-40">
                                 <div class="research__features-icon mr-25">
                               <span>
-                                 {!! $data["research"]["research_info_svg_1"] ?? \App\Service\Helper::defaultSVG() !!}
+                                <svg width="27" height="27" viewBox="0 0 27 27" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M26 13.9961V15.1656C26 19.8436 24.8875 21 20.45 21H6.55C2.1125 21 1 19.8305 1 15.1656V6.83443C1 2.16951 2.1125 1 6.55 1H8.5"
+                                        stroke="#6151FB" stroke-width="1.6" stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                                    <path d="M13.5 21.5V25.5" stroke="#6151FB" stroke-width="1.6" stroke-linecap="round"
+                                          stroke-linejoin="round"/>
+                                    <path d="M1 14.75H26" stroke="#6151FB" stroke-width="1.6" stroke-linecap="round"
+                                          stroke-linejoin="round"/>
+                                    <path d="M7.875 26H19.125" stroke="#6151FB" stroke-width="1.6"
+                                          stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path
+                                        d="M20.825 10.2127H14.875C13.15 10.2127 12.575 9.0627 12.575 7.9127V3.5127C12.575 2.1377 13.7 1.0127 15.075 1.0127H20.825C22.1 1.0127 23.125 2.0377 23.125 3.31269V7.9127C23.125 9.1877 22.1 10.2127 20.825 10.2127Z"
+                                        stroke="#6151FB" stroke-width="1.6" stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                                    <path
+                                        d="M24.6375 8.39985L23.125 7.33735V3.88735L24.6375 2.82485C25.3875 2.31235 26 2.62485 26 3.53735V7.69985C26 8.61235 25.3875 8.92485 24.6375 8.39985Z"
+                                        stroke="#6151FB" stroke-width="1.6" stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                                 </svg>
                               </span>
                                 </div>
                                 <div class="research__features-content">
-                                    <h4>{{$data["research"]["research_info_title_1"]}}</h4>
-                                    <p>{{$data["research"]["research_info_description_1"]}}</p>
+                                    <h4>{{$language["arastirma_bilgi_baslik_1"]}}</h4>
+                                    <p>{{$language["arastirma_bilgi_aciklama_1"]}}</p>
                                 </div>
                             </div>
                             <div class="research__features-item d-sm-flex align-items-start mb-40">
                                 <div class="research__features-icon mr-25">
                               <span class="yellow-bg">
-                                {!! $data["research"]["research_info_svg_2"] ?? \App\Service\Helper::defaultSVG() !!}
+                                <svg width="28" height="27" viewBox="0 0 28 27" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11.4 19.746H6.47299C2.092 19.746 1 18.654 1 14.273V6.47299C1 2.092 2.092 1 6.47299 1H20.162C24.543 1 25.635 2.092 25.635 6.47299"
+                                        stroke="#F4930E" stroke-width="1.7" stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                                    <path d="M11.3999 25.6218V19.7458" stroke="#F4930E" stroke-width="1.7"
+                                          stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M1 14.5459H11.4" stroke="#F4930E" stroke-width="1.7" stroke-linecap="round"
+                                          stroke-linejoin="round"/>
+                                    <path d="M7.16211 25.6218H11.4001" stroke="#F4930E" stroke-width="1.7"
+                                          stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path
+                                        d="M26.9999 14.3509V21.7739C26.9999 24.8549 26.2329 25.6219 23.152 25.6219H18.537C15.456 25.6219 14.689 24.8549 14.689 21.7739V14.3509C14.689 11.2699 15.456 10.5029 18.537 10.5029H23.152C26.2329 10.5029 26.9999 11.2699 26.9999 14.3509Z"
+                                        stroke="#F4930E" stroke-width="1.7" stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                                    <path d="M20.8179 21.4359H20.8296" stroke="#F4930E" stroke-width="2"
+                                          stroke-linecap="round" stroke-linejoin="round"/>
+                                 </svg>
                               </span>
                                 </div>
                                 <div class="research__features-content">
-                                    <h4>{{$data["research"]["research_info_title_2"]}}</h4>
-                                    <p>{{$data["research"]["research_info_description_2"]}}</p>
+                                    <h4>{{$language["arastirma_bilgi_baslik_2"]}}</h4>
+                                    <p>{{$language["arastirma_bilgi_aciklama_2"]}}</p>
                                 </div>
                             </div>
                             <div class="research__features-item d-sm-flex align-items-start">
                                 <div class="research__features-icon mr-25">
                               <span class="green-bg">
-                                {!! $data["research"]["research_info_svg_3"] ?? \App\Service\Helper::defaultSVG() !!}
+                                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M14.6185 23.8234H7.24516C3.5585 23.8234 2.3335 21.3734 2.3335 18.9118V9.08842C2.3335 5.40176 3.5585 4.17676 7.24516 4.17676H14.6185C18.3052 4.17676 19.5302 5.40176 19.5302 9.08842V18.9118C19.5302 22.5984 18.2935 23.8234 14.6185 23.8234Z"
+                                        stroke="#20AD96" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                                    <path
+                                        d="M22.7736 19.9502L19.5303 17.6752V10.3135L22.7736 8.03849C24.3603 6.93015 25.6669 7.60682 25.6669 9.55515V18.4452C25.6669 20.3935 24.3603 21.0702 22.7736 19.9502Z"
+                                        stroke="#20AD96" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                                    <path
+                                        d="M13.4165 12.8345C14.383 12.8345 15.1665 12.051 15.1665 11.0845C15.1665 10.118 14.383 9.33447 13.4165 9.33447C12.45 9.33447 11.6665 10.118 11.6665 11.0845C11.6665 12.051 12.45 12.8345 13.4165 12.8345Z"
+                                        stroke="#20AD96" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                                 </svg>
                               </span>
                                 </div>
                                 <div class="research__features-content">
-                                    <h4>{{$data["research"]["research_info_title_3"]}}</h4>
-                                    <p>{{$data["research"]["research_info_description_3"]}}</p>
+                                    <h4>{{$language["arastirma_bilgi_baslik_3"]}}</h4>
+                                    <p>{{$language["arastirma_bilgi_aciklama_3"]}}</p>
                                 </div>
                             </div>
                         </div>

@@ -23,6 +23,18 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'city',
+        'district',
+        'phone',
+        'role',
+        'company_name',
+        'company_type',
+        'user_type',
+        'address',
+        'status',
+        'sms_approve',
+        'email_approve',
+        'kvkk_approve',
     ];
 
     /**

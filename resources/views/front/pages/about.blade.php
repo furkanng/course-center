@@ -1,4 +1,3 @@
-
 @extends('front.layout.app')
 
 @section('title', 'Home Page')
@@ -78,7 +77,7 @@
             </div>
         </div>
       </div>
-      <!-- offcanvas area end -->      
+      <!-- offcanvas area end -->
       <div class="body-overlay"></div>
       <!-- offcanvas area end -->
 

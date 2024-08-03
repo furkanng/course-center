@@ -47,7 +47,7 @@
                                 </div>
                                 <button type="submit" class="tp-btn  w-100"><span></span> Giriş Yap</button>
                                 <div class="sign__new text-center mt-20">
-                                    <p>Hesabınız yok mu? <a href="{{"register"}}">Kayıt Ol</a></p>
+                                    <p>Hesabınız yok mu? <a href="{{route("register")}}">Kayıt Ol</a></p>
                                 </div>
                             </form>
                         </div>
@@ -58,3 +58,4 @@
     </section>
 
 @endsection
+

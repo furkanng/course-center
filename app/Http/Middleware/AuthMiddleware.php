@@ -19,6 +19,7 @@ class AuthMiddleware
         if (!Auth::check()) {
             return redirect('login')->with('error', 'Lütfen önce giriş yapınız.');
         } else {
+            $request->session()->regenerate();
             return $next($request);
         }
     }

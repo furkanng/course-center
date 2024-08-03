@@ -13,9 +13,7 @@ return new class extends Migration {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("slug");
             $table->text("svg")->nullable();
-            $table->string("color")->nullable();
             $table->integer("order")->nullable();
             $table->boolean("menu_status");
             $table->boolean("category_status");

@@ -3,41 +3,37 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Models\Course;
-use App\Models\Setting;
+use App\Http\Requests\RegisterRequest;
+use App\Models\CompanyType;
+use App\Models\Page;
+use App\Models\User;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function home()
+    public function home(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
-        $sliders = Setting::query()->where("group_key", "slider_settings")->get();
-        $categories = Setting::query()->where("group_key", "category_settings")->get();
-        $researches = Setting::query()->where("group_key", "research_settings")->get();
-        $courses = Course::query()->where("status", 1)->orderBy('order')->get();
-
-        $data = [];
-
-        foreach ($sliders as $slider) {
-            $data["slider"][$slider->key] = $slider->value;
-        }
-        foreach ($categories as $category) {
-            $data["category"][$category->key] = $category->value;
-        }
-        foreach ($researches as $research) {
-            $data["research"][$research->key] = $research->value;
-        }
-        return view("front.pages.home", compact(["data", "courses"]));
+        return view("front.pages.home");
     }
 
     public function login()
     {
-        $courses = Course::query()->where("status", 1)->orderBy('order')->get();
-        return view("front.pages.login",compact("courses"));
+        return view("front.pages.login");
     }
 
-    public function loginPost(Request $request)
+    public function register(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    {
+        $page = Page::query()->where("permanent_name", "sartlar_ve_kosullar")->first();
+        $types = CompanyType::all();
+        return view("front.pages.register", compact(["types", "page"]));
+    }
+
+    public function loginPost(Request $request): RedirectResponse
     {
         $credentials = $request->only('email', 'password');
 
@@ -48,9 +44,29 @@ class HomeController extends Controller
         }
     }
 
-    public function logout()
+    public function registerPost(RegisterRequest $request): RedirectResponse
+    {
+        $model = User::query()->create($request->all());
+
+        if ($model) {
+            $credentials = $request->only('email', 'password');
+            Auth::attempt($credentials);
+            return redirect()->route('panel.home')->with('success', 'Kullanıcı başarıyla oluşturuldu.');
+        } else {
+            return redirect()->back()->with('error', 'Kullanıcı oluşturulurken bir hata oluştu.')->withInput();
+        }
+    }
+
+    public function logout(): RedirectResponse
     {
         auth()->logout();
-        return redirect()->route('home')->with('error', 'Çıkış Başarılı.');
+        return redirect()->route('home')->with('success', 'Çıkış Başarılı.');
+    }
+
+    public function page($seo_link)
+    {
+        $page = Page::query()->where("seo_link", $seo_link)->firstOrFail();
+
+        return view("front.pages.page", compact("page"));
     }
 }

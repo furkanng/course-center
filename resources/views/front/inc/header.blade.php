@@ -8,7 +8,7 @@
                         <div class="header__bottom-left d-flex align-items-center">
                             <div class="logo">
                                 <a href="{{route("home")}}">
-                                    <img src="{{asset("images/logo.png")}}" alt="logo">
+                                    <img src="{{asset("images/logo.png")}}" alt="hangidershane">
                                 </a>
                             </div>
                             <div class="main-menu main-menu-2 main-menu-border ml-30 pl-30">

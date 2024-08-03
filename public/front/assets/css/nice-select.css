@@ -1,10 +1,12 @@
 
 
 .nice-select {
+    margin-bottom: 25px;
 	-webkit-tap-highlight-color: transparent;
-	background-color: #fff;
-	border-radius: 5px;
-	border: solid 1px #e8e8e8;
+	background-color: var(--tp-grey-2);
+    color: var(--tp-common-black);
+	border-radius: 6px;
+	border: solid 2px transparent;
 	box-sizing: border-box;
 	clear: both;
 	cursor: pointer;
@@ -13,11 +15,10 @@
 	font-family: inherit;
 	font-size: 14px;
 	font-weight: normal;
-	height: 42px;
-	line-height: 40px;
+	height: 60px;
+	line-height: 52px;
 	outline: none;
-	padding-left: 18px;
-	padding-right: 30px;
+    padding: 0 50px;
 	position: relative;
 	text-align: left !important;
 	-webkit-transition: all 0.2s ease-in-out;
@@ -27,7 +28,11 @@
 	-ms-user-select: none;
 	user-select: none;
 	white-space: nowrap;
-	width: auto;
+	width: 100%;
+}
+
+.nice-select .li {
+    padding-top: 30px;
 }
 
 .nice-select:hover {
@@ -121,16 +126,22 @@
 }
 
 .nice-select .list {
+    max-height: 300px; /* İstediğiniz yüksekliği belirleyin */
+    overflow-y: auto;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: normal;
 	background-color: #fff;
+    line-height: 52px;
+    padding: 0px;
 	border-radius: 5px;
 	box-shadow: 0 0 0 1px rgba(68, 68, 68, 0.11);
 	box-sizing: border-box;
 	margin-top: 4px;
 	opacity: 0;
-	overflow: hidden;
-	padding: 0;
 	pointer-events: none;
 	position: absolute;
+    width: 100%;
 	top: 100%;
 	left: 0;
 	-webkit-transform-origin: 50% 0;
@@ -169,10 +180,6 @@
 	background-color: transparent;
 	color: #999;
 	cursor: default;
-}
-
-.no-csspointerevents .nice-select .list {
-	display: none;
 }
 
 .no-csspointerevents .nice-select.open .list {

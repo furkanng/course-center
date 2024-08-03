@@ -32,4 +32,22 @@ class Helper
                           stroke-width="1.56" stroke-linecap="round"/>
                             </svg>';
     }
+
+    public static function getNoImage(): string
+    {
+        return asset("images/no_image.jpg");
+    }
+
+    public static function randColor(): array|int|string
+    {
+        $colors = [
+            "pink-bg",
+            "orange-bg",
+            "purple-bg",
+            "yellow-bg",
+        ];
+
+        $randomKey = array_rand($colors);
+        return $colors[$randomKey];
+    }
 }
