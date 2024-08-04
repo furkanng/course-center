@@ -31,7 +31,7 @@ trait SeoTrait
         });
     }
 
-    protected function OldLink(): string
+    protected function link(): string
     {
         $column = $this->getSeoColumn();
         return Str::slug($this->getOriginal($column), "-", "tr");
@@ -39,7 +39,7 @@ trait SeoTrait
 
     protected function initializeLinkList(): void
     {
-        $this->linkList = LinkList::query()->firstOrNew(['link' => $this->OldLink()]);
+        $this->linkList = LinkList::query()->firstOrNew(['link' => $this->link()]);
     }
 
     private function mapSeoAttributes(): void
@@ -77,6 +77,11 @@ trait SeoTrait
 
     private function linkDelete(): void
     {
-        LinkList::query()->where("link", $this->OldLink())->delete();
+        LinkList::query()->where("link", $this->link())->delete();
+    }
+
+    public function getLinkAttribute(): string
+    {
+        return $this->link();
     }
 }

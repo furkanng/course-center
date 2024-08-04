@@ -37,6 +37,8 @@ class RouteServiceProvider extends ServiceProvider
                     Route::prefix("/manager")->group(base_path('routes/web/panel.php'));
                 });
             });
+
+            Route::middleware('api')->prefix('api')->group(base_path('routes/api.php'));
         });
     }
 }

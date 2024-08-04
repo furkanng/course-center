@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
-    use HasFactory;
+    use HasFactory,SeoTrait;
 
     protected $table = "pages";
 
@@ -17,4 +17,5 @@ class Page extends Model
         "content",
         "status",
     ];
+
 }
