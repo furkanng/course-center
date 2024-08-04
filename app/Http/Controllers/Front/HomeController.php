@@ -21,7 +21,7 @@ class HomeController extends Controller
         return view("front.pages.home");
     }
 
-    public function login()
+    public function login(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
         return view("front.pages.login");
     }
@@ -63,7 +63,7 @@ class HomeController extends Controller
         return redirect()->route('home')->with('success', 'Çıkış Başarılı.');
     }
 
-    public function page($seo_link)
+    public function page($seo_link): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
         $page = Page::query()->where("seo_link", $seo_link)->firstOrFail();
 

@@ -12,11 +12,11 @@ return new class extends Migration {
     {
         Schema::create('link_list', function (Blueprint $table) {
             $table->increments("id");
-            $table->string('link')->nullable();
+            $table->string('link');
             $table->string('seo_title')->nullable();
             $table->string('seo_description')->nullable();
             $table->string("seo_keywords")->nullable();
-            $table->string("model")->nullable();
+            $table->string("model");
             $table->timestamps();
         });
     }

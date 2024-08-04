@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
+use App\Traits\SeoTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    use HasFactory;
+    use HasFactory, SeoTrait;
 
     protected $table = "courses";
 
     protected $fillable = [
         "name",
         "svg",
-        "color",
         "menu_status",
         "category_status",
         "order",

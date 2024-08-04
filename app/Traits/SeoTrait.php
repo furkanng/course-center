@@ -8,136 +8,75 @@ use Illuminate\Support\Str;
 
 trait SeoTrait
 {
-    private array $linklist ;
+    protected $linkList;
 
-    public function bootSeoTrait(): void
+    public static function bootSeoTrait(): void
     {
         static::creating(function ($model) {
-            self::seoLinkMapper($model);
-            self::seoTitleMapper($model);
-            self::seoDescriptionMapper($model);
-            self::seoKeywordsMapper($model);
-            self::linkCreate();
+            $model->initializeLinkList();
+            $model->mapSeoAttributes();
+            $model->linkCreateOrUpdate();
         });
 
         static::updating(function ($model) {
-            self::seoLinkUpdateMapper($model);
-            self::linkCreate();
+            if ($model->isDirty($model->getSeoColumn())) {
+                $model->initializeLinkList();
+                $model->mapSeoAttributes();
+                $model->linkCreateOrUpdate();
+            }
         });
 
         static::deleting(function ($model) {
-            self::linkDelete($model);
+            $model->linkDelete();
         });
     }
 
-    private function seoLinkMapper($model): void
+    protected function OldLink(): string
     {
-        if (Schema::hasColumn($model->table, "title")) {
-            $newLink = Str::slug($model->title, "-", "tr");
-            $control = self::linkControl($newLink);
-            if ($control) {
-                $this->linkList->link = $newLink;
-            } else {
-                $randLink = $newLink . "-" . rand(1, 500);
-                $this->linkList->link = $randLink;
-            }
-        } elseif (Schema::hasColumn($model->table, "name")) {
-            $newLink = Str::slug($model->name, "-", "tr");
-            $control = self::linkControl($newLink);
-            if ($control) {
-                $this->linkList->link = $newLink;
-            } else {
-                $randLink = $newLink . "-" . rand(1, 500);
-                $this->linkList->link = $randLink;
-            }
-        }
+        $column = $this->getSeoColumn();
+        return Str::slug($this->getOriginal($column), "-", "tr");
     }
 
-    private function seoTitleMapper($model): void
+    protected function initializeLinkList(): void
     {
-        if (Schema::hasColumn($model->table, "title")) {
-            $this->linkList->seo_title = $model->title;
-        } elseif (Schema::hasColumn($model->table, "name")) {
-            $this->linkList->seo_title = $model->name;
+        $this->linkList = LinkList::query()->firstOrNew(['link' => $this->OldLink()]);
+    }
+
+    private function mapSeoAttributes(): void
+    {
+        $column = $this->getSeoColumn();
+        $newLink = Str::slug($this->$column, "-", "tr");
+
+        if ($this->linkControl($newLink)) {
+            $newLink .= "-" . rand(1, 1000);
         }
 
+        $this->linkList->fill([
+            'link' => $newLink,
+            'seo_title' => $this->$column,
+            'seo_description' => $this->$column,
+            'seo_keywords' => $this->$column,
+        ]);
     }
 
-    private function seoKeywordsMapper($model): void
+    private function getSeoColumn(): string
     {
-        if (Schema::hasColumn($model->table, "title")) {
-            $this->linkList->seo_keywords = $model->title;
-        } elseif (Schema::hasColumn($model->table, "name")) {
-            $this->linkList->seo_keywords = $model->name;
-        }
+        return Schema::hasColumn($this->getTable(), "title") ? "title" : "name";
     }
 
-    private function seoDescriptionMapper($model): void
+    public function linkControl($link): bool
     {
-        if (Schema::hasColumn($model->table, "title")) {
-            $this->linkList->seo_description = $model->title;
-        } elseif (Schema::hasColumn($model->table, "name")) {
-            $this->linkList->seo_description = $model->name;
-        }
-
+        return LinkList::query()->where("link", $link)->exists();
     }
 
-    public static function linkControl($link): bool
+    private function linkCreateOrUpdate(): void
     {
-        $dataLink = LinkList::query()->where("link", $link)->first();
-
-        if ($dataLink == null) {
-            return true;
-        } else {
-            return false;
-        }
+        $this->linkList->model = $this->getTable();
+        $this->linkList->save();
     }
 
-    private function linkCreate(): void
+    private function linkDelete(): void
     {
-        $this->linkList->where("link", $this->linkList->link)->delete();
-        #$hasLink = LinkList::query()->where("link", $this->linkList->link)->first();
-
-        #if ($hasLink) {
-        #    $hasLink->delete();
-        #}
-
-        (new $this->linkList)->save();
-
-        #$builder->link = ($model->seo_link);
-        #$builder->seo_title = ($model->seo_title);
-        #$builder->seo_description = ($model->seo_description);
-        #$builder->seo_keywords = ($model->seo_keywords);
-        #$builder->type = $model->table;
-
-        #$builder->save();
-
+        LinkList::query()->where("link", $this->OldLink())->delete();
     }
-
-    public static function seoLinkUpdateMapper($model): void
-    {
-        if (Schema::hasColumn($model->table, "seo_link")) {
-            $originalLink = $model->getOriginal("seo_link");
-            $attributesLink = $model->getAttribute("seo_link");
-
-            if ($originalLink !== $attributesLink) {
-                $newLink = Str::slug($attributesLink, "-", "tr");
-                $control = self::linkControl($newLink);
-                if ($control) {
-                    $model->seo_link = $newLink;
-                } else {
-                    $model->seo_link = $originalLink;
-                }
-            }
-        }
-    }
-
-    public static function linkDelete($model): void
-    {
-        if (isset($model->seo_link)) {
-            LinkList::query()->where("link", $model->seo_link)->delete();
-        }
-    }
-
-
 }

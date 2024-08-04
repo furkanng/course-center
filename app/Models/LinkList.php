@@ -16,6 +16,6 @@ class LinkList extends Model
         "seo_title",
         "seo_description",
         "seo_keywords",
-        "type",
+        "model",
     ];
 }
