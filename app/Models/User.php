@@ -30,7 +30,7 @@ class User extends Authenticatable
         'company_name',
         'company_type',
         'user_type',
-        'address',
+        //'address',
         'status',
         'sms_approve',
         'email_approve',

@@ -25,14 +25,14 @@ class RegisterRequest extends FormRequest
             "name" => "required",
             "role" => "required",
             "city" => "required",
-            "agree" => "required",//todo
+            "kvkk_approve" => "required",
             "district" => "required",
             "phone" => "required",
             "email" => "required|email|unique:users",
             "password" => "required|min:8|confirmed",
             "company_name" => "required_if:role,company",
-            "company_type_code" => "required_if:role,company",
-            "address" => "required_if:role,company",
+            "company_type" => "required_if:role,company",
+            //"address" => "required_if:role,company",
         ];
     }
 

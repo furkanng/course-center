@@ -20,6 +20,7 @@ class Company extends Model
         "company_type",
         "city",
         "district",
-        "mernis"
+        "mernis",
+        'status'
     ];
 }
