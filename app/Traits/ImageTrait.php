@@ -4,57 +4,77 @@ namespace App\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 trait ImageTrait
 {
-    public static function bootImageTrait(): void
+    protected static function bootImageTrait(): void
     {
         static::creating(function ($model) {
-            self::createMapper($model);
+            $model->processImage();
         });
 
         static::updating(function ($model) {
-            self::updateMapper($model);
+            $model->processImage();
         });
 
         static::deleting(function ($model) {
-            self::deleteMapper($model);
+            $model->deleteImage();
         });
     }
 
-
-    public static function createMapper($model): void
+    protected function processImage(): void
     {
-        if (!empty($model->image)) {
-            $filename = self::getFileName($model);
-            Storage::disk(config("filesystem.default"))->putFileAs($model->table, $model->image, $filename);
-            $model->image = $filename;
-            $model->image_url = config("app.url") . "/storage/" . $model->table . "/" . $filename;
+        if ($this->isDirty('image') && !empty($this->image)) {
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($this->image);
+
+            if ($this->width || $this->height) {
+                $image->resize($this->width, $this->height);
+            }
+
+            if ($this->watermark) {
+                $watermark = $manager->read(Storage::disk("images")->get("watermark.png"));
+                $image->place($watermark, 'center', 0, 0, 50);
+            }
+
+            $encoded = $image->toJpeg()->toDataUri();
+            $filename = $this->getFileName();
+
+            $url = Storage::disk(config("filesystems.default"))->putFileAs($this->getTable(), $encoded, $filename);
+
+            $this->updateImageAttributes($filename, $url);
         }
     }
 
-    public static function updateMapper($model): void
+    protected function deleteImage(): void
     {
-        if ($model->getAttribute("image") != $model->getOriginal("image") && $model->image) {
-            Storage::delete($model->table . "/" . $model->getOriginal("image"));
-            $filename = self::getFileName($model);
-            Storage::disk(config("filesystem.default"))->putFileAs($model->table, $model->image, $filename);
-            $model->image = $filename;
-            $model->image_url = config("app.url") . "/storage/" . $model->table . "/" . $filename;
+        if (!empty($this->image)) {
+            Storage::disk(config("filesystems.default"))->delete($this->getStoragePath($this->getOriginal('image')));
+            $this->image = null;
+            $this->image_url = null;
         }
     }
 
-    public static function deleteMapper($model): void
+    protected function updateImageAttributes(string $filename, string $url): void
     {
-        if (!empty($model->image)) {
-            Storage::disk(config("filesystem.default"))->delete($model->table . "/" . $model->getOriginal("image"));
-            $model->image = null;
-            $model->image_url = null;
+        $this->image = $filename;
+
+        if (config("filesystems.default") === "public") {
+            $this->image_url = config("app.url") . "/storage/" . $url;
+        } else {
+            $this->image_url = $url;
         }
     }
 
-    private static function getFileName($model): string
+    protected function getStoragePath(string $filename): string
     {
-        return Carbon::now()->timestamp . "." . $model->image->getClientOriginalExtension();
+        return "{$this->getTable()}/{$filename}";
+    }
+
+    protected static function getFileName(): string
+    {
+        return Carbon::now()->timestamp . rand(1, 1000) . ".jpeg";
     }
 }

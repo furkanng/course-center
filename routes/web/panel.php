@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Panel\Config\ImagesController;
+use App\Http\Controllers\Panel\Config\FrontImagesController;
 use App\Http\Controllers\Panel\Config\LanguageController;
 use App\Http\Controllers\Panel\HomeController;
 use App\Http\Controllers\Panel\System\CourseController;
@@ -15,7 +15,7 @@ Route::prefix("site-config")->group(function () {
             'update' => 'panel.config.language.update',
         ]);
 
-    Route::resource('images', ImagesController::class)
+    Route::resource('images', FrontImagesController::class)
         ->parameters(['images' => 'id'])->names([
             'index' => 'panel.config.image.index',
             'update' => 'panel.config.image.update',

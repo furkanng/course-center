@@ -11,7 +11,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 
-class ImagesController extends Controller
+class FrontImagesController extends Controller
 {
     /**
      * Display a listing of the resource.

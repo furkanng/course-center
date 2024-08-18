@@ -10,7 +10,7 @@ trait SeoTrait
 {
     protected $linkList;
 
-    public static function bootSeoTrait(): void
+    protected static function bootSeoTrait(): void
     {
         static::creating(function ($model) {
             $model->initializeLinkList();
