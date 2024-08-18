@@ -2,6 +2,11 @@
 
 @section('title', 'Home Page')
 @section('content')
+    <x-register-modal
+        title="Kayıt"
+        body="Kurum kaydı başarıyla oluşturuldu onay bekleniyor..."
+    >
+    </x-register-modal>
     <section class="signup__area p-relative z-index-1 pt-100 pb-145">
         <div class="sign__shape">
             <img class="man-1" src="{{asset("front/assets/img/icon/sign/man-1.png")}}" alt="">
@@ -11,6 +16,10 @@
             <img class="dot" src="{{asset("front/assets/img/icon/sign/dot.png")}}" alt="">
             <img class="bg" src="{{asset("front/assets/img/icon/sign/sign-up.png")}}" alt="">
         </div>
+
+
+
+
         <div class="container">
             <div class="row">
                 <div class="col-xxl-8 offset-xxl-2 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
@@ -21,7 +30,7 @@
                                 <div class="sign__input-wrapper mb-25 d-flex justify-content-center">
                                     <div class="radio-inputs" id="role">
                                         <label class="radio">
-                                            <input type="radio" name="role" value="student" checked
+                                            <input type="radio" name="role" value="guest" checked
                                                    onchange="updateFormFields()">
                                             <span class="name">Öğrenci</span>
                                         </label>
@@ -142,61 +151,41 @@
                                             <div class="sign__input">
                                                 <input type="text" name="phone" value="{{ old('phone') }}" required
                                                        placeholder="(555) 555 55 55"
-                                                       oninput="formatPhoneNumber(this)" maxlength="10">
+                                                       oninput="formatPhoneNumber(this)"
+
+                                                       maxlength="10">
                                                 <i class="fal fa-phone"></i>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="col">
-                                        <div class="sign__input-wrapper mb-25" id="fax">
+                                        <div class="sign__input-wrapper mb-25" id="user_type">
                                             <div class="d-flex justify-content-between">
-                                                <h5>Fax</h5>
-                                                @error('fax')
+                                                <h5>Kullanıcı Tipi *</h5>
+                                                @error('user_type')
                                                 <div class="text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="sign__input">
-                                                <input type="text" name="fax" value="{{ old('fax') }}"
-                                                       placeholder="(555) 555 55 55"
-                                                       oninput="formatPhoneNumber(this)" maxlength="10">
-                                                <i class="fal fa-phone"></i>
+                                                <select name="user_type" required >
+                                                    <option value="">Seçiniz</option>
+                                                    <option value="student">Öğrenci</option>
+                                                    <option value="teacher">Öğretmen</option>
+                                                    <option value="parent">Veli</option>
+                                                    <option value="graduated">Mezun</option>
+
+{{--                                                    @foreach($types as $type)--}}
+{{--                                                        <option value={{$type->code}}>{{$type->name}}</option>--}}
+{{--                                                    @endforeach--}}
+                                                </select>
+                                                <i class="fal fa fa-address-card mt-4 pt-2"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="sign__input-wrapper mb-25" id="website">
-                                            <div class="d-flex justify-content-between">
-                                                <h5>website</h5>
-                                                @error('website')
-                                                <div class="text-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                            <div class="sign__input">
-                                                <input type="text" name="website" value="{{ old('website') }}"
-                                                       placeholder="www.test.com">
-                                                <i class="fal fa-link"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="sign__input-wrapper mb-25" id="address">
-                                            <div class="d-flex justify-content-between">
-                                                <h5>Firma Adres *</h5>
-                                                @error('address')
-                                                <div class="text-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                            <div class="sign__input">
-                                                <input type="text" required name="address" value="{{ old('address') }}"
-                                                       placeholder="Firma açık adres">
-                                                <i class="fa fa-map-marker"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="row">
                                     <div class="col">
                                         <div class="sign__input-wrapper mb-25" id="company_name">
@@ -214,15 +203,15 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="sign__input-wrapper mb-25" id="company_type_code">
+                                        <div class="sign__input-wrapper mb-25" id="company_type">
                                             <div class="d-flex justify-content-between">
                                                 <h5>Firma Tipi *</h5>
-                                                @error('company_type_code')
+                                                @error('company_type')
                                                 <div class="text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="sign__input">
-                                                <select name="company_type_code" required id="company_type_code">
+                                                <select name="company_type" required >
                                                     <option value="">Seçiniz</option>
                                                     @foreach($types as $type)
                                                         <option value={{$type->code}}>{{$type->name}}</option>
@@ -235,7 +224,7 @@
                                 </div>
                                 <div class="sign__action d-flex justify-content-between mb-30">
                                     <div class="sign__agree d-flex align-items-center">
-                                        <input class="m-check-input" type="checkbox" id="m-agree" name="agree" required>
+                                        <input class="m-check-input" type="checkbox" id="m-agree" name="kvkk_approve" required>
                                         <label class="m-check-label" for="m-agree"><a
                                                 {{--href="{{route("front.page",["seo_link" => $page->seo_link])}}"--}}
                                                 target="_blank">
@@ -298,13 +287,27 @@
 
     </style>
 
+    @if(session('registerSuccess'))
+
+        <script>
+            $(document).ready(function () {
+                $('#registerModal').modal('show');
+            });
+
+        </script>
+
+    @endif
     <script>
+
+
         document.addEventListener('DOMContentLoaded', function () {
             fetchProvinces();
             updateFormFields();
             formatPhoneNumber();
 
             $('select').niceSelect();
+
+
         });
     </script>
 

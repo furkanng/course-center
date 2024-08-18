@@ -1,11 +1,12 @@
 function updateFormFields() {
     var role = document.querySelector('input[name="role"]:checked').value;
 
-    var requiredFields = ["company_name", "company_type_code", "address"];
-    var optionalFields = ["fax", "website"];
+    var requiredFields = ["company_name", "company_type"];
 
-    if (role === "student") {
-        requiredFields.concat(optionalFields).forEach(function (id) {
+    var justUserFilds = ["user_type"];
+
+    if (role === "guest") {
+        requiredFields.forEach(function (id) {
             var field = document.getElementById(id);
             field.style.display = 'none';
             field.querySelector('input, select').removeAttribute('required');
@@ -16,9 +17,10 @@ function updateFormFields() {
             field.style.display = 'block';
             field.querySelector('input, select').setAttribute('required', 'required');
         });
-        optionalFields.forEach(function (id) {
+
+        justUserFilds.forEach(function (id) {
             var field = document.getElementById(id);
-            field.style.display = 'block';
+            field.style.display = 'none';
             field.querySelector('input, select').removeAttribute('required');
         });
     }

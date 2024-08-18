@@ -33,35 +33,7 @@ class HomeController extends Controller
         return view("front.pages.register", compact(["types", "page"]));
     }
 
-    public function loginPost(Request $request): RedirectResponse
-    {
-        $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('panel.home');
-        } else {
-            return redirect()->back()->with('error', 'Giriş başarısız.');
-        }
-    }
-
-    public function registerPost(RegisterRequest $request): RedirectResponse
-    {
-        $model = User::query()->create($request->all());
-
-        if ($model) {
-            $credentials = $request->only('email', 'password');
-            Auth::attempt($credentials);
-            return redirect()->route('panel.home')->with('success', 'Kullanıcı başarıyla oluşturuldu.');
-        } else {
-            return redirect()->back()->with('error', 'Kullanıcı oluşturulurken bir hata oluştu.')->withInput();
-        }
-    }
-
-    public function logout(): RedirectResponse
-    {
-        auth()->logout();
-        return redirect()->route('home')->with('success', 'Çıkış Başarılı.');
-    }
 
     public function page($seo_link): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
