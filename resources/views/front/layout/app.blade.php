@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{asset("front/assets/css/font-awesome-pro.css")}}">
     <link rel="stylesheet" href="{{asset("front/assets/css/spacing.css")}}">
     <link rel="stylesheet" href="{{asset("front/assets/css/style.css")}}">
+    <script src="{{asset("front/assets/js/vendor/jquery.js")}}"></script>
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -58,7 +59,7 @@
 @include("front.inc.footer")
 
 <!-- JS here -->
-<script src="{{asset("front/assets/js/vendor/jquery.js")}}"></script>
+
 <script src="{{asset("front/assets/js/vendor/waypoints.js")}}"></script>
 <script src="{{asset("front/assets/js/bootstrap-bundle.js")}}"></script>
 <script src="{{asset("front/assets/js/meanmenu.js")}}"></script>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Panel\Config\FrontImagesController;
 use App\Http\Controllers\Panel\Config\LanguageController;
 use App\Http\Controllers\Panel\HomeController;
 use App\Http\Controllers\Panel\System\CourseController;
+use App\Http\Controllers\Panel\System\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/", [HomeController::class, "home"])->name("panel.home");
@@ -34,5 +35,17 @@ Route::prefix("system")->group(function () {
             'edit' => 'panel.system.course.edit',
             'destroy' => 'panel.system.course.destroy',
         ]);
+    Route::resource("users", UserController::class)
+        ->parameters(['users' => 'id'])->names([
+            'index' => 'panel.system.users.userList',
+
+            'create' => 'panel.system.users.create',
+            'store' => 'panel.system.users.store',
+            'update' => 'panel.system.users.update',
+            'edit' => 'panel.system.users.edit',
+            'destroy' => 'panel.system.users.destroy',
+        ]);
+
+    Route::get("/institutions", [UserController::class, "institutionList"])->name("panel.system.institutions.institutionList");
 });
 

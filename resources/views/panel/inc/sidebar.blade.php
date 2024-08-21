@@ -127,14 +127,22 @@
                         <li class="nav-item ">
                             <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#usersExample">
                                 <span class="sidenav-mini-icon"> U </span>
-                                <span class="sidenav-normal"> Users <b class="caret"></b></span>
+                                <span class="sidenav-normal"> Kullanıcılar <b class="caret"></b></span>
                             </a>
                             <div class="collapse " id="usersExample">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/pages/users/reports.html">
+
+                                        <a class="nav-link " href="{{route("panel.system.users.userList")}}">
                                             <span class="sidenav-mini-icon text-xs"> R </span>
-                                            <span class="sidenav-normal"> Reports </span>
+                                            <span class="sidenav-normal"> Kullanıcı Listesi </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+
+                                        <a class="nav-link " href="{{route("panel.system.users.institutionList")}}">
+                                            <span class="sidenav-mini-icon text-xs"> R </span>
+                                            <span class="sidenav-normal"> Kurum Listesi </span>
                                         </a>
                                     </li>
                                     <li class="nav-item">

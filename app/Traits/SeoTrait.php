@@ -31,7 +31,7 @@ trait SeoTrait
         });
     }
 
-    protected function link(): string
+    public function link(): string
     {
         $column = $this->getSeoColumn();
         return Str::slug($this->getOriginal($column), "-", "tr");

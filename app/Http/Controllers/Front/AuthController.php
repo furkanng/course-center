@@ -74,10 +74,24 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('panel.home');
+
+        $user = User::where('email', $credentials['email'])->first();
+
+        if ($user) {
+
+            if ($user->role != 'guest' && $user->status != 0) {
+                if (Auth::attempt($credentials)) {
+                    return redirect()->route('panel.home');
+                } else {
+                    return redirect()->back()->with('error', 'Giriş başarısız.');
+                }
+            } else {
+
+                return redirect()->back()->with('error', 'Giriş izni yok.');
+            }
         } else {
-            return redirect()->back()->with('error', 'Giriş başarısız.');
+
+            return redirect()->back()->with('error', 'Kullanıcı bulunamadı.');
         }
     }
 
