@@ -140,7 +140,7 @@
                                     </li>
                                     <li class="nav-item">
 
-                                        <a class="nav-link " href="{{route("panel.system.users.institutionList")}}">
+                                        <a class="nav-link " href="{{route("panel.system.institutions.institutionList")}}">
                                             <span class="sidenav-mini-icon text-xs"> R </span>
                                             <span class="sidenav-normal"> Kurum Listesi </span>
                                         </a>

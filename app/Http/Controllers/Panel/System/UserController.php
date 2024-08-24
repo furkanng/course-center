@@ -34,7 +34,7 @@ class UserController extends Controller
 
 
 
-        return view("panel.pages.system.users.institutionList",compact("institutions"));
+        return view("panel.pages.system.institutions.institutionList",compact("institutions"));
     }
 
     /**
