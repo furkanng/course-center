@@ -62,6 +62,46 @@ function fetchProvinces() {
 
 function populateProvinces(provinces) {
     const citySelect = document.getElementById('citySelect');
+    const selectedCity = citySelect.getAttribute('data-selected-city');
+
+    citySelect.innerHTML = '<option value="">Seciniz</option>';
+    provinces.forEach(province => {
+        const option = document.createElement('option');
+        option.value = province.name;
+        option.textContent = province.name;
+
+
+        if(selectedCity){
+
+
+        if (province.name === selectedCity) {
+            option.selected = true;
+        }
+        }
+
+        citySelect.appendChild(option);
+    });
+
+    $('select').niceSelect('update');
+
+    if (selectedCity) {
+        citySelect.dispatchEvent(new Event('change'));
+    }
+
+    citySelect.addEventListener('change', function () {
+        const provinceId = this.value;
+        if (provinceId) {
+            fetchDistricts(provinceId);
+        } else {
+            document.getElementById('districtSelect').innerHTML = '<option value="">Önce ili seçiniz</option>';
+            $('select').niceSelect('update');
+        }
+    });
+}
+
+/*
+function populateProvinces(provinces) {
+    const citySelect = document.getElementById('citySelect');
     citySelect.innerHTML = '<option value="">Seciniz</option>';
     provinces.forEach(province => {
         const option = document.createElement('option');
@@ -82,7 +122,7 @@ function populateProvinces(provinces) {
             $('select').niceSelect('update');
         }
     });
-}
+}*/
 
 function fetchDistricts(provinceName) {
     fetch(`https://turkiyeapi.dev/api/v1/provinces?name=${provinceName}`)
@@ -96,11 +136,19 @@ function fetchDistricts(provinceName) {
 
 function populateDistricts(districts) {
     const districtSelect = document.getElementById('districtSelect');
+    const selectedDistrict = districtSelect.getAttribute('data-selected-district');
     districtSelect.innerHTML = '<option value="">Seçiniz</option>';
     districts.forEach(district => {
         const option = document.createElement('option');
         option.value = district.name;
         option.textContent = district.name;
+        if(selectedDistrict){
+
+        if (district.name === selectedDistrict) {
+            option.selected = true;
+        }
+
+        }
         districtSelect.appendChild(option);
     });
 

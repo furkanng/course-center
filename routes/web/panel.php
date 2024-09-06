@@ -43,9 +43,14 @@ Route::prefix("system")->group(function () {
             'store' => 'panel.system.users.store',
             'update' => 'panel.system.users.update',
             'edit' => 'panel.system.users.edit',
-            'destroy' => 'panel.system.users.destroy',
+            'destroy' => 'panel.system.users.destroy'
+
         ]);
 
-    Route::get("/institutions", [UserController::class, "institutionList"])->name("panel.system.institutions.institutionList");
+        Route::get("/institutions", [UserController::class, "institutionList"])->name("panel.system.institutions.institutionList");
+        Route::get("/institutions/{id}/edit", [UserController::class, "edit"])->name("panel.system.institutions.institutionEdit");
+        Route::put("/institutions/{id}", [UserController::class, "update"])->name("panel.system.institutions.institutionUpdate");
+        Route::delete("/institutions/{id}", [UserController::class, "delete"])->name("panel.system.institutions.institutionDelete");
+
 });
 

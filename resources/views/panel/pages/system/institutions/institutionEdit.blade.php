@@ -2,15 +2,15 @@
 
 @section('navigation-bar')
     <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="javascript:;">Kurs Yönetimi</a>
+        <a class="opacity-5 text-dark" href="javascript:;">Kurum Yönetimi</a>
     </li>
     <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="{{route("panel.system.course.index")}}">Kurs Listesi</a>
+        <a class="opacity-5 text-dark" href="{{route("panel.system.course.index")}}">Kurum Listesi</a>
     </li>
-    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Kurs Düzenle</li>
+    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Kurum Düzenle</li>
 @endsection
 @section('navigation-name')
-    <h6 class="font-weight-bolder mb-0">Kurs Düzenle</h6>
+    <h6 class="font-weight-bolder mb-0">Kurum Düzenle</h6>
 @endsection
 
 @section('content')
@@ -19,68 +19,120 @@
         <div class="col-12 col-md-8 col-xl-6">
             <div class="card h-100">
                 <div class="card-header pb-0 p-3">
-                    <h6 class="mb-0">Kurs Detayları</h6>
+                    <h6 class="mb-0">Kurum Detayları</h6>
                 </div>
                 <div class="card-body p-3">
                     <form class="form-submit" method="POST"
-                          action="{{route("panel.system.course.update",["id" =>$course->id])}}">
+                          action="{{route("panel.system.institutions.institutionUpdate",["id" =>$institution->id])}}">
                         @csrf
                         @method('PUT')
-                        <div class="form-group">
-                            <label for="course">Kurs</label>
-                            <input type="text" class="form-control"
-                                   {{ $errors->has('name') ? 'is-invalid' : '' }} value="{{$course->name}}"
-                                   name="name" id="course" placeholder="Kurs Adı">
-                        </div>
-                        @if ($errors->has('name'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('name') }}
-                            </div>
-                        @endif
-                        <div class="form-group">
-                            <label for="svg">SVG İkon</label>
-                            <input type="text" class="form-control" value="{{$course->svg}}"
-                                   name="svg" id="svg" placeholder="Svg ikon giriniz">
-                        </div>
-                        <div class="form-group">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" name="menu_status" type="checkbox"
-                                       id="flexSwitchCheckDefault"
-                                    {{$course->menu_status ? 'checked' : '' }}>
-                                <label class="form-check-label" for="flexSwitchCheckDefault">Menü Gösterim</label>
+                        <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-number-input" class="form-control-label">İsim</label>
+                                        <input class="form-control" type="text" name="name" style="width: 100%"
+                                               value="{{$institution->name}}"
+                                               id="name">
+                                    </div>
+                                </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-number-input" class="form-control-label">Email</label>
+                                    <input class="form-control" type="text" name="email" style="width: 100%"
+                                           value="{{$institution->email}}"
+                                           id="email">
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" name="category_status" type="checkbox"
-                                       id="flexSwitchCheckDefault"
-                                    {{$course->category_status ? 'checked' : '' }}>
-                                <label class="form-check-label" for="flexSwitchCheckDefault">Kategori Gösterim</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-number-input" class="form-control-label">Telefon</label>
+                                    <input class="form-control" type="text"   name="phone" style="width: 100%"
+                                           value="{{$institution->phone}}"
+                                           id="phone">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-number-input" class="form-control-label">Şehir</label>
+                                    <div class="sign__input">
+                                        <select class="form-control" name="city"  data-selected-city="{{ $institution->city }}" id="citySelect" required
+                                                onchange="updateDistricts()">
+                                            <option value="">Seciniz</option>
+                                        </select>
+
+                                    </div>
+{{--                                    <input class="form-control" type="text" name="city" style="width: 100%"--}}
+{{--                                           value="{{$institution->city}}"--}}
+{{--                                           id="city">--}}
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" name="status" type="checkbox"
-                                       id="flexSwitchCheckDefault"
-                                    {{$course->status ? 'checked' : '' }}>
-                                <label class="form-check-label" for="flexSwitchCheckDefault">Durum</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-number-input" class="form-control-label">İlçe</label>
+                                    <div class="sign__input">
+                                        <select class="form-control" name="district" data-selected-district="{{ $institution->district}}" required id="districtSelect">
+                                            <option value="">Önce ili seçiniz</option>
+                                        </select>
+
+                                    </div>
+{{--                                    <input class="form-control" type="text" name="district" style="width: 100%"--}}
+{{--                                           value="{{$institution->district}}"--}}
+{{--                                           id="district">--}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-number-input" class="form-control-label">Kurum İsmi</label>
+                                    <input class="form-control" type="text" name="company_name" style="width: 100%"
+                                           value="{{$institution->company_name}}"
+                                           id="company_name">
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="example-number-input" class="form-control-label">Sıra</label>
-                            <input class="form-control" type="number" name="order" style="width: 30%"
-                                   value="{{$course->order}}"
-                                   id="example-number-input">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-number-input" class="form-control-label">Kurum Tipi</label>
+                                    <select  class="form-control" name="company_type" required >
+                                        <option value="">Seçiniz</option>
+                                        @foreach($types as $type)
+                                            <option value="{{ $type->code }}"
+                                                    @if($type->code == $institution->company_type) selected @endif>
+                                                {{ $type->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="status" type="checkbox"
+                                           id="flexSwitchCheckDefault"
+                                        {{$institution->status ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Durum</label>
+                                </div>
+                            </div>
+                            </div>
                         </div>
+
+
+
+
                         <button type="submit" class="btn bg-gradient-primary my-2">Kaydet</button>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $course->id }}"
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $institution->id }}"
                                 class="btn bg-gradient-danger my-2">Sil
                         </button>
                     </form>
-                    <x-delete-modal modalId="deleteModal-{{ $course->id }}"
+                    <x-delete-modal modalId="deleteModal-{{ $institution->id }}"
                                     title="Silme Onayı"
                                     body="Bu öğeyi silmek istediğinizden emin misiniz?"
-                                    action="{{ route('panel.system.course.destroy', ['id' => $course->id]) }}">
+                                    action="{{ route('panel.system.institutions.institutionDelete', ['id' => $institution->id]) }}">
                     </x-delete-modal>
                 </div>
             </div>
@@ -90,6 +142,18 @@
 @endsection
 
 @push('scripts')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchProvinces();
+
+            formatPhoneNumber();
+
+            $('select').niceSelect();
+
+
+        });
+    </script>
 
 @endpush
 

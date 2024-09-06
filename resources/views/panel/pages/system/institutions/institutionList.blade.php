@@ -92,9 +92,10 @@
                                     <td class="text-sm">
                                         {{$user->company_type_name}}
                                     </td>
-                                  
+
                                     <td class="text-sm">
-                                        @if($user->status === 1)
+
+                                        @if($user->user_status === 1)
                                             <span class="badge badge-dot me-4">
                                                 <i class="bg-info"></i>
                                                 <span class="text-dark text-xs">Aktif</span>
@@ -108,7 +109,7 @@
                                     </td>
 
                                     <td class="text-sm">
-                                        <a href=""
+                                        <a href="{{route("panel.system.institutions.institutionEdit",["id" => $user->user_id])}}"
                                            class="mx-3">
                                             <i class="fas fa-edit text-secondary text-sm"></i>
                                         </a>

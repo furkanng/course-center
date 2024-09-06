@@ -100,7 +100,7 @@
                                     </td>
 
                                     <td class="text-sm">
-                                        <a href=""
+                                        <a href="{{route("panel.system.users.edit",["id" => $user->id])}}"
                                            class="mx-3">
                                             <i class="fas fa-edit text-secondary text-sm"></i>
                                         </a>

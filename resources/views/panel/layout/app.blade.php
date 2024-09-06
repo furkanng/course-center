@@ -15,6 +15,7 @@
     <link href="{{asset("panel/assets/css/nucleo-icons.css")}}" rel="stylesheet"/>
     <link href="{{asset("panel/assets/css/nucleo-svg.css")}}" rel="stylesheet"/>
     <link href="{{asset("panel/assets/css/style.css")}}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{asset("front/assets/css/nice-select.css")}}">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="{{asset("panel/assets/css/nucleo-svg.css")}}" rel="stylesheet"/>
@@ -77,6 +78,7 @@
 <script src="{{asset("panel/assets/js/plugins/chartjs.min.js")}}"></script>
 <script src="{{asset("panel/assets/js/plugins/threejs.js")}}"></script>
 <script src="{{asset("panel/assets/js/plugins/orbit-controls.js")}}"></script>
+
 <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
@@ -377,10 +379,12 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{asset("panel/assets/js/soft-ui-dashboard.min.js?v=1.1.0")}}"></script>
-
+<script src="{{asset("front/assets/js/vendor/jquery.js")}}"></script>
 <script src="{{asset("panel/assets/js/form-spinner.js")}}"></script>
 <script src="{{asset("panel/assets/js/alert-timeout.js")}}"></script>
 <script src="{{asset("panel/assets/js/plugins/datatables.js")}}"></script>
+<script src="{{asset("front/assets/js/service.js")}}"></script>
+<script src="{{asset("front/assets/js/nice-select.js")}}"></script>
 
 @stack('scripts')
 </body>
