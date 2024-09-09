@@ -50,4 +50,31 @@ class Helper
         $randomKey = array_rand($colors);
         return $colors[$randomKey];
     }
+
+    public static function validatePhone($tel, $onek = 90): array|false|string|null
+    {
+        $tel = preg_replace('/[^0-9]/', '', $tel); //Rakam disinda herseyi temizle.
+
+        if (substr($tel, 0, 2) == '00') //numaranın bası cift sifirla basliyorsa
+            $tel = substr($tel, 2); //temizle
+        elseif (substr($tel, 0, 1) == '0') //numaranın bası tek sifirla basliyorsa
+            $tel = substr($tel, 1); //temizle
+
+        $numara = substr($tel, 2); //onek ile basladigi varsayilan numaranin geri kalanini al
+        if (substr($numara, 0, 1) == '0') //sifirla basliyormu kontrol et
+            $numara = substr($numara, 1); //basliyorsa temizle
+
+        if (strlen($tel) == '10') //telefon numarasi 10 karakterse
+            return $onek . $tel; //basina onek ekle gonder
+        if (substr($tel, 0, 2) != $onek) //telefon numarasi onek ile baslamiyorsa
+            return $tel; //Ulke kodu TR degil //noyu geri
+        if (strlen($numara) != '10') //son numara 10 karakter değilse
+            return false; //'Gecersiz: TR telefon formatina uygun degil (901112223344)';//hata gonder
+        return $onek . $numara; //sorun yoksa numarayı gonder
+    }
+
+    public static function parseUrl(string ...$urls): string
+    {
+        return collect($urls)->map(fn ($url) => trim($url, '/'))->implode('/');
+    }
 }
