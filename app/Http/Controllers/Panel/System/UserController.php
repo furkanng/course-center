@@ -17,8 +17,8 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = User::query()->where('role','guest')->orderBy("created_at", "desc")->get();
-        return view("panel.pages.system.users.userList",compact("users"));
+        $users = User::query()->where('role', 'guest')->orderBy("created_at", "desc")->get();
+        return view("panel.pages.system.users.userList", compact("users"));
     }
 
 
@@ -52,14 +52,13 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $types = CompanyType::all();
-        $userTypeValues = User::getUserTypes();
 
         $user = User::query()->findOrFail($id);
 
 
-        if($user->role == "company"){
+        if ($user->role == "company") {
 
-            $institution= User::query()
+            $institution = User::query()
                 ->join('company_type', 'users.company_type', '=', 'company_type.code')
                 ->where('users.id', $id)
                 ->orderBy('users.created_at', 'desc')
@@ -68,34 +67,32 @@ class UserController extends Controller
                     'company_type.name as company_type_name',
 
                 ]);
-            return view("panel.pages.system.institutions.institutionEdit", compact(["institution","types"]));
-        }
-        else if($user->role == "guest"){
+            return view("panel.pages.system.institutions.institutionEdit", compact(["institution", "types"]));
+        } else if ($user->role == "guest") {
 
-            return view("panel.pages.system.users.userEdit", compact(["user","userTypeValues"]));
+            return view("panel.pages.system.users.userEdit", compact("user"));
         }
 
 
     }
 
 
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id):RedirectResponse
+    public function update(Request $request, string $id): RedirectResponse
     {
         $user = User::query()->findOrFail($id);
 
-        if($user->role == "company"){
+        if ($user->role == "company") {
             $institution = InstitutionalRegister::query()->where('user_id', $id)
                 ->firstOrFail();
-            $institution->fill(array_merge($request->all(),[
+            $institution->fill(array_merge($request->all(), [
                 "status" => $request->has("status"),
             ]))->save();
 
         }
-        $user->fill(array_merge($request->all(),[
+        $user->fill(array_merge($request->all(), [
             "status" => $request->has("status"),
         ]))->save();
         return redirect()->back()->with('success', 'Güncelleme İşlemi Başarılı');
@@ -109,7 +106,8 @@ class UserController extends Controller
         //
     }
 
-    public function institutionList(){
+    public function institutionList()
+    {
 
         $institutions = User::query()
             ->join('institutional_register', 'users.id', '=', 'institutional_register.user_id')
@@ -124,10 +122,7 @@ class UserController extends Controller
             ]);
 
 
-
-
-
-        return view("panel.pages.system.institutions.institutionList",compact("institutions"));
+        return view("panel.pages.system.institutions.institutionList", compact("institutions"));
     }
 
 }

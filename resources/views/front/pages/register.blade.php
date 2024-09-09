@@ -17,9 +17,6 @@
             <img class="bg" src="{{asset("front/assets/img/icon/sign/sign-up.png")}}" alt="">
         </div>
 
-
-
-
         <div class="container">
             <div class="row">
                 <div class="col-xxl-8 offset-xxl-2 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
@@ -30,19 +27,19 @@
                                 <div class="sign__input-wrapper mb-25 d-flex justify-content-center">
                                     <div class="radio-inputs" id="role">
                                         <label class="radio">
-                                            <input type="radio" name="role" value="guest" checked
+                                            <input class="role" type="radio" name="role" value="guest" checked
                                                    onchange="updateFormFields()">
                                             <span class="name">Öğrenci</span>
                                         </label>
                                         <label class="radio">
-                                            <input type="radio" name="role" value="company"
+                                            <input class="role" type="radio" name="role" value="company"
                                                    onchange="updateFormFields()">
                                             <span class="name">Kurum</span>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <div class="sign__input-wrapper mb-25" id="name">
                                             <div class="d-flex justify-content-between">
                                                 <h5>İsim Soyisim *</h5>
@@ -57,7 +54,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <div class="sign__input-wrapper mb-25" id="email">
                                             <div class="d-flex justify-content-between">
                                                 <h5>Email Adresi *</h5>
@@ -74,7 +71,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <div class="sign__input-wrapper mb-25" id="city">
                                             <div class="d-flex justify-content-between">
                                                 <h5>İl *</h5>
@@ -91,7 +88,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <div class="sign__input-wrapper mb-25" id="district">
                                             <div class="d-flex justify-content-between">
                                                 <h5>İlçe *</h5>
@@ -109,7 +106,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <div class="sign__input-wrapper mb-25" id="password">
                                             <div class="d-flex justify-content-between">
                                                 <h5>Şifre *</h5>
@@ -123,7 +120,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <div class="sign__input-wrapper mb-25" id="password_confirmation">
                                             <div class="d-flex justify-content-between">
                                                 <h5>Şifre Tekrar *</h5>
@@ -140,7 +137,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <div class="sign__input-wrapper mb-25" id="phone">
                                             <div class="d-flex justify-content-between">
                                                 <h5>Telefon Numarası *</h5>
@@ -159,7 +156,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <div class="sign__input-wrapper mb-25" id="user_type">
                                             <div class="d-flex justify-content-between">
                                                 <h5>Kullanıcı Tipi *</h5>
@@ -168,16 +165,11 @@
                                                 @enderror
                                             </div>
                                             <div class="sign__input">
-                                                <select name="user_type" required >
+                                                <select name="user_type" required>
                                                     <option value="">Seçiniz</option>
-                                                    <option value="student">Öğrenci</option>
-                                                    <option value="teacher">Öğretmen</option>
-                                                    <option value="parent">Veli</option>
-                                                    <option value="graduated">Mezun</option>
-
-{{--                                                    @foreach($types as $type)--}}
-{{--                                                        <option value={{$type->code}}>{{$type->name}}</option>--}}
-{{--                                                    @endforeach--}}
+                                                    @foreach(\App\Enums\User::cases() as $type)
+                                                        <option value={{$type->value}}>{{$type->label()}}</option>
+                                                    @endforeach
                                                 </select>
                                                 <i class="fal fa fa-address-card mt-4 pt-2"></i>
                                             </div>
@@ -187,8 +179,8 @@
 
 
                                 <div class="row">
-                                    <div class="col">
-                                        <div class="sign__input-wrapper mb-25" id="company_name">
+                                    <div class="col-md-6">
+                                        <div class="sign__input-wrapper mb-25" id="company_name" style="display: none">
                                             <div class="d-flex justify-content-between">
                                                 <h5>Firma Adı *</h5>
                                                 @error('company_name')
@@ -202,8 +194,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="sign__input-wrapper mb-25" id="company_type">
+                                    <div class="col-md-6">
+                                        <div class="sign__input-wrapper mb-25" id="company_type" style="display: none">
                                             <div class="d-flex justify-content-between">
                                                 <h5>Firma Tipi *</h5>
                                                 @error('company_type')
@@ -211,7 +203,7 @@
                                                 @enderror
                                             </div>
                                             <div class="sign__input">
-                                                <select name="company_type" required >
+                                                <select name="company_type" required>
                                                     <option value="">Seçiniz</option>
                                                     @foreach($types as $type)
                                                         <option value={{$type->code}}>{{$type->name}}</option>
@@ -224,7 +216,8 @@
                                 </div>
                                 <div class="sign__action d-flex justify-content-between mb-30">
                                     <div class="sign__agree d-flex align-items-center">
-                                        <input class="m-check-input" type="checkbox" id="m-agree" name="kvkk_approve" required>
+                                        <input class="m-check-input" type="checkbox" id="m-agree" name="kvkk_approve"
+                                               required>
                                         <label class="m-check-label" for="m-agree"><a
                                                 {{--href="{{route("front.page",["seo_link" => $page->seo_link])}}"--}}
                                                 target="_blank">
@@ -298,17 +291,52 @@
 
     @endif
     <script>
-
-
         document.addEventListener('DOMContentLoaded', function () {
             fetchProvinces();
-            updateFormFields();
             formatPhoneNumber();
-
             $('select').niceSelect();
-
 
         });
     </script>
 
+    <script>
+        $(document).ready(function () {
+            $('.role').on('change', function () {
+                var role = document.querySelector('input[name="role"]:checked').value;
+
+                var companyFields = [
+                    "company_name",
+                    "company_type"
+                ];
+
+                var userFields = [
+                    "user_type",
+                ];
+
+                if (role === "guest") {
+                    companyFields.forEach(function (id) {
+                        var field = document.getElementById(id);
+                        field.style.display = 'none';
+                        field.querySelector('input, select').removeAttribute('required');
+                    });
+                    userFields.forEach(function (id) {
+                        var field = document.getElementById(id);
+                        field.style.display = 'block';
+                        field.querySelector('input, select').setAttribute('required', 'required');
+                    });
+                } else if (role === "company") {
+                    userFields.forEach(function (id) {
+                        var field = document.getElementById(id);
+                        field.style.display = 'none';
+                        field.querySelector('input, select').setAttribute('required', 'required');
+                    });
+                    companyFields.forEach(function (id) {
+                        var field = document.getElementById(id);
+                        field.style.display = 'block';
+                        field.querySelector('input, select').removeAttribute('required');
+                    });
+                }
+            })
+        })
+    </script>
 @endsection

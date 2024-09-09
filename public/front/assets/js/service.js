@@ -1,26 +1,49 @@
 function updateFormFields() {
     var role = document.querySelector('input[name="role"]:checked').value;
 
-    var requiredFields = ["company_name", "company_type"];
+    var companyFields = [
+        "name",
+        "email",
+        "city",
+        "district",
+        "password",
+        "password_confirmation",
+        "phone",
+        "company_name",
+        "company_type"
+    ];
 
-    var justUserFilds = ["user_type"];
+    var userFields = [
+        "user_type",
+        "name",
+        "email",
+        "city",
+        "district",
+        "password",
+        "password_confirmation",
+        "phone",
+    ];
 
     if (role === "guest") {
-        requiredFields.forEach(function (id) {
+        companyFields.forEach(function (id) {
             var field = document.getElementById(id);
             field.style.display = 'none';
             field.querySelector('input, select').removeAttribute('required');
         });
-    } else if (role === "company") {
-        requiredFields.forEach(function (id) {
+        userFields.forEach(function (id) {
             var field = document.getElementById(id);
             field.style.display = 'block';
             field.querySelector('input, select').setAttribute('required', 'required');
         });
-
-        justUserFilds.forEach(function (id) {
+    } else if (role === "company") {
+        userFields.forEach(function (id) {
             var field = document.getElementById(id);
             field.style.display = 'none';
+            field.querySelector('input, select').setAttribute('required', 'required');
+        });
+        companyFields.forEach(function (id) {
+            var field = document.getElementById(id);
+            field.style.display = 'block';
             field.querySelector('input, select').removeAttribute('required');
         });
     }
@@ -71,12 +94,12 @@ function populateProvinces(provinces) {
         option.textContent = province.name;
 
 
-        if(selectedCity){
+        if (selectedCity) {
 
 
-        if (province.name === selectedCity) {
-            option.selected = true;
-        }
+            if (province.name === selectedCity) {
+                option.selected = true;
+            }
         }
 
         citySelect.appendChild(option);
@@ -142,11 +165,11 @@ function populateDistricts(districts) {
         const option = document.createElement('option');
         option.value = district.name;
         option.textContent = district.name;
-        if(selectedDistrict){
+        if (selectedDistrict) {
 
-        if (district.name === selectedDistrict) {
-            option.selected = true;
-        }
+            if (district.name === selectedDistrict) {
+                option.selected = true;
+            }
 
         }
         districtSelect.appendChild(option);

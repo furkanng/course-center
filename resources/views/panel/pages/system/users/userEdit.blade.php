@@ -85,10 +85,10 @@
                                     <label for="example-number-input" class="form-control-label">Kullanıcı Tipi</label>
                                     <div class="sign__input">
                                         <select class="form-control" name="user_type"  required id="user_type">
-                                            @foreach($userTypeValues as $value)
-                                                <option value="{{ $value }}"
-                                                        @if(isset($user) && $user->user_type === $value) selected @endif>
-                                                    {{ $value }}
+                                            @foreach(\App\Enums\User::cases() as $key)
+                                                <option value="{{ $key->value }}"
+                                                        @if($key->value === $user->user_type) selected @endif>
+                                                    {{ $key->label() }}
                                                 </option>
                                             @endforeach
                                         </select>
