@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers\Panel\System;
 
+use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyType;
 use App\Models\InstitutionalRegister;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Application|Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
-
-        $users = User::query()->where('role', 'guest')->orderBy("created_at", "desc")->get();
-        return view("panel.pages.system.users.userList", compact("users"));
+        $users = User::query()->where('role', UserRole::GUEST)
+            ->orderBy("created_at", "desc")->get();
+        return view("panel.pages.system.users.index", compact("users"));
     }
 
 
@@ -38,42 +42,14 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|Application
     {
-        $types = CompanyType::all();
-
         $user = User::query()->findOrFail($id);
-
-
-        if ($user->role == "company") {
-
-            $institution = User::query()
-                ->join('company_type', 'users.company_type', '=', 'company_type.code')
-                ->where('users.id', $id)
-                ->orderBy('users.created_at', 'desc')
-                ->firstOrFail([
-                    'users.*',
-                    'company_type.name as company_type_name',
-
-                ]);
-            return view("panel.pages.system.institutions.institutionEdit", compact(["institution", "types"]));
-        } else if ($user->role == "guest") {
-
-            return view("panel.pages.system.users.userEdit", compact("user"));
-        }
-
-
+        return view("panel.pages.system.users.edit", compact("user"));
     }
 
 
@@ -95,6 +71,7 @@ class UserController extends Controller
         $user->fill(array_merge($request->all(), [
             "status" => $request->has("status"),
         ]))->save();
+        
         return redirect()->back()->with('success', 'Güncelleme İşlemi Başarılı');
     }
 
@@ -104,25 +81,6 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    public function institutionList()
-    {
-
-        $institutions = User::query()
-            ->join('institutional_register', 'users.id', '=', 'institutional_register.user_id')
-            ->join('company_type', 'users.company_type', '=', 'company_type.code')
-            ->where('users.role', 'company')
-            ->orderBy('users.created_at', 'desc')
-            ->get([
-                'users.*',
-                'institutional_register.*',
-                'company_type.name as company_type_name',
-                'users.status as user_status'
-            ]);
-
-
-        return view("panel.pages.system.institutions.institutionList", compact("institutions"));
     }
 
 }

@@ -48,7 +48,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="example-number-input" class="form-control-label">Telefon</label>
-                                    <input class="form-control" type="text"   name="phone" style="width: 100%"
+                                    <input class="form-control" type="text" name="phone" style="width: 100%"
                                            value="{{$user->phone}}"
                                            id="phone">
                                 </div>
@@ -57,7 +57,8 @@
                                 <div class="form-group">
                                     <label for="example-number-input" class="form-control-label">Şehir</label>
                                     <div class="sign__input">
-                                        <select class="form-control" name="city"  data-selected-city="{{ $user->city }}" id="citySelect" required
+                                        <select class="form-control" name="city" data-selected-city="{{ $user->city }}"
+                                                id="citySelect" required
                                                 onchange="updateDistricts()">
                                             <option value="">Seciniz</option>
                                         </select>
@@ -72,7 +73,9 @@
                                 <div class="form-group">
                                     <label for="example-number-input" class="form-control-label">İlçe</label>
                                     <div class="sign__input">
-                                        <select class="form-control" name="district" data-selected-district="{{ $user->district}}" required id="districtSelect">
+                                        <select class="form-control" name="district"
+                                                data-selected-district="{{ $user->district}}" required
+                                                id="districtSelect">
                                             <option value="">Önce ili seçiniz</option>
                                         </select>
 
@@ -84,8 +87,8 @@
                                 <div class="form-group">
                                     <label for="example-number-input" class="form-control-label">Kullanıcı Tipi</label>
                                     <div class="sign__input">
-                                        <select class="form-control" name="user_type"  required id="user_type">
-                                            @foreach(\App\Enums\User::cases() as $key)
+                                        <select class="form-control" name="user_type" required id="user_type">
+                                            @foreach(\App\Enums\UserType::cases() as $key)
                                                 <option value="{{ $key->value }}"
                                                         @if($key->value === $user->user_type) selected @endif>
                                                     {{ $key->label() }}
@@ -112,8 +115,6 @@
                                 </div>
                             </div>
                         </div>
-
-
 
 
                         <button type="submit" class="btn bg-gradient-primary my-2">Kaydet</button>

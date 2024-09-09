@@ -27,13 +27,11 @@
                                 <div class="sign__input-wrapper mb-25 d-flex justify-content-center">
                                     <div class="radio-inputs" id="role">
                                         <label class="radio">
-                                            <input class="role" type="radio" name="role" value="guest" checked
-                                                   onchange="updateFormFields()">
+                                            <input class="role" type="radio" name="role" value="guest" checked>
                                             <span class="name">Öğrenci</span>
                                         </label>
                                         <label class="radio">
-                                            <input class="role" type="radio" name="role" value="company"
-                                                   onchange="updateFormFields()">
+                                            <input class="role" type="radio" name="role" value="company">
                                             <span class="name">Kurum</span>
                                         </label>
                                     </div>
@@ -157,7 +155,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <div class="sign__input-wrapper mb-25" id="user_type">
+                                        <div class="sign__input-wrapper mb-25" id="user_type_user">
                                             <div class="d-flex justify-content-between">
                                                 <h5>Kullanıcı Tipi *</h5>
                                                 @error('user_type')
@@ -165,16 +163,39 @@
                                                 @enderror
                                             </div>
                                             <div class="sign__input">
-                                                <select name="user_type" required>
+                                                <select name="user_type" id="user_type" required>
                                                     <option value="">Seçiniz</option>
-                                                    @foreach(\App\Enums\User::cases() as $type)
-                                                        <option value={{$type->value}}>{{$type->label()}}</option>
+                                                    @foreach(\App\Enums\UserType::cases() as $key)
+                                                        @if($key->isGuest())
+                                                            <option value="{{$key->value}}">{{$key->label()}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                                <i class="fal fa fa-address-card mt-4 pt-2"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="sign__input-wrapper mb-25" id="user_type_company">
+                                            <div class="d-flex justify-content-between">
+                                                <h5>Kullanıcı Tipi *</h5>
+                                                @error('user_type')
+                                                <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="sign__input">
+                                                <select name="user_type" id="user_type" required>
+                                                    <option value="">Seçiniz</option>
+                                                    @foreach(\App\Enums\UserType::cases() as $key)
+                                                        @if($key->isCompany())
+                                                            <option value="{{$key->value}}">{{$key->label()}}</option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                                 <i class="fal fa fa-address-card mt-4 pt-2"></i>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
 
 
@@ -189,7 +210,7 @@
                                             </div>
                                             <div class="sign__input">
                                                 <input type="text" name="company_name" value="{{ old('company_name') }}"
-                                                       required placeholder="Şirketiniz">
+                                                       required placeholder="Firma İsmi">
                                                 <i class="fal fa-building"></i>
                                             </div>
                                         </div>
@@ -301,17 +322,17 @@
 
     <script>
         $(document).ready(function () {
+            updateUserTypeOptions();
+
             $('.role').on('change', function () {
+                updateUserTypeOptions();
+            });
+
+            function updateUserTypeOptions() {
                 var role = document.querySelector('input[name="role"]:checked').value;
 
-                var companyFields = [
-                    "company_name",
-                    "company_type"
-                ];
-
-                var userFields = [
-                    "user_type",
-                ];
+                var companyFields = ["company_name", "company_type", "user_type_company"];
+                var userFields = ["user_type_user"];
 
                 if (role === "guest") {
                     companyFields.forEach(function (id) {
@@ -322,21 +343,22 @@
                     userFields.forEach(function (id) {
                         var field = document.getElementById(id);
                         field.style.display = 'block';
-                        field.querySelector('input, select').setAttribute('required', 'required');
+                        field.querySelector('input, select').removeAttribute('required');
                     });
                 } else if (role === "company") {
-                    userFields.forEach(function (id) {
-                        var field = document.getElementById(id);
-                        field.style.display = 'none';
-                        field.querySelector('input, select').setAttribute('required', 'required');
-                    });
                     companyFields.forEach(function (id) {
                         var field = document.getElementById(id);
                         field.style.display = 'block';
+                        field.querySelector('input, select').setAttribute('required', 'required');
+                    });
+                    userFields.forEach(function (id) {
+                        var field = document.getElementById(id);
+                        field.style.display = 'none';
                         field.querySelector('input, select').removeAttribute('required');
                     });
                 }
-            })
-        })
+            }
+        });
     </script>
+
 @endsection

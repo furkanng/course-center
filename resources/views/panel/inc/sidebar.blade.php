@@ -13,10 +13,11 @@
     <div class="collapse navbar-collapse  w-auto h-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link {{ request()->routeIs('panel.config.*') ? 'active' : '' }}"
+                <a data-bs-toggle="collapse" href="#dashboardsExamples"
+                   class="nav-link {{ request()->routeIs('panel.config.*') ? 'active' : '' }}"
                    aria-controls="dashboardsExamples" role="button" aria-expanded="false">
                     <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>shop </title>
@@ -40,13 +41,15 @@
                 <div class="collapse {{ request()->routeIs('panel.config.*') ? 'show' : '' }}" id="dashboardsExamples">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item {{ request()->routeIs('panel.config.language.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('panel.config.language.*') ? 'active' : '' }}" href="{{route("panel.config.language.index")}}">
+                            <a class="nav-link {{ request()->routeIs('panel.config.language.*') ? 'active' : '' }}"
+                               href="{{route("panel.config.language.index")}}">
                                 <span class="sidenav-mini-icon"> M </span>
                                 <span class="sidenav-normal"> Site Metinleri </span>
                             </a>
                         </li>
                         <li class="nav-item {{ request()->routeIs('panel.config.image.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('panel.config.image.*') ? 'active' : '' }}" href="{{route("panel.config.image.index")}}">
+                            <a class="nav-link {{ request()->routeIs('panel.config.image.*') ? 'active' : '' }}"
+                               href="{{route("panel.config.image.index")}}">
                                 <span class="sidenav-mini-icon"> R </span>
                                 <span class="sidenav-normal"> Site Resimleri </span>
                             </a>
@@ -92,10 +95,12 @@
                 <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Sistem</h6>
             </li>
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link {{ request()->routeIs('panel.system.*') ? 'active' : '' }}" aria-controls="pagesExamples"
+                <a data-bs-toggle="collapse" href="#pagesExamples"
+                   class="nav-link {{ request()->routeIs('panel.system.*') ? 'active' : '' }}"
+                   aria-controls="pagesExamples"
                    role="button" aria-expanded="false">
                     <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>office</title>
@@ -119,29 +124,36 @@
                 <div class="collapse {{ request()->routeIs('panel.system.*') ? 'show' : '' }}" id="pagesExamples">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item {{ request()->routeIs('panel.system.course.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('panel.system.course.*') ? 'active' : '' }}" href="{{route("panel.system.course.index")}}">
+                            <a class="nav-link {{ request()->routeIs('panel.system.course.*') ? 'active' : '' }}"
+                               href="{{route("panel.system.course.index")}}">
                                 <span class="sidenav-mini-icon text-xs"> K </span>
                                 <span class="sidenav-normal"> Kurs Yönetimi </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#usersExample">
-                                <span class="sidenav-mini-icon"> U </span>
+                            <a class="nav-link {{ request()->routeIs('panel.system.users.*') ||
+                               request()->routeIs('panel.system.institutions.*')? 'active' : '' }}"
+                               data-bs-toggle="collapse" aria-expanded="false" href="#usersExample">
+                                <span class="sidenav-mini-icon"> K </span>
                                 <span class="sidenav-normal"> Kullanıcılar <b class="caret"></b></span>
                             </a>
-                            <div class="collapse " id="usersExample">
+                            <div class="collapse {{ request()->routeIs('panel.system.users.*') ||
+                                 request()->routeIs('panel.system.institutions.*') ? 'show' : '' }}"
+                                 id="usersExample">
                                 <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-
-                                        <a class="nav-link " href="{{route("panel.system.users.userList")}}">
-                                            <span class="sidenav-mini-icon text-xs"> R </span>
+                                    <li class="nav-item {{ request()->routeIs('panel.system.users.*') ? 'active' : '' }}">
+                                        <a class="nav-link"
+                                           {{ request()->routeIs('panel.system.users.*') ? 'active' : '' }}
+                                           href="{{route("panel.system.users.index")}}">
+                                            <span class="sidenav-mini-icon text-xs"> UL </span>
                                             <span class="sidenav-normal"> Kullanıcı Listesi </span>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-
-                                        <a class="nav-link " href="{{route("panel.system.institutions.institutionList")}}">
-                                            <span class="sidenav-mini-icon text-xs"> R </span>
+                                    <li class="nav-item {{ request()->routeIs('panel.system.institutions.*') ? 'active' : '' }}">
+                                        <a class="nav-link"
+                                           {{ request()->routeIs('panel.system.institutions.*') ? 'active' : '' }}
+                                           href="{{route("panel.system.institutions.index")}}">
+                                            <span class="sidenav-mini-icon text-xs"> KL </span>
                                             <span class="sidenav-normal"> Kurum Listesi </span>
                                         </a>
                                     </li>
@@ -266,7 +278,7 @@
                 <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link "
                    aria-controls="applicationsExamples" role="button" aria-expanded="false">
                     <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>settings</title>
@@ -328,7 +340,7 @@
                 <a data-bs-toggle="collapse" href="#ecommerceExamples" class="nav-link "
                    aria-controls="ecommerceExamples" role="button" aria-expanded="false">
                     <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg class="text-dark" width="12px" height="12px" viewBox="0 0 42 44" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>basket</title>
@@ -427,7 +439,7 @@
                 <a data-bs-toggle="collapse" href="#authExamples" class="nav-link " aria-controls="authExamples"
                    role="button" aria-expanded="false">
                     <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>document</title>
@@ -624,7 +636,7 @@
                 <a data-bs-toggle="collapse" href="#basicExamples" class="nav-link " aria-controls="basicExamples"
                    role="button" aria-expanded="false">
                     <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>spaceship</title>
@@ -745,7 +757,7 @@
                 <a data-bs-toggle="collapse" href="#componentsExamples" class="nav-link "
                    aria-controls="componentsExamples" role="button" aria-expanded="false">
                     <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>
@@ -914,7 +926,7 @@
                    href="https://github.com/creativetimofficial/ct-soft-ui-dashboard-pro/blob/main/CHANGELOG.md"
                    target="_blank">
                     <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center  me-2 d-flex align-items-center justify-content-center">
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center  me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>credit-card</title>

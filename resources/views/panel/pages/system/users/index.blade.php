@@ -22,7 +22,7 @@
                         <div>
                             <h5 class="mb-0">Tüm Kullanıcılar</h5>
                             <p class="text-sm mb-0">
-                                Site içerisindeki tüm kullanıcıları düzenleyebilirsiniz.
+                                Tüm misafir kullanıcılar listelenmektedir.
                             </p>
                         </div>
                         <div class="ms-auto my-auto mt-lg-0 mt-4">
@@ -54,9 +54,6 @@
                                     Kullanıcı Tipi
                                 </th>
                                 <th>
-                                    Kullanıcı Rolü
-                                </th>
-                                <th>
                                     Durum
                                 </th>
                                 <th>
@@ -80,13 +77,10 @@
                                         {{$user->city}}
                                     </td>
                                     <td class="text-sm">
-                                        {{$user->user_type}}
+                                        {{$user->user_type?->label()}}
                                     </td>
                                     <td class="text-sm">
-                                        {{$user->role}}
-                                    </td>
-                                    <td class="text-sm">
-                                        @if($user->status === 1)
+                                        @if($user->status)
                                             <span class="badge badge-dot me-4">
                                                 <i class="bg-info"></i>
                                                 <span class="text-dark text-xs">Aktif</span>

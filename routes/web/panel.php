@@ -4,6 +4,7 @@ use App\Http\Controllers\Panel\Config\FrontImagesController;
 use App\Http\Controllers\Panel\Config\LanguageController;
 use App\Http\Controllers\Panel\HomeController;
 use App\Http\Controllers\Panel\System\CourseController;
+use App\Http\Controllers\Panel\System\InstitutionController;
 use App\Http\Controllers\Panel\System\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,10 +36,10 @@ Route::prefix("system")->group(function () {
             'edit' => 'panel.system.course.edit',
             'destroy' => 'panel.system.course.destroy',
         ]);
+
     Route::resource("users", UserController::class)
         ->parameters(['users' => 'id'])->names([
-            'index' => 'panel.system.users.userList',
-
+            'index' => 'panel.system.users.index',
             'create' => 'panel.system.users.create',
             'store' => 'panel.system.users.store',
             'update' => 'panel.system.users.update',
@@ -47,10 +48,16 @@ Route::prefix("system")->group(function () {
 
         ]);
 
-        Route::get("/institutions", [UserController::class, "institutionList"])->name("panel.system.institutions.institutionList");
-        Route::get("/institutions/{id}/edit", [UserController::class, "edit"])->name("panel.system.institutions.institutionEdit");
-        Route::put("/institutions/{id}", [UserController::class, "update"])->name("panel.system.institutions.institutionUpdate");
-        Route::delete("/institutions/{id}", [UserController::class, "delete"])->name("panel.system.institutions.institutionDelete");
+    Route::resource("institutions", InstitutionController::class)
+        ->parameters(['institutions' => 'id'])->names([
+            'index' => 'panel.system.institutions.index',
+            'create' => 'panel.system.institutions.create',
+            'store' => 'panel.system.institutions.store',
+            'update' => 'panel.system.institutions.update',
+            'edit' => 'panel.system.institutions.edit',
+            'destroy' => 'panel.system.institutions.destroy'
+
+        ]);
 
 });
 
