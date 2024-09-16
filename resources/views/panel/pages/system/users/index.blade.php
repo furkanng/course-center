@@ -7,10 +7,10 @@
     <li class="breadcrumb-item text-sm">
         <a class="opacity-5 text-dark" href="javascript:;">Kullanıcılar</a>
     </li>
-    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Kullanıcı Listesi</li>
+    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Misafir Listesi</li>
 @endsection
 @section('navigation-name')
-    <h6 class="font-weight-bolder mb-0">Kullanıcı Listesi</h6>
+    <h6 class="font-weight-bolder mb-0">Misafir Listesi</h6>
 @endsection
 
 @section('content')
@@ -20,15 +20,15 @@
                 <div class="card-header pb-0">
                     <div class="d-lg-flex">
                         <div>
-                            <h5 class="mb-0">Tüm Kullanıcılar</h5>
+                            <h5 class="mb-0">Tüm Misafirler</h5>
                             <p class="text-sm mb-0">
                                 Tüm misafir kullanıcılar listelenmektedir.
                             </p>
                         </div>
                         <div class="ms-auto my-auto mt-lg-0 mt-4">
                             <div class="ms-auto my-auto">
-                                <a href="{{route("panel.system.course.create")}}"
-                                   class="btn bg-gradient-primary btn-sm mb-0">+&nbsp;Yeni Kullanıcı</a>
+                                <a href="{{route("panel.system.users.create")}}"
+                                   class="btn bg-gradient-primary btn-sm mb-0">+&nbsp;Yeni Misafir</a>
                             </div>
                         </div>
                     </div>
@@ -80,17 +80,12 @@
                                         {{$user->user_type?->label()}}
                                     </td>
                                     <td class="text-sm">
-                                        @if($user->status)
-                                            <span class="badge badge-dot me-4">
-                                                <i class="bg-info"></i>
-                                                <span class="text-dark text-xs">Aktif</span>
-                                            </span>
-                                        @else
-                                            <span class="badge badge-dot me-4">
-                                                <i class="bg-danger"></i>
-                                                <span class="text-dark text-xs">Pasif</span>
-                                            </span>
-                                        @endif
+                                        <span class="badge badge-dot me-4">
+                                                <i class="{{$user->status ? "bg-info" : "bg-danger"}}"></i>
+                                                <span
+                                                    class="text-dark text-xs">{{$user->status ? "Aktif" : "Pasif"}}
+                                                </span>
+                                        </span>
                                     </td>
 
                                     <td class="text-sm">

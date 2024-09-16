@@ -27,7 +27,7 @@
                         </div>
                         <div class="ms-auto my-auto mt-lg-0 mt-4">
                             <div class="ms-auto my-auto">
-                                <a href="{{route("panel.system.course.create")}}"
+                                <a href="{{route("panel.system.institutions.create")}}"
                                    class="btn bg-gradient-primary btn-sm mb-0">+&nbsp;Yeni Kurumsal</a>
                             </div>
                         </div>
@@ -81,18 +81,11 @@
                                     </td>
 
                                     <td class="text-sm">
-
-                                        @if($user->user_status === 1)
-                                            <span class="badge badge-dot me-4">
-                                                <i class="bg-info"></i>
-                                                <span class="text-dark text-xs">Aktif</span>
-                                            </span>
-                                        @else
-                                            <span class="badge badge-dot me-4">
-                                                <i class="bg-danger"></i>
-                                                <span class="text-dark text-xs">Pasif</span>
-                                            </span>
-                                        @endif
+                                        <span class="badge badge-dot me-4">
+                                                <i class="{{$user->status ? "bg-info" : "bg-danger"}}"></i>
+                                                <span
+                                                    class="text-dark text-xs">{{$user->status ? "Aktif" : "Pasif"}}</span>
+                                        </span>
                                     </td>
 
                                     <td class="text-sm">

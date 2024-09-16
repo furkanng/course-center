@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Panel\System;
 
 use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
 use App\Models\CompanyType;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
@@ -27,17 +28,25 @@ class InstitutionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): view
     {
-        //
+        $companyTypes = CompanyType::all();
+        return view("panel.pages.system.institutions.create",compact("companyTypes"));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request): RedirectResponse
     {
-        //
+        $user = new User();
+        $user->fill(array_merge($request->all(), [
+            "status" => $request->has("status"),
+            "kvkk_approve" => $request->has("kvkk_approve"),
+            "role" => UserRole::COMPANY,
+        ]))->save();
+
+        return redirect()->route("panel.system.institutions.index")->with('success', 'Oluşturma İşlemi Başarılı');
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\UserRole;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterRequest extends FormRequest
@@ -23,16 +24,14 @@ class RegisterRequest extends FormRequest
     {
         return [
             "name" => "required",
-            "role" => "required",
             "city" => "required",
             "kvkk_approve" => "required",
             "district" => "required",
             "phone" => "required",
             "email" => "required|email|unique:users",
             "password" => "required|min:8|confirmed",
-            "company_name" => "required_if:role,company",
-            "company_type" => "required_if:role,company",
-            //"address" => "required_if:role,company",
+            "company_name" => "required_if:role," . UserRole::COMPANY->value,
+            "company_type" => "required_if:role," . UserRole::COMPANY->value,
         ];
     }
 

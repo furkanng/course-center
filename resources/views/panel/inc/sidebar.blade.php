@@ -146,7 +146,7 @@
                                            {{ request()->routeIs('panel.system.users.*') ? 'active' : '' }}
                                            href="{{route("panel.system.users.index")}}">
                                             <span class="sidenav-mini-icon text-xs"> UL </span>
-                                            <span class="sidenav-normal"> Kullanıcı Listesi </span>
+                                            <span class="sidenav-normal"> Misafir Listesi </span>
                                         </a>
                                     </li>
                                     <li class="nav-item {{ request()->routeIs('panel.system.institutions.*') ? 'active' : '' }}">
