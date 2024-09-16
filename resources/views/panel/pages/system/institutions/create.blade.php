@@ -2,7 +2,7 @@
 
 @section('navigation-bar')
     <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="javascript:;">Kurumsal Yönetimi</a>
+        <a class="opacity-5 text-dark" href="javascript:;">Kullanıcı Yönetimi</a>
     </li>
     <li class="breadcrumb-item text-sm">
         <a class="opacity-5 text-dark" href="{{route("panel.system.course.index")}}">Kurumsal Listesi</a>
