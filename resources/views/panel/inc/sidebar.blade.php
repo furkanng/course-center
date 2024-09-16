@@ -154,7 +154,7 @@
                                            {{ request()->routeIs('panel.system.institutions.*') ? 'active' : '' }}
                                            href="{{route("panel.system.institutions.index")}}">
                                             <span class="sidenav-mini-icon text-xs"> KL </span>
-                                            <span class="sidenav-normal"> Kurum Listesi </span>
+                                            <span class="sidenav-normal"> Kurumsal Listesi </span>
                                         </a>
                                     </li>
                                     <li class="nav-item">

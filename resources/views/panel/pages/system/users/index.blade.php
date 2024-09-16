@@ -5,7 +5,7 @@
         <a class="opacity-5 text-dark" href="javascript:;">Sistem Yönetimi</a>
     </li>
     <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="javascript:;">Kullanıcı Yönetimi</a>
+        <a class="opacity-5 text-dark" href="javascript:;">Kullanıcılar</a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Kullanıcı Listesi</li>
 @endsection
@@ -99,15 +99,15 @@
                                             <i class="fas fa-edit text-secondary text-sm"></i>
                                         </a>
                                         <a href="#" data-bs-toggle="modal"
-                                           data-bs-target="#deleteModal-">
+                                           data-bs-target="#deleteModal-{{ $user->id }}">
                                             <i class="fas fa-trash-alt text-secondary text-sm"></i>
                                         </a>
                                     </td>
                                 </tr>
-                                <x-delete-modal modalId="deleteModal-"
+                                <x-delete-modal modalId="deleteModal-{{ $user->id }}"
                                                 title="Silme Onayı"
                                                 body="Bu öğeyi silmek istediğinizden emin misiniz?"
-                                                action="">
+                                                action="{{ route('panel.system.users.destroy', ['id' => $user->id]) }}">
                                 </x-delete-modal>
                             @endforeach
                             </tbody>

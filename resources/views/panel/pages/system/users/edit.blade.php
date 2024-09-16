@@ -50,6 +50,8 @@
                                     <label for="example-number-input" class="form-control-label">Telefon</label>
                                     <input class="form-control" type="text" name="phone" style="width: 100%"
                                            value="{{$user->phone}}"
+                                           maxlength="10"
+                                           oninput="formatPhoneNumber(this)"
                                            id="phone">
                                 </div>
                             </div>
@@ -89,15 +91,15 @@
                                     <div class="sign__input">
                                         <select class="form-control" name="user_type" required id="user_type">
                                             @foreach(\App\Enums\UserType::cases() as $key)
-                                                <option value="{{ $key->value }}"
-                                                        @if($key->value === $user->user_type) selected @endif>
-                                                    {{ $key->label() }}
-                                                </option>
+                                                @if($key->isGuest())
+                                                    <option value="{{$key->value}}"
+                                                            @if($key === $user->user_type) selected @endif>
+                                                        {{$key->label()}}
+                                                    </option>
+                                                @endif
                                             @endforeach
                                         </select>
-
                                     </div>
-
                                 </div>
                             </div>
 
@@ -116,7 +118,6 @@
                             </div>
                         </div>
 
-
                         <button type="submit" class="btn bg-gradient-primary my-2">Kaydet</button>
                         <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $user->id }}"
                                 class="btn bg-gradient-danger my-2">Sil
@@ -125,7 +126,7 @@
                     <x-delete-modal modalId="deleteModal-{{ $user->id }}"
                                     title="Silme Onayı"
                                     body="Bu öğeyi silmek istediğinizden emin misiniz?"
-                                    action="{{ route('panel.system.institutions.institutionDelete', ['id' => $user->id]) }}">
+                                    action="{{ route('panel.system.users.destroy', ['id' => $user->id]) }}">
                     </x-delete-modal>
                 </div>
             </div>
@@ -138,12 +139,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            fetchProvinces();
 
+            var phoneInput = document.getElementById('phone');
+            if (phoneInput && phoneInput.value) {
+                formatPhoneNumber(phoneInput);
+            }
+
+            fetchProvinces();
             formatPhoneNumber();
 
             $('select').niceSelect();
-
 
         });
     </script>

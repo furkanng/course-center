@@ -147,7 +147,6 @@
                                                 <input type="text" name="phone" value="{{ old('phone') }}" required
                                                        placeholder="(555) 555 55 55"
                                                        oninput="formatPhoneNumber(this)"
-
                                                        maxlength="10">
                                                 <i class="fal fa-phone"></i>
                                             </div>
@@ -313,6 +312,10 @@
     @endif
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            var phoneInput = document.getElementById('phone');
+            if (phoneInput && phoneInput.value) {
+                formatPhoneNumber(phoneInput);
+            }
             fetchProvinces();
             formatPhoneNumber();
             $('select').niceSelect();

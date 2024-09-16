@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserRole;
 use App\Enums\UserType;
+use App\Service\Helper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -59,4 +60,25 @@ class User extends Authenticatable
         "user_type" => UserType::class,
         "role" => UserRole::class,
     ];
+
+    public function getCompanyTypeName()
+    {
+        $companyTypeCode = $this->getAttribute("company_type");
+
+        if (!$companyTypeCode) {
+            return null;
+        }
+
+        $companyType = CompanyType::query()
+            ->where("code", $companyTypeCode)
+            ->first();
+
+        return $companyType?->getAttribute("name");
+    }
+
+    protected function setPhoneAttribute($value): void
+    {
+        $this->attributes['phone']= preg_replace('/\D+/', '', $value);
+    }
+
 }

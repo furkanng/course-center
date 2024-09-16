@@ -4,21 +4,19 @@ namespace App\Http\Controllers\Panel\System;
 
 use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
-use App\Models\CompanyType;
-use App\Models\InstitutionalRegister;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): Application|Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+    public function index(): Application|Factory|View|\Illuminate\Foundation\Application
     {
         $users = User::query()->where('role', UserRole::GUEST)
             ->orderBy("created_at", "desc")->get();
@@ -46,7 +44,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id): Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|Application
+    public function edit(string $id): Factory|\Illuminate\Foundation\Application|View|Application
     {
         $user = User::query()->findOrFail($id);
         return view("panel.pages.system.users.edit", compact("user"));
@@ -59,28 +57,22 @@ class UserController extends Controller
     public function update(Request $request, string $id): RedirectResponse
     {
         $user = User::query()->findOrFail($id);
-
-        if ($user->role == "company") {
-            $institution = InstitutionalRegister::query()->where('user_id', $id)
-                ->firstOrFail();
-            $institution->fill(array_merge($request->all(), [
-                "status" => $request->has("status"),
-            ]))->save();
-
-        }
         $user->fill(array_merge($request->all(), [
             "status" => $request->has("status"),
         ]))->save();
-        
-        return redirect()->back()->with('success', 'Güncelleme İşlemi Başarılı');
+
+        return redirect()->route("panel.system.users.index")->with('success', 'Güncelleme İşlemi Başarılı');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
-        //
+        $model = User::query()->findOrFail($id);
+        $model->delete();
+
+        return redirect()->route("panel.system.users.index")->with('success', 'Silme İşlemi Başarılı');
     }
 
 }

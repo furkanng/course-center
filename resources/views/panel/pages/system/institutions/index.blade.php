@@ -5,12 +5,12 @@
         <a class="opacity-5 text-dark" href="javascript:;">Sistem Yönetimi</a>
     </li>
     <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="javascript:;">Kurum Yönetimi</a>
+        <a class="opacity-5 text-dark" href="javascript:;">Kullanıcılar</a>
     </li>
-    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Kurum Listesi</li>
+    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Kurumsal Listesi</li>
 @endsection
 @section('navigation-name')
-    <h6 class="font-weight-bolder mb-0">Kurum Listesi</h6>
+    <h6 class="font-weight-bolder mb-0">Kurumsal Listesi</h6>
 @endsection
 
 @section('content')
@@ -20,15 +20,15 @@
                 <div class="card-header pb-0">
                     <div class="d-lg-flex">
                         <div>
-                            <h5 class="mb-0">Tüm Kurumlar</h5>
+                            <h5 class="mb-0">Tüm Kurumsal Kullanıcılar</h5>
                             <p class="text-sm mb-0">
-                                Site içerisindeki tüm kurumları düzenleyebilirsiniz.
+                                Site içerisindeki tüm kurum yöneticilerini görebilirsiniz
                             </p>
                         </div>
                         <div class="ms-auto my-auto mt-lg-0 mt-4">
                             <div class="ms-auto my-auto">
                                 <a href="{{route("panel.system.course.create")}}"
-                                   class="btn bg-gradient-primary btn-sm mb-0">+&nbsp;Yeni Kurum</a>
+                                   class="btn bg-gradient-primary btn-sm mb-0">+&nbsp;Yeni Kurumsal</a>
                             </div>
                         </div>
                     </div>
@@ -50,15 +50,8 @@
                                 <th>
                                     Şehir
                                 </th>
-
-                                <th>
-                                    Kullanıcı Rolü
-                                </th>
                                 <th>
                                     Firma İsmi
-                                </th>
-                                <th>
-                                    Firma Tipi
                                 </th>
                                 <th>
                                     Durum
@@ -69,7 +62,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($institutions as $user)
+                            @foreach($users as $user)
                                 <tr>
                                     <td class="text-sm">
                                         {{$user->name}}
@@ -84,13 +77,7 @@
                                         {{$user->city}}
                                     </td>
                                     <td class="text-sm">
-                                        {{$user->role}}
-                                    </td>
-                                    <td class="text-sm">
                                         {{$user->company_name}}
-                                    </td>
-                                    <td class="text-sm">
-                                        {{$user->company_type_name}}
                                     </td>
 
                                     <td class="text-sm">
@@ -109,20 +96,20 @@
                                     </td>
 
                                     <td class="text-sm">
-                                        <a href="{{route("panel.system.institutions.institutionEdit",["id" => $user->user_id])}}"
+                                        <a href="{{route("panel.system.institutions.edit",["id" => $user->id])}}"
                                            class="mx-3">
                                             <i class="fas fa-edit text-secondary text-sm"></i>
                                         </a>
                                         <a href="#" data-bs-toggle="modal"
-                                           data-bs-target="#deleteModal-">
+                                           data-bs-target="#deleteModal-{{ $user->id }}">
                                             <i class="fas fa-trash-alt text-secondary text-sm"></i>
                                         </a>
                                     </td>
                                 </tr>
-                                <x-delete-modal modalId="deleteModal-"
+                                <x-delete-modal modalId="deleteModal-{{ $user->id }}"
                                                 title="Silme Onayı"
                                                 body="Bu öğeyi silmek istediğinizden emin misiniz?"
-                                                action="">
+                                                action="{{ route('panel.system.users.destroy', ['id' => $user->id]) }}">
                                 </x-delete-modal>
                             @endforeach
                             </tbody>
