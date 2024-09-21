@@ -341,12 +341,6 @@
                                 <span class="sidenav-normal"> Api </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/applications/analytics.html">
-                                <span class="sidenav-mini-icon"> A </span>
-                                <span class="sidenav-normal"> Analytics </span>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </li>
