@@ -40,7 +40,6 @@
 
         @yield('content')
 
-
         <!-- Footer -->
         @include("panel.inc.footer")
         <!-- Footer End -->
@@ -78,6 +77,30 @@
 <script src="{{asset("panel/assets/js/plugins/chartjs.min.js")}}"></script>
 <script src="{{asset("panel/assets/js/plugins/threejs.js")}}"></script>
 <script src="{{asset("panel/assets/js/plugins/orbit-controls.js")}}"></script>
+<!-- Github buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="{{asset("panel/assets/js/soft-ui-dashboard.min.js?v=1.1.0")}}"></script>
+<script src="{{asset("front/assets/js/vendor/jquery.js")}}"></script>
+<script src="{{asset("panel/assets/js/form-spinner.js")}}"></script>
+<script src="{{asset("panel/assets/js/alert-timeout.js")}}"></script>
+<script src="{{asset("panel/assets/js/plugins/datatables.js")}}"></script>
+<script src="{{asset("front/assets/js/service.js")}}"></script>
+<script src="{{asset("front/assets/js/nice-select.js")}}"></script>
+<script src="{{asset("panel/assets/js/plugins/dropzone.min.js")}}"></script>
+<script src="{{asset("panel/assets/js/plugins/flatpickr.min.js")}}"></script>
+<script src="{{asset("panel/assets/js/plugins/quill.min.js")}}"></script>
+<script src="{{asset("panel/assets/js/plugins/choices.min.js")}}"></script>
+
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+</script>
 
 <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
@@ -367,24 +390,56 @@
     })();
 </script>
 <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-        var options = {
-            damping: '0.5'
-        }
-        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    if (document.getElementById('editor')) {
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
     }
+
+    if (document.getElementById('choices-multiple-remove-button')) {
+        var element = document.getElementById('choices-multiple-remove-button');
+        const example = new Choices(element, {
+            removeItemButton: true
+        });
+
+        example.setChoices(
+            [{
+                value: 'One',
+                label: 'Label One',
+                disabled: true
+            },
+                {
+                    value: 'Two',
+                    label: 'Label Two',
+                    selected: true
+                },
+                {
+                    value: 'Three',
+                    label: 'Label Three'
+                },
+            ],
+            'value',
+            'label',
+            false,
+        );
+    }
+
+    if (document.querySelector('.datetimepicker')) {
+        flatpickr('.datetimepicker', {
+            allowInput: true
+        }); // flatpickr
+    }
+
+    Dropzone.autoDiscover = false;
+    var drop = document.getElementById('dropzone')
+    var myDropzone = new Dropzone(drop, {
+        url: "/file/post",
+        addRemoveLinks: true
+
+    });
 </script>
-<!-- Github buttons -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="{{asset("panel/assets/js/soft-ui-dashboard.min.js?v=1.1.0")}}"></script>
-<script src="{{asset("front/assets/js/vendor/jquery.js")}}"></script>
-<script src="{{asset("panel/assets/js/form-spinner.js")}}"></script>
-<script src="{{asset("panel/assets/js/alert-timeout.js")}}"></script>
-<script src="{{asset("panel/assets/js/plugins/datatables.js")}}"></script>
-<script src="{{asset("front/assets/js/service.js")}}"></script>
-<script src="{{asset("front/assets/js/nice-select.js")}}"></script>
+
+
 
 @stack('scripts')
 </body>

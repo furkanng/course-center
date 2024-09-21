@@ -5,9 +5,7 @@ namespace App\Providers;
 use App\Models\Course;
 use App\Models\FrontImage;
 use App\Models\Language;
-use Dflydev\DotAccessData\Data;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

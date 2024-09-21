@@ -17,7 +17,7 @@
                    class="nav-link {{ request()->routeIs('panel.config.*') ? 'active' : '' }}"
                    aria-controls="dashboardsExamples" role="button" aria-expanded="false">
                     <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>shop </title>
@@ -100,10 +100,10 @@
                    aria-controls="pagesExamples"
                    role="button" aria-expanded="false">
                     <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>office</title>
+                            <title>Sistem</title>
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
                                     <g transform="translate(1716.000000, 291.000000)">
@@ -275,13 +275,14 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link "
+                <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link
+                {{ request()->routeIs("panel.setting.*") ? 'active' : '' }}"
                    aria-controls="applicationsExamples" role="button" aria-expanded="false">
                     <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>settings</title>
+                            <title>Ayarlar</title>
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
                                     <g transform="translate(1716.000000, 291.000000)">
@@ -299,14 +300,16 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Applications</span>
+                    <span class="nav-link-text ms-1">Ayarlar</span>
                 </a>
-                <div class="collapse " id="applicationsExamples">
+                <div class="collapse {{ request()->routeIs('panel.setting.sms.*') ? 'show' : '' }}"
+                     id="applicationsExamples">
                     <ul class="nav ms-4 ps-3">
-                        <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/applications/kanban.html">
-                                <span class="sidenav-mini-icon"> K </span>
-                                <span class="sidenav-normal"> Kanban </span>
+                        <li class="nav-item {{ request()->routeIs('panel.setting.sms.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.setting.sms.*') ? 'active' : '' }}"
+                               href="{{route("panel.setting.sms.index")}}">
+                                <span class="sidenav-mini-icon"> S </span>
+                                <span class="sidenav-normal"> Sms Ayarları </span>
                             </a>
                         </li>
                         <li class="nav-item ">
@@ -340,7 +343,7 @@
                 <a data-bs-toggle="collapse" href="#ecommerceExamples" class="nav-link "
                    aria-controls="ecommerceExamples" role="button" aria-expanded="false">
                     <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg class="text-dark" width="12px" height="12px" viewBox="0 0 42 44" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>basket</title>
@@ -439,7 +442,7 @@
                 <a data-bs-toggle="collapse" href="#authExamples" class="nav-link " aria-controls="authExamples"
                    role="button" aria-expanded="false">
                     <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>document</title>
@@ -636,7 +639,7 @@
                 <a data-bs-toggle="collapse" href="#basicExamples" class="nav-link " aria-controls="basicExamples"
                    role="button" aria-expanded="false">
                     <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>spaceship</title>
@@ -757,7 +760,7 @@
                 <a data-bs-toggle="collapse" href="#componentsExamples" class="nav-link "
                    aria-controls="componentsExamples" role="button" aria-expanded="false">
                     <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>
@@ -926,7 +929,7 @@
                    href="https://github.com/creativetimofficial/ct-soft-ui-dashboard-pro/blob/main/CHANGELOG.md"
                    target="_blank">
                     <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center  me-2 d-flex align-items-center justify-content-center">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center  me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>credit-card</title>

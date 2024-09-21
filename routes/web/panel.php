@@ -3,6 +3,7 @@
 use App\Http\Controllers\Panel\Config\FrontImagesController;
 use App\Http\Controllers\Panel\Config\LanguageController;
 use App\Http\Controllers\Panel\HomeController;
+use App\Http\Controllers\Panel\Setting\SmsController;
 use App\Http\Controllers\Panel\System\CourseController;
 use App\Http\Controllers\Panel\System\InstitutionController;
 use App\Http\Controllers\Panel\System\UserController;
@@ -58,6 +59,18 @@ Route::prefix("system")->group(function () {
             'destroy' => 'panel.system.institutions.destroy'
 
         ]);
-
 });
 
+Route::prefix("settings")->group(function () {
+
+    Route::resource("sms", SmsController::class)
+        ->parameters(['sms' => 'id'])->names([
+            'index' => 'panel.setting.sms.index',
+            'create' => 'panel.setting.sms.create',
+            'store' => 'panel.setting.sms.store',
+            'update' => 'panel.setting.sms.update',
+            'edit' => 'panel.setting.sms.edit',
+            'destroy' => 'panel.setting.sms.destroy'
+        ]);
+
+});

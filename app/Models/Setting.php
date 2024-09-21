@@ -9,8 +9,6 @@ class Setting extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = "id";
-
     protected $table = "settings";
 
     public $timestamps = false;
@@ -23,11 +21,16 @@ class Setting extends Model
         "group_key",
     ];
 
+    public static function get($key): string
+    {
+        $model = Setting::query()->where("key", $key)->select("value")->firstOrFail();
+        return data_get($model, "value");
+    }
 
-    public function set($key, $value)
+    public static function set($key, $value): void
     {
         foreach ($value as $item) {
-            Setting::where("key", $key)->update(["value" => $item]);
+            Setting::query()->where("key", $key)->update(["value" => $item]);
         }
     }
 }

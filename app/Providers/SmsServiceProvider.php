@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Enums\Sms;
+use App\Models\Setting;
 use App\Service\SmsService\NetGsm\NetGsmProvider;
 use App\Service\SmsService\SmsProviderInterface;
 use Illuminate\Support\ServiceProvider;
@@ -29,6 +30,11 @@ class SmsServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        config()->set('sms.providers.netgsm', [
+            'baseUrl' => Setting::get("sms_base_url"),
+            'userCode' => Setting::get("sms_username"),
+            'password' => Setting::get("sms_password"),
+            'msgHeader' => Setting::get("sms_msgHeader"),
+        ]);
     }
 }
