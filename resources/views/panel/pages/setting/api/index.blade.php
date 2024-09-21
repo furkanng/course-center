@@ -18,7 +18,7 @@
                 <p class="text-sm mb-0">Proje içerisindeki api bilgilerinizi giriniz.</p>
                 <hr class="horizontal dark my-3">
 
-                <form class="form-submit" action="{{ route('panel.setting.contact.store') }}" method="POST">
+                <form class="form-submit" action="{{ route('panel.setting.api.store') }}" method="POST">
                     @csrf
 
                     <div class="form-group mt-4">

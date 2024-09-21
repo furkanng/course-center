@@ -5,6 +5,7 @@ use App\Http\Controllers\Panel\Config\LanguageController;
 use App\Http\Controllers\Panel\HomeController;
 use App\Http\Controllers\Panel\Setting\ApiController;
 use App\Http\Controllers\Panel\Setting\ContactController;
+use App\Http\Controllers\Panel\Setting\EmailController;
 use App\Http\Controllers\Panel\Setting\SmsController;
 use App\Http\Controllers\Panel\Setting\SocialMediaController;
 use App\Http\Controllers\Panel\System\CourseController;
@@ -88,6 +89,12 @@ Route::prefix("settings")->group(function () {
         ->parameters(['api' => 'id'])->names([
             'index' => 'panel.setting.api.index',
             'store' => 'panel.setting.api.store',
+        ]);
+
+    Route::resource("email", EmailController::class)
+        ->parameters(['email' => 'id'])->names([
+            'index' => 'panel.setting.email.index',
+            'store' => 'panel.setting.email.store',
         ]);
 
 });

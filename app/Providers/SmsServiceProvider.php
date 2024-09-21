@@ -34,7 +34,7 @@ class SmsServiceProvider extends ServiceProvider
             'baseUrl' => Setting::get("sms_base_url"),
             'userCode' => Setting::get("sms_username"),
             'password' => Setting::get("sms_password"),
-            'msgHeader' => Setting::get("sms_msgHeader"),
+            'msgHeader' => Setting::get("sms_msg_header"),
         ]);
     }
 }

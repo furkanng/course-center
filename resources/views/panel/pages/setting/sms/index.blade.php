@@ -27,25 +27,25 @@
                     @csrf
                     <div class="mt-4">
                         <label for="projectName" class="form-label">Base Url</label>
-                        <input type="text" name="sms_base_url" value="{{config("sms.providers.netgsm.baseUrl")}}"
+                        <input type="text" name="sms_base_url" value="{{\App\Models\Setting::get("sms_base_url")}}"
                                class="form-control" id="projectName">
                     </div>
 
                     <div class="mt-4">
                         <label for="projectName" class="form-label">User Code</label>
-                        <input type="text" name="sms_username" value="{{config("sms.providers.netgsm.userCode")}}"
+                        <input type="text" name="sms_username" value="{{\App\Models\Setting::get("sms_username")}}"
                                class="form-control" id="projectName">
                     </div>
 
                     <div class="mt-4">
                         <label for="projectName" class="form-label">Password</label>
-                        <input type="text" name="sms_password" value="{{config("sms.providers.netgsm.password")}}"
+                        <input type="text" name="sms_password" value="{{\App\Models\Setting::get("sms_password")}}"
                                class="form-control" id="projectName">
                     </div>
 
                     <div class="mt-4">
                         <label for="projectName" class="form-label">Message Header</label>
-                        <input type="text" name="sms_msgHeader" value="{{config("sms.providers.netgsm.msgHeader")}}"
+                        <input type="text" name="sms_msgHeader" value="{{\App\Models\Setting::get("sms_msg_header")}}"
                                class="form-control" id="projectName">
                     </div>
 

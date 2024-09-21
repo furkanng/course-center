@@ -312,6 +312,13 @@
                                 <span class="sidenav-normal"> Sms Ayarları </span>
                             </a>
                         </li>
+                        <li class="nav-item {{ request()->routeIs('panel.setting.email.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.setting.email.*') ? 'active' : '' }}"
+                               href="{{route("panel.setting.email.index")}}">
+                                <span class="sidenav-mini-icon"> E </span>
+                                <span class="sidenav-normal"> Email Ayarları </span>
+                            </a>
+                        </li>
                         <li class="nav-item {{ request()->routeIs('panel.setting.social-media.*') ? 'active' : '' }}">
                             <a class="nav-link {{ request()->routeIs('panel.setting.social-media.*') ? 'active' : '' }}"
                                href="{{route("panel.setting.social-media.index")}}">
