@@ -21,9 +21,9 @@ class Setting extends Model
         "group_key",
     ];
 
-    public static function get($key): string
+    public static function get($key): string|null
     {
-        $model = Setting::query()->where("key", $key)->select("value")->firstOrFail();
+        $model = Setting::query()->where("key", $key)->select("value")->first();
         return data_get($model, "value");
     }
 

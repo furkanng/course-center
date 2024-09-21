@@ -302,7 +302,7 @@
                     </div>
                     <span class="nav-link-text ms-1">Ayarlar</span>
                 </a>
-                <div class="collapse {{ request()->routeIs('panel.setting.sms.*') ? 'show' : '' }}"
+                <div class="collapse {{ request()->routeIs('panel.setting.*') ? 'show' : '' }}"
                      id="applicationsExamples">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item {{ request()->routeIs('panel.setting.sms.*') ? 'active' : '' }}">
@@ -312,16 +312,18 @@
                                 <span class="sidenav-normal"> Sms Ayarları </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/applications/wizard.html">
-                                <span class="sidenav-mini-icon"> W </span>
-                                <span class="sidenav-normal"> Wizard </span>
+                        <li class="nav-item {{ request()->routeIs('panel.setting.social-media.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.setting.social-media.*') ? 'active' : '' }}"
+                               href="{{route("panel.setting.social-media.index")}}">
+                                <span class="sidenav-mini-icon"> M </span>
+                                <span class="sidenav-normal"> Sosyal Medya </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/applications/datatables.html">
-                                <span class="sidenav-mini-icon"> D </span>
-                                <span class="sidenav-normal"> DataTables </span>
+                        <li class="nav-item {{ request()->routeIs('panel.setting.contact.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.setting.contact.*') ? 'active' : '' }}"
+                               href="{{route("panel.setting.contact.index")}}">
+                                <span class="sidenav-mini-icon"> İ </span>
+                                <span class="sidenav-normal"> İletişim </span>
                             </a>
                         </li>
                         <li class="nav-item ">

@@ -8,14 +8,14 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class SmsController extends Controller
+class SocialMediaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(): view
     {
-        return view('panel.pages.setting.sms.index');
+        return view('panel.pages.setting.socialMedia.index');
     }
 
     /**
