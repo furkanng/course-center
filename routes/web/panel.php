@@ -3,6 +3,7 @@
 use App\Http\Controllers\Panel\Config\FrontImagesController;
 use App\Http\Controllers\Panel\Config\LanguageController;
 use App\Http\Controllers\Panel\HomeController;
+use App\Http\Controllers\Panel\Setting\ApiController;
 use App\Http\Controllers\Panel\Setting\ContactController;
 use App\Http\Controllers\Panel\Setting\SmsController;
 use App\Http\Controllers\Panel\Setting\SocialMediaController;
@@ -81,6 +82,12 @@ Route::prefix("settings")->group(function () {
         ->parameters(['contact' => 'id'])->names([
             'index' => 'panel.setting.contact.index',
             'store' => 'panel.setting.contact.store',
+        ]);
+
+    Route::resource("api", ApiController::class)
+        ->parameters(['api' => 'id'])->names([
+            'index' => 'panel.setting.api.index',
+            'store' => 'panel.setting.api.store',
         ]);
 
 });

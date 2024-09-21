@@ -326,10 +326,12 @@
                                 <span class="sidenav-normal"> İletişim </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/applications/calendar.html">
-                                <span class="sidenav-mini-icon"> C </span>
-                                <span class="sidenav-normal"> Calendar </span>
+
+                        <li class="nav-item {{ request()->routeIs('panel.setting.api.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.setting.api.*') ? 'active' : '' }}"
+                               href="{{route("panel.setting.api.index")}}">
+                                <span class="sidenav-mini-icon"> A </span>
+                                <span class="sidenav-normal"> Api </span>
                             </a>
                         </li>
                         <li class="nav-item ">

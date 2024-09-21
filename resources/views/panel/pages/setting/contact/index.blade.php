@@ -48,8 +48,7 @@
                     <div class="mt-4">
                         <label for="projectName" class="form-label">Adres</label>
                         <textarea type="text" name="contact_address"
-                                  class="form-control">
-                            {!! \App\Models\Setting::get("contact_address") !!}
+                                  class="form-control">{!! \App\Models\Setting::get("contact_address") !!}
                         </textarea>
                     </div>
 

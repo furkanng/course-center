@@ -51,7 +51,7 @@ class SettingSeeder extends Seeder
                 ['title' => 'Set Api Analytics', 'key' => 'analytics_api', 'value' => '', "type" => 'text', "group_key" => 'api_settings'],
                 ['title' => 'Set Api Webmaster Tools', 'key' => 'webmaster_api', 'value' => '', "type" => 'text', "group_key" => 'api_settings'],
                 ['title' => 'Set Api Map', 'key' => 'map_api', 'value' => '', "type" => 'text', "group_key" => 'api_settings'],
-                ['title' => 'Set Api Live Support', 'key' => 'livesupport_api', 'value' => '', "type" => 'text', "group_key" => 'api_settings'],
+                ['title' => 'Set Api Live Support', 'key' => 'live_support_api', 'value' => '', "type" => 'text', "group_key" => 'api_settings'],
                 ['title' => 'Set Api Google Recaptcha', 'key' => 'recaptcha_api', 'value' => '', "type" => 'text', "group_key" => 'api_settings'],
             ];
 
