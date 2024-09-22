@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Kurumsal kayıt bilgi formu tablosu
      */
@@ -15,7 +14,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId("user_id")->constrained()->onDelete('cascade');
             $table->foreignId("company_id")->constrained()->onDelete('cascade');
-            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
+            $table->enum('status', [
+                \App\Enums\UserStatus::PENDING,
+                \App\Enums\UserStatus::ACCEPTED,
+                \App\Enums\UserStatus::REJECTED
+            ])->default(\App\Enums\UserStatus::PENDING);
             $table->timestamps();
         });
     }

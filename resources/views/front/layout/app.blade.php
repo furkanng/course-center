@@ -30,7 +30,6 @@
     your browser</a> to improve your experience and security.</p>
 <![endif]-->
 
-
 <!-- pre loader area start -->
 <div id="loading">
     <div id="loading-center">
@@ -55,6 +54,14 @@
 @include("front.inc.header")
 
 @yield('content')
+
+@if(session('success'))
+    <x-front-alert type="success" :message="session('success')" />
+@endif
+
+@if(session('error'))
+    <x-front-alert type="danger" :message="session('error')" />
+@endif
 
 @include("front.inc.footer")
 

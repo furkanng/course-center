@@ -6,28 +6,25 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class RegisterModal extends Component
+class FrontAlert extends Component
 {
-
-    public string $title;
-    public string $body;
-
+    public $type;
+    public $message;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($title, $body)
+    public function __construct($type, $message)
     {
-
-        $this->title = $title;
-        $this->body = $body;
-
+        $this->type = $type;
+        $this->message = $message;
     }
+
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('components.register-modal');
+        return view('components.front-alert');
     }
 }

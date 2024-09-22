@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Enums\UserRole;
+use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\Company;
@@ -96,32 +98,45 @@ class AuthController extends Controller
     }
 
 
-
     public function registerPost(RegisterRequest $request): RedirectResponse
     {
+        $user = new User();
 
-        $model = User::query()->create(array_merge($request->all(), ['status' => 0,'kvkk_approve' => $request->has('kvkk_approve') ? 1 : 0]));
+        $role = $request->get("role");
 
+        switch ($role) {
+            case UserRole::COMPANY->value:
+                $user->fill(array_merge($request->all(),
+                    [
+                        "user_type" => $request->user_type_company,
+                        "status" => 0,
+                        'kvkk_approve' => $request->has('kvkk_approve') ? 1 : 0
+                    ]
+                ))->save();
 
+                InstitutionalRegister::query()->create([
+                    "user_id" => $user->id,
+                    "status" => UserStatus::PENDING,
+                    "company_name" => $user->company_name,
+                    "company_type" => $user->company_type
+                ]);
 
-        if($model->role == "company"){
-            InstitutionalRegister::query()->create([
-                'user_id'=>$model->id,
-                'status'=>'pending',
-                'company_name'=>$model->company_name,
-                'company_type'=>$model->company_type
-            ]);
+                return redirect()->back()->with("companyRegister", "Kayıt Başarılı");
 
+            case UserRole::GUEST->value:
+
+                $user->fill(array_merge($request->all(),
+                    [
+                        "user_type" => $request->user_type_guest,
+                        "status" => 1,
+                        'kvkk_approve' => $request->has('kvkk_approve') ? 1 : 0
+                    ]
+                ))->save();
+
+                return redirect()->route('home')->with("success", "Kayıt Başarılı");
         }
 
-        if ($model) {
-            //$credentials = $request->only('email', 'password');
-            //Auth::attempt($credentials);
-            //return redirect()->route('panel.home')->with('success', 'Kullanıcı başarıyla oluşturuldu.');
-            return redirect()->back()->with('registerSuccess',true);
-        } else {
-            return redirect()->back()->with('error', 'Kullanıcı oluşturulurken bir hata oluştu.')->withInput();
-        }
+        return redirect()->back()->with("error", "Kayıt Başarısız")->withInput();
     }
 
     public function logout(): RedirectResponse

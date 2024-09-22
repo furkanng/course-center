@@ -2,11 +2,6 @@
 
 @section('title', 'Home Page')
 @section('content')
-    <x-register-modal
-        title="Kayıt"
-        body="Kurum kaydı başarıyla oluşturuldu onay bekleniyor..."
-    >
-    </x-register-modal>
     <section class="signup__area p-relative z-index-1 pt-100 pb-145">
         <div class="sign__shape">
             <img class="man-1" src="{{asset("front/assets/img/icon/sign/man-1.png")}}" alt="">
@@ -27,12 +22,14 @@
                                 <div class="sign__input-wrapper mb-25 d-flex justify-content-center">
                                     <div class="radio-inputs" id="role">
                                         <label class="radio">
-                                            <input class="role" type="radio" name="role" value="guest" checked>
-                                            <span class="name">Öğrenci</span>
+                                            <input class="role" type="radio" name="role"
+                                                   value="{{\App\Enums\UserRole::GUEST}}" checked>
+                                            <span class="name">{{\App\Enums\UserRole::GUEST->label()}}</span>
                                         </label>
                                         <label class="radio">
-                                            <input class="role" type="radio" name="role" value="company">
-                                            <span class="name">Kurum</span>
+                                            <input class="role" type="radio" name="role"
+                                                   value="{{\App\Enums\UserRole::COMPANY}}">
+                                            <span class="name">{{\App\Enums\UserRole::COMPANY->label()}}</span>
                                         </label>
                                     </div>
                                 </div>
@@ -162,8 +159,7 @@
                                                 @enderror
                                             </div>
                                             <div class="sign__input">
-                                                <select name="user_type" id="user_type" required>
-                                                    <option value="">Seçiniz</option>
+                                                <select name="user_type_guest" id="user_type" required>
                                                     @foreach(\App\Enums\UserType::cases() as $key)
                                                         @if($key->isGuest())
                                                             <option value="{{$key->value}}">{{$key->label()}}</option>
@@ -182,8 +178,7 @@
                                                 @enderror
                                             </div>
                                             <div class="sign__input">
-                                                <select name="user_type" id="user_type" required>
-                                                    <option value="">Seçiniz</option>
+                                                <select name="user_type_company" id="user_type" required>
                                                     @foreach(\App\Enums\UserType::cases() as $key)
                                                         @if($key->isCompany())
                                                             <option value="{{$key->value}}">{{$key->label()}}</option>
@@ -194,9 +189,7 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -300,16 +293,40 @@
 
     </style>
 
-    @if(session('registerSuccess'))
+    @if(session('companyRegister'))
+        <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="modal-title-notification">Bilgilendirme Mesajı</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="py-3 text-center">
+                            <i class="ni ni-bell-55 ni-3x"></i>
+                            <h4 class="text-gradient text-danger mt-4">Lütfen Okuyunuz !</h4>
+                            <p>Kayıt başvurunuz alınmıştır. En kısa sürede size dönüş sağlayacağız.</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tamam</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script>
-            $(document).ready(function () {
-                $('#registerModal').modal('show');
+            document.addEventListener('DOMContentLoaded', function () {
+                var myModal = new bootstrap.Modal(document.getElementById('modal-notification'));
+                myModal.show();
             });
-
         </script>
-
     @endif
+
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var phoneInput = document.getElementById('phone');
