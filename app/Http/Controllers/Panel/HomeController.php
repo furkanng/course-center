@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function home(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    public function home(): view
     {
         return view("panel.pages.home");
     }

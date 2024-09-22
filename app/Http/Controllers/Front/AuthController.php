@@ -6,97 +6,38 @@ use App\Enums\UserRole;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
-use App\Models\Company;
 use App\Models\InstitutionalRegister;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
-    public function loginPost(Request $request): RedirectResponse
+    public function loginPost(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
-
-        $user = User::where('email', $credentials['email'])->first();
-
-        if ($user) {
-
-            if ($user->role != 'guest' && $user->status != 0) {
-                if (Auth::attempt($credentials)) {
-                    return redirect()->route('panel.home');
-                } else {
-                    return redirect()->back()->with('error', 'Giriş başarısız.');
-                }
-            } else {
-
-                return redirect()->back()->with('error', 'Giriş izni yok.');
-            }
-        } else {
-
-            return redirect()->back()->with('error', 'Kullanıcı bulunamadı.');
+        if (!Auth::attempt($credentials)) {
+            return redirect()->back()->with("error", "E-posta veya şifre hatalı.");
         }
-    }
 
+        $user = Auth::user();
+
+        if (!$user->status) {
+            Auth::logout();
+            return redirect()->back()->with("error", "Giriş Başarısız. Kullanıcı aktif değil.");
+        }
+
+        switch ($user->role):
+            case UserRole::ADMIN:
+                return redirect()->route('panel.home');
+            case UserRole::COMPANY:
+                return redirect()->route('panel.home.test');
+            case UserRole::GUEST:
+                return redirect()->route('home');
+        endswitch;
+    }
 
     public function registerPost(RegisterRequest $request): RedirectResponse
     {
