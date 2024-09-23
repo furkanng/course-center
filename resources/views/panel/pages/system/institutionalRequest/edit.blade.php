@@ -69,7 +69,7 @@
                                 <select class="form-control" name="status" style="width: 95%">
                                     @foreach(\App\Enums\UserStatus::cases() as $status)
                                         <option
-                                            value="{{$status}}" {{$user->status === $status->value ? "selected" : '' }}>
+                                            value="{{$status}}" {{$user->status === $status ? "selected" : '' }}>
                                             {{$status->label()}}</option>
                                     @endforeach
                                 </select>
