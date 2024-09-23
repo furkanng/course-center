@@ -5,7 +5,7 @@
         <a class="opacity-5 text-dark" href="javascript:;">Kullanıcı Yönetimi</a>
     </li>
     <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="{{route("panel.system.course.index")}}">Misafir Listesi</a>
+        <a class="opacity-5 text-dark" href="{{route("panel.system.users.index")}}">Misafir Listesi</a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Misafir Düzenle</li>
 @endsection

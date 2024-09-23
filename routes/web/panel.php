@@ -9,6 +9,7 @@ use App\Http\Controllers\Panel\Setting\EmailController;
 use App\Http\Controllers\Panel\Setting\SmsController;
 use App\Http\Controllers\Panel\Setting\SocialMediaController;
 use App\Http\Controllers\Panel\System\CourseController;
+use App\Http\Controllers\Panel\System\InstitutionalRequestController;
 use App\Http\Controllers\Panel\System\InstitutionController;
 use App\Http\Controllers\Panel\System\UserController;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,17 @@ Route::prefix("system")->group(function () {
             'update' => 'panel.system.institutions.update',
             'edit' => 'panel.system.institutions.edit',
             'destroy' => 'panel.system.institutions.destroy'
+
+        ]);
+
+    Route::resource("institutional-register", InstitutionalRequestController::class)
+        ->parameters(['institutional-register' => 'id'])->names([
+            'index' => 'panel.system.institutional-register.index',
+            'create' => 'panel.system.institutional-register.create',
+            'store' => 'panel.system.institutional-register.store',
+            'update' => 'panel.system.institutional-register.update',
+            'edit' => 'panel.system.institutional-register.edit',
+            'destroy' => 'panel.system.institutional-register.destroy'
 
         ]);
 });

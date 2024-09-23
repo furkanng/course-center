@@ -5,7 +5,7 @@
         <a class="opacity-5 text-dark" href="javascript:;">Kurumsal Yönetimi</a>
     </li>
     <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="{{route("panel.system.course.index")}}">Kurumsal Listesi</a>
+        <a class="opacity-5 text-dark" href="{{route("panel.system.institutions.index")}}">Kurumsal Listesi</a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Kurumsal Düzenle</li>
 @endsection

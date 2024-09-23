@@ -31,7 +31,7 @@ class InstitutionController extends Controller
     public function create(): view
     {
         $companyTypes = CompanyType::all();
-        return view("panel.pages.system.institutions.create",compact("companyTypes"));
+        return view("panel.pages.system.institutions.create", compact("companyTypes"));
     }
 
     /**

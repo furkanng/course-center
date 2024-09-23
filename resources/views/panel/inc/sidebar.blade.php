@@ -130,15 +130,18 @@
                                 <span class="sidenav-normal"> Kurs Yönetimi </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('panel.system.users.*') ||
-                               request()->routeIs('panel.system.institutions.*')? 'active' : '' }}"
+                               request()->routeIs('panel.system.institutions.*') ||
+                               request()->routeIs('panel.system.institutional-register.*')
+                               ? 'active' : '' }}"
                                data-bs-toggle="collapse" aria-expanded="false" href="#usersExample">
                                 <span class="sidenav-mini-icon"> K </span>
                                 <span class="sidenav-normal"> Kullanıcılar <b class="caret"></b></span>
                             </a>
                             <div class="collapse {{ request()->routeIs('panel.system.users.*') ||
-                                 request()->routeIs('panel.system.institutions.*') ? 'show' : '' }}"
+                                 request()->routeIs('panel.system.institutions.*') ||
+                                 request()->routeIs('panel.system.institutional-register.*') ? 'show' : '' }}"
                                  id="usersExample">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item {{ request()->routeIs('panel.system.users.*') ? 'active' : '' }}">
@@ -157,10 +160,12 @@
                                             <span class="sidenav-normal"> Kurumsal Listesi </span>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/pages/users/new-user.html">
-                                            <span class="sidenav-mini-icon text-xs"> N </span>
-                                            <span class="sidenav-normal"> New User </span>
+                                    <li class="nav-item {{ request()->routeIs('panel.system.institutional-register.*') ? 'active' : '' }}">
+                                        <a class="nav-link"
+                                           {{ request()->routeIs('panel.system.institutional-register.*') ? 'active' : '' }}
+                                           href="{{route("panel.system.institutional-register.index")}}">
+                                            <span class="sidenav-mini-icon text-xs"> KB </span>
+                                            <span class="sidenav-normal"> Kurumsal Başvurular </span>
                                         </a>
                                     </li>
                                 </ul>
