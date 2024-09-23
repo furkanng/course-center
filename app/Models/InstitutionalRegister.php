@@ -39,7 +39,9 @@ class InstitutionalRegister extends Model
         });
 
         static::deleted(function ($model) {
-            $model->user->delete();
+            if ($model->status === UserStatus::REJECTED) {
+                $model->user->delete();
+            }
         });
     }
 
