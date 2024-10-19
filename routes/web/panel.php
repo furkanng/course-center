@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Panel\Company\CompanyController;
+use App\Http\Controllers\Panel\Company\CompanyImageController;
+use App\Http\Controllers\Panel\Company\FeatureController;
+use App\Http\Controllers\Panel\Company\PriceController;
+use App\Http\Controllers\Panel\Company\SssController;
 use App\Http\Controllers\Panel\Config\FrontImagesController;
 use App\Http\Controllers\Panel\Config\LanguageController;
 use App\Http\Controllers\Panel\HomeController;
@@ -109,4 +114,59 @@ Route::prefix("settings")->group(function () {
             'store' => 'panel.setting.email.store',
         ]);
 
+});
+
+Route::prefix("companies")->group(function () {
+
+    Route::resource("company", CompanyController::class)
+        ->parameters(['company' => 'id'])->names([
+            'index' => 'panel.companies.company.index',
+            'create' => 'panel.companies.company.create',
+            'store' => 'panel.companies.company.store',
+            'update' => 'panel.companies.company.update',
+            'edit' => 'panel.companies.company.edit',
+            'destroy' => 'panel.companies.company.destroy',
+        ]);
+
+    Route::resource("company.sss", SssController::class)
+        ->parameters(['sss' => 'id'])->names([
+            'index' => 'panel.companies.sss.index',
+            'create' => 'panel.companies.sss.create',
+            'store' => 'panel.companies.sss.store',
+            'update' => 'panel.companies.sss.update',
+            'edit' => 'panel.companies.sss.edit',
+            'destroy' => 'panel.companies.sss.destroy',
+        ])->shallow();
+
+    Route::resource("company.price", PriceController::class)
+        ->parameters(['price' => 'id'])->names([
+            'index' => 'panel.companies.price.index',
+            'create' => 'panel.companies.price.create',
+            'store' => 'panel.companies.price.store',
+            'update' => 'panel.companies.price.update',
+            'edit' => 'panel.companies.price.edit',
+            'destroy' => 'panel.companies.price.destroy',
+        ])->shallow();
+
+    Route::delete("company/image/{id}", [CompanyController::class, "imageDelete"])
+        ->name("panel.companies.company.image.delete");
+
+    Route::resource("image", CompanyImageController::class)
+        ->parameters(['image' => 'id'])->names([
+            'index' => 'panel.companies.image.index',
+            'create' => 'panel.companies.image.create',
+            'store' => 'panel.companies.image.store',
+            'update' => 'panel.companies.image.update',
+            'edit' => 'panel.companies.image.edit',
+            'destroy' => 'panel.companies.image.destroy'
+        ]);
+
+    Route::resource("feature", FeatureController::class)
+        ->parameters(['feature' => 'id'])->names([
+            'index' => 'panel.companies.feature.index',
+            'store' => 'panel.companies.feature.store',
+        ]);
+
+    Route::post("feature/delete", [FeatureController::class, "delete"])
+        ->name("panel.companies.feature.delete");
 });

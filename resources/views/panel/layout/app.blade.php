@@ -91,6 +91,9 @@
 <script src="{{asset("panel/assets/js/plugins/flatpickr.min.js")}}"></script>
 <script src="{{asset("panel/assets/js/plugins/quill.min.js")}}"></script>
 <script src="{{asset("panel/assets/js/plugins/choices.min.js")}}"></script>
+<script src="{{asset("panel/assets/js/plugins/leaflet.js")}}"></script>
+<script src="{{asset("panel/assets/js/plugins/nouislider.min.js")}}"></script>
+<script src="{{asset("panel/assets/js/plugins/multistep-form.js")}}"></script>
 
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -440,7 +443,7 @@
 </script>
 
 
-
+@stack('style')
 @stack('scripts')
 </body>
 

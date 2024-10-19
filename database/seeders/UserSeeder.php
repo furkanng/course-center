@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserRole;
+use App\Enums\UserType;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +26,12 @@ class UserSeeder extends Seeder
                 "city" => "Kahramanmaraş",
                 "district" => "onikişubat",
                 "password" => '$2y$10$WGerOaCXGZy2rPNkQ6QYreHCKcp/FotVhwT7CE75L2PFb1Knh5KoO',
-                "role" => "admin",
+                "role" => UserRole::ADMIN,
+                "user_type" => UserType::ADMIN,
+                "status" => true,
+                "sms_approve" => true,
+                "email_approve" => true,
+                "kvkk_approve" => true,
             ];
 
         User::query()->insert($defaultData);

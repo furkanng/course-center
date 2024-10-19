@@ -4,6 +4,7 @@ namespace App\Enums;
 
 enum UserType: string
 {
+    case ADMIN = "admin";
     case STUDENT = "student";
     case TEACHER = "teacher";
     case GRADUATED = "graduated";
@@ -14,6 +15,7 @@ enum UserType: string
     public function label(): string
     {
         return match ($this) {
+            self::ADMIN                  => 'Admin',
             self::STUDENT                => 'Öğrenci',
             self::TEACHER                => 'Öğretmen',
             self::GRADUATED              => 'Mezun',

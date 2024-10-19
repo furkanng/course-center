@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\ImageTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CompanyImage extends Model
 {
-    use HasFactory;
+    use HasFactory, ImageTrait;
 
     protected $table = "company_images";
 
@@ -16,4 +18,9 @@ class CompanyImage extends Model
         "status",
         "order"
     ];
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', "id");
+    }
 }

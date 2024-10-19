@@ -6,20 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class CompanySss extends Model
+class CompanyFeature extends Model
 {
     use HasFactory;
 
-    protected $table = 'company_sss';
+    protected $table = 'company_features';
 
     protected $fillable = [
-        "question",
-        "answer",
-        "status",
-        "order"
+        "feature_id",
     ];
 
-    public function company(): BelongsTo
+    public function images(): BelongsTo
     {
         return $this->belongsTo(Company::class, 'company_id', "id");
     }

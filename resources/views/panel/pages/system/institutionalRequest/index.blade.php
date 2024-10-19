@@ -113,7 +113,7 @@
                                 <x-delete-modal modalId="deleteModal-{{ $user->id }}"
                                                 title="Silme Onayı"
                                                 body="Bu öğeyi silmek istediğinizden emin misiniz?"
-                                                action="{{ route('panel.system.users.destroy', ['id' => $user->id]) }}">
+                                                action="{{ route('panel.system.institutional-register.destroy', ['id' => $user->id]) }}">
                                 </x-delete-modal>
                             @endforeach
                             </tbody>

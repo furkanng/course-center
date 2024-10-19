@@ -131,7 +131,7 @@
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" name="status" type="checkbox"
                                            id="flexSwitchCheckDefault"
-                                            {{$user->status ? 'checked' : '' }}>
+                                        {{$user->status ? 'checked' : '' }}>
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Durum</label>
                                 </div>
                             </div>

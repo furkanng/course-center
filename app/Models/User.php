@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\UserRole;
 use App\Enums\UserType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -76,7 +77,11 @@ class User extends Authenticatable
 
     protected function setPhoneAttribute($value): void
     {
-        $this->attributes['phone']= preg_replace('/\D+/', '', $value);
+        $this->attributes['phone'] = preg_replace('/\D+/', '', $value);
     }
 
+    public function companies(): BelongsToMany
+    {
+        return $this->belongsToMany(Company::class);
+    }
 }

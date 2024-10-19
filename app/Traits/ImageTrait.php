@@ -48,7 +48,7 @@ trait ImageTrait
         }
     }
 
-    protected function deleteImage(): void
+    public function deleteImage(): void
     {
         if (!empty($this->image)) {
             Storage::disk(config("filesystems.default"))->delete($this->getStoragePath($this->getOriginal('image')));
