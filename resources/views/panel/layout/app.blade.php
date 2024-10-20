@@ -26,7 +26,11 @@
 <body class="g-sidenav-show  bg-gray-100">
 
 <!-- Sidebar -->
-@include("panel.inc.sidebar")
+@if(auth()->user()->role === \App\Enums\UserRole::ADMIN)
+    @include("panel.inc.sidebar")
+@elseif(auth()->user()->role === \App\Enums\UserRole::COMPANY)
+    @include("merchant.inc.sidebar")
+@endif
 <!-- Sidebar End -->
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -94,6 +98,8 @@
 <script src="{{asset("panel/assets/js/plugins/leaflet.js")}}"></script>
 <script src="{{asset("panel/assets/js/plugins/nouislider.min.js")}}"></script>
 <script src="{{asset("panel/assets/js/plugins/multistep-form.js")}}"></script>
+<script src="{{asset("panel/assets/js/plugins/photoswipe.min.js")}}"></script>
+<script src="{{asset("panel/assets/js/plugins/photoswipe-ui-default.min.js")}}"></script>
 
 <script>
     var win = navigator.platform.indexOf('Win') > -1;

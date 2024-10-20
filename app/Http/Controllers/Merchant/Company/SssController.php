@@ -1,25 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Panel\Company;
+namespace App\Http\Controllers\Merchant\Company;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
-use App\Models\CompanyImage;
+use App\Models\CompanySss;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Intervention\Image\Colors\Rgb\Channels\Red;
 
-class CompanyImageController extends Controller
+class SssController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index($id): View
+    public function index()
     {
-        $company = Company::query()->findOrFail($id);
-        $images = $company->images;
 
-        return view("panel.pages.company.images", compact(["images", "company"]));
     }
 
     /**
@@ -35,11 +32,17 @@ class CompanyImageController extends Controller
      */
     public function store(Request $request, $id): RedirectResponse
     {
-        $model = new CompanyImage();
-        $model->fill($request->all());
-        $model->forceFill(["company_id" => $id, "status" => true])->save();
+        $request->validate([
+            "question" => "required",
+            "answer" => "required",
+            "status" => "required",
+        ]);
 
-        return redirect()->back()->with("success", "İşlem Başarılı");
+        $model = new CompanySss();
+        $model->fill($request->all());
+        $model->forceFill(["company_id" => $id])->save();
+
+        return back()->with("success", "İşlem Başarılı");
     }
 
     /**
@@ -63,7 +66,13 @@ class CompanyImageController extends Controller
      */
     public function update(Request $request, string $id): RedirectResponse
     {
-        $model = CompanyImage::query()->findOrFail($id);
+        $request->validate([
+            "question" => "required",
+            "answer" => "required",
+            "status" => "required",
+        ]);
+
+        $model = CompanySss::query()->findOrFail($id);
         $model->fill($request->all())->save();
 
         return redirect()->back()->with("success", "İşlem Başarılı");
@@ -74,7 +83,7 @@ class CompanyImageController extends Controller
      */
     public function destroy(string $id): RedirectResponse
     {
-        $model = CompanyImage::query()->findOrFail($id);
+        $model = CompanySss::query()->findOrFail($id);
         $model->delete();
 
         return redirect()->back()->with("success", "İşlem Başarılı");

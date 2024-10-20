@@ -2,8 +2,10 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\LoginCacheMiddleware;
+use App\Http\Middleware\MerchantMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -68,5 +70,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'AuthMiddleware' => AuthMiddleware::class,
         'LoginCacheMiddleware' => LoginCacheMiddleware::class,
+        'AdminMiddleware' => AdminMiddleware::class,
+        'MerchantMiddleware' => MerchantMiddleware::class,
     ];
 }

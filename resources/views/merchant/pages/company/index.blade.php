@@ -17,57 +17,13 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <!-- Card header -->
                 <div class="card-header pb-0">
                     <div class="d-lg-flex">
                         <div>
-                            <h5 class="mb-0">Tüm Kurumlar</h5>
+                            <h5 class="mb-0">Tüm Kurumlarım</h5>
                             <p class="text-sm mb-0">
-                                Sistemde kayıtlı olan tüm kurumları görebilir ve düzenleyebilirsiniz.
+                                Size ait olan olan tüm kurumları görebilir ve düzenleyebilirsiniz.
                             </p>
-                        </div>
-                        <div class="ms-auto my-auto mt-lg-0 mt-4">
-                            <div class="ms-auto my-auto">
-                                <a href="{{route("panel.companies.company.create")}}"
-                                   class="btn bg-gradient-primary btn-sm mb-0">+&nbsp; Yeni Kurum</a>
-                                <button type="button" class="btn btn-outline-primary btn-sm mb-0" data-bs-toggle="modal"
-                                        data-bs-target="#import">
-                                    Import
-                                </button>
-                                <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
-                                    <div class="modal-dialog mt-lg-10">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="ModalLabel">Import CSV</h5>
-                                                <i class="fas fa-upload ms-3"></i>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>You can browse your computer for a file.</p>
-                                                <input type="text" placeholder="Browse file..."
-                                                       class="form-control mb-3">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="importCheck" checked="">
-                                                    <label class="custom-control-label" for="importCheck">I accept the
-                                                        terms and conditions</label>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn bg-gradient-secondary btn-sm"
-                                                        data-bs-dismiss="modal">Close
-                                                </button>
-                                                <button type="button" class="btn bg-gradient-primary btn-sm">Upload
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1" data-type="csv"
-                                        type="button" name="button">Export
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -113,28 +69,18 @@
                                         </span>
                                     </td>
                                     <td class="text-sm">
-                                        <a href="{{route("panel.companies.image.index",["company" => $company->id])}}"
-                                           class="mx-1" data-bs-toggle="tooltip"
+                                        <a href="{{route("merchant.companies.image.index",["company" => $company->id])}}"
+                                           class="mx-3" data-bs-toggle="tooltip"
                                            data-bs-original-title="New İmage">
                                             <i class="fa fa-image text-secondary"></i>
                                         </a>
-                                        <a href="{{route("panel.companies.company.edit",["id" => $company->id])}}"
-                                           class="mx-3" data-bs-toggle="tooltip"
+                                        <a href="{{route("merchant.companies.company.edit",["id" => $company->id])}}"
+                                            data-bs-toggle="tooltip"
                                            data-bs-original-title="Edit product">
                                             <i class="fas fa-edit text-secondary"></i>
                                         </a>
-                                        <a href="#" data-bs-toggle="modal"
-                                           data-bs-target="#deleteModal-{{ $company->id }}">
-                                            <i class="fas fa-trash text-secondary"></i>
-                                        </a>
                                     </td>
                                 </tr>
-                                <x-delete-modal modalId="deleteModal-{{ $company->id }}"
-                                                title="Silme Onayı"
-                                                body="Bu öğeyi silmek istediğinizden emin misiniz?"
-                                                action="{{ route('panel.companies.company.destroy',
-                                                ['id' => $company->id]) }}">
-                                </x-delete-modal>
                             @endforeach
                             </tbody>
                         </table>

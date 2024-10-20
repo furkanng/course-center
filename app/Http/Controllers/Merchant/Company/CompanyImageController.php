@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Panel\Company;
+namespace App\Http\Controllers\Merchant\Company;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyImage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class CompanyImageController extends Controller
@@ -19,7 +20,7 @@ class CompanyImageController extends Controller
         $company = Company::query()->findOrFail($id);
         $images = $company->images;
 
-        return view("panel.pages.company.images", compact(["images", "company"]));
+        return view("merchant.pages.company.images", compact(["images", "company"]));
     }
 
     /**
@@ -37,7 +38,7 @@ class CompanyImageController extends Controller
     {
         $model = new CompanyImage();
         $model->fill($request->all());
-        $model->forceFill(["company_id" => $id, "status" => true])->save();
+        $model->forceFill(["company_id" => $id, "status" => false])->save();
 
         return redirect()->back()->with("success", "İşlem Başarılı");
     }
@@ -61,12 +62,9 @@ class CompanyImageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(Request $request, string $id)
     {
-        $model = CompanyImage::query()->findOrFail($id);
-        $model->fill($request->all())->save();
 
-        return redirect()->back()->with("success", "İşlem Başarılı");
     }
 
     /**
@@ -78,5 +76,6 @@ class CompanyImageController extends Controller
         $model->delete();
 
         return redirect()->back()->with("success", "İşlem Başarılı");
+
     }
 }

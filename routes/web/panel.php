@@ -151,7 +151,7 @@ Route::prefix("companies")->group(function () {
     Route::delete("company/image/{id}", [CompanyController::class, "imageDelete"])
         ->name("panel.companies.company.image.delete");
 
-    Route::resource("image", CompanyImageController::class)
+    Route::resource("company.image", CompanyImageController::class)
         ->parameters(['image' => 'id'])->names([
             'index' => 'panel.companies.image.index',
             'create' => 'panel.companies.image.create',
@@ -159,7 +159,7 @@ Route::prefix("companies")->group(function () {
             'update' => 'panel.companies.image.update',
             'edit' => 'panel.companies.image.edit',
             'destroy' => 'panel.companies.image.destroy'
-        ]);
+        ])->shallow();
 
     Route::resource("feature", FeatureController::class)
         ->parameters(['feature' => 'id'])->names([

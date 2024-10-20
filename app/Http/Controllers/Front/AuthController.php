@@ -33,7 +33,7 @@ class AuthController extends Controller
             case UserRole::ADMIN:
                 return redirect()->route('panel.home');
             case UserRole::COMPANY:
-                return redirect()->route('panel.home.test');
+                return redirect()->route('merchant.home');
             case UserRole::GUEST:
                 return redirect()->route('home');
         endswitch;

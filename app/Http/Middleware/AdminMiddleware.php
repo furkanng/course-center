@@ -5,10 +5,9 @@ namespace App\Http\Middleware;
 use App\Enums\UserRole;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class LoginCacheMiddleware
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,14 +16,11 @@ class LoginCacheMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check()) {
-            if (Auth::user()->role === UserRole::ADMIN) {
-                return redirect()->route("panel.home");
-            } elseif (Auth::user()->role === UserRole::COMPANY) {
-                return redirect()->route("merchant.home");
-            }
-        } else {
+        if (auth()->user()->role === UserRole::ADMIN) {
+            $request->session()->regenerate();
             return $next($request);
+        } else {
+            return abort(403, 'Bu işlem için yetkiniz yok.');
         }
     }
 }
