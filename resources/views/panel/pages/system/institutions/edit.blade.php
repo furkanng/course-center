@@ -19,7 +19,7 @@
         <div class="col-12 col-md-8 col-xl-6">
             <div class="card h-100">
                 <div class="card-header pb-0 p-3">
-                    <h6 class="mb-0">Kurum Detayları</h6>
+                    <h6 class="mb-0">Kurumsal Detayları</h6>
                 </div>
                 <div class="card-body p-3">
                     <form class="form-submit" method="POST"

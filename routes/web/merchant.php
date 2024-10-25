@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Merchant\Company\CompanyController;
 use App\Http\Controllers\Merchant\Company\CompanyImageController;
+use App\Http\Controllers\Merchant\Company\MyRequestController;
 use App\Http\Controllers\Merchant\Company\PriceController;
+use App\Http\Controllers\Merchant\Company\RequestController;
 use App\Http\Controllers\Merchant\Company\SssController;
 use App\Http\Controllers\Merchant\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +55,26 @@ Route::prefix("companies")->group(function () {
             'edit' => 'merchant.companies.price.edit',
             'destroy' => 'merchant.companies.price.destroy',
         ])->shallow();
+
+    Route::resource("request", RequestController::class)
+        ->parameters(['request' => 'id'])->names([
+            'index' => 'merchant.companies.request.index',
+            'create' => 'merchant.companies.request.create',
+            'store' => 'merchant.companies.request.store',
+            'update' => 'merchant.companies.request.update',
+            'edit' => 'merchant.companies.request.edit',
+            'destroy' => 'merchant.companies.request.destroy',
+        ]);
+
+    Route::resource("my-request", MyRequestController::class)
+        ->parameters(['my-request' => 'id'])->names([
+            'index' => 'merchant.companies.my-request.index',
+            'create' => 'merchant.companies.my-request.create',
+            'store' => 'merchant.companies.my-request.store',
+            'update' => 'merchant.companies.my-request.update',
+            'edit' => 'merchant.companies.my-request.edit',
+            'destroy' => 'merchant.companies.my-request.destroy',
+        ]);
 
 });
 

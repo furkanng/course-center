@@ -37,7 +37,7 @@ class CompanyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CompanyStoreRequest $request)
+    public function store(CompanyStoreRequest $request): RedirectResponse
     {
         $company = new Company();
         $company->fill($request->all());

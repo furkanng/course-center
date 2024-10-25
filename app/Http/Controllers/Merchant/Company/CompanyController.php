@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Merchant\Company;
 
+use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyType;
 use App\Models\Course;
 use App\Models\Feature;
+use App\Models\UserCompanyRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -28,17 +29,38 @@ class CompanyController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        $companyTypes = CompanyType::all();
+        return view("merchant.pages.company.create", compact(["companyTypes"]));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $exist = UserCompanyRequest::query()
+            ->where("status", UserStatus::PENDING)
+            ->where("user_id", auth()->user()->id)->get();
+
+        if (count($exist) > 3) {
+            return redirect()->back()->with("error", "Maximum talep sayısına ulaştınız.");
+        }
+
+        $company = new Company();
+        $company->fill($request->all());
+        $company->forceFill(["status" => false])->save();
+
+        $request = new UserCompanyRequest();
+        $request->forceFill([
+            "user_id" => auth()->user()->id,
+            "company_id" => $company->id,
+            "status" => UserStatus::PENDING,
+            "new_company" => true
+        ])->save();
+
+        return redirect()->route("merchant.companies.request.index")->with("success", "kayıt başarılı");
     }
 
     /**

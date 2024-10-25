@@ -96,11 +96,18 @@
                                 <span class="sidenav-normal"> Kurumlarım </span>
                             </a>
                         </li>
-                        <li class="nav-item {{ request()->routeIs('panel.companies.feature.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('panel.companies.feature.*') ? 'active' : '' }}"
-                               href="{{route("panel.companies.feature.index")}}">
+                        <li class="nav-item {{ request()->routeIs('merchant.companies.request.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('merchant.companies.request.*') ? 'active' : '' }}"
+                               href="{{route("merchant.companies.request.index")}}">
                                 <span class="sidenav-mini-icon"> KT </span>
                                 <span class="sidenav-normal"> Kurum Talep </span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ request()->routeIs('merchant.companies.my-request.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('merchant.companies.my-request.*') ? 'active' : '' }}"
+                               href="{{route("merchant.companies.my-request.index")}}">
+                                <span class="sidenav-mini-icon"> TM </span>
+                                <span class="sidenav-normal"> Taleplerim </span>
                             </a>
                         </li>
                     </ul>

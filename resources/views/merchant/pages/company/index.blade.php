@@ -36,7 +36,6 @@
                                 <th>Kurum Tipi</th>
                                 <th>Mernis</th>
                                 <th>Şehir</th>
-                                <th>Sahiplik</th>
                                 <th>Durum</th>
                                 <th>İşlemler</th>
                             </tr>
@@ -55,13 +54,6 @@
                                     <td class="text-sm">{{$company->getCompanyTypeName()}}</td>
                                     <td class="text-sm">{{$company->mernis ?? "Bilinmiyor"}}</td>
                                     <td class="text-sm">{{$company->city}}</td>
-                                    <td>
-                                        <span
-                                            class="badge {{count($company->users) === 0 ? "badge-danger" : "badge-info"}}
-                                             badge-sm">
-                                            {{count($company->users) === 0  ? "Sahipsiz" : "Atandı"}}
-                                        </span>
-                                    </td>
                                     <td>
                                         <span
                                             class="badge {{$company->status ? "badge-success" : "badge-danger"}} badge-sm">

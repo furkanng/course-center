@@ -32,6 +32,7 @@ class Company extends Model
         'status',
         "image"
     ];
+
     public function getCompanyTypeName()
     {
         $companyTypeCode = $this->getAttribute("company_type");
@@ -91,5 +92,10 @@ class Company extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'company_user', 'company_id', 'user_id');
+    }
+
+    public function request(): HasMany
+    {
+        return $this->hasMany(UserCompanyRequest::class, 'company_id', "id");
     }
 }
