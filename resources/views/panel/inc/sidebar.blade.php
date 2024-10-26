@@ -17,7 +17,7 @@
                    class="nav-link {{ request()->routeIs('panel.config.*') ? 'active' : '' }}"
                    aria-controls="dashboardsExamples" role="button" aria-expanded="false">
                     <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>shop </title>
@@ -54,40 +54,6 @@
                                 <span class="sidenav-normal"> Site Resimleri </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/dashboards/smart-home.html">
-                                <span class="sidenav-mini-icon"> S </span>
-                                <span class="sidenav-normal"> Smart Home </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#vrExamples">
-                                <span class="sidenav-mini-icon"> V </span>
-                                <span class="sidenav-normal"> Virtual Reality <b class="caret"></b></span>
-                            </a>
-                            <div class="collapse " id="vrExamples">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/dashboards/vr/vr-default.html">
-                                            <span class="sidenav-mini-icon text-xs"> V </span>
-                                            <span class="sidenav-normal"> VR Default </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/dashboards/vr/vr-info.html">
-                                            <span class="sidenav-mini-icon text-xs"> V </span>
-                                            <span class="sidenav-normal"> VR Info </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/dashboards/crm.html">
-                                <span class="sidenav-mini-icon"> C </span>
-                                <span class="sidenav-normal"> CRM </span>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </li>
@@ -100,7 +66,7 @@
                    aria-controls="pagesExamples"
                    role="button" aria-expanded="false">
                     <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg class="text-dark" width="16px" height="16px" viewBox="0 0 42 42" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -176,111 +142,6 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#accountExample">
-                                <span class="sidenav-mini-icon"> A </span>
-                                <span class="sidenav-normal"> Account <b class="caret"></b></span>
-                            </a>
-                            <div class="collapse " id="accountExample">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/pages/account/settings.html">
-                                            <span class="sidenav-mini-icon text-xs"> S </span>
-                                            <span class="sidenav-normal"> Settings </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/pages/account/billing.html">
-                                            <span class="sidenav-mini-icon text-xs"> B </span>
-                                            <span class="sidenav-normal"> Billing </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/pages/account/invoice.html">
-                                            <span class="sidenav-mini-icon text-xs"> I </span>
-                                            <span class="sidenav-normal"> Invoice </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/pages/account/security.html">
-                                            <span class="sidenav-mini-icon text-xs"> S </span>
-                                            <span class="sidenav-normal"> Security </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false"
-                               href="#projectsExample">
-                                <span class="sidenav-mini-icon"> P </span>
-                                <span class="sidenav-normal"> Projects <b class="caret"></b></span>
-                            </a>
-                            <div class="collapse " id="projectsExample">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/pages/projects/general.html">
-                                            <span class="sidenav-mini-icon text-xs"> G </span>
-                                            <span class="sidenav-normal"> General </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/pages/projects/timeline.html">
-                                            <span class="sidenav-mini-icon text-xs"> T </span>
-                                            <span class="sidenav-normal"> Timeline </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/pages/projects/new-project.html">
-                                            <span class="sidenav-mini-icon text-xs"> N </span>
-                                            <span class="sidenav-normal"> New Project </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/pages/pricing-page.html">
-                                <span class="sidenav-mini-icon"> P </span>
-                                <span class="sidenav-normal"> Pricing Page </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/pages/messages.html">
-                                <span class="sidenav-mini-icon"> M </span>
-                                <span class="sidenav-normal"> Messages </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/pages/rtl-page.html">
-                                <span class="sidenav-mini-icon"> R </span>
-                                <span class="sidenav-normal"> RTL </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/pages/widgets.html">
-                                <span class="sidenav-mini-icon"> W </span>
-                                <span class="sidenav-normal"> Widgets </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/pages/charts.html">
-                                <span class="sidenav-mini-icon"> C </span>
-                                <span class="sidenav-normal"> Charts </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/pages/sweet-alerts.html">
-                                <span class="sidenav-mini-icon"> S </span>
-                                <span class="sidenav-normal"> Sweet Alerts </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/pages/notifications.html">
-                                <span class="sidenav-mini-icon"> N </span>
-                                <span class="sidenav-normal"> Notifications </span>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </li>
@@ -289,7 +150,7 @@
                 {{ request()->routeIs("panel.setting.*") ? 'active' : '' }}"
                    aria-controls="applicationsExamples" role="button" aria-expanded="false">
                     <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>Ayarlar</title>
@@ -359,7 +220,7 @@
                    class="nav-link {{ request()->routeIs('panel.companies.*') ? 'active' : '' }}"
                    aria-controls="ecommerceExamples" role="button" aria-expanded="false">
                     <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>Sistem</title>
@@ -393,265 +254,16 @@
                         <li class="nav-item {{ request()->routeIs('panel.companies.feature.*') ? 'active' : '' }}">
                             <a class="nav-link {{ request()->routeIs('panel.companies.feature.*') ? 'active' : '' }}"
                                href="{{route("panel.companies.feature.index")}}">
-                                <span class="sidenav-mini-icon"> KI </span>
-                                <span class="sidenav-normal"> Kurum İmkanlar </span>
+                                <span class="sidenav-mini-icon"> IL </span>
+                                <span class="sidenav-normal"> İmkan Listesi  </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false"
-                               href="#productsExample">
-                                <span class="sidenav-mini-icon"> P </span>
-                                <span class="sidenav-normal"> Products <b class="caret"></b></span>
+                        <li class="nav-item {{ request()->routeIs('panel.companies.request.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.companies.request.*') ? 'active' : '' }}"
+                               href="{{route("panel.companies.request.index")}}">
+                                <span class="sidenav-mini-icon"> KT </span>
+                                <span class="sidenav-normal"> Talepler  </span>
                             </a>
-                            <div class="collapse " id="productsExample">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/ecommerce/products/new-product.html">
-                                            <span class="sidenav-mini-icon text-xs"> N </span>
-                                            <span class="sidenav-normal"> New Product </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/ecommerce/products/edit-product.html">
-                                            <span class="sidenav-mini-icon text-xs"> E </span>
-                                            <span class="sidenav-normal"> Edit Product </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/ecommerce/products/product-page.html">
-                                            <span class="sidenav-mini-icon text-xs"> P </span>
-                                            <span class="sidenav-normal"> Product Page </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/ecommerce/products/products-list.html">
-                                            <span class="sidenav-mini-icon text-xs"> P </span>
-                                            <span class="sidenav-normal"> Products List </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#ordersExample">
-                                <span class="sidenav-mini-icon"> O </span>
-                                <span class="sidenav-normal"> Orders <b class="caret"></b></span>
-                            </a>
-                            <div class="collapse " id="ordersExample">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/ecommerce/orders/list.html">
-                                            <span class="sidenav-mini-icon text-xs"> O </span>
-                                            <span class="sidenav-normal"> Order List </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/ecommerce/orders/details.html">
-                                            <span class="sidenav-mini-icon text-xs"> O </span>
-                                            <span class="sidenav-normal"> Order Details </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="../../pages/ecommerce/referral.html">
-                                <span class="sidenav-mini-icon"> R </span>
-                                <span class="sidenav-normal"> Referral </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#authExamples" class="nav-link " aria-controls="authExamples"
-                   role="button" aria-expanded="false">
-                    <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                        <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1"
-                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>document</title>
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g transform="translate(-1870.000000, -591.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                                    <g transform="translate(1716.000000, 291.000000)">
-                                        <g transform="translate(154.000000, 300.000000)">
-                                            <path class="color-background"
-                                                  d="M40,40 L36.3636364,40 L36.3636364,3.63636364 L5.45454545,3.63636364 L5.45454545,0 L38.1818182,0 C39.1854545,0 40,0.814545455 40,1.81818182 L40,40 Z"
-                                                  opacity="0.603585379"></path>
-                                            <path class="color-background"
-                                                  d="M30.9090909,7.27272727 L1.81818182,7.27272727 C0.814545455,7.27272727 0,8.08727273 0,9.09090909 L0,41.8181818 C0,42.8218182 0.814545455,43.6363636 1.81818182,43.6363636 L30.9090909,43.6363636 C31.9127273,43.6363636 32.7272727,42.8218182 32.7272727,41.8181818 L32.7272727,9.09090909 C32.7272727,8.08727273 31.9127273,7.27272727 30.9090909,7.27272727 Z M18.1818182,34.5454545 L7.27272727,34.5454545 L7.27272727,30.9090909 L18.1818182,30.9090909 L18.1818182,34.5454545 Z M25.4545455,27.2727273 L7.27272727,27.2727273 L7.27272727,23.6363636 L25.4545455,23.6363636 L25.4545455,27.2727273 Z M25.4545455,20 L7.27272727,20 L7.27272727,16.3636364 L25.4545455,16.3636364 L25.4545455,20 Z"></path>
-                                        </g>
-                                    </g>
-                                </g>
-                            </g>
-                        </svg>
-                    </div>
-                    <span class="nav-link-text ms-1">Authentication</span>
-                </a>
-                <div class="collapse " id="authExamples">
-                    <ul class="nav ms-4 ps-3">
-                        <li class="nav-item ">
-                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#signinExample">
-                                <span class="sidenav-mini-icon"> S </span>
-                                <span class="sidenav-normal"> Sign In <b class="caret"></b></span>
-                            </a>
-                            <div class="collapse " id="signinExample">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/signin/basic.html">
-                                            <span class="sidenav-mini-icon text-xs"> B </span>
-                                            <span class="sidenav-normal"> Basic </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/signin/cover.html">
-                                            <span class="sidenav-mini-icon text-xs"> C </span>
-                                            <span class="sidenav-normal"> Cover </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/signin/illustration.html">
-                                            <span class="sidenav-mini-icon text-xs"> I </span>
-                                            <span class="sidenav-normal"> Illustration </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#signupExample">
-                                <span class="sidenav-mini-icon"> S </span>
-                                <span class="sidenav-normal"> Sign Up <b class="caret"></b></span>
-                            </a>
-                            <div class="collapse " id="signupExample">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/signup/basic.html">
-                                            <span class="sidenav-mini-icon text-xs"> B </span>
-                                            <span class="sidenav-normal"> Basic </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/signup/cover.html">
-                                            <span class="sidenav-mini-icon text-xs"> C </span>
-                                            <span class="sidenav-normal"> Cover </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/signup/illustration.html">
-                                            <span class="sidenav-mini-icon text-xs"> I </span>
-                                            <span class="sidenav-normal"> Illustration </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#resetExample">
-                                <span class="sidenav-mini-icon"> R </span>
-                                <span class="sidenav-normal"> Reset Password <b class="caret"></b></span>
-                            </a>
-                            <div class="collapse " id="resetExample">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/reset/basic.html">
-                                            <span class="sidenav-mini-icon text-xs"> B </span>
-                                            <span class="sidenav-normal"> Basic </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/reset/cover.html">
-                                            <span class="sidenav-mini-icon text-xs"> C </span>
-                                            <span class="sidenav-normal"> Cover </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/reset/illustration.html">
-                                            <span class="sidenav-mini-icon text-xs"> I </span>
-                                            <span class="sidenav-normal"> Illustration </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#lockExample">
-                                <span class="sidenav-mini-icon"> L </span>
-                                <span class="sidenav-normal"> Lock <b class="caret"></b></span>
-                            </a>
-                            <div class="collapse " id="lockExample">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/lock/basic.html">
-                                            <span class="sidenav-mini-icon text-xs"> B </span>
-                                            <span class="sidenav-normal"> Basic </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/lock/cover.html">
-                                            <span class="sidenav-mini-icon text-xs"> C </span>
-                                            <span class="sidenav-normal"> Cover </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/lock/illustration.html">
-                                            <span class="sidenav-mini-icon text-xs"> I </span>
-                                            <span class="sidenav-normal"> Illustration </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#StepExample">
-                                <span class="sidenav-mini-icon"> 2 </span>
-                                <span class="sidenav-normal"> 2-Step Verification <b class="caret"></b></span>
-                            </a>
-                            <div class="collapse " id="StepExample">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/verification/basic.html">
-                                            <span class="sidenav-mini-icon text-xs"> B </span>
-                                            <span class="sidenav-normal"> Basic </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/verification/cover.html">
-                                            <span class="sidenav-mini-icon text-xs"> C </span>
-                                            <span class="sidenav-normal"> Cover </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link "
-                                           href="../../pages/authentication/verification/illustration.html">
-                                            <span class="sidenav-mini-icon text-xs"> I </span>
-                                            <span class="sidenav-normal"> Illustration </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#errorExample">
-                                <span class="sidenav-mini-icon"> E </span>
-                                <span class="sidenav-normal"> Error <b class="caret"></b></span>
-                            </a>
-                            <div class="collapse " id="errorExample">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/error/404.html">
-                                            <span class="sidenav-mini-icon text-xs"> E </span>
-                                            <span class="sidenav-normal"> Error 404 </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="../../pages/authentication/error/500.html">
-                                            <span class="sidenav-mini-icon text-xs"> E </span>
-                                            <span class="sidenav-normal"> Error 500 </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
                     </ul>
                 </div>
@@ -664,7 +276,7 @@
                 <a data-bs-toggle="collapse" href="#basicExamples" class="nav-link " aria-controls="basicExamples"
                    role="button" aria-expanded="false">
                     <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>spaceship</title>
@@ -785,7 +397,7 @@
                 <a data-bs-toggle="collapse" href="#componentsExamples" class="nav-link "
                    aria-controls="componentsExamples" role="button" aria-expanded="false">
                     <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>
@@ -954,7 +566,7 @@
                    href="https://github.com/creativetimofficial/ct-soft-ui-dashboard-pro/blob/main/CHANGELOG.md"
                    target="_blank">
                     <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center  me-2 d-flex align-items-center justify-content-center">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center  me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>credit-card</title>

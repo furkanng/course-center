@@ -4,6 +4,7 @@ use App\Http\Controllers\Panel\Company\CompanyController;
 use App\Http\Controllers\Panel\Company\CompanyImageController;
 use App\Http\Controllers\Panel\Company\FeatureController;
 use App\Http\Controllers\Panel\Company\PriceController;
+use App\Http\Controllers\Panel\Company\RequestController;
 use App\Http\Controllers\Panel\Company\SssController;
 use App\Http\Controllers\Panel\Config\FrontImagesController;
 use App\Http\Controllers\Panel\Config\LanguageController;
@@ -169,4 +170,14 @@ Route::prefix("companies")->group(function () {
 
     Route::post("feature/delete", [FeatureController::class, "delete"])
         ->name("panel.companies.feature.delete");
+
+    Route::resource("request", RequestController::class)
+        ->parameters(['request' => 'id'])->names([
+            'index' => 'panel.companies.request.index',
+            'create' => 'panel.companies.request.create',
+            'store' => 'panel.companies.request.store',
+            'update' => 'panel.companies.request.update',
+            'edit' => 'panel.companies.request.edit',
+            'destroy' => 'panel.companies.request.destroy',
+        ]);
 });

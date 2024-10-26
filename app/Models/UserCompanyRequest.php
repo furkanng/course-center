@@ -32,6 +32,11 @@ class UserCompanyRequest extends Model
         return $this->belongsTo(Company::class, 'company_id', "id");
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', "id");
+    }
+
     protected static function booted(): void
     {
         static::creating(function ($model) {
@@ -62,6 +67,23 @@ class UserCompanyRequest extends Model
                 $model->withoutEvents(function () use ($model) {
                     $model->save();
                 });
+            }
+            if ($model->isDirty(["status"])) {
+                if ($model->status == UserStatus::ACCEPTED) {
+                    $model->company->update([
+                        "status" => true
+                    ]);
+
+                    CompanyUser::query()->forceCreate([
+                        "company_id" => $model->company_id,
+                        "user_id" => $model->user_id,
+                    ]);
+                }
+
+                if ($model->status == UserStatus::REJECTED) {
+                    CompanyUser::query()->where("company_id", $model->company_id)
+                        ->where("user_id", $model->user_id)->delete();
+                }
             }
         });
 
