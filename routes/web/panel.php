@@ -6,6 +6,7 @@ use App\Http\Controllers\Panel\Company\FeatureController;
 use App\Http\Controllers\Panel\Company\PriceController;
 use App\Http\Controllers\Panel\Company\RequestController;
 use App\Http\Controllers\Panel\Company\SssController;
+use App\Http\Controllers\Panel\Company\TypeController;
 use App\Http\Controllers\Panel\Config\FrontImagesController;
 use App\Http\Controllers\Panel\Config\LanguageController;
 use App\Http\Controllers\Panel\HomeController;
@@ -180,4 +181,16 @@ Route::prefix("companies")->group(function () {
             'edit' => 'panel.companies.request.edit',
             'destroy' => 'panel.companies.request.destroy',
         ]);
+
+    Route::resource("type", TypeController::class)
+        ->parameters(['type' => 'id'])->names([
+            'index' => 'panel.companies.type.index',
+            'create' => 'panel.companies.type.create',
+            'store' => 'panel.companies.type.store',
+            'update' => 'panel.companies.type.update',
+            'edit' => 'panel.companies.type.edit',
+        ]);
+
+    Route::post("type/delete", [TypeController::class, "delete"])
+        ->name("panel.companies.type.delete");
 });

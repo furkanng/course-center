@@ -59,7 +59,7 @@
                 <div class="card-body">
                     <h5 class="font-weight-bolder">İmkan Sil</h5>
                     <p class="form-text text-muted text-xs ms-1 d-inline">
-                        (Silmek istediğiniz imkanları seçiniz)
+                        (Silmek istediğiniz imkanı seçiniz)
                     </p>
                     <form class="form-submit" action="{{route("panel.companies.feature.delete")}}" method="POST">
                         @csrf
@@ -76,8 +76,7 @@
                             </div>
 
                             <div class="button-row d-flex mt-4">
-                                <button type="submit" id="deleteButton" data-bs-toggle="modal"
-                                        data-bs-target="#deleteModal"
+                                <button type="submit" id="deleteButton"
                                         class="btn bg-gradient-danger ms-auto mb-0 js-btn-next">Sil
                                 </button>
                             </div>

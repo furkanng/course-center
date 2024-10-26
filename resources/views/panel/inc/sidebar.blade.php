@@ -251,18 +251,25 @@
                                 <span class="sidenav-normal"> Kurumlar </span>
                             </a>
                         </li>
-                        <li class="nav-item {{ request()->routeIs('panel.companies.feature.*') ? 'active' : '' }}">
-                            <a class="nav-link {{ request()->routeIs('panel.companies.feature.*') ? 'active' : '' }}"
-                               href="{{route("panel.companies.feature.index")}}">
-                                <span class="sidenav-mini-icon"> IL </span>
-                                <span class="sidenav-normal"> İmkan Listesi  </span>
-                            </a>
-                        </li>
                         <li class="nav-item {{ request()->routeIs('panel.companies.request.*') ? 'active' : '' }}">
                             <a class="nav-link {{ request()->routeIs('panel.companies.request.*') ? 'active' : '' }}"
                                href="{{route("panel.companies.request.index")}}">
                                 <span class="sidenav-mini-icon"> KT </span>
                                 <span class="sidenav-normal"> Talepler  </span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ request()->routeIs('panel.companies.feature.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.companies.feature.*') ? 'active' : '' }}"
+                               href="{{route("panel.companies.feature.index")}}">
+                                <span class="sidenav-mini-icon"> IL </span>
+                                <span class="sidenav-normal"> İmkanlar  </span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ request()->routeIs('panel.companies.type.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.companies.type.*') ? 'active' : '' }}"
+                               href="{{route("panel.companies.type.index")}}">
+                                <span class="sidenav-mini-icon"> TL </span>
+                                <span class="sidenav-normal"> Tipler  </span>
                             </a>
                         </li>
                     </ul>

@@ -114,16 +114,21 @@
                                     </td>
                                     <td class="text-sm">
                                         <a href="{{route("panel.companies.image.index",["company" => $company->id])}}"
-                                           class="mx-1" data-bs-toggle="tooltip"
+                                           class="mx-2" data-bs-toggle="tooltip"
+                                           data-bs-original-title="New İmage">
+                                            <i class="fa fa-user text-secondary"></i>
+                                        </a>
+                                        <a href="{{route("panel.companies.image.index",["company" => $company->id])}}"
+                                           class="mx-2" data-bs-toggle="tooltip"
                                            data-bs-original-title="New İmage">
                                             <i class="fa fa-image text-secondary"></i>
                                         </a>
                                         <a href="{{route("panel.companies.company.edit",["id" => $company->id])}}"
-                                           class="mx-3" data-bs-toggle="tooltip"
+                                           class="mx-2" data-bs-toggle="tooltip"
                                            data-bs-original-title="Edit product">
                                             <i class="fas fa-edit text-secondary"></i>
                                         </a>
-                                        <a href="#" data-bs-toggle="modal"
+                                        <a href="#" class="mx-2" data-bs-toggle="modal"
                                            data-bs-target="#deleteModal-{{ $company->id }}">
                                             <i class="fas fa-trash text-secondary"></i>
                                         </a>
