@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Course;
 use App\Models\FrontImage;
 use App\Models\Language;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
         $this->cacheLanguageData();
         $this->cacheImagesData();
         $this->cacheCourseData();
+        $this->cacheSettingData();
     }
 
     protected function cacheCourseData(): void
@@ -38,6 +40,20 @@ class AppServiceProvider extends ServiceProvider
         });
         view()->share('courses', $courses);
     }
+
+    protected function cacheSettingData(): void
+    {
+        $cacheKey = 'settings';
+        $cacheDuration = 60 * 60;
+
+        $settings = Cache::remember($cacheKey, $cacheDuration, function () {
+            $settings = Setting::query()->get(['key', 'value']);
+            return $settings->pluck('value', 'key')->toArray();
+        });
+
+        view()->share('settings', $settings);
+    }
+
 
     protected function cacheLanguageData(): void
     {

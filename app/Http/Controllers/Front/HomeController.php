@@ -17,17 +17,17 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function home(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    public function home(): View
     {
         return view("front.pages.home");
     }
 
-    public function login(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    public function login(): View
     {
         return view("front.pages.login");
     }
 
-    public function register(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    public function register(): View
     {
         $page = Page::query()->where("permanent_name", "sartlar_ve_kosullar")->first();
         $types = CompanyType::all();
@@ -35,8 +35,7 @@ class HomeController extends Controller
     }
 
 
-
-    public function page($seo_link): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    public function page($seo_link): View
     {
         $page = Page::query()->where("seo_link", $seo_link)->firstOrFail();
 
