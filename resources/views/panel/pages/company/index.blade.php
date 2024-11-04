@@ -113,7 +113,7 @@
                                         </span>
                                     </td>
                                     <td class="text-sm">
-                                        <a href="{{route("panel.companies.image.index",["company" => $company->id])}}"
+                                        <a href="{{route("panel.companies.user.index",["company" => $company->id])}}"
                                            class="mx-2" data-bs-toggle="tooltip"
                                            data-bs-original-title="New İmage">
                                             <i class="fa fa-user text-secondary"></i>

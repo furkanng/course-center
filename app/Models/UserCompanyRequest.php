@@ -49,7 +49,7 @@ class UserCompanyRequest extends Model
                 ->where("user_id", auth()->user()->id)
                 ->where("company_id", $model->company_id)->exists();
 
-            if (count($exist) > 3) {
+            if (count($exist) > \App\Enums\Company::MAX_USER_COMPANY_COUNT->value) {
                 session()->flash('error', "Maximum talep sayısına ulaştınız.");
                 return false;
             }

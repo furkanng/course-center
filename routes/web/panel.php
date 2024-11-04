@@ -19,6 +19,7 @@ use App\Http\Controllers\Panel\System\CourseController;
 use App\Http\Controllers\Panel\System\InstitutionalRequestController;
 use App\Http\Controllers\Panel\System\InstitutionController;
 use App\Http\Controllers\Panel\System\UserController;
+use App\Http\Controllers\Panel\Company\UserController as CompanyUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/", [HomeController::class, "home"])->name("panel.home");
@@ -162,6 +163,16 @@ Route::prefix("companies")->group(function () {
             'edit' => 'panel.companies.image.edit',
             'destroy' => 'panel.companies.image.destroy'
         ])->shallow();
+
+    Route::resource("company.user", CompanyUserController::class)
+        ->names([
+            'index' => 'panel.companies.user.index',
+            'create' => 'panel.companies.user.create',
+            'store' => 'panel.companies.user.store',
+            'update' => 'panel.companies.user.update',
+            'edit' => 'panel.companies.user.edit',
+            'destroy' => 'panel.companies.user.destroy'
+        ]);
 
     Route::resource("feature", FeatureController::class)
         ->parameters(['feature' => 'id'])->names([
