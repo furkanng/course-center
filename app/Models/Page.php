@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
-    use HasFactory, SeoTrait,ImageTrait;
+    use HasFactory, SeoTrait, ImageTrait;
 
     protected $table = "pages";
 
@@ -18,5 +18,15 @@ class Page extends Model
         "content",
         "status",
     ];
+
+    protected static function booted(): void
+    {
+        static::deleting(function ($model) {
+            if ($model->permanent) {
+                session()->flash('error', "Sabit sayfalar silinemez.");
+                return false;
+            }
+        });
+    }
 
 }

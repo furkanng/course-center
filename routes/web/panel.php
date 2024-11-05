@@ -9,6 +9,7 @@ use App\Http\Controllers\Panel\Company\SssController;
 use App\Http\Controllers\Panel\Company\TypeController;
 use App\Http\Controllers\Panel\Config\FrontImagesController;
 use App\Http\Controllers\Panel\Config\LanguageController;
+use App\Http\Controllers\Panel\Config\PageController;
 use App\Http\Controllers\Panel\HomeController;
 use App\Http\Controllers\Panel\Setting\ApiController;
 use App\Http\Controllers\Panel\Setting\ContactController;
@@ -36,6 +37,16 @@ Route::prefix("site-config")->group(function () {
             'index' => 'panel.config.image.index',
             'update' => 'panel.config.image.update',
             'destroy' => 'panel.config.image.destroy',
+        ]);
+
+    Route::resource('pages', PageController::class)
+        ->parameters(['pages' => 'id'])->names([
+            'index' => 'panel.config.pages.index',
+            'create' => 'panel.config.pages.create',
+            'store' => 'panel.config.pages.store',
+            'update' => 'panel.config.pages.update',
+            'edit' => 'panel.config.pages.edit',
+            'destroy' => 'panel.config.pages.destroy',
         ]);
 });
 

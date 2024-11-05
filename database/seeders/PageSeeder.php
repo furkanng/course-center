@@ -19,11 +19,43 @@ class PageSeeder extends Seeder
         $defaultData =
             [
                 [
+                    "title" => "Üyelik Sözleşmesi",
+                    "content" => "Üyelik sözleşmesi",
+                    "status" => true,
+                    "permanent" => false,
+                ],
+                [
+                    "title" => "Hakkımızda",
+                    "content" => "Hakkkımızda içerik",
+                    "status" => true,
+                    "permanent" => false,
+                ],
+                [
+                    "title" => "Ön Bilgilendirme Formu",
+                    "content" => "Ön bilgilendirme içerik",
+                    "status" => true,
+                    "permanent" => false,
+                ],
+                [
+                    "title" => "Kvkk",
+                    "content" => "Kvkk içerik",
+                    "key" => "kvkk",
+                    "status" => true,
+                    "permanent" => true,
+                ],
+                [
                     "title" => "Şartlar ve Koşullar",
-                    "content" => "şartlar ve koşullar",
-                    "permanent_name" => "sartlar_ve_kosullar",
-                    "status" => 1,
-                    "permanent" => 1,
+                    "content" => "Şartlar ve koşullar",
+                    "key" => "sartlar_ve_kosullar",
+                    "status" => true,
+                    "permanent" => true,
+                ],
+                [
+                    "title" => "Aydınlatma Metni",
+                    "content" => "Aydınlatma metni içerik",
+                    "key" => "aydinlatma_metni",
+                    "status" => true,
+                    "permanent" => true,
                 ]
             ];
 

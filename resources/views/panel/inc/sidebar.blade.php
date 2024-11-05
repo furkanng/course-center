@@ -54,6 +54,13 @@
                                 <span class="sidenav-normal"> Site Resimleri </span>
                             </a>
                         </li>
+                        <li class="nav-item {{ request()->routeIs('panel.config.pages.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.config.pages.*') ? 'active' : '' }}"
+                               href="{{route("panel.config.pages.index")}}">
+                                <span class="sidenav-mini-icon"> S </span>
+                                <span class="sidenav-normal"> Sayfa Yönetimi </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
