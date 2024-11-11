@@ -3,12 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Eduker - Online Course & Education HTML5 Template</title>
+    <title>{{$settings["site_title"]}}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
+    <link href="{{asset("panel/assets/css/style.css")}}" rel="stylesheet"/>
 
     <!-- CSS here -->
     <link rel="stylesheet" href="{{asset('front/assets/css/bootstrap.css')}}">
@@ -25,23 +26,6 @@
 </head>
 <body>
 
-<!--[if lte IE 9]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
-    your browser</a> to improve your experience and security.</p>
-<![endif]-->
-
-<!-- pre loader area start
-<div id="loading">
-    <div id="loading-center">
-        <div id="loading-center-absolute">
-            <svg id="loader">
-                <path id="corners" d="m 0 12.5 l 0 -12.5 l 50 0 l 0 50 l -50 0 l 0 -37.5"/>
-            </svg>
-            <img src="{{asset("front/assets/img/favicon.png")}}" alt="">
-        </div>
-    </div>
-</div>
--->
 <!-- pre loader area end -->
 
 <!-- back to top start -->
@@ -51,6 +35,16 @@
     </svg>
 </div>
 <!-- back to top end -->
+
+<x-spinner />
+
+@if(session('success'))
+    <x-alert type="success" :message="session('success')" />
+@endif
+
+@if(session('error'))
+    <x-alert type="danger" :message="session('error')" />
+@endif
 
 <!-- header area start -->
 @include('front.inc.header')
@@ -64,60 +58,20 @@
                 <div class="col-xxl-8 col-xl-9 col-lg-10 col-md-6 col-6">
                     <div class="header__bottom-left d-flex align-items-center">
                         <div class="logo">
-                            <a href="index.html">
-                                <img src="assets/img/logo/logo-3.png" alt="logo">
+                            <a href="{{ route("home") }}">
+                                <img src="{{asset("images/logo.png")}}" alt="logo">
                             </a>
                         </div>
                         <div class="main-menu main-menu-2 main-menu-mobile ml-30 pl-30">
                             <nav id="mobile-menu">
                                 <ul>
-                                    <li class="has-dropdown">
-                                        <a href="index.html">Home</a>
-                                        <ul class="submenu">
-                                            <li><a href="index.html">Home Style 1</a></li>
-                                            <li><a href="index-2.html">Home Style 2</a></li>
-                                            <li><a href="index-3.html">Home Style 3</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="about.html">About</a>
-                                    </li>
-                                    <li class="has-dropdown">
-                                        <a href="course-v1.html">Courses</a>
-                                        <ul class="submenu">
-                                            <li><a href="course-v1.html">Course Style 1</a></li>
-                                            <li><a href="course-v2.html">Course Style 2</a></li>
-                                            <li><a href="course-sidebar.html">Course Sidebar</a></li>
-                                            <li><a href="course-details.html">Course Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-dropdown">
-                                        <a href="about.html">Pages</a>
-                                        <ul class="submenu">
-                                            <li><a href="event.html">Our Events</a></li>
-                                            <li><a href="event-details.html">Event Details</a></li>
-                                            <li><a href="team.html">Team</a></li>
-                                            <li><a href="team-details.html">Team Details</a></li>
-                                            <li><a href="error.html">404 Error</a></li>
-                                            <li><a href="my-profile.html">My Profile</a></li>
-                                            <li><a href="my-course.html">My Courses</a></li>
-                                            <li><a href="sign-in.html">Sign In</a></li>
-                                            <li><a href="sign-up.html">Sign Up</a></li>
-                                            <li><a href="cart.html">Cart</a></li>
-                                            <li><a href="wishlist.html">Wishlist</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-dropdown">
-                                        <a href="blog.html">Blog</a>
-                                        <ul class="submenu">
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="blog-details.html">Blog Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="contact.html">Contact</a>
-                                    </li>
+                                    @foreach($courses as $course)
+                                        @if($course->menu_status)
+                                            <li>
+                                                <a href="{{$course->link}}">{{strtoupper($course->name)}}</a>
+                                            </li>
+                                        @endif
+                                    @endforeach
                                 </ul>
                             </nav>
                         </div>
@@ -125,10 +79,15 @@
                 </div>
                 <div class="col-xxl-4 col-xl-3 col-lg-2 col-md-6 col-6">
                     <div class="header__bottom-right d-flex justify-content-end align-items-center pl-30">
-                        <div class="header__action d-none d-xl-block">
+                        @if(auth()->user())
+                            {{strtoupper(auth()->user()->name)}}
+                        @else
+                            Giriş Yap | Kayıt Ol
+                        @endif
+                        <div class="ml-10 header__action d-none d-xl-block">
                             <ul>
                                 <li>
-                                    <a href="sign-in.html">
+                                    <a href="{{route('login')}}">
                                         <svg width="15" height="20" viewBox="0 0 15 20" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -143,24 +102,6 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>
-                        <div class="header__search header__search-2 header__search-3 d-none d-xl-block">
-                            <form action="#">
-                                <div class="header__search-input">
-                                    <input type="text" placeholder="Search...">
-                                    <button class="header__search-btn">
-                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M8.11111 15.2222C12.0385 15.2222 15.2222 12.0385 15.2222 8.11111C15.2222 4.18375 12.0385 1 8.11111 1C4.18375 1 1 4.18375 1 8.11111C1 12.0385 4.18375 15.2222 8.11111 15.2222Z"
-                                                stroke="#3E8454" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round"/>
-                                            <path d="M17 17L13.1333 13.1333" stroke="#3E8454" stroke-width="2"
-                                                  stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </form>
                         </div>
                         <div class="header__hamburger ml-50 d-xl-none">
                             <button type="button" data-bs-toggle="modal" data-bs-target="#offcanvasmodal"
@@ -187,8 +128,8 @@
                     <div class="offcanvas__content">
                         <div class="offcanvas__top mb-40 d-flex justify-content-between align-items-center">
                             <div class="offcanvas__logo logo">
-                                <a href="index.html">
-                                    <img src="assets/img/logo/logo-3.png" alt="logo">
+                                <a href="{{route("home")}}">
+                                    <img src="{{$image["logo"]}}" alt="logo">
                                 </a>
                             </div>
                             <div class="offcanvas__close">
@@ -198,33 +139,20 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="offcanvas__search mb-25">
-                            <form action="#">
-                                <input type="text" placeholder="What are you searching for?">
-                                <button type="submit"><i class="far fa-search"></i></button>
-                            </form>
-                        </div>
                         <div class="mobile-menu fix"></div>
-                        <div class="offcanvas__text d-none d-lg-block">
-                            <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising
-                                pain was born and will give you a complete account of the system and expound the actual
-                                teachings of the great explore</p>
-                        </div>
                         <div class="offcanvas__map d-none d-lg-block mb-15">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d29176.030811137334!2d90.3883827!3d23.924917699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1605272373598!5m2!1sen!2sbd"></iframe>
                         </div>
                         <div class="offcanvas__contact mt-30 mb-20">
-                            <h4>Contact Info</h4>
+                            <h4>İletişim</h4>
                             <ul>
                                 <li class="d-flex align-items-center">
                                     <div class="offcanvas__contact-icon mr-15">
                                         <i class="fal fa-map-marker-alt"></i>
                                     </div>
                                     <div class="offcanvas__contact-text">
-                                        <a target="_blank"
-                                           href="https://www.google.com/maps/place/Dhaka/@23.7806207,90.3492859,12z/data=!3m1!4b1!4m5!3m4!1s0x3755b8b087026b81:0x8fa563bbdd5904c2!8m2!3d23.8104753!4d90.4119873">12/A,
-                                            Mirnada City Tower, NYC</a>
+                                        {{$settings["contact_address"]}}
                                     </div>
                                 </li>
                                 <li class="d-flex align-items-center">
@@ -232,7 +160,7 @@
                                         <i class="far fa-phone"></i>
                                     </div>
                                     <div class="offcanvas__contact-text">
-                                        <a href="mailto:support@gmail.com">088889797697</a>
+                                        {{$settings["contact_phone"]}}
                                     </div>
                                 </li>
                                 <li class="d-flex align-items-center">
@@ -240,17 +168,23 @@
                                         <i class="fal fa-envelope"></i>
                                     </div>
                                     <div class="offcanvas__contact-text">
-                                        <a href="tel:+012-345-6789">support@mail.com</a>
+                                        {{$settings["contact_email"]}}
                                     </div>
                                 </li>
                             </ul>
                         </div>
                         <div class="offcanvas__social">
                             <ul>
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                                <li><a href="{{$settings["media_facebook"]}}"><i
+                                            class="fa-brands fa-facebook-f"></i></a></li>
+                                <li><a href="{{$settings["media_twitter"]}}"><i
+                                            class="fa-brands fa-twitter"></i></a></li>
+                                <li><a href="{{$settings["media_linkedin"]}}"><i
+                                            class="fa-brands fa-linkedin-in"></i></a></li>
+                                <li><a href="{{$settings["media_instagram"]}}"><i
+                                            class="fa-brands fa-instagram"></i></a></li>
+                                <li><a href="{{$settings["media_youtube"]}}"><i
+                                            class="fa-brands fa-youtube"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -270,9 +204,10 @@
 </main>
 
 <!-- footer area start -->
-@yield('footer')
+@include('front.inc.footer')
 <!-- footer area end -->
-
+@stack('style')
+@stack('scripts')
 <!-- JS here -->
 <script src="{{asset('front/assets/js/vendor/jquery.js')}}"></script>
 <script src="{{asset('front/assets/js/vendor/waypoints.js')}}"></script>
@@ -290,5 +225,9 @@
 <script src="{{asset('front/assets/js/imagesloaded-pkgd.js')}}"></script>
 <script src="{{asset('front/assets/js/ajax-form.js')}}"></script>
 <script src="{{asset('front/assets/js/main.js')}}"></script>
+<script src="{{asset("front/assets/js/service.js")}}"></script>
+
+<script src="{{asset("panel/assets/js/form-spinner.js")}}"></script>
+<script src="{{asset("panel/assets/js/alert-timeout.js")}}"></script>
 </body>
 </html>

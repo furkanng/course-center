@@ -27,8 +27,9 @@ class PageSeeder extends Seeder
                 [
                     "title" => "Hakkımızda",
                     "content" => "Hakkkımızda içerik",
+                    "key" => "hakkimizda",
                     "status" => true,
-                    "permanent" => false,
+                    "permanent" => true,
                 ],
                 [
                     "title" => "Ön Bilgilendirme Formu",

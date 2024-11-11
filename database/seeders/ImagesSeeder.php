@@ -19,15 +19,22 @@ class ImagesSeeder extends Seeder
             [
                 [
                     'key' => 'slider_resim',
-                    'image' => 'slider.png',
-                    "image_url" => config("app.url") . "/images/slider.png",
+                    'image' => 'searchIcon.png',
+                    "image_url" => config("app.url") . "/images/dershaneslider1.jpg",
                     "created_at" => now(),
                     "updated_at" => now(),
                 ],
                 [
-                    'key' => 'arastirma_resim',
-                    'image' => 'research-bg.jpg',
-                    "image_url" => config("app.url") . "/images/research-bg.jpg",
+                    'key' => 'logo',
+                    'image' => 'logo.png',
+                    "image_url" => config("app.url") . "/images/logo.png",
+                    "created_at" => now(),
+                    "updated_at" => now(),
+                ],
+                [
+                    'key' => 'advisor',
+                    'image' => 'advisor.jpg',
+                    "image_url" => config("app.url") . "/images/advisor.jpg",
                     "created_at" => now(),
                     "updated_at" => now(),
                 ],

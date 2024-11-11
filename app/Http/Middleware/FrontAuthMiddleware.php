@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class LoginCacheMiddleware
+class FrontAuthMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,17 +17,11 @@ class LoginCacheMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check()) {
-            if (Auth::user()->role === UserRole::ADMIN) {
-                return redirect()->route("panel.home");
-            } elseif (Auth::user()->role === UserRole::COMPANY) {
-                return redirect()->route("merchant.home");
-            }
-            elseif (Auth::user()->role === UserRole::GUEST) {
-                return redirect()->route("front.profil.index");
-            }
-        } else {
+        if (Auth::user()->role === UserRole::GUEST) {
             return $next($request);
+        } else {
+            return redirect()->route("home");
         }
+
     }
 }

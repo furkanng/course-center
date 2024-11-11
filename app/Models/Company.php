@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\SeoPrefix;
 use App\Traits\ImageTrait;
+use App\Traits\SeoTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,9 +13,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Company extends Model
 {
-    use HasFactory, ImageTrait;
+    use HasFactory, ImageTrait, SeoTrait;
 
     protected $table = "companies";
+
+    protected string $prefix = SeoPrefix::COMPANY->value;
 
     protected int $width = 800;
     protected int $height = 600;

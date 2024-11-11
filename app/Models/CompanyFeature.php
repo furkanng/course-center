@@ -14,6 +14,7 @@ class CompanyFeature extends Model
 
     protected $fillable = [
         "feature_id",
+        "company_id"
     ];
 
     public function company(): BelongsTo

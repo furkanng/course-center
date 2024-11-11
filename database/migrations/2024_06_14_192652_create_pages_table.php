@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->longText('content')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('permanent')->default(0);
+            $table->string("link");
             $table->timestamps();
         });
     }

@@ -15,10 +15,10 @@ return new class extends Migration {
             $table->foreignId("user_id")->constrained()->onDelete('cascade');
             $table->foreignId("company_id")->constrained()->onDelete('cascade');
             $table->enum('status', [
-                \App\Enums\UserStatus::PENDING,
-                \App\Enums\UserStatus::ACCEPTED,
-                \App\Enums\UserStatus::REJECTED
-            ])->default(\App\Enums\UserStatus::PENDING);
+                \App\Enums\UserStatus::PENDING->value,
+                \App\Enums\UserStatus::ACCEPTED->value,
+                \App\Enums\UserStatus::REJECTED->value
+            ])->default(\App\Enums\UserStatus::PENDING->value);
             $table->timestamps();
         });
     }

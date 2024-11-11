@@ -49,16 +49,16 @@
   --tp-common-cream: #FFF1E0;
   --tp-common-pink: #FF6470;
   --tp-common-pink-2: #FC4C56;
-  --tp-common-orange: #F37F43;
-  --tp-common-orange-2: #EE6002;
-  --tp-common-orange-3: #FF9F4B;
+  --tp-common-orange: #f28900;
+  --tp-common-orange-2: #f28900;
+  --tp-common-orange-3: #f28900;
   --tp-common-purple: #E33CFF;
   --tp-common-purple-2: #E64DFF;
   --tp-common-yellow: #F5B455;
-  --tp-common-yellow-2: #F47F42;
-  --tp-common-yellow-3: #F4930E;
-  --tp-common-yellow-4: #FFAA2C;
-  --tp-common-yellow-5: #FF8D00;
+  --tp-common-yellow-2: #f28900;
+  --tp-common-yellow-3: #f28900;
+  --tp-common-yellow-4: #f28900;
+  --tp-common-yellow-5: #f28900;
   --tp-common-violet: #6151FB;
   --tp-common-violet-2: #A794C8;
   --tp-header-primary: #031220;
@@ -91,7 +91,7 @@
   --tp-text-15: #a1a2ab;
   --tp-theme-1: #3D6CE7;
   --tp-theme-2: #41bcc7;
-  --tp-theme-3: #007A70;
+  --tp-theme-3: #41bcc7;
   --tp-border-1: #dedede;
   /**
   @font weight declaration

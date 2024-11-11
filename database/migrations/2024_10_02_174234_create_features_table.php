@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('features', function (Blueprint $table) {
-            $table->increments("id");
+            $table->id();
             $table->integer("group_id")->default(0);
             $table->string('name')->nullable();
             $table->boolean('status')->default(true);

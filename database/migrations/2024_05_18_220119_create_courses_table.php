@@ -13,10 +13,11 @@ return new class extends Migration {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->text("svg")->nullable();
+            $table->text("icons")->nullable();
             $table->integer("order")->nullable();
             $table->boolean("menu_status");
             $table->boolean("category_status");
+            $table->string("link");
             $table->boolean("status");
             $table->timestamps();
         });

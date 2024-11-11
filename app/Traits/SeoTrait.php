@@ -16,6 +16,7 @@ trait SeoTrait
             $model->initializeLinkList();
             $model->mapSeoAttributes();
             $model->linkCreateOrUpdate();
+            $model->link = $model->linkList->link;
         });
 
         static::updating(function ($model) {
@@ -23,18 +24,19 @@ trait SeoTrait
                 $model->initializeLinkList();
                 $model->mapSeoAttributes();
                 $model->linkCreateOrUpdate();
+                $model->link = $model->linkList->link;
             }
         });
 
         static::deleting(function ($model) {
-            $model->linkDelete();
+            $model->linkDelete($model);
         });
     }
 
     public function link(): string
     {
         $column = $this->getSeoColumn();
-        return Str::slug($this->getOriginal($column), "-", "tr");
+        return $this->prefix . "/" . Str::slug($this->getOriginal($column), "-", "tr");
     }
 
     protected function initializeLinkList(): void
@@ -45,7 +47,7 @@ trait SeoTrait
     private function mapSeoAttributes(): void
     {
         $column = $this->getSeoColumn();
-        $newLink = Str::slug($this->$column, "-", "tr");
+        $newLink = $this->prefix . "/" . Str::slug($this->$column, "-", "tr");
 
         if ($this->linkControl($newLink)) {
             $newLink .= "-" . rand(1, 1000);
@@ -75,13 +77,8 @@ trait SeoTrait
         $this->linkList->save();
     }
 
-    private function linkDelete(): void
+    private function linkDelete($model): void
     {
-        LinkList::query()->where("link", $this->link())->delete();
-    }
-
-    public function getLinkAttribute(): string
-    {
-        return $this->link();
+        LinkList::query()->where("link", $model->link)->delete();
     }
 }

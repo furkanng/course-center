@@ -50,8 +50,8 @@ class AuthController extends Controller
                 $user->fill(array_merge($request->all(),
                     [
                         "user_type" => $request->user_type_company,
-                        "status" => 0,
-                        'kvkk_approve' => $request->has('kvkk_approve') ? 1 : 0
+                        "status" => false,
+                        'kvkk_approve' => $request->has('kvkk_approve')
                     ]
                 ))->save();
 
@@ -69,8 +69,8 @@ class AuthController extends Controller
                 $user->fill(array_merge($request->all(),
                     [
                         "user_type" => $request->user_type_guest,
-                        "status" => 1,
-                        'kvkk_approve' => $request->has('kvkk_approve') ? 1 : 0
+                        "status" => true,
+                        'kvkk_approve' => $request->has('kvkk_approve')
                     ]
                 ))->save();
 

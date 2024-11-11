@@ -2,12 +2,14 @@
 
 namespace App\Service;
 
+use Illuminate\Support\Facades\Storage;
+
 class Helper
 {
     public static function defaultSVG()
     {
-        return '<svg width="30" height="30" viewBox="0 0 30 30" fill="none"
-                     xmlns="http://www.w3.org/2000/svg">
+        return '<icons width="30" height="30" viewBox="0 0 30 30" fill="none"
+                     xmlns="http://www.w3.org/2000/icons">
                     <path
                         d="M28.733 3.71736C26.5787 9.08912 21.1789 16.3914 16.6605 20.0145L13.9047 22.2247C13.555 22.4765 13.2052 22.7004 12.8135 22.8542C12.8135 22.6024 12.7996 22.3227 12.7576 22.0569C12.6037 20.8818 12.0721 19.7907 11.1349 18.8534C10.1836 17.9022 9.02254 17.3426 7.83348 17.1887C7.5537 17.1747 7.27392 17.1468 6.99414 17.1747C7.14802 16.7411 7.38583 16.3354 7.6796 15.9997L9.86188 13.2438C13.471 8.7254 20.8012 3.29769 26.159 1.15738C26.9844 0.849623 27.7817 1.07345 28.2853 1.59104C28.8169 2.10863 29.0687 2.906 28.733 3.71736Z"
                         stroke="#4270FF" stroke-width="1.56" stroke-linecap="round"
@@ -30,12 +32,22 @@ class Helper
                           stroke-width="1.56" stroke-linecap="round"/>
                     <path d="M26.3688 16.0137L22.228 20.1404" stroke="#4270FF"
                           stroke-width="1.56" stroke-linecap="round"/>
-                            </svg>';
+                            </icons>';
     }
 
     public static function getNoImage(): string
     {
         return asset("images/no_image.jpg");
+    }
+
+    public static function getNoProfileImage(): string
+    {
+        return asset("images/noprofile.webp");
+    }
+
+    public static function randSvg(): ?string
+    {
+        return Storage::disk('icons')->get(rand(1, 7) . ".svg");
     }
 
     public static function randColor(): array|int|string
@@ -45,6 +57,8 @@ class Helper
             "orange-bg",
             "purple-bg",
             "yellow-bg",
+            "violet-bg",
+            "blue-bg-2",
         ];
 
         $randomKey = array_rand($colors);
@@ -75,6 +89,6 @@ class Helper
 
     public static function parseUrl(string ...$urls): string
     {
-        return collect($urls)->map(fn ($url) => trim($url, '/'))->implode('/');
+        return collect($urls)->map(fn($url) => trim($url, '/'))->implode('/');
     }
 }

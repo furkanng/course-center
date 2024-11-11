@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Course;
 use App\Models\FrontImage;
 use App\Models\Language;
+use App\Models\Page;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
@@ -28,6 +29,19 @@ class AppServiceProvider extends ServiceProvider
         $this->cacheImagesData();
         $this->cacheCourseData();
         $this->cacheSettingData();
+        $this->cachePageData();
+    }
+
+    protected function cachePageData(): void
+    {
+        $cacheKey = 'pages';
+        $cacheDuration = 60 * 60;
+
+        $pages = Cache::remember($cacheKey, $cacheDuration, function () {
+            return Page::query()->where('status', true)->get();
+        });
+       
+        view()->share('pages', $pages);
     }
 
     protected function cacheCourseData(): void
@@ -36,7 +50,7 @@ class AppServiceProvider extends ServiceProvider
         $cacheDuration = 60 * 60;
 
         $courses = Cache::remember($cacheKey, $cacheDuration, function () {
-            return Course::query()->where('status', 1)->orderBy('order')->get();
+            return Course::query()->where('status', true)->orderBy('order')->get();
         });
         view()->share('courses', $courses);
     }

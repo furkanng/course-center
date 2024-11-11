@@ -9685,7 +9685,7 @@
                 })), f.push(this.imagesToDataURI(this.sprite.dom, t)), f.push(this.prepForeignObjects(this.sprite.dom, t)), [4, Promise.all(f)];
               case 2:
                 return g = n.sent(), m = this.normalizeSVG("<style>" + g[0] + "</style>" + this.serializeElement(this.sprite.paper.defs) + this.serializeElement(this.sprite.dom), t, s, l, c, u, h), y = new Blob([m], {
-                  type: "image/svg+xml"
+                  type: "image/icons+xml"
                 }), r = i.createObjectURL(y), [4, this.loadNewImage(r, s * c * p, l * c * p, "anonymous")];
               case 3:
                 return v = n.sent(), d.drawImage(v, 0, 0), [3, 5];
@@ -9751,7 +9751,7 @@
             switch (n.label) {
               case 0:
                 if (!(r = t.querySelectorAll("image")).length) return [3, 2];
-                for (a = [], o = r.length, s = 0; s < o; s++) l = r[s], (u = l.getAttributeNS(e.XLINK, "href")) && (-1 !== u.indexOf("data:image") || (-1 !== u.indexOf(".svg") ? a.push(this.svgToDataURI(l, i)) : a.push(this.imageToDataURI(l, i))));
+                for (a = [], o = r.length, s = 0; s < o; s++) l = r[s], (u = l.getAttributeNS(e.XLINK, "href")) && (-1 !== u.indexOf("data:image") || (-1 !== u.indexOf(".icons") ? a.push(this.svgToDataURI(l, i)) : a.push(this.imageToDataURI(l, i))));
                 return [4, Promise.all(a)];
               case 1:
                 return n.sent(), [2];
@@ -9837,7 +9837,7 @@
                 n.label = 1;
               case 1:
                 n.trys.push([1, 6, , 7]), (e = document.createElement("canvas")).width = 1, e.height = 1, i = e.getContext("2d"), r = this.getDOMURL(), a = new Blob([this.normalizeSVG("<g></g>", {}, 1, 1)], {
-                  type: "image/svg+xml"
+                  type: "image/icons+xml"
                 }), o = r.createObjectURL(a), s = void 0, n.label = 2;
               case 2:
                 return n.trys.push([2, 4, , 5]), [4, this.loadNewImage(o, 1, 1)];
@@ -9906,7 +9906,7 @@
           c = t.match(/<foreignObject[\s\S]*<\/foreignObject>/gi);
         if (c)
           for (var p = 0; p < c.length; p++) t = t.replace(c[p], I.d), h.push(c[p]);
-        t.match(/<svg/) ? "" !== l && (t = (t = (t = t.replace(/(<svg[^>]*)width="[^"]*"/, "$1")).replace(/(<svg[^>]*)height="[^"]*"/, "$1")).replace(/(<svg)/, "$1" + l)) : t = '<?xml version="1.0" encoding="utf-8"?><svg ' + l + ' style="' + u + '" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">' + t + "</svg>", s && (t = t.replace(/(<svg[^>]*>)/, '$1<rect width="100%" height="100%" fill="' + s.rgba + '"/>')), x.a() && (t = t.replace(/<feColorMatrix [^\/>]*\/>/gi, ""));
+        t.match(/<svg/) ? "" !== l && (t = (t = (t = t.replace(/(<svg[^>]*)width="[^"]*"/, "$1")).replace(/(<svg[^>]*)height="[^"]*"/, "$1")).replace(/(<svg)/, "$1" + l)) : t = '<?xml version="1.0" encoding="utf-8"?><icons ' + l + ' style="' + u + '" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">' + t + "</icons>", s && (t = t.replace(/(<svg[^>]*>)/, '$1<rect width="100%" height="100%" fill="' + s.rgba + '"/>')), x.a() && (t = t.replace(/<feColorMatrix [^\/>]*\/>/gi, ""));
         var d = new RegExp("url\\(" + T.escapeForRgex(T.getBaseURI()), "g");
         if (t = (t = t.replace(d, "url(#")).replace(/url\(&quot;([^)]*)&quot;\)/gm, "url($1)"), h.length)
           for (p = 0; p < h.length; p++) t = t.replace(I.d, h[p]);
@@ -10312,7 +10312,7 @@
           var i, r, a, o, s, l, u, h, c, p, d, f, g, m, y;
           return Object(n.d)(this, function(n) {
             if (this.msBlobDownloadSupport()) {
-              if (f = t.split(";"), g = f.shift().replace(/data:/, ""), t = decodeURIComponent(f.join(";").replace(/^[^,]*,/, "")), -1 != ["image/svg+xml", "application/json", "text/csv"].indexOf(g)) return i = new Blob([t], {
+              if (f = t.split(";"), g = f.shift().replace(/data:/, ""), t = decodeURIComponent(f.join(";").replace(/^[^,]*,/, "")), -1 != ["image/icons+xml", "application/json", "text/csv"].indexOf(g)) return i = new Blob([t], {
                 type: g
               }), window.navigator.msSaveBlob(i, e), [2, !0];
               try {
@@ -10325,7 +10325,7 @@
                 type: g
               }), window.navigator.msSaveBlob(c, e)
             } else if (this.blobDownloadSupport()) {
-              if ((r = document.createElement("a")).download = e, document.body.appendChild(r), f = t.split(";"), g = f.shift().replace(/data:/, ""), t = decodeURIComponent(f.join(";").replace(/^[^,]*,/, "")), -1 != ["image/svg+xml", "application/json", "text/csv", "text/html"].indexOf(g)) return o = new Blob([t], {
+              if ((r = document.createElement("a")).download = e, document.body.appendChild(r), f = t.split(";"), g = f.shift().replace(/data:/, ""), t = decodeURIComponent(f.join(";").replace(/^[^,]*,/, "")), -1 != ["image/icons+xml", "application/json", "text/csv", "text/html"].indexOf(g)) return o = new Blob([t], {
                 type: g
               }), s = window.URL.createObjectURL(o), r.href = s, r.download = e, r.click(), setTimeout(function() {
                 document.body.removeChild(r), window.URL.revokeObjectURL(s)
@@ -10341,7 +10341,7 @@
               }), p = window.URL.createObjectURL(c), r.href = p, r.download = e, document.body.appendChild(r), r.click(), document.body.removeChild(r), setTimeout(function() {
                 window.URL.revokeObjectURL(p)
               }, 100)
-            } else this.linkDownloadSupport() ? ((d = document.createElement("a")).download = e, d.href = t, document.body.appendChild(d), d.click(), document.body.removeChild(d)) : this.legacyIE() ? 4 === (f = t.match(/^data:(.*);[ ]*([^,]*),(.*)$/)).length && ("base64" == f[2] ? f[1].match(/^image\//) && this.showModal('<img src="' + t + '" style="float: left; max-width: 50%; max-height: 80%; margin: 0 1em 0.5em 0; border: 1px solid #eee;" /><p>' + this.language.translate('To save the image, right-click thumbnail on the left and choose "Save picture as..."') + '</p><p style="text-align: center;"><small>' + this.language.translate("(Press ESC to close this message)") + "</small></p>", this.language.translate("Image Export Complete")) : (g = void 0, e.match(/\.svg$/) ? g = "image/svg+xml" : (g = "text/plain", e += ".txt"), (m = document.createElement("iframe")).width = "1px", m.height = "1px", m.style.display = "none", document.body.appendChild(m), (y = m.contentDocument).open(g, "replace"), y.write(decodeURIComponent(f[3])), y.close(), y.execCommand("SaveAs", !0, e), document.body.removeChild(m))) : window.location.href = t;
+            } else this.linkDownloadSupport() ? ((d = document.createElement("a")).download = e, d.href = t, document.body.appendChild(d), d.click(), document.body.removeChild(d)) : this.legacyIE() ? 4 === (f = t.match(/^data:(.*);[ ]*([^,]*),(.*)$/)).length && ("base64" == f[2] ? f[1].match(/^image\//) && this.showModal('<img src="' + t + '" style="float: left; max-width: 50%; max-height: 80%; margin: 0 1em 0.5em 0; border: 1px solid #eee;" /><p>' + this.language.translate('To save the image, right-click thumbnail on the left and choose "Save picture as..."') + '</p><p style="text-align: center;"><small>' + this.language.translate("(Press ESC to close this message)") + "</small></p>", this.language.translate("Image Export Complete")) : (g = void 0, e.match(/\.svg$/) ? g = "image/icons+xml" : (g = "text/plain", e += ".txt"), (m = document.createElement("iframe")).width = "1px", m.height = "1px", m.style.display = "none", document.body.appendChild(m), (y = m.contentDocument).open(g, "replace"), y.write(decodeURIComponent(f[3])), y.close(), y.execCommand("SaveAs", !0, e), document.body.removeChild(m))) : window.location.href = t;
             return [2, !0]
           })
         })
@@ -10612,7 +10612,7 @@
             e = "image/jpeg";
             break;
           case "svg":
-            e = "image/svg+xml";
+            e = "image/icons+xml";
             break;
           case "csv":
             e = "text/csv";
@@ -16385,7 +16385,7 @@
       if (i || ((i = document.createElement("div")).style.width = "200px", i.style.height = "200px", i.style.visibility = "hidden", i.style.position = "absolute", document.body.appendChild(i), r = !0), i) {
         i.innerHTML = "";
         var n = new Ft.a(i),
-          a = new At.a(n.SVGContainer, "svg-" + (Ft.b.length - 1)),
+          a = new At.a(n.SVGContainer, "icons-" + (Ft.b.length - 1)),
           o = new b.a;
         o.htmlContainer = i, o.svgContainer = n, o.width = Object(Q.c)(100), o.height = Object(Q.c)(100), o.background.fillOpacity = 0, o.paper = a, a.append(o.group), r && E.x(function() {
           o.moveHtmlContainer(t)
@@ -20504,7 +20504,7 @@
               top: "0.3em",
               right: "0.3em",
               "background-color": "rgb(100, 100, 100)",
-              background: "rgba(100, 100, 100, 0.1) url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyBoZWlnaHQ9IjUxMiIgdmVyc2lvbj0iMSIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTQ0NS4yIDEwOS4ybC00Mi40LTQyLjRMMjU2IDIxMy42IDEwOS4yIDY2LjhsLTQyLjQgNDIuNEwyMTMuNiAyNTYgNjYuOCA0MDIuOGw0Mi40IDQyLjRMMjU2IDI5OC40bDE0Ni44IDE0Ni44IDQyLjQtNDIuNEwyOTguNCAyNTYiLz48L3N2Zz4=) no-repeat center",
+              background: "rgba(100, 100, 100, 0.1) url(data:image/icons+xml;charset=utf-8;base64,PHN2ZyBoZWlnaHQ9IjUxMiIgdmVyc2lvbj0iMSIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTQ0NS4yIDEwOS4ybC00Mi40LTQyLjRMMjU2IDIxMy42IDEwOS4yIDY2LjhsLTQyLjQgNDIuNEwyMTMuNiAyNTYgNjYuOCA0MDIuOGw0Mi40IDQyLjRMMjU2IDI5OC40bDE0Ni44IDE0Ni44IDQyLjQtNDIuNEwyOTguNCAyNTYiLz48L3N2Zz4=) no-repeat center",
               "background-size": "80%",
               width: "1.2em",
               height: "1.2em",
@@ -34310,7 +34310,7 @@
           type: e
         }).className, i.setAttribute("tabindex", this.tabindex.toString()), i.setAttribute("role", "menuitem"), i
       }, e.prototype.createSvgElement = function(t, e, i) {
-        var r = (new DOMParser).parseFromString(i, "image/svg+xml").documentElement,
+        var r = (new DOMParser).parseFromString(i, "image/icons+xml").documentElement,
           n = this.classPrefix + "-icon " + this.classPrefix + "-icon-level-" + t + " " + this.classPrefix + "-item-" + (e || "blank");
         return this.typeClickable(e) && (n += " " + this.classPrefix + "-clickable"), r.setAttribute("class", this.adapter.apply("labelClass", {
           className: n,

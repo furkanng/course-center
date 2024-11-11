@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Enums\UserType;
+use App\Enums\SeoPrefix;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterRequest;
+use App\Models\Company;
 use App\Models\CompanyType;
 use App\Models\Page;
-use App\Models\User;
-use Illuminate\Contracts\View\Factory;
+use App\Service\Helper;
 use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function home(): View
     {
-        return view("front.pages.home");
+        $previewCompanies = Company::query()
+            ->where("status", true)
+            ->orderBy("created_at", "desc")
+            ->take(6)
+            ->get();
+
+        return view("front.pages.home", compact(["previewCompanies"]));
     }
 
     public function login(): View
@@ -29,16 +30,17 @@ class HomeController extends Controller
 
     public function register(): View
     {
-        $page = Page::query()->where("permanent_name", "sartlar_ve_kosullar")->first();
         $types = CompanyType::all();
-        return view("front.pages.register", compact(["types", "page"]));
+        return view("front.pages.register", compact(["types"]));
     }
 
 
-    public function page($seo_link): View
+    public function page($seoLink): View
     {
-        $page = Page::query()->where("seo_link", $seo_link)->firstOrFail();
+        $link = Helper::parseUrl(SeoPrefix::PAGE->value, $seoLink);
 
-        return view("front.pages.page", compact("page"));
+        $page = Page::query()->where("link", $link)->firstOrFail();
+
+        return view("front.pages.page", compact(["page"]));
     }
 }

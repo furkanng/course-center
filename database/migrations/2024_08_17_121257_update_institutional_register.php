@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('institutional_register', function (Blueprint $table) {
             $table->string('company_name');
             $table->integer('company_type');
+            $table->dropForeign(['company_id']);
             $table->dropColumn('company_id');
         });
     }

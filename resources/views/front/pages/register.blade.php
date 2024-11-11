@@ -1,6 +1,7 @@
 @extends('front.layout.app')
 
-@section('title', 'Home Page')
+@section('title', 'Kayıt Ol')
+
 @section('content')
     <section class="signup__area p-relative z-index-1 pt-100 pb-145">
         <div class="sign__shape">
@@ -23,14 +24,17 @@
                                     <div class="radio-inputs" id="role">
                                         <label class="radio">
                                             <input class="role" type="radio" name="role"
-                                                   value="{{\App\Enums\UserRole::GUEST}}" checked>
+                                                   value="{{\App\Enums\UserRole::GUEST}}" checked
+                                                   onchange="updateUserTypeOptionsInline()">
                                             <span class="name">{{\App\Enums\UserRole::GUEST->label()}}</span>
                                         </label>
                                         <label class="radio">
                                             <input class="role" type="radio" name="role"
-                                                   value="{{\App\Enums\UserRole::COMPANY}}">
+                                                   value="{{\App\Enums\UserRole::COMPANY}}"
+                                                   onchange="updateUserTypeOptionsInline()">
                                             <span class="name">{{\App\Enums\UserRole::COMPANY->label()}}</span>
                                         </label>
+
                                     </div>
                                 </div>
                                 <div class="row">
@@ -159,7 +163,7 @@
                                                 @enderror
                                             </div>
                                             <div class="sign__input">
-                                                <select name="user_type_guest" id="user_type" required>
+                                                <select name="user_type_guest" id="user_type_guest" required>
                                                     @foreach(\App\Enums\UserType::cases() as $key)
                                                         @if($key->isGuest())
                                                             <option value="{{$key->value}}">{{$key->label()}}</option>
@@ -170,7 +174,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="sign__input-wrapper mb-25" id="user_type_company">
+                                        <div class="sign__input-wrapper mb-25" id="user_type_company" hidden="">
                                             <div class="d-flex justify-content-between">
                                                 <h5>Kullanıcı Tipi *</h5>
                                                 @error('user_type')
@@ -178,7 +182,7 @@
                                                 @enderror
                                             </div>
                                             <div class="sign__input">
-                                                <select name="user_type_company" id="user_type" required>
+                                                <select name="user_type_company" id="user_type_company" required>
                                                     @foreach(\App\Enums\UserType::cases() as $key)
                                                         @if($key->isCompany())
                                                             <option value="{{$key->value}}">{{$key->label()}}</option>
@@ -202,7 +206,7 @@
                                             </div>
                                             <div class="sign__input">
                                                 <input type="text" name="company_name" value="{{ old('company_name') }}"
-                                                       required placeholder="Firma İsmi">
+                                                       placeholder="Firma İsmi">
                                                 <i class="fal fa-building"></i>
                                             </div>
                                         </div>
@@ -216,7 +220,7 @@
                                                 @enderror
                                             </div>
                                             <div class="sign__input">
-                                                <select name="company_type" required>
+                                                <select name="company_type">
                                                     <option value="">Seçiniz</option>
                                                     @foreach($types as $type)
                                                         <option value={{$type->code}}>{{$type->name}}</option>
@@ -232,9 +236,9 @@
                                         <input class="m-check-input" type="checkbox" id="m-agree" name="kvkk_approve"
                                                required>
                                         <label class="m-check-label" for="m-agree"><a
-                                                {{--href="{{route("front.page",["seo_link" => $page->seo_link])}}"--}}
+                                                href="{{$pages->where("key","kvkk")->first()->link}}"
                                                 target="_blank">
-                                                {{$page->title}}</a>
+                                                {{$pages->where("key","kvkk")->first()->title}}</a>
                                             kabul ediyorum
                                         </label>
                                         @error('agree')
@@ -317,68 +321,89 @@
             </div>
         </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var myModal = new bootstrap.Modal(document.getElementById('modal-notification'));
-                myModal.show();
-            });
-        </script>
     @endif
 
+    @push("scripts")
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Telefon numarası alanı düzenleme
+                var phoneInput = document.getElementById('phone');
+                if (phoneInput && phoneInput.value) {
+                    formatPhoneNumber(phoneInput);
+                }
 
+                // İl ve İlçe bilgilerinin doldurulması
+                fetchProvinces();
+                formatPhoneNumber();
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var phoneInput = document.getElementById('phone');
-            if (phoneInput && phoneInput.value) {
-                formatPhoneNumber(phoneInput);
-            }
-            fetchProvinces();
-            formatPhoneNumber();
-            $('select').niceSelect();
-
-        });
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            updateUserTypeOptions();
-
-            $('.role').on('change', function () {
-                updateUserTypeOptions();
+                // Eğer bir modal varsa göster
+                @if(session('companyRegister'))
+                var myModal = new bootstrap.Modal(document.getElementById('modal-notification'));
+                myModal.show();
+                @endif
             });
 
-            function updateUserTypeOptions() {
+            function updateUserTypeOptionsInline() {
                 var role = document.querySelector('input[name="role"]:checked').value;
 
                 var companyFields = ["company_name", "company_type", "user_type_company"];
                 var userFields = ["user_type_user"];
 
-                if (role === "guest") {
+                if (role === "{{ \App\Enums\UserRole::GUEST }}") {
+                    // Firma alanlarını gizle ve zorunlulukları kaldır
                     companyFields.forEach(function (id) {
                         var field = document.getElementById(id);
-                        field.style.display = 'none';
-                        field.querySelector('input, select').removeAttribute('required');
+                        if (field) {
+                            field.style.display = 'none'; // Display none ile alanı gizliyoruz
+                            field.removeAttribute('hidden'); // Eğer önceden hidden attribute varsa kaldırıyoruz
+                            var inputOrSelect = field.querySelector('input, select');
+                            if (inputOrSelect) {
+                                inputOrSelect.removeAttribute('required'); // required niteliğini kaldırıyoruz
+                            }
+                        }
                     });
+
+                    // Kullanıcı alanlarını göster ve zorunlu yap
                     userFields.forEach(function (id) {
                         var field = document.getElementById(id);
-                        field.style.display = 'block';
-                        field.querySelector('input, select').removeAttribute('required');
+                        if (field) {
+                            field.style.display = 'block'; // Display block ile görünür yapıyoruz
+                            field.removeAttribute('hidden'); // Eğer önceden hidden attribute varsa kaldırıyoruz
+                            var inputOrSelect = field.querySelector('input, select');
+                            if (inputOrSelect) {
+                                inputOrSelect.setAttribute('required', 'required'); // required niteliğini ekliyoruz
+                            }
+                        }
                     });
-                } else if (role === "company") {
+                } else if (role === "{{ \App\Enums\UserRole::COMPANY }}") {
+                    // Firma alanlarını göster ve zorunlu yap
                     companyFields.forEach(function (id) {
                         var field = document.getElementById(id);
-                        field.style.display = 'block';
-                        field.querySelector('input, select').setAttribute('required', 'required');
+                        if (field) {
+                            field.style.display = 'block'; // Display block ile görünür yapıyoruz
+                            field.removeAttribute('hidden'); // Eğer önceden hidden attribute varsa kaldırıyoruz
+                            var inputOrSelect = field.querySelector('input, select');
+                            if (inputOrSelect) {
+                                inputOrSelect.setAttribute('required', 'required'); // required niteliğini ekliyoruz
+                            }
+                        }
                     });
+
+                    // Kullanıcı alanlarını gizle ve zorunlulukları kaldır
                     userFields.forEach(function (id) {
                         var field = document.getElementById(id);
-                        field.style.display = 'none';
-                        field.querySelector('input, select').removeAttribute('required');
+                        if (field) {
+                            field.style.display = 'none'; // Display none ile alanı gizliyoruz
+                            field.removeAttribute('hidden'); // Eğer önceden hidden attribute varsa kaldırıyoruz
+                            var inputOrSelect = field.querySelector('input, select');
+                            if (inputOrSelect) {
+                                inputOrSelect.removeAttribute('required'); // required niteliğini kaldırıyoruz
+                            }
+                        }
                     });
                 }
             }
-        });
-    </script>
+        </script>
+    @endpush
 
 @endsection

@@ -230,7 +230,7 @@ $cyan-800: shade-color($cyan, 6) !default;
 $cyan-900: shade-color($cyan, 8) !default;
 // fusv-enable
 
-// Characters which are escaped by the escape-svg function
+// Characters which are escaped by the escape-icons function
 $escaped-characters: (
   ("<", "%3c"),
   (">", "%3e"),

@@ -38,7 +38,7 @@
                         @if(is_null($company->image) || empty($company->image))
                             <div class="col-12">
                                 <img class="w-100 border-radius-lg shadow-lg mt-3"
-                                     src="{{ asset('images/noImage.jpg') }}"
+                                     src="{{ \App\Service\Helper::getNoImage() }}"
                                      alt="kapak_resmi">
                             </div>
                         @else

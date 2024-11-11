@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer("company_type");
             $table->string("city");
             $table->string("district");
+            $table->string("link");
             $table->string("mernis")->nullable();
             $table->boolean("status")->default(true);
             $table->timestamps();

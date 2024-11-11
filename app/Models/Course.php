@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\SeoPrefix;
 use App\Traits\SeoTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,9 +14,11 @@ class Course extends Model
 
     protected $table = "courses";
 
+    protected string $prefix = SeoPrefix::COURSE->value;
+
     protected $fillable = [
         "name",
-        "svg",
+        "icons",
         "menu_status",
         "category_status",
         "order",
