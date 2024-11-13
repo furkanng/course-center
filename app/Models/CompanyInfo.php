@@ -29,12 +29,14 @@ class CompanyInfo extends Model
 
     public function setMapAttribute($value): void
     {
-        preg_match('/src="([^"]+)"/', $value, $matches);
+        if (!str_starts_with($value, "https://")) {
+            preg_match('/src="([^"]+)"/', $value, $matches);
 
-        if (isset($matches[1])) {
-            $this->attributes['map'] = $matches[1];
-        } else {
-            $this->attributes['map'] = null;
+            if (isset($matches[1])) {
+                $this->attributes['map'] = $matches[1];
+            } else {
+                $this->attributes['map'] = null;
+            }
         }
     }
 }

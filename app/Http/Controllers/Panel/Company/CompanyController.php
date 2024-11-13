@@ -11,6 +11,7 @@ use App\Models\Course;
 use App\Models\Feature;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -94,6 +95,34 @@ class CompanyController extends Controller
         $company = Company::query()->findOrFail($id);
         $company->fill($request->all())->save();
 
+        if ($company->info) {
+            $company->info->update([
+                "about" => $request->get("about"),
+                "map" => $request->get("map"),
+                "facebook" => $request->get("facebook"),
+                "instagram" => $request->get("instagram"),
+                "youtube" => $request->get("youtube"),
+                "twitter" => $request->get("twitter"),
+            ]);
+        } else {
+            $company->info()->create([
+                "about" => $request->get("about"),
+                "map" => $request->get("map"),
+                "facebook" => $request->get("facebook"),
+                "instagram" => $request->get("instagram"),
+                "youtube" => $request->get("youtube"),
+                "twitter" => $request->get("twitter"),
+            ]);
+        }
+
+        if ($request->has('courses')) {
+            $company->courses()->sync($request->get('courses'));
+        }
+
+        if ($request->has('features')) {
+            $company->features()->sync($request->get('features'));
+        }
+
         return redirect()->back()->with("success", "Güncelleme Başarılı");
     }
 
@@ -101,7 +130,7 @@ class CompanyController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id): RedirectResponse
-    {
+    {dd(1);
         $company = Company::query()->findOrFail($id);
         $company->delete();
 

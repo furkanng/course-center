@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Company extends Model
 {
@@ -19,8 +20,8 @@ class Company extends Model
 
     protected string $prefix = SeoPrefix::COMPANY->value;
 
-    protected int $width = 800;
-    protected int $height = 600;
+    protected int $width = 370;
+    protected int $height = 230;
     protected bool $watermark = true;
 
     protected $fillable = [
@@ -72,14 +73,14 @@ class Company extends Model
         return $this->hasMany(CompanyImage::class, 'company_id', "id");
     }
 
-    public function info(): BelongsTo
+    public function info(): HasOne
     {
-        return $this->belongsTo(CompanyInfo::class, 'id', "company_id");
+        return $this->hasOne(CompanyInfo::class, 'company_id', 'id');
     }
 
-    public function features(): HasMany
+    public function features(): BelongsToMany
     {
-        return $this->hasMany(CompanyFeature::class, 'company_id', "id");
+        return $this->belongsToMany(Feature::class, 'company_features');
     }
 
     public function sss(): HasMany

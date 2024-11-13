@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="col-12 col-lg-8 m-auto">
                         <form method="POST" action="{{route("panel.companies.company.store")}}"
-                              class="multisteps-form__form mb-8">
+                              class="multisteps-form__form mb-8 form-submit">
                             @csrf
                             <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active"
                                  data-animation="FadeIn">

@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId("company_id")->constrained()->onDelete('cascade');
             $table->text("about")->nullable();
             $table->jsonb("general-info")->nullable();
-            $table->string("map")->nullable();
+            $table->text("map")->nullable();
             $table->timestamps();
         });
     }

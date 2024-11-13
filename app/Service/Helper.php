@@ -37,7 +37,7 @@ class Helper
 
     public static function getNoImage(): string
     {
-        return asset("images/no_image.jpg");
+        return asset("images/no_image_2.jpg");
     }
 
     public static function getNoProfileImage(): string

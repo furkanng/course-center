@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\SeoPrefix;
+use App\Http\Controllers\Front\CompanyController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\AuthController;
 use App\Http\Controllers\Front\UserController;
@@ -15,7 +17,7 @@ Route::get("/cikis-yap", [AuthController::class, "logout"])->name("logout");
 
 Route::get("/sayfalar/{seo_link}", [HomeController::class, "page"])->name("front.page");
 
-Route::middleware(["AuthMiddleware", "auth","FrontAuth"])->group(function () {
+Route::middleware(["AuthMiddleware", "auth", "FrontAuth"])->group(function () {
 
     Route::resource("profil", UserController::class)
         ->parameters(['profil' => 'id'])->names([
@@ -31,4 +33,7 @@ Route::middleware(["AuthMiddleware", "auth","FrontAuth"])->group(function () {
     Route::put("profil/{id}/update-permission", [UserController::class, "updatePermission"])->name("front.profil.updatePermission");
 });
 
+Route::prefix(SeoPrefix::COMPANY->value)->group(function () {
+    Route::get("{seo_link}", [CompanyController::class, "show"])->name("front.company.show");
+});
 
