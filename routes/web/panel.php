@@ -142,9 +142,6 @@ Route::prefix("companies")->group(function () {
             'destroy' => 'panel.companies.company.destroy',
         ]);
 
-    Route::put("company/image-update/{id}", [CompanyController::class, "updateImage"])
-        ->name("panel.companies.company.updateImage");
-
     Route::resource("company.sss", SssController::class)
         ->parameters(['sss' => 'id'])->names([
             'index' => 'panel.companies.sss.index',
