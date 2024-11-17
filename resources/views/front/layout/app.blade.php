@@ -84,8 +84,6 @@
                     <div class="header__bottom-right d-flex justify-content-end align-items-center pl-30">
                         @if(auth()->user())
                             {{strtoupper(auth()->user()->name)}}
-                        @else
-                            Giriş Yap | Kayıt Ol
                         @endif
                         <div class="ml-10 header__action d-none d-xl-block">
                             <ul>
