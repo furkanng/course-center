@@ -65,7 +65,7 @@
                                     <td class="text-sm">
                                         <div class="d-flex px-2">
                                             <div
-                                                class="avatar avatar-sm rounded-circle me-2"> {!! $course->svg !!} </div>
+                                                class="avatar avatar-sm rounded-circle me-2"> {!! $course->icons !!} </div>
                                             <div class="my-auto">
                                                 <h6 class="mb-0 text-xs">{{$course->name}}</h6>
                                             </div>

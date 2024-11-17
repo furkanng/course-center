@@ -38,9 +38,9 @@
                             </div>
                         @endif
                         <div class="form-group">
-                            <label for="svg">SVG İkon</label>
-                            <input type="text" class="form-control" value="{{$course->svg}}"
-                                   name="svg" id="svg" placeholder="Svg ikon giriniz">
+                            <label for="icons">SVG İkon</label>
+                            <input type="text" class="form-control" value="{{$course->icons}}"
+                                   name="icons" id="icons" placeholder="Svg ikon giriniz">
                         </div>
                         <div class="form-group">
                             <div class="form-check form-switch">

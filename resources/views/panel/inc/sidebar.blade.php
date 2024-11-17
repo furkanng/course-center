@@ -208,7 +208,7 @@
                             <a class="nav-link {{ request()->routeIs('panel.setting.contact.*') ? 'active' : '' }}"
                                href="{{route("panel.setting.contact.index")}}">
                                 <span class="sidenav-mini-icon"> İ </span>
-                                <span class="sidenav-normal"> İletişim </span>
+                                <span class="sidenav-normal"> İletişim Ayarları</span>
                             </a>
                         </li>
 
@@ -284,10 +284,12 @@
             </li>
             <li class="nav-item">
                 <hr class="horizontal dark"/>
-                <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">DOCS</h6>
+                <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">İletişim</h6>
             </li>
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#basicExamples" class="nav-link " aria-controls="basicExamples"
+                <a data-bs-toggle="collapse" href="#basicExamples"
+                   class="nav-link {{ request()->routeIs('panel.contacts.*') ? 'active' : '' }}"
+                   aria-controls="basicExamples"
                    role="button" aria-expanded="false">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
@@ -314,313 +316,20 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Basic</span>
+                    <span class="nav-link-text ms-1">Talepler</span>
                 </a>
-                <div class="collapse " id="basicExamples">
+                <div class="collapse {{ request()->routeIs('panel.contacts.*') ? 'show' : '' }}" id="basicExamples">
                     <ul class="nav ms-4 ps-3">
-                        <li class="nav-item ">
-                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false"
-                               href="#gettingStartedExample">
-                                <span class="sidenav-mini-icon"> G </span>
-                                <span class="sidenav-normal"> Getting Started <b class="caret"></b></span>
-                            </a>
-                            <div class="collapse " id="gettingStartedExample">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link "
-                                           href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/quick-start/soft-ui-dashboard"
-                                           target="_blank">
-                                            <span class="sidenav-mini-icon text-xs"> Q </span>
-                                            <span class="sidenav-normal"> Quick Start </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link "
-                                           href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/license/soft-ui-dashboard"
-                                           target="_blank">
-                                            <span class="sidenav-mini-icon text-xs"> L </span>
-                                            <span class="sidenav-normal"> License </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link "
-                                           href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/overview/soft-ui-dashboard"
-                                           target="_blank">
-                                            <span class="sidenav-mini-icon text-xs"> C </span>
-                                            <span class="sidenav-normal"> Contents </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link "
-                                           href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/build-tools/soft-ui-dashboard"
-                                           target="_blank">
-                                            <span class="sidenav-mini-icon text-xs"> B </span>
-                                            <span class="sidenav-normal"> Build Tools </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false"
-                               href="#foundationExample">
-                                <span class="sidenav-mini-icon"> F </span>
-                                <span class="sidenav-normal"> Foundation <b class="caret"></b></span>
-                            </a>
-                            <div class="collapse " id="foundationExample">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link "
-                                           href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/colors/soft-ui-dashboard"
-                                           target="_blank">
-                                            <span class="sidenav-mini-icon text-xs"> C </span>
-                                            <span class="sidenav-normal"> Colors </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link "
-                                           href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/grid/soft-ui-dashboard"
-                                           target="_blank">
-                                            <span class="sidenav-mini-icon text-xs"> G </span>
-                                            <span class="sidenav-normal"> Grid </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link "
-                                           href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/typography/soft-ui-dashboard"
-                                           target="_blank">
-                                            <span class="sidenav-mini-icon text-xs"> T </span>
-                                            <span class="sidenav-normal"> Typography </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link "
-                                           href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/icons/soft-ui-dashboard"
-                                           target="_blank">
-                                            <span class="sidenav-mini-icon text-xs"> I </span>
-                                            <span class="sidenav-normal"> Icons </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#componentsExamples" class="nav-link "
-                   aria-controls="componentsExamples" role="button" aria-expanded="false">
-                    <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                        <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1"
-                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>customer-support</title>
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                                    <g transform="translate(1716.000000, 291.000000)">
-                                        <g transform="translate(1.000000, 0.000000)">
-                                            <path class="color-background"
-                                                  d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z"
-                                                  opacity="0.59858631"></path>
-                                            <path class="color-foreground"
-                                                  d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z"></path>
-                                            <path class="color-foreground"
-                                                  d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>
-                                        </g>
-                                    </g>
-                                </g>
-                            </g>
-                        </svg>
-                    </div>
-                    <span class="nav-link-text ms-1">Components</span>
-                </a>
-                <div class="collapse " id="componentsExamples">
-                    <ul class="nav ms-4 ps-3">
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/alerts/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> A </span>
-                                <span class="sidenav-normal"> Alerts </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/badge/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> B </span>
-                                <span class="sidenav-normal"> Badge </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/buttons/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> B </span>
-                                <span class="sidenav-normal"> Buttons </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/cards/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> C </span>
-                                <span class="sidenav-normal"> Card </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/carousel/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> C </span>
-                                <span class="sidenav-normal"> Carousel </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/collapse/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> C </span>
-                                <span class="sidenav-normal"> Collapse </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/dropdowns/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> D </span>
-                                <span class="sidenav-normal"> Dropdowns </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/forms/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> F </span>
-                                <span class="sidenav-normal"> Forms </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/modal/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> M </span>
-                                <span class="sidenav-normal"> Modal </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/navs/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> N </span>
-                                <span class="sidenav-normal"> Navs </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/navbar/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> N </span>
-                                <span class="sidenav-normal"> Navbar </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/pagination/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> P </span>
-                                <span class="sidenav-normal"> Pagination </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/popovers/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> P </span>
-                                <span class="sidenav-normal"> Popovers </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/progress/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> P </span>
-                                <span class="sidenav-normal"> Progress </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/spinners/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> S </span>
-                                <span class="sidenav-normal"> Spinners </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/tables/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> T </span>
-                                <span class="sidenav-normal"> Tables </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link "
-                               href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/tooltips/soft-ui-dashboard"
-                               target="_blank">
-                                <span class="sidenav-mini-icon"> T </span>
-                                <span class="sidenav-normal"> Tooltips </span>
+                        <li class="nav-item {{ request()->routeIs('panel.contacts.users.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.contacts.users.*') ? 'active' : '' }}"
+                               href="{{route("panel.contacts.users.index")}}">
+                                <span class="sidenav-mini-icon"> K </span>
+                                <span class="sidenav-normal"> Kullanıcı Talepleri </span>
                             </a>
                         </li>
                     </ul>
                 </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   href="https://github.com/creativetimofficial/ct-soft-ui-dashboard-pro/blob/main/CHANGELOG.md"
-                   target="_blank">
-                    <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center  me-2 d-flex align-items-center justify-content-center">
-                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
-                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>credit-card</title>
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                                    <g transform="translate(1716.000000, 291.000000)">
-                                        <g transform="translate(453.000000, 454.000000)">
-                                            <path class="color-background"
-                                                  d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
-                                                  opacity="0.593633743"></path>
-                                            <path class="color-background"
-                                                  d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                                        </g>
-                                    </g>
-                                </g>
-                            </g>
-                        </svg>
-                    </div>
-                    <span class="nav-link-text ms-1">Changelog</span>
-                </a>
             </li>
         </ul>
-    </div>
-    <div class="sidenav-footer mx-3 mt-3 pt-3">
-        <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
-            <div class="full-background"
-                 style="background-image: url('{{asset("panel/assets/img/curved-images/white-curved.jpg")}}')"></div>
-            <div class="card-body text-start p-3 w-100">
-                <div
-                    class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
-                    <i class="ni ni-diamond text-dark text-gradient text-lg top-0" aria-hidden="true"
-                       id="sidenavCardIcon"></i>
-                </div>
-                <div class="docs-info">
-                    <h6 class="text-white up mb-0">Need help?</h6>
-                    <p class="text-xs font-weight-bold">Please check our docs</p>
-                    <a href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/overview/soft-ui-dashboard"
-                       target="_blank" class="btn btn-white btn-sm w-100 mb-0">Documentation</a>
-                </div>
-            </div>
-        </div>
     </div>
 </aside>

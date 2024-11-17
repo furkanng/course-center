@@ -10,6 +10,7 @@ use App\Http\Controllers\Panel\Company\TypeController;
 use App\Http\Controllers\Panel\Config\FrontImagesController;
 use App\Http\Controllers\Panel\Config\LanguageController;
 use App\Http\Controllers\Panel\Config\PageController;
+use App\Http\Controllers\Panel\Contact\UserCompanyController;
 use App\Http\Controllers\Panel\HomeController;
 use App\Http\Controllers\Panel\Setting\ApiController;
 use App\Http\Controllers\Panel\Setting\ContactController;
@@ -215,4 +216,17 @@ Route::prefix("companies")->group(function () {
 
     Route::post("type/delete", [TypeController::class, "delete"])
         ->name("panel.companies.type.delete");
+});
+
+Route::prefix("contacts")->group(function () {
+    Route::resource("users", UserCompanyController::class)
+        ->parameters(['users' => 'id'])->names([
+            'index' => 'panel.contacts.users.index',
+            'create' => 'panel.contacts.users.create',
+            'show' => 'panel.contacts.users.show',
+            'store' => 'panel.contacts.users.store',
+            'update' => 'panel.contacts.users.update',
+            'edit' => 'panel.contacts.users.edit',
+            'destroy' => 'panel.contacts.users.destroy',
+        ]);
 });

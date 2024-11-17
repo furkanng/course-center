@@ -36,9 +36,9 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="svg">SVG İkon</label>
+                            <label for="icons">SVG İkon</label>
                             <input type="text" class="form-control"
-                                   name="svg" id="svg" placeholder="Svg ikon giriniz">
+                                   name="icons" id="icons" placeholder="Svg ikon giriniz">
                         </div>
                         <div class="form-group">
                             <div class="form-check form-switch">
