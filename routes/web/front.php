@@ -37,3 +37,4 @@ Route::prefix(SeoPrefix::COMPANY->value)->group(function () {
     Route::get("{seo_link}", [CompanyController::class, "show"])->name("front.company.show");
 });
 
+Route::post("teklif-al/{id}",[HomeController::class,"createContact"])->name("front.contact.create");

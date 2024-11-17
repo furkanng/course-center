@@ -105,10 +105,6 @@
             },
             paramName: "image",
             addRemoveLinks: true,
-
-            success: function (file, response) {
-                window.location.reload();
-            }
         });
     </script>
 

@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
         $pages = Cache::remember($cacheKey, $cacheDuration, function () {
             return Page::query()->where('status', true)->get();
         });
-       
+
         view()->share('pages', $pages);
     }
 

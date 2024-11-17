@@ -11,6 +11,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
     <link href="{{asset("panel/assets/css/style.css")}}" rel="stylesheet"/>
 
+    <!-- Swipper js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
     <!-- CSS here -->
     <link rel="stylesheet" href="{{asset('front/assets/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('front/assets/css/meanmenu.css')}}">
@@ -208,6 +211,10 @@
 <!-- footer area end -->
 @stack('style')
 @stack('scripts')
+
+<!-- Swipper js -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <!-- JS here -->
 <script src="{{asset('front/assets/js/vendor/jquery.js')}}"></script>
 <script src="{{asset('front/assets/js/vendor/waypoints.js')}}"></script>

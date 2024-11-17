@@ -13,8 +13,8 @@ class CompanyImage extends Model
 
     protected $table = "company_images";
 
-    protected int $width = 800;
-    protected int $height = 600;
+    protected int $width = 770;
+    protected int $height = 450;
     protected bool $watermark = true;
 
     protected $fillable = [

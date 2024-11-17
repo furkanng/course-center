@@ -151,13 +151,11 @@
                                                     </a>
                                                 </div>
                                                 <div class="course__content-2">
-                                                    <div
-                                                        class="course__top-2 d-flex align-items-center">
+                                                    <div class="course__top-2 d-flex align-items-center">
                                                         @if(count($company->courses) > 0)
-                                                            @foreach($company->courses as $course)
-                                                                <div
-                                                                    class="course__tag-2 mr-10 {{\App\Service\Helper::randColor()}}">
-                                                                    <a>{{strtoupper($course->name)}}</a>
+                                                            @foreach($company->courses->take(5) as $course)
+                                                                <div class="course__tag-2 mr-10 {{ \App\Service\Helper::randColor() }}">
+                                                                    <a>{{ strtoupper($course->name) }}</a>
                                                                 </div>
                                                             @endforeach
                                                         @endif

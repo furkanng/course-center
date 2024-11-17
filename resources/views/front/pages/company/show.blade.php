@@ -2,8 +2,7 @@
 
 @section('title', 'Profilim')
 @section('content')
-
-    <section class="course__area pt-115 pb-90">
+    <section class="course__area pt-30 pb-90">
         <div class="container">
             <div class="row">
                 <div class="col-xxl-8 col-xl-8 col-lg-8">
@@ -13,26 +12,27 @@
                                 <span><a href="{{route("home")}}">Ana Sayfa</a></span>
                                 <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
                                 <span>Dershaneler</span>
+                                <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                                <span>{{$company->name}}</span>
                             </div>
-                            <span class="breadcrumb__title-pre">Development</span>
-                            <h5 class="breadcrumb__title-2">The business Intelligence analyst Course 2022</h5>
+                            @foreach($company->courses as $course)
+                                <span class="breadcrumb__title-pre">{{strtoupper($course->name)}}</span>
+                            @endforeach
+                            <h5 class="breadcrumb__title-2">{{ mb_strtoupper($company->name, 'UTF-8') }}</h5>
                         </div>
                         <div class="course__meta-2 d-sm-flex align-items-center mb-30">
                             <div class="course__teacher-3 d-flex align-items-center mr-70 mb-30">
-                                <div class="course__teacher-thumb-3 mr-15">
-                                    <img src="assets/img/course/tutor/course-tutor-1.jpg" alt="">
-                                </div>
                                 <div class="course__teacher-info-3">
-                                    <h5>Teacher</h5>
-                                    <p><a href="#">Elon Gated</a></p>
+                                    <h5>Kurum Türü</h5>
+                                    <p>{{$company->getCompanyTypeName()}}</p>
                                 </div>
                             </div>
                             <div class="course__update mr-80 mb-30">
-                                <h5>Last Update:</h5>
-                                <p>July 24, 2022</p>
+                                <h5>Son Hareketler:</h5>
+                                <p>{{ $company->updated_at->format('Y-m-d') }}</p>
                             </div>
                             <div class="course__rating-2 mb-30">
-                                <h5>Review:</h5>
+                                <h5>Puan:</h5>
                                 <div class="course__rating-inner d-flex align-items-center">
                                     <ul>
                                         <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
@@ -45,33 +45,51 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="course__img w-img mb-30">
-                            <img src="assets/img/course/details/course-details-1.jpg" alt="">
-                        </div>
+                        @if(count($company->images) == 0)
+                            <div class="course__img w-img mb-30">
+                                <img src="{{\App\Service\Helper::getNoImage()}}" style="width: 770px; height: 450px"
+                                     alt="">
+                            </div>
+                        @else
+                            <div class="swiper-container course__img mb-30">
+                                <div class="swiper-wrapper">
+                                    @foreach($company->images as $companyImage)
+                                        <div class="swiper-slide">
+                                            <img src="{{ $companyImage->image_url }}" alt="image">
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                        @endif
+
+
                         <div class="course__tab-2 mb-45">
                             <ul class="nav nav-tabs" id="courseTab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="description-tab" data-bs-toggle="tab"
                                             data-bs-target="#description" type="button" role="tab"
                                             aria-controls="description" aria-selected="true"><i
-                                            class="fa-regular fa-medal"></i> <span>Discription</span></button>
+                                            class="fa-regular fa-medal"></i> <span>Genel Bilgiler</span></button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link " id="curriculum-tab" data-bs-toggle="tab"
                                             data-bs-target="#curriculum" type="button" role="tab"
                                             aria-controls="curriculum" aria-selected="false"><i
-                                            class="fa-regular fa-book-blank"></i> <span>Curriculum</span></button>
+                                            class="fa-regular fa-book-blank"></i> <span>Soru Cevap</span></button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="review-tab" data-bs-toggle="tab"
                                             data-bs-target="#review" type="button" role="tab" aria-controls="review"
                                             aria-selected="false"><i class="fa-regular fa-star"></i>
-                                        <span>Reviews</span></button>
+                                        <span>Yorumlar</span></button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="member-tab" data-bs-toggle="tab"
                                             data-bs-target="#member" type="button" role="tab" aria-controls="member"
-                                            aria-selected="false"><i class="fal fa-user"></i> <span>Members</span>
+                                            aria-selected="false"><i class="fal fa-user"></i> <span>Fiyat Bilgisi</span>
                                     </button>
                                 </li>
                             </ul>
@@ -81,250 +99,98 @@
                                 <div class="tab-pane fade show active" id="description" role="tabpanel"
                                      aria-labelledby="description-tab">
                                     <div class="course__description">
-                                        <h3>Course Overview</h3>
-                                        <p>Only a quid me old mucker squiffy tomfoolery grub cheers ruddy cor blimey
-                                            guvnor in my flat, up the duff Eaton car boot up the kyver pardon you A bit
-                                            of how's your father David skive off sloshed, don't get shirty with me chip
-                                            shop vagabond crikey bugger Queen's English chap. Matie boy nancy boy bite
-                                            your arm off up the kyver old no biggie fantastic boot, David have it show
-                                            off show off pick your nose and blow off lost the plot porkies bits and bobs
-                                            only a quid bugger all mate, absolutely bladdered bamboozled it's your round
-                                            don't get shirty with me down the pub well. Give us a bell bits and bobs
-                                            Charles he lost his bottle super my lady cras starkers bite your arm off
-                                            Queen's English, pardon me horse play Elizabeth a blinding shot chinwag
-                                            knees up do one David, blag cup of tea Eaton so I said bleeding haggle James
-                                            Bond cup of char. Gosh William ummm I'm telling crikey burke I don't want no
-                                            agro A bit of how's your father bugger all mate off his nut that, what a
-                                            plonker cuppa owt to do with me nancy boy show off show off pick your nose
-                                            and blow off spiffing good time lavatory me old mucker, chimney pot what a
-                                            load of rubbish boot squiffy lost the plot brolly wellies excuse my
-                                            french.</p>
+                                        <div class="mb-4">
+                                            <h3>Kurum Hakkına</h3>
+                                            {!! $company->info?->about ?? "Herhangi bir bilgi bulunmuyor" !!}
+                                        </div>
 
-                                        <div class="course__tag-4 mb-35 mt-35">
-                                            <i class="fal fa-tag"></i>
-                                            <a href="#">Big data,</a>
-                                            <a href="#">Data analysis,</a>
-                                            <a href="#">Data modeling</a>
-                                        </div>
-                                        <div class="course__description-list mb-45">
-                                            <h4>What is the Target Audience?</h4>
-                                            <ul>
-                                                <li><i class="fa-solid fa-check"></i> Business's managers, leaders</li>
-                                                <li><i class="fa-solid fa-check"></i> Downloadable lectures, code and
-                                                    design assets for all projects
-                                                </li>
-                                                <li><i class="fa-solid fa-check"></i> Anyone who is finding a chance to
-                                                    get the promotion
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="course__instructor mb-45">
-                                            <h3>Other Instructors</h3>
-                                            <div class="course__instructor-wrapper d-md-flex align-items-center">
-                                                <div class="course__instructor-item d-flex align-items-center mr-70">
-                                                    <div class="course__instructor-thumb mr-20">
-                                                        <img src="assets/img/course/tutor/course-tutor-4.jpg" alt="">
-                                                    </div>
-                                                    <div class="course__instructor-content">
-                                                        <h3>Eleanor Fant</h3>
-                                                        <p>Instructor</p>
-                                                    </div>
+                                        <div class="mb-4">
+                                            <h3 class="mb-3">Kurum İmkanları</h3>
+                                            @foreach($menuStructure as $mainMenu)
+                                                <h6 class="font-weight-bold">{{ $mainMenu->name }}</h6>
+                                                <div class="row mb-3">
+                                                    @foreach($mainMenu->subMenus as $subMenu)
+                                                        <div class="col-md-4 col-sm-6">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                       id="feature-{{ $subMenu->id }}"
+                                                                       {{ in_array($subMenu->id, $companyFeatures) ? 'checked' : '' }} disabled>
+                                                                <label class="font-weight-bolder"
+                                                                       for="feature-{{ $subMenu->id }}">
+                                                                    {{ $subMenu->name }}
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
-                                                <div class="course__instructor-item d-flex align-items-center mr-70">
-                                                    <div class="course__instructor-thumb mr-20">
-                                                        <img src="assets/img/course/tutor/course-tutor-3.jpg" alt="">
-                                                    </div>
-                                                    <div class="course__instructor-content">
-                                                        <h3>Lauren Stamps</h3>
-                                                        <p>Teacher</p>
-                                                    </div>
-                                                </div>
-                                                <div class="course__instructor-item d-flex align-items-center mr-70">
-                                                    <div class="course__instructor-thumb mr-20">
-                                                        <img src="assets/img/course/tutor/course-tutor-2.jpg" alt="">
-                                                    </div>
-                                                    <div class="course__instructor-content">
-                                                        <h3>Jonquil Von</h3>
-                                                        <p>Associate</p>
-                                                    </div>
+                                            @endforeach
+                                        </div>
+                                        @if($company->info?->map)
+                                            <div class="mb-4">
+                                                <h3>Konum</h3>
+                                                <div class="map-container"
+                                                     style="position: relative; padding-bottom: 56.25%; overflow: hidden; width: 100%; height: 0;">
+                                                    <iframe
+                                                        src="{{$company->info?->map}}"
+                                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 1px solid gray;"
+                                                        allowfullscreen="" loading="lazy"
+                                                        referrerpolicy="no-referrer-when-downgrade">
+                                                    </iframe>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
+
                                 <div class="tab-pane fade" id="curriculum" role="tabpanel"
                                      aria-labelledby="curriculum-tab">
                                     <div class="course__curriculum">
                                         <div class="accordion" id="course__accordion">
-                                            <div class="accordion-item mb-50">
-                                                <h2 class="accordion-header" id="week-01">
-                                                    <button class="accordion-button" type="button"
-                                                            data-bs-toggle="collapse" data-bs-target="#week-01-content"
-                                                            aria-expanded="true" aria-controls="week-01-content">
-                                                        Week 01
-                                                    </button>
-                                                </h2>
-                                                <div id="week-01-content" class="accordion-collapse collapse show"
-                                                     aria-labelledby="week-01" data-bs-parent="#course__accordion">
-                                                    <div class="accordion-body">
-                                                        <div
-                                                            class="course__curriculum-content d-sm-flex justify-content-between align-items-center">
-                                                            <div class="course__curriculum-info">
-                                                                <svg class="document" viewBox="0 0 24 24">
-                                                                    <path class="st0"
-                                                                          d="M14,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V8L14,2z"/>
-                                                                    <polyline class="st0" points="14,2 14,8 20,8 "/>
-                                                                    <line class="st0" x1="16" y1="13" x2="8" y2="13"/>
-                                                                    <line class="st0" x1="16" y1="17" x2="8" y2="17"/>
-                                                                    <polyline class="st0" points="10,9 9,9 8,9 "/>
-                                                                </svg>
-                                                                <h3><span>Reading:</span> Ut enim ad minim veniam</h3>
-                                                            </div>
-                                                            <div class="course__curriculum-meta">
-                                                                <span class="time"> <i class="icon_clock_alt"></i> 14 minutes</span>
-                                                                <span class="question">2 questions</span>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            class="course__curriculum-content d-sm-flex justify-content-between align-items-center">
-                                                            <div class="course__curriculum-info">
-                                                                <svg viewBox="0 0 24 24">
-                                                                    <polygon class="st0" points="23,7 16,12 23,17 "/>
-                                                                    <path class="st0"
-                                                                          d="M3,5h11c1.1,0,2,0.9,2,2v10c0,1.1-0.9,2-2,2H3c-1.1,0-2-0.9-2-2V7C1,5.9,1.9,5,3,5z"/>
-                                                                </svg>
-                                                                <h3><span>Video: </span> Greetings and introduction</h3>
-                                                            </div>
-                                                            <div class="course__curriculum-meta">
-                                                                <span class="time"> <i class="icon_clock_alt"></i> 15 minutes</span>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            class="course__curriculum-content d-sm-flex justify-content-between align-items-center">
-                                                            <div class="course__curriculum-info">
-                                                                <svg viewBox="0 0 16 16">
-
-                                                                    <path class="st0"
-                                                                          d="M2,12V8c0-3.3,2.9-6,6.4-6s6.4,2.7,6.4,6v4"/>
-                                                                    <path class="st0"
-                                                                          d="M14.8,12.7c0,0.7-0.6,1.3-1.4,1.3h-0.7c-0.8,0-1.4-0.6-1.4-1.3v-2c0-0.7,0.6-1.3,1.4-1.3h2.1V12.7z M2,12.7  C2,13.4,2.6,14,3.3,14H4c0.7,0,1.3-0.6,1.3-1.3v-2c0-0.7-0.6-1.3-1.3-1.3H2V12.7z"/>
-                                                                </svg>
-                                                                <h3><span>Audio:</span> Interactive lesson</h3>
-                                                            </div>
-                                                            <div class="course__curriculum-meta">
-                                                                <span class="time"> <i class="icon_clock_alt"></i> 7 minutes</span>
-                                                                <span class="question">3 questions</span>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            class="course__curriculum-content d-sm-flex justify-content-between align-items-center">
-                                                            <div class="course__curriculum-info">
-                                                                <svg class="document" viewBox="0 0 24 24">
-                                                                    <path class="st0"
-                                                                          d="M14,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V8L14,2z"/>
-                                                                    <polyline class="st0" points="14,2 14,8 20,8 "/>
-                                                                    <line class="st0" x1="16" y1="13" x2="8" y2="13"/>
-                                                                    <line class="st0" x1="16" y1="17" x2="8" y2="17"/>
-                                                                    <polyline class="st0" points="10,9 9,9 8,9 "/>
-                                                                </svg>
-                                                                <h3><span>Reading: </span> Ut enim ad minim veniam</h3>
-                                                            </div>
-                                                            <div class="course__curriculum-meta">
-                                                                <span class="time"> <i class="icon_clock_alt"></i> 22 minutes</span>
+                                            @foreach($company->sss as $index => $sss)
+                                                <div class="accordion-item mb-20">
+                                                    <h2 class="accordion-header" id="heading-{{ $index }}">
+                                                        <button
+                                                            class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}"
+                                                            type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#collapse-{{ $index }}"
+                                                            aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
+                                                            aria-controls="collapse-{{ $index }}">
+                                                            {{ $sss->question }}
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapse-{{ $index }}"
+                                                         class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}"
+                                                         aria-labelledby="heading-{{ $index }}"
+                                                         data-bs-parent="#course__accordion">
+                                                        <div class="accordion-body">
+                                                            <div
+                                                                class="course__curriculum-content d-sm-flex justify-content-between align-items-center">
+                                                                <div class="course__curriculum-info">
+                                                                    <svg class="document" viewBox="0 0 24 24">
+                                                                        <path class="st0"
+                                                                              d="M14,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V8L14,2z"/>
+                                                                        <polyline class="st0" points="14,2 14,8 20,8 "/>
+                                                                        <line class="st0" x1="16" y1="13" x2="8"
+                                                                              y2="13"/>
+                                                                        <line class="st0" x1="16" y1="17" x2="8"
+                                                                              y2="17"/>
+                                                                        <polyline class="st0" points="10,9 9,9 8,9 "/>
+                                                                    </svg>
+                                                                    <h3>{{ $sss->answer }}</h3>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion" id="course__accordion-2">
-                                            <div class="accordion-item mb-50">
-                                                <h2 class="accordion-header" id="week-02">
-                                                    <button class="accordion-button" type="button"
-                                                            data-bs-toggle="collapse" data-bs-target="#week-02-content"
-                                                            aria-expanded="true" aria-controls="week-02-content">
-                                                        Week 02
-                                                    </button>
-                                                </h2>
-                                                <div id="week-02-content" class="accordion-collapse  collapse show"
-                                                     aria-labelledby="week-02" data-bs-parent="#course__accordion-2">
-                                                    <div class="accordion-body">
-                                                        <div
-                                                            class="course__curriculum-content d-sm-flex justify-content-between align-items-center">
-                                                            <div class="course__curriculum-info">
-                                                                <svg class="document" viewBox="0 0 24 24">
-                                                                    <path class="st0"
-                                                                          d="M14,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V8L14,2z"/>
-                                                                    <polyline class="st0" points="14,2 14,8 20,8 "/>
-                                                                    <line class="st0" x1="16" y1="13" x2="8" y2="13"/>
-                                                                    <line class="st0" x1="16" y1="17" x2="8" y2="17"/>
-                                                                    <polyline class="st0" points="10,9 9,9 8,9 "/>
-                                                                </svg>
-                                                                <h3><span>Reading:</span> Ut enim ad minim veniam</h3>
-                                                            </div>
-                                                            <div class="course__curriculum-meta">
-                                                                <span class="time"> <i class="icon_clock_alt"></i> 14 minutes</span>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            class="course__curriculum-content d-sm-flex justify-content-between align-items-center">
-                                                            <div class="course__curriculum-info">
-                                                                <svg viewBox="0 0 24 24">
-                                                                    <polygon class="st0" points="23,7 16,12 23,17 "/>
-                                                                    <path class="st0"
-                                                                          d="M3,5h11c1.1,0,2,0.9,2,2v10c0,1.1-0.9,2-2,2H3c-1.1,0-2-0.9-2-2V7C1,5.9,1.9,5,3,5z"/>
-                                                                </svg>
-                                                                <h3><span>Video: </span> Greetings and introduction</h3>
-                                                            </div>
-                                                            <div class="course__curriculum-meta">
-                                                                <span class="time"> <i class="icon_clock_alt"></i> 15 minutes</span>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            class="course__curriculum-content d-sm-flex justify-content-between align-items-center">
-                                                            <div class="course__curriculum-info">
-                                                                <svg viewBox="0 0 16 16">
-                                                                    <path class="st0"
-                                                                          d="M2,12V8c0-3.3,2.9-6,6.4-6s6.4,2.7,6.4,6v4"/>
-                                                                    <path class="st0"
-                                                                          d="M14.8,12.7c0,0.7-0.6,1.3-1.4,1.3h-0.7c-0.8,0-1.4-0.6-1.4-1.3v-2c0-0.7,0.6-1.3,1.4-1.3h2.1V12.7z M2,12.7  C2,13.4,2.6,14,3.3,14H4c0.7,0,1.3-0.6,1.3-1.3v-2c0-0.7-0.6-1.3-1.3-1.3H2V12.7z"/>
-                                                                </svg>
-                                                                <h3><span>Audio:</span> Interactive lesson</h3>
-                                                            </div>
-                                                            <div class="course__curriculum-meta">
-                                                                <span class="time"> <i class="icon_clock_alt"></i> 7 minutes</span>
-                                                                <span class="question">2 questions</span>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            class="course__curriculum-content d-sm-flex justify-content-between align-items-center">
-                                                            <div class="course__curriculum-info">
-                                                                <svg class="document" viewBox="0 0 24 24">
-                                                                    <path class="st0"
-                                                                          d="M14,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V8L14,2z"/>
-                                                                    <polyline class="st0" points="14,2 14,8 20,8 "/>
-                                                                    <line class="st0" x1="16" y1="13" x2="8" y2="13"/>
-                                                                    <line class="st0" x1="16" y1="17" x2="8" y2="17"/>
-                                                                    <polyline class="st0" points="10,9 9,9 8,9 "/>
-                                                                </svg>
-                                                                <h3><span>Reading: </span> Ut enim ad minim veniam</h3>
-                                                            </div>
-                                                            <div class="course__curriculum-meta">
-                                                                <span class="time"> <i class="icon_clock_alt"></i> 22 minutes</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
+
+
                                 <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                                     <div class="course__review">
-                                        <h3>Reviews</h3>
-                                        <p>Gosh william I'm telling crikey burke I don't want no agro A bit of how's
-                                            your father bugger all mate off his nut that, what a plonker cuppa owt to
-                                            do</p>
 
                                         <div class="course__review-rating mb-50">
                                             <div class="row g-0">
@@ -431,19 +297,24 @@
                                                                     class="course__comment-rating float-start float-sm-end">
                                                                     <ul>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -472,19 +343,24 @@
                                                                     class="course__comment-rating float-start float-sm-end">
                                                                     <ul>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -513,19 +389,24 @@
                                                                     class="course__comment-rating float-start float-sm-end">
                                                                     <ul>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -565,19 +446,24 @@
                                                                     <span>Rating : </span>
                                                                     <ul>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#" class="no-rating"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li><a href="#" class="no-rating"> <i
-                                                                                    class="fa-solid fa-star"></i> </a>
+                                                                                    class="fa-solid fa-star"></i>
+                                                                            </a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -598,114 +484,94 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="tab-pane fade" id="member" role="tabpanel" aria-labelledby="member-tab">
                                     <div class="course__member mb-45">
-                                        <div class="course__member-item">
-                                            <div class="row align-items-center">
-                                                <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-6">
-                                                    <div class="course__member-thumb d-flex align-items-center">
-                                                        <img src="assets/img/course/instructor/course-instructor-1.jpg"
-                                                             alt="">
-                                                        <div class="course__member-name ml-20">
-                                                            <h5>Shahnewaz Sakil</h5>
-                                                            <span>Engineer</span>
+                                        @if(\Illuminate\Support\Facades\Auth::check())
+                                            @foreach($company?->price as $price)
+                                                <div class="course__member-item mb-4">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-8">
+                                                            <div class="course__member-thumb d-flex align-items-center">
+                                                                <img src="{{ asset('images/baykus.png') }}"
+                                                                     alt="Price Image" class="img-fluid"
+                                                                     style="width: 50px; height: 50px;">
+                                                                <div class="course__member-name ml-20">
+                                                                    <h5>{{ $price->price_title->label() }}</h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div
+                                                            class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-4 text-end">
+                                                            <div class="course__member-info">
+                                                                @if($price?->discounted_price)
+                                                                    <h5>
+                                                            <span
+                                                                style="text-decoration: line-through; color: #b0b0b0;">
+                                                                {{ number_format($price->price, 2) }} ₺
+                                                            </span>
+                                                                        <span
+                                                                            style="color: #28a745; font-weight: bold;">
+                                                                {{ number_format($price->discounted_price, 2) }} ₺
+                                                            </span>
+                                                                    </h5>
+                                                                    <span style="color: #ff6f61;">İndirimli Fiyat</span>
+                                                                @else
+                                                                    <h5>{{ number_format($price->price, 2) }} ₺</h5>
+                                                                    <span>Fiyat</span>
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4">
-                                                    <div class="course__member-info pl-45">
-                                                        <h5>07</h5>
-                                                        <span>Courses</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4">
-                                                    <div class="course__member-info pl-70">
-                                                        <h5>05</h5>
-                                                        <span>Reviw</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4">
-                                                    <div class="course__member-info pl-85">
-                                                        <h5>3.00</h5>
-                                                        <span>Rating</span>
-                                                    </div>
-                                                </div>
+                                            @endforeach
+                                        @else
+                                            <div class="course__member-item mb-4">
+                                                Fiyatları görmek için
+                                                <a href="{{route("login")}}" style="font-weight: bolder">giriş</a>
+                                                yapınız
                                             </div>
-                                        </div>
-                                        <div class="course__member-item">
-                                            <div class="row align-items-center">
-                                                <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-6">
-                                                    <div class="course__member-thumb d-flex align-items-center">
-                                                        <img src="assets/img/course/instructor/course-instructor-2.jpg"
-                                                             alt="">
-                                                        <div class="course__member-name ml-20">
-                                                            <h5>Lauren Stamps</h5>
-                                                            <span>Teacher</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4">
-                                                    <div class="course__member-info pl-45">
-                                                        <h5>05</h5>
-                                                        <span>Courses</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4">
-                                                    <div class="course__member-info pl-70">
-                                                        <h5>03</h5>
-                                                        <span>Reviw</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4">
-                                                    <div class="course__member-info pl-85">
-                                                        <h5>3.00</h5>
-                                                        <span>Rating</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="course__member-item">
-                                            <div class="row align-items-center">
-                                                <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-6 ">
-                                                    <div class="course__member-thumb d-flex align-items-center">
-                                                        <img src="assets/img/course/instructor/course-instructor-3.jpg"
-                                                             alt="">
-                                                        <div class="course__member-name ml-20">
-                                                            <h5>Jonquil Von</h5>
-                                                            <span>Associate</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4">
-                                                    <div class="course__member-info pl-45">
-                                                        <h5>09</h5>
-                                                        <span>Courses</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4">
-                                                    <div class="course__member-info pl-70">
-                                                        <h5>07</h5>
-                                                        <span>Reviw</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-4">
-                                                    <div class="course__member-info pl-85">
-                                                        <h5>4.00</h5>
-                                                        <span>Rating</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="course__share">
-                                    <h3>Share :</h3>
-                                    <ul>
-                                        <li><a href="#" class="fb"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                        <li><a href="#" class="tw"><i class="fa-brands fa-twitter"></i></a></li>
-                                        <li><a href="#" class="pin"><i class="fa-brands fa-pinterest-p"></i></a></li>
-                                    </ul>
-                                </div>
+
+                                @if($company->info?->facebook || $company->info?->twitter
+                                    || $company->info?->instagram || $company->info?->youtube)
+                                    <div class="course__share mt-4">
+                                        <h3>Sosyal Medya</h3>
+                                        <ul>
+                                            @if($company->info?->facebook)
+                                                <li>
+                                                    <a href="{{$company->info?->facebook}}" target="_blank" class="fb">
+                                                        <i class="fa-brands fa-facebook-f"></i>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                            @if($company->info?->twitter)
+                                                <li>
+                                                    <a href="{{$company->info?->twitter}}" target="_blank" class="tw">
+                                                        <i class="fa-brands fa-twitter"></i>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                            @if($company->info?->instagram)
+                                                <li>
+                                                    <a href="{{$company->info?->instagram}}" target="_blank" class="fb">
+                                                        <i class="fa-brands fa-instagram"></i>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                            @if($company->info?->youtube)
+                                                <li>
+                                                    <a href="{{$company->info?->youtube}}" target="_blank" class="pin">
+                                                        <i class="fa-brands fa-youtube"></i>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="course__related">
@@ -1362,26 +1228,10 @@
                 </div>
                 <div class="col-xxl-4 col-xl-4 col-lg-4">
                     <div class="course__sidebar pl-70 p-relative">
-                        <div class="course__shape">
-                            <img class="course-dot" src="assets/img/course/course-dot.png" alt="">
-                        </div>
                         <div class="course__sidebar-widget-2 white-bg mb-20">
                             <div class="course__video">
                                 <div class="course__video-thumb w-img mb-25">
-                                    <img src="assets/img/course/video/course-video.jpg" alt="">
-                                    <div class="course__video-play">
-                                        <a href="https://www.youtube.com/watch?v=Zv11L-ZfrSg"
-                                           class="play-btn popup-video"> <i class="fas fa-play"></i> </a>
-                                    </div>
-                                </div>
-                                <div class="course__video-meta mb-25 d-flex align-items-center justify-content-between">
-                                    <div class="course__video-price">
-                                        <h5>$74.<span>00</span></h5>
-                                        <h5 class="old-price">$129.00</h5>
-                                    </div>
-                                    <div class="course__video-discount">
-                                        <span>68% OFF</span>
-                                    </div>
+                                    <img src="{{$company?->image_url ?? \App\Service\Helper::getNoImage()}}" alt="">
                                 </div>
                                 <div class="course__video-content mb-35">
                                     <ul>
@@ -1397,25 +1247,25 @@
                                           </svg>
                                             </div>
                                             <div class="course__video-info">
-                                                <h5><span>Instructor :</span> Eleanor Fant</h5>
+                                                <h5><span>İl :</span>{{$company->city}}</h5>
                                             </div>
                                         </li>
                                         <li class="d-flex align-items-center">
                                             <div class="course__video-icon">
                                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                                                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                     viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;"
+                                                     viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;"
                                                      xml:space="preserve">
-
-                                             <path class="st0" d="M4,19.5C4,18.1,5.1,17,6.5,17H20"/>
-                                                    <path class="st0"
-                                                          d="M6.5,2H20v20H6.5C5.1,22,4,20.9,4,19.5v-15C4,3.1,5.1,2,6.5,2z"/>
+                                             <path class="st0"
+                                                   d="M2,6l6-4.7L14,6v7.3c0,0.7-0.6,1.3-1.3,1.3H3.3c-0.7,0-1.3-0.6-1.3-1.3V6z"/>
+                                                    <polyline class="st0" points="6,14.7 6,8 10,8 10,14.7 "/>
                                           </svg>
                                             </div>
                                             <div class="course__video-info">
-                                                <h5><span>Lectures :</span>14</h5>
+                                                <h5><span>İlçe :</span>{{$company->district}}</h5>
                                             </div>
                                         </li>
+
                                         <li class="d-flex align-items-center">
                                             <div class="course__video-icon">
                                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -1427,7 +1277,7 @@
                                           </svg>
                                             </div>
                                             <div class="course__video-info">
-                                                <h5><span>Duration :</span>6 weeks</h5>
+                                                <h5><span>website :</span>{{$company->website ?? "Yok"}}</h5>
                                             </div>
                                         </li>
                                         <li class="d-flex align-items-center">
@@ -1439,33 +1289,14 @@
                                                 </svg>
                                             </div>
                                             <div class="course__video-info">
-                                                <h5><span>Enrolled :</span>20 students</h5>
-                                            </div>
-                                        </li>
-                                        <li class="d-flex align-items-center">
-                                            <div class="course__video-icon">
-                                                <svg>
-                                                    <circle class="st0" cx="8" cy="8" r="6.7"/>
-                                                    <line class="st0" x1="1.3" y1="8" x2="14.7" y2="8"/>
-                                                    <path class="st0"
-                                                          d="M8,1.3c1.7,1.8,2.6,4.2,2.7,6.7c-0.1,2.5-1,4.8-2.7,6.7C6.3,12.8,5.4,10.5,5.3,8C5.4,5.5,6.3,3.2,8,1.3z"/>
-                                                </svg>
-                                            </div>
-                                            <div class="course__video-info">
-                                                <h5><span>Language :</span>English</h5>
+                                                <h5><span>Adres :</span>{{$company->address}}</h5>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="course__payment mb-35">
-                                    <h3>Payment:</h3>
-                                    <a href="#">
-                                        <img src="assets/img/course/payment/payment-1.png" alt="">
-                                    </a>
-                                </div>
                                 <div class="course__enroll-btn">
                                     <button type="button" class="tp-btn w-100 text-center" data-bs-toggle="modal"
-                                            data-bs-target="#course_enroll_modal">Enroll <i
+                                            data-bs-target="#course_enroll_modal">Ücretsiz İletişime Geç <i
                                             class="far fa-arrow-right"></i></button>
                                 </div>
                             </div>
@@ -1568,58 +1399,40 @@
                             <button type="button" class="course__popup-close-btn" data-bs-toggle="modal"
                                     data-bs-target="#course_enroll_modal"><i class="fa-light fa-xmark"></i></button>
                         </div>
-                        <div class="course__popup-top d-flex align-items-start mb-40">
-                            <div class="course__popup-thumb mr-20">
-                                <img src="assets/img/course/course-sm-1.jpg" alt="">
-                            </div>
+                        <div class="course__popup-top d-flex align-items-start mb-40  d-flex justify-content-center">
                             <div class="course__popup-content">
                                 <h3 class="course__popup-title">
-                                    <a href="#">Mechanical Engineering and Electrical Engineering Explained</a>
+                                    Ücretsiz iletişime geç
                                 </h3>
-                                <div class="course__sm-rating">
-                                    <ul>
-                                        <li><a href="#"> <i class="fa-solid fa-star"></i> </a></li>
-                                        <li><a href="#"> <i class="fa-solid fa-star"></i> </a></li>
-                                        <li><a href="#"> <i class="fa-solid fa-star"></i> </a></li>
-                                        <li><a href="#"> <i class="fa-solid fa-star"></i> </a></li>
-                                        <li><a href="#"> <i class="fa-solid fa-star"></i> </a></li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                         <div class="course__popup-info">
-                            <form action="#">
+                            <form action="{{route("front.contact.create",["id"=> $company->id])}}" method="POST">
+                                @csrf
                                 <div class="row gx-3">
                                     <div class="col-xl-12">
                                         <div class="course__popup-input">
-                                            <input type="email" placeholder="Email">
+                                            <input type="text" name="name" placeholder="Ad Soyad">
+                                            <span class="course__popup-input-icon"><i
+                                                    class="fa-light fa-user"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <div class="course__popup-input">
+                                            <input type="email" name="email" placeholder="Email">
                                             <span class="course__popup-input-icon"><i class="fa-light fa-envelope"></i></span>
                                         </div>
                                     </div>
-                                    <div class="col-xxl-12">
+                                    <div class="col-xl-12">
                                         <div class="course__popup-input">
-                                            <input type="text" placeholder="Card Number">
+                                            <input type="text" name="phone" placeholder="Telefon">
                                             <span class="course__popup-input-icon"><i
-                                                    class="fa-light fa-credit-card"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-xxl-6">
-                                        <div class="course__popup-input">
-                                            <input type="text" placeholder="MM/YY">
-                                            <span class="course__popup-input-icon"><i
-                                                    class="fa-light fa-calendar-days"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-xxl-6">
-                                        <div class="course__popup-input">
-                                            <input type="text" placeholder="CVC">
-                                            <span class="course__popup-input-icon"><i
-                                                    class="fa-light fa-lock"></i></span>
+                                                    class="fa-light fa-phone"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-xxl-12">
                                         <div class="course__popup-btn">
-                                            <button type="submit" class="tp-btn w-100">Pay $10.00</button>
+                                            <button type="submit" class="tp-btn w-100">İletişime Geç</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1633,6 +1446,44 @@
     <!-- course enroll popup end -->
 @endsection
 
-@push('scripts')
+@push('style')
+    <style>
+        .map-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            overflow: hidden;
+            width: 100%;
+            height: 0;
+            border: 1px solid gray;
+        }
 
+        @media (max-width: 768px) {
+            .map-container {
+                padding-bottom: 75%;
+            }
+        }
+    </style>
+@endpush
+
+@push('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            new Swiper(".swiper-container", {
+                loop: true,
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+            });
+        });
+
+    </script>
 @endpush
