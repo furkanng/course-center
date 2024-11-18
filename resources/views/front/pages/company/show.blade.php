@@ -29,19 +29,19 @@
                             </div>
                             <div class="course__update mr-80 mb-30">
                                 <h5>Son Hareketler:</h5>
-                                <p>{{ $company->updated_at->format('Y-m-d') }}</p>
+                                <p>{{ $company->updated_at->format('d-m-Y') }}</p>
                             </div>
                             <div class="course__rating-2 mb-30">
                                 <h5>Puan:</h5>
                                 <div class="course__rating-inner d-flex align-items-center">
-                                    <ul>
-                                        <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                        <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                        <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                        <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                        <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
+                                    <ul class="d-flex align-items-center list-unstyled">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <li>
+                                                <i class="fa-solid fa-star" style="color: {{ $i <= round($averageRating) ? '#FFD700' : '#ccc' }}"></i>
+                                            </li>
+                                        @endfor
                                     </ul>
-                                    <p>4.5</p>
+                                    <p class="ms-3">{{ number_format($averageRating, 1) }}</p>
                                 </div>
                             </div>
                         </div>
@@ -72,13 +72,13 @@
                                     <button class="nav-link active" id="description-tab" data-bs-toggle="tab"
                                             data-bs-target="#description" type="button" role="tab"
                                             aria-controls="description" aria-selected="true"><i
-                                            class="fa-regular fa-medal"></i> <span>Genel Bilgiler</span></button>
+                                                class="fa-regular fa-medal"></i> <span>Genel Bilgiler</span></button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link " id="curriculum-tab" data-bs-toggle="tab"
                                             data-bs-target="#curriculum" type="button" role="tab"
                                             aria-controls="curriculum" aria-selected="false"><i
-                                            class="fa-regular fa-book-blank"></i> <span>Soru Cevap</span></button>
+                                                class="fa-regular fa-book-blank"></i> <span>Soru Cevap</span></button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="review-tab" data-bs-toggle="tab"
@@ -131,10 +131,10 @@
                                                 <div class="map-container"
                                                      style="position: relative; padding-bottom: 56.25%; overflow: hidden; width: 100%; height: 0;">
                                                     <iframe
-                                                        src="{{$company->info?->map}}"
-                                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 1px solid gray;"
-                                                        allowfullscreen="" loading="lazy"
-                                                        referrerpolicy="no-referrer-when-downgrade">
+                                                            src="{{$company->info?->map}}"
+                                                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 1px solid gray;"
+                                                            allowfullscreen="" loading="lazy"
+                                                            referrerpolicy="no-referrer-when-downgrade">
                                                     </iframe>
                                                 </div>
                                             </div>
@@ -150,12 +150,12 @@
                                                 <div class="accordion-item mb-20">
                                                     <h2 class="accordion-header" id="heading-{{ $index }}">
                                                         <button
-                                                            class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}"
-                                                            type="button"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#collapse-{{ $index }}"
-                                                            aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
-                                                            aria-controls="collapse-{{ $index }}">
+                                                                class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}"
+                                                                type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#collapse-{{ $index }}"
+                                                                aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
+                                                                aria-controls="collapse-{{ $index }}">
                                                             {{ $sss->question }}
                                                         </button>
                                                     </h2>
@@ -165,7 +165,7 @@
                                                          data-bs-parent="#course__accordion">
                                                         <div class="accordion-body">
                                                             <div
-                                                                class="course__curriculum-content d-sm-flex justify-content-between align-items-center">
+                                                                    class="course__curriculum-content d-sm-flex justify-content-between align-items-center">
                                                                 <div class="course__curriculum-info">
                                                                     <svg class="document" viewBox="0 0 24 24">
                                                                         <path class="st0"
@@ -194,294 +194,145 @@
 
                                         <div class="course__review-rating mb-50">
                                             <div class="row g-0">
+                                                <!-- Ortalama Puan -->
                                                 <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                                     <div class="course__review-rating-info grey-bg-2 text-center">
-                                                        <h5>5</h5>
-                                                        <ul>
-                                                            <li><a href="#"> <i class="fa-solid fa-star"></i> </a></li>
-                                                            <li><a href="#"> <i class="fa-solid fa-star"></i> </a></li>
-                                                            <li><a href="#"> <i class="fa-solid fa-star"></i> </a></li>
-                                                            <li><a href="#"> <i class="fa-solid fa-star"></i> </a></li>
-                                                            <li><a href="#"> <i class="fa-solid fa-star"></i> </a></li>
+                                                        <h5>{{ number_format($averageRating, 1) }}</h5>
+                                                        <ul class="d-flex justify-content-center">
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                <li>
+                                                                    <i class="fa-solid fa-star" style="color: {{ $i <= round($averageRating) ? '#FFD700' : '#ccc' }}"></i>
+                                                                </li>
+                                                            @endfor
                                                         </ul>
-                                                        <p>4 Ratings</p>
+                                                        <p>{{ $totalReviews }} Yorum</p>
                                                     </div>
                                                 </div>
+
+                                                <!-- Puan Detayları -->
                                                 <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-8">
                                                     <div class="course__review-details grey-bg-2">
-                                                        <h5>Detailed Rating</h5>
+                                                        <h5>Puan Detayları</h5>
                                                         <div class="course__review-content mb-20">
-                                                            <div
-                                                                class="course__review-item d-flex align-items-center justify-content-between">
-                                                                <div class="course__review-text">
-                                                                    <span>5 stars</span>
+                                                            @foreach (range(5, 1) as $star)
+                                                                <div class="course__review-item d-flex align-items-center justify-content-between">
+                                                                    <div class="course__review-text">
+                                                                        <span>{{ $star }} yıldız</span>
+                                                                    </div>
+                                                                    <div class="course__review-progress">
+                                                                        <div class="single-progress" style="width: {{ $ratings[$star]['percentage'] }}%;"></div>
+                                                                    </div>
+                                                                    <div class="course__review-percent">
+                                                                        <h5>{{ $ratings[$star]['percentage'] }}%</h5>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="course__review-progress">
-                                                                    <div class="single-progress"
-                                                                         data-width="100%"></div>
-                                                                </div>
-                                                                <div class="course__review-percent">
-                                                                    <h5>100%</h5>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                class="course__review-item d-flex align-items-center justify-content-between">
-                                                                <div class="course__review-text">
-                                                                    <span>4 stars</span>
-                                                                </div>
-                                                                <div class="course__review-progress">
-                                                                    <div class="single-progress" data-width="30%"></div>
-                                                                </div>
-                                                                <div class="course__review-percent">
-                                                                    <h5>30%</h5>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                class="course__review-item d-flex align-items-center justify-content-between">
-                                                                <div class="course__review-text">
-                                                                    <span>3 stars</span>
-                                                                </div>
-                                                                <div class="course__review-progress">
-                                                                    <div class="single-progress" data-width="0%"></div>
-                                                                </div>
-                                                                <div class="course__review-percent">
-                                                                    <h5>0%</h5>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                class="course__review-item d-flex align-items-center justify-content-between">
-                                                                <div class="course__review-text">
-                                                                    <span>2 stars</span>
-                                                                </div>
-                                                                <div class="course__review-progress">
-                                                                    <div class="single-progress" data-width="0%"></div>
-                                                                </div>
-                                                                <div class="course__review-percent">
-                                                                    <h5>0%</h5>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                class="course__review-item d-flex align-items-center justify-content-between">
-                                                                <div class="course__review-text">
-                                                                    <span>1 stars</span>
-                                                                </div>
-                                                                <div class="course__review-progress">
-                                                                    <div class="single-progress" data-width="0%"></div>
-                                                                </div>
-                                                                <div class="course__review-percent">
-                                                                    <h5>0%</h5>
-                                                                </div>
-                                                            </div>
+                                                            @endforeach
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="course__comment mb-75">
-                                            <h3 class="course__comment-title">2 Comments</h3>
 
-                                            <ul>
-                                                <li>
-                                                    <div class="course__comment-box ">
-                                                        <div class="course__comment-thumb float-start">
-                                                            <img src="assets/img/course/comment/course-comment-1.jpg"
-                                                                 alt="">
-                                                        </div>
-                                                        <div class="course__comment-content">
-                                                            <div class="course__comment-wrapper ml-70 fix">
-                                                                <div class="course__comment-info float-start">
-                                                                    <h4>Eleanor Fant</h4>
-                                                                    <span>July 14, 2022</span>
+                                        <div class="course__comment mb-75">
+                                            @if(count($comments) > 0)
+                                                <h3 class="course__comment-title">{{count($comments)}} Yorum</h3>
+                                                <ul>
+                                                    @foreach($comments as $comment)
+                                                        <li>
+                                                            <div class="course__comment-box">
+                                                                <div class="course__comment-thumb float-start">
+                                                                    <img src="{{ \App\Service\Helper::getNoProfileImage() }}" alt="User Image">
                                                                 </div>
-                                                                <div
-                                                                    class="course__comment-rating float-start float-sm-end">
-                                                                    <ul>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
+                                                                <div class="course__comment-content">
+                                                                    <div class="course__comment-wrapper ml-70 fix">
+                                                                        <div class="course__comment-info float-start">
+                                                                            <h4>{{ $comment->user->name }}</h4>
+                                                                            <span>{{ $comment->created_at->format('d-m-Y') }}</span>
+                                                                        </div>
+                                                                        <div class="course__comment-rating float-start float-sm-end">
+                                                                            <ul class="d-flex">
+                                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                                    <li>
+                                                                                        <i class="fa-solid fa-star" style="color: {{ $i <= $comment->rating ? '#FFD700' : '#ccc' }}"></i>
+                                                                                    </li>
+                                                                                @endfor
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="course__comment-text ml-70">
+                                                                        <p>{{ $comment->comment }}</p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="course__comment-text ml-70">
-                                                                <p>So I said lurgy dropped a clanger Jeffrey bugger
-                                                                    cuppa gosh David blatant have it, standard A bit of
-                                                                    how's your father my lady absolutely.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="children">
-                                                    <div class="course__comment-box ">
-                                                        <div class="course__comment-thumb float-start">
-                                                            <img src="assets/img/course/comment/course-comment-1.jpg"
-                                                                 alt="">
-                                                        </div>
-                                                        <div class="course__comment-content">
-                                                            <div class="course__comment-wrapper ml-70 fix">
-                                                                <div class="course__comment-info float-start">
-                                                                    <h4>Eleanor Fant</h4>
-                                                                    <span>July 14, 2022</span>
-                                                                </div>
-                                                                <div
-                                                                    class="course__comment-rating float-start float-sm-end">
-                                                                    <ul>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="course__comment-text ml-70">
-                                                                <p>So I said lurgy dropped a clanger Jeffrey bugger
-                                                                    cuppa gosh David blatant have it, standard A bit of
-                                                                    how's your father my lady absolutely.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="course__comment-box ">
-                                                        <div class="course__comment-thumb float-start">
-                                                            <img src="assets/img/course/comment/course-comment-2.jpg"
-                                                                 alt="">
-                                                        </div>
-                                                        <div class="course__comment-content">
-                                                            <div class="course__comment-wrapper ml-70 fix">
-                                                                <div class="course__comment-info float-start">
-                                                                    <h4>Shahnewaz Sakil</h4>
-                                                                    <span>July 17, 2022</span>
-                                                                </div>
-                                                                <div
-                                                                    class="course__comment-rating float-start float-sm-end">
-                                                                    <ul>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="course__comment-text ml-70">
-                                                                <p>David blatant have it, standard A bit of how's your
-                                                                    father my lady absolutely.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @else
+                                                <div class="course__member-item mb-4">
+                                                   Henüz yorum bulunmuyor
+                                                </div>
+                                            @endif
+
                                         </div>
-                                        <div class="course__form">
-                                            <h3 class="course__form-title">Write a Review</h3>
-                                            <div class="course__form-inner">
-                                                <form action="#">
-                                                    <div class="row">
-                                                        <div class="col-xxl-6">
-                                                            <div class="course__form-input">
-                                                                <input type="text" placeholder="Your Name">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xxl-6">
-                                                            <div class="course__form-input">
-                                                                <input type="email" placeholder="Your Email">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xxl-12">
-                                                            <div class="course__form-input">
-                                                                <input type="text" placeholder="Review Title">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xxl-12">
-                                                            <div class="course__form-input">
-                                                                <div class="course__form-rating">
-                                                                    <span>Rating : </span>
-                                                                    <ul>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#" class="no-rating"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li><a href="#" class="no-rating"> <i
-                                                                                    class="fa-solid fa-star"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
+                                        @if(auth()->user() && auth()->user()->role == \App\Enums\UserRole::GUEST)
+
+                                            <div class="course__form">
+                                                <h3 class="course__form-title">Yorum yap</h3>
+                                                <div class="course__form-inner">
+                                                    <form class="form-submit" method="POST"
+                                                          action="{{ route('front.comment.create', ['userId' => auth()->user()->id, 'companyId' => $company->id]) }}">
+                                                        @csrf
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="course__form-input">
+                                                                    <textarea name="comment" class="form-control"
+                                                                              rows="5" placeholder="Yorumunuz"
+                                                                              required></textarea>
                                                                 </div>
-                                                                <textarea placeholder="Review Summary"></textarea>
+                                                            </div>
+
+                                                            <div class="col-12">
+                                                                <div class="course__form-input">
+                                                                    <div class="course__form-rating">
+                                                                        <label for="rating" class="form-label">Puan
+                                                                            :</label>
+                                                                        <ul class="rating-stars d-flex list-unstyled">
+                                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                                <li>
+                                                                                    <input type="radio"
+                                                                                           id="star-{{ $i }}"
+                                                                                           name="rating"
+                                                                                           value="{{ $i }}"
+                                                                                           class="d-none" required>
+                                                                                    <label for="star-{{ $i }}">
+                                                                                        <i class="fa-solid fa-star"
+                                                                                           style="cursor: pointer; color: #ccc;"></i>
+                                                                                    </label>
+                                                                                </li>
+                                                                            @endfor
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-12">
+                                                                <div class="course__form-btn text-end">
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        Gönder
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xxl-12">
-                                                            <div class="course__form-btn mt-10 mb-55">
-                                                                <button type="submit" class="tp-btn">Submit Review
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @else
+                                            <div class="course__member-item mb-4">
+                                                Yorum yapmak için
+                                                <a href="{{route("login")}}" style="font-weight: bolder">giriş</a>
+                                                yapınız
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -503,16 +354,16 @@
                                                         </div>
 
                                                         <div
-                                                            class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-4 text-end">
+                                                                class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-4 text-end">
                                                             <div class="course__member-info">
                                                                 @if($price?->discounted_price)
                                                                     <h5>
                                                             <span
-                                                                style="text-decoration: line-through; color: #b0b0b0;">
+                                                                    style="text-decoration: line-through; color: #b0b0b0;">
                                                                 {{ number_format($price->price, 2) }} ₺
                                                             </span>
                                                                         <span
-                                                                            style="color: #28a745; font-weight: bold;">
+                                                                                style="color: #28a745; font-weight: bold;">
                                                                 {{ number_format($price->discounted_price, 2) }} ₺
                                                             </span>
                                                                     </h5>
@@ -647,7 +498,7 @@
                                 <div class="course__enroll-btn">
                                     <button type="button" class="tp-btn w-100 text-center" data-bs-toggle="modal"
                                             data-bs-target="#course_enroll_modal">Ücretsiz İletişime Geç <i
-                                            class="far fa-arrow-right"></i></button>
+                                                class="far fa-arrow-right"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -685,7 +536,7 @@
                                         <div class="course__popup-input">
                                             <input type="text" name="name" placeholder="Ad Soyad">
                                             <span class="course__popup-input-icon"><i
-                                                    class="fa-light fa-user"></i></span>
+                                                        class="fa-light fa-user"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
@@ -698,7 +549,7 @@
                                         <div class="course__popup-input">
                                             <input type="text" name="phone" placeholder="Telefon">
                                             <span class="course__popup-input-icon"><i
-                                                    class="fa-light fa-phone"></i></span>
+                                                        class="fa-light fa-phone"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-xxl-12">
@@ -755,6 +606,17 @@
                 },
             });
         });
+    </script>
+    <script>
+        document.querySelectorAll('.rating-stars input').forEach((input) => {
+            input.addEventListener('change', () => {
+                const allStars = document.querySelectorAll('.rating-stars i');
+                const selectedStars = [...allStars].slice(0, input.value);
+                const unselectedStars = [...allStars].slice(input.value);
 
+                selectedStars.forEach((star) => star.style.color = '#FFD700');
+                unselectedStars.forEach((star) => star.style.color = '#ccc');
+            });
+        });
     </script>
 @endpush

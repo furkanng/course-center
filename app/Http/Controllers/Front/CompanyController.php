@@ -31,12 +31,33 @@ class CompanyController extends Controller
             return $mainMenu;
         });
 
+        $comments = $company->comments;
+
+        $averageRating = $comments->avg('rating');
+
+        $totalReviews = $comments->count();
+
+        $ratings = [];
+        for ($i = 1; $i <= 5; $i++) {
+            $count = $comments->where('rating', $i)->count();
+            $percentage = $totalReviews > 0 ? ($count / $totalReviews) * 100 : 0;
+
+            $ratings[$i] = [
+                'count' => $count,
+                'percentage' => round($percentage, 2),
+            ];
+        }
+
         return view('front.pages.company.show', compact([
             'company',
             'companyFeatures',
             'mainMenus',
             'features',
             'menuStructure',
+            'comments',
+            'averageRating',
+            'totalReviews',
+            'ratings'
         ]));
     }
 }

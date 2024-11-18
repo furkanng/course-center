@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Enums\SeoPrefix;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\CompanyComments;
 use App\Models\CompanyType;
 use App\Models\Page;
 use App\Models\UserCompanyContact;
@@ -59,5 +60,24 @@ class HomeController extends Controller
         ])->save();
 
         return redirect()->back()->with("success", "İşlem Başarılı");
+    }
+
+    public function createComment(Request $request, $userId, $companyId): RedirectResponse
+    {
+        $request->validate([
+            "comment" => "required",
+            "rating" => "required",
+        ]);
+
+        $model = new CompanyComments();
+        $model->forceFill([
+            "company_id" => $companyId,
+            "user_id" => $userId,
+            "comment" => $request->get("comment"),
+            "rating" => $request->get("rating"),
+            "status" => true,
+        ])->save();
+
+        return redirect()->back()->with("success", "Yorum Gönderildi");
     }
 }

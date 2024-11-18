@@ -19,6 +19,8 @@ Route::get("/sayfalar/{seo_link}", [HomeController::class, "page"])->name("front
 
 Route::middleware(["AuthMiddleware", "auth", "FrontAuth"])->group(function () {
 
+    Route::post("comment/create/{userId}/{companyId}",[HomeController::class,"createComment"])->name("front.comment.create");
+
     Route::resource("profil", UserController::class)
         ->parameters(['profil' => 'id'])->names([
             'index' => 'front.profil.index',

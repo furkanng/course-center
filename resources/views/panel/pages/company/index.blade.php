@@ -113,6 +113,11 @@
                                         </span>
                                     </td>
                                     <td class="text-sm">
+                                        <a href="{{route("panel.companies.comment.index",["company" => $company->id])}}"
+                                           class="mx-2" data-bs-toggle="tooltip"
+                                           data-bs-original-title="comments">
+                                            <i class="fa fa-comment text-secondary"></i>
+                                        </a>
                                         <a href="{{route("panel.companies.user.index",["company" => $company->id])}}"
                                            class="mx-2" data-bs-toggle="tooltip"
                                            data-bs-original-title="New İmage">

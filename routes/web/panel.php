@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Panel\Company\CommentController;
 use App\Http\Controllers\Panel\Company\CompanyController;
 use App\Http\Controllers\Panel\Company\CompanyImageController;
 use App\Http\Controllers\Panel\Company\FeatureController;
@@ -174,6 +175,16 @@ Route::prefix("companies")->group(function () {
             'update' => 'panel.companies.image.update',
             'edit' => 'panel.companies.image.edit',
             'destroy' => 'panel.companies.image.destroy'
+        ])->shallow();
+
+    Route::resource("company.comment", CommentController::class)
+        ->parameters(['comment' => 'id'])->names([
+            'index' => 'panel.companies.comment.index',
+            'create' => 'panel.companies.comment.create',
+            'store' => 'panel.companies.comment.store',
+            'update' => 'panel.companies.comment.update',
+            'edit' => 'panel.companies.comment.edit',
+            'destroy' => 'panel.companies.comment.destroy'
         ])->shallow();
 
     Route::resource("company.user", CompanyUserController::class)

@@ -85,4 +85,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Company::class, 'company_user', 'user_id', 'company_id');
     }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(CompanyComments::class);
+    }
 }
