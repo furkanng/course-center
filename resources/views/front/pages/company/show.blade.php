@@ -37,7 +37,8 @@
                                     <ul class="d-flex align-items-center list-unstyled">
                                         @for ($i = 1; $i <= 5; $i++)
                                             <li>
-                                                <i class="fa-solid fa-star" style="color: {{ $i <= round($averageRating) ? '#FFD700' : '#ccc' }}"></i>
+                                                <i class="fa-solid fa-star"
+                                                   style="color: {{ $i <= round($averageRating) ? '#FFD700' : '#ccc' }}"></i>
                                             </li>
                                         @endfor
                                     </ul>
@@ -72,13 +73,13 @@
                                     <button class="nav-link active" id="description-tab" data-bs-toggle="tab"
                                             data-bs-target="#description" type="button" role="tab"
                                             aria-controls="description" aria-selected="true"><i
-                                                class="fa-regular fa-medal"></i> <span>Genel Bilgiler</span></button>
+                                            class="fa-regular fa-medal"></i> <span>Genel Bilgiler</span></button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link " id="curriculum-tab" data-bs-toggle="tab"
                                             data-bs-target="#curriculum" type="button" role="tab"
                                             aria-controls="curriculum" aria-selected="false"><i
-                                                class="fa-regular fa-book-blank"></i> <span>Soru Cevap</span></button>
+                                            class="fa-regular fa-book-blank"></i> <span>Soru Cevap</span></button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="review-tab" data-bs-toggle="tab"
@@ -131,10 +132,10 @@
                                                 <div class="map-container"
                                                      style="position: relative; padding-bottom: 56.25%; overflow: hidden; width: 100%; height: 0;">
                                                     <iframe
-                                                            src="{{$company->info?->map}}"
-                                                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 1px solid gray;"
-                                                            allowfullscreen="" loading="lazy"
-                                                            referrerpolicy="no-referrer-when-downgrade">
+                                                        src="{{$company->info?->map}}"
+                                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 1px solid gray;"
+                                                        allowfullscreen="" loading="lazy"
+                                                        referrerpolicy="no-referrer-when-downgrade">
                                                     </iframe>
                                                 </div>
                                             </div>
@@ -146,44 +147,52 @@
                                      aria-labelledby="curriculum-tab">
                                     <div class="course__curriculum">
                                         <div class="accordion" id="course__accordion">
-                                            @foreach($company->sss as $index => $sss)
-                                                <div class="accordion-item mb-20">
-                                                    <h2 class="accordion-header" id="heading-{{ $index }}">
-                                                        <button
+                                            @if(count($company->sss) > 0)
+                                                @foreach($company->sss as $index => $sss)
+                                                    <div class="accordion-item mb-20">
+                                                        <h2 class="accordion-header" id="heading-{{ $index }}">
+                                                            <button
                                                                 class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}"
                                                                 type="button"
                                                                 data-bs-toggle="collapse"
                                                                 data-bs-target="#collapse-{{ $index }}"
                                                                 aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
                                                                 aria-controls="collapse-{{ $index }}">
-                                                            {{ $sss->question }}
-                                                        </button>
-                                                    </h2>
-                                                    <div id="collapse-{{ $index }}"
-                                                         class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}"
-                                                         aria-labelledby="heading-{{ $index }}"
-                                                         data-bs-parent="#course__accordion">
-                                                        <div class="accordion-body">
-                                                            <div
+                                                                {{ $sss->question }}
+                                                            </button>
+                                                        </h2>
+                                                        <div id="collapse-{{ $index }}"
+                                                             class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}"
+                                                             aria-labelledby="heading-{{ $index }}"
+                                                             data-bs-parent="#course__accordion">
+                                                            <div class="accordion-body">
+                                                                <div
                                                                     class="course__curriculum-content d-sm-flex justify-content-between align-items-center">
-                                                                <div class="course__curriculum-info">
-                                                                    <svg class="document" viewBox="0 0 24 24">
-                                                                        <path class="st0"
-                                                                              d="M14,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V8L14,2z"/>
-                                                                        <polyline class="st0" points="14,2 14,8 20,8 "/>
-                                                                        <line class="st0" x1="16" y1="13" x2="8"
-                                                                              y2="13"/>
-                                                                        <line class="st0" x1="16" y1="17" x2="8"
-                                                                              y2="17"/>
-                                                                        <polyline class="st0" points="10,9 9,9 8,9 "/>
-                                                                    </svg>
-                                                                    <h3>{{ $sss->answer }}</h3>
+                                                                    <div class="course__curriculum-info">
+                                                                        <svg class="document" viewBox="0 0 24 24">
+                                                                            <path class="st0"
+                                                                                  d="M14,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V8L14,2z"/>
+                                                                            <polyline class="st0"
+                                                                                      points="14,2 14,8 20,8 "/>
+                                                                            <line class="st0" x1="16" y1="13" x2="8"
+                                                                                  y2="13"/>
+                                                                            <line class="st0" x1="16" y1="17" x2="8"
+                                                                                  y2="17"/>
+                                                                            <polyline class="st0"
+                                                                                      points="10,9 9,9 8,9 "/>
+                                                                        </svg>
+                                                                        <h3>{{ $sss->answer }}</h3>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                @endforeach
+                                            @else
+                                                <div class="course__member-item mb-4">
+                                                    Henüz soru cevap bulunmuyor
                                                 </div>
-                                            @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -201,7 +210,8 @@
                                                         <ul class="d-flex justify-content-center">
                                                             @for ($i = 1; $i <= 5; $i++)
                                                                 <li>
-                                                                    <i class="fa-solid fa-star" style="color: {{ $i <= round($averageRating) ? '#FFD700' : '#ccc' }}"></i>
+                                                                    <i class="fa-solid fa-star"
+                                                                       style="color: {{ $i <= round($averageRating) ? '#FFD700' : '#ccc' }}"></i>
                                                                 </li>
                                                             @endfor
                                                         </ul>
@@ -215,12 +225,14 @@
                                                         <h5>Puan Detayları</h5>
                                                         <div class="course__review-content mb-20">
                                                             @foreach (range(5, 1) as $star)
-                                                                <div class="course__review-item d-flex align-items-center justify-content-between">
+                                                                <div
+                                                                    class="course__review-item d-flex align-items-center justify-content-between">
                                                                     <div class="course__review-text">
                                                                         <span>{{ $star }} yıldız</span>
                                                                     </div>
                                                                     <div class="course__review-progress">
-                                                                        <div class="single-progress" style="width: {{ $ratings[$star]['percentage'] }}%;"></div>
+                                                                        <div class="single-progress"
+                                                                             style="width: {{ $ratings[$star]['percentage'] }}%;"></div>
                                                                     </div>
                                                                     <div class="course__review-percent">
                                                                         <h5>{{ $ratings[$star]['percentage'] }}%</h5>
@@ -241,7 +253,9 @@
                                                         <li>
                                                             <div class="course__comment-box">
                                                                 <div class="course__comment-thumb float-start">
-                                                                    <img src="{{ \App\Service\Helper::getNoProfileImage() }}" alt="User Image">
+                                                                    <img
+                                                                        src="{{ \App\Service\Helper::getNoProfileImage() }}"
+                                                                        alt="User Image">
                                                                 </div>
                                                                 <div class="course__comment-content">
                                                                     <div class="course__comment-wrapper ml-70 fix">
@@ -249,11 +263,13 @@
                                                                             <h4>{{ $comment->user->name }}</h4>
                                                                             <span>{{ $comment->created_at->format('d-m-Y') }}</span>
                                                                         </div>
-                                                                        <div class="course__comment-rating float-start float-sm-end">
+                                                                        <div
+                                                                            class="course__comment-rating float-start float-sm-end">
                                                                             <ul class="d-flex">
                                                                                 @for ($i = 1; $i <= 5; $i++)
                                                                                     <li>
-                                                                                        <i class="fa-solid fa-star" style="color: {{ $i <= $comment->rating ? '#FFD700' : '#ccc' }}"></i>
+                                                                                        <i class="fa-solid fa-star"
+                                                                                           style="color: {{ $i <= $comment->rating ? '#FFD700' : '#ccc' }}"></i>
                                                                                     </li>
                                                                                 @endfor
                                                                             </ul>
@@ -269,7 +285,7 @@
                                                 </ul>
                                             @else
                                                 <div class="course__member-item mb-4">
-                                                   Henüz yorum bulunmuyor
+                                                    Henüz yorum bulunmuyor
                                                 </div>
                                             @endif
 
@@ -338,52 +354,61 @@
 
                                 <div class="tab-pane fade" id="member" role="tabpanel" aria-labelledby="member-tab">
                                     <div class="course__member mb-45">
-                                        @if(\Illuminate\Support\Facades\Auth::check())
-                                            @foreach($company?->price as $price)
-                                                <div class="course__member-item mb-4">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-8">
-                                                            <div class="course__member-thumb d-flex align-items-center">
-                                                                <img src="{{ asset('images/baykus.png') }}"
-                                                                     alt="Price Image" class="img-fluid"
-                                                                     style="width: 50px; height: 50px;">
-                                                                <div class="course__member-name ml-20">
-                                                                    <h5>{{ $price->price_title->label() }}</h5>
+                                        @if(count($company?->price) > 0)
+                                            @if(\Illuminate\Support\Facades\Auth::check())
+                                                @foreach($company?->price as $price)
+                                                    <div class="course__member-item mb-4">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-8">
+                                                                <div
+                                                                    class="course__member-thumb d-flex align-items-center">
+                                                                    <img src="{{ asset('images/baykus.png') }}"
+                                                                         alt="Price Image" class="img-fluid"
+                                                                         style="width: 50px; height: 50px;">
+                                                                    <div class="course__member-name ml-20">
+                                                                        <h5>{{ $price->price_title->label() }}</h5>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
 
-                                                        <div
+                                                            <div
                                                                 class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-4 text-end">
-                                                            <div class="course__member-info">
-                                                                @if($price?->discounted_price)
-                                                                    <h5>
+                                                                <div class="course__member-info">
+                                                                    @if($price?->discounted_price)
+                                                                        <h5>
                                                             <span
-                                                                    style="text-decoration: line-through; color: #b0b0b0;">
+                                                                style="text-decoration: line-through; color: #b0b0b0;">
                                                                 {{ number_format($price->price, 2) }} ₺
                                                             </span>
-                                                                        <span
+                                                                            <span
                                                                                 style="color: #28a745; font-weight: bold;">
                                                                 {{ number_format($price->discounted_price, 2) }} ₺
                                                             </span>
-                                                                    </h5>
-                                                                    <span style="color: #ff6f61;">İndirimli Fiyat</span>
-                                                                @else
-                                                                    <h5>{{ number_format($price->price, 2) }} ₺</h5>
-                                                                    <span>Fiyat</span>
-                                                                @endif
+                                                                        </h5>
+                                                                        <span
+                                                                            style="color: #ff6f61;">İndirimli Fiyat</span>
+                                                                    @else
+                                                                        <h5>{{ number_format($price->price, 2) }} ₺</h5>
+                                                                        <span>Fiyat</span>
+                                                                    @endif
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                @endforeach
+                                            @else
+                                                <div class="course__member-item mb-4">
+                                                    Fiyatları görmek için
+                                                    <a href="{{route("login")}}" style="font-weight: bolder">giriş</a>
+                                                    yapınız
                                                 </div>
-                                            @endforeach
+                                            @endif
                                         @else
                                             <div class="course__member-item mb-4">
-                                                Fiyatları görmek için
-                                                <a href="{{route("login")}}" style="font-weight: bolder">giriş</a>
-                                                yapınız
+                                                Henüz fiyat bilgisi bulunmuyor
                                             </div>
                                         @endif
+
                                     </div>
                                 </div>
 
@@ -498,7 +523,7 @@
                                 <div class="course__enroll-btn">
                                     <button type="button" class="tp-btn w-100 text-center" data-bs-toggle="modal"
                                             data-bs-target="#course_enroll_modal">Ücretsiz İletişime Geç <i
-                                                class="far fa-arrow-right"></i></button>
+                                            class="far fa-arrow-right"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -536,7 +561,7 @@
                                         <div class="course__popup-input">
                                             <input type="text" name="name" placeholder="Ad Soyad">
                                             <span class="course__popup-input-icon"><i
-                                                        class="fa-light fa-user"></i></span>
+                                                    class="fa-light fa-user"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
@@ -549,7 +574,7 @@
                                         <div class="course__popup-input">
                                             <input type="text" name="phone" placeholder="Telefon">
                                             <span class="course__popup-input-icon"><i
-                                                        class="fa-light fa-phone"></i></span>
+                                                    class="fa-light fa-phone"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-xxl-12">
