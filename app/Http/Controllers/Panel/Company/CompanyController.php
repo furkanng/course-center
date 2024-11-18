@@ -22,7 +22,7 @@ class CompanyController extends Controller
      */
     public function index(): view
     {
-        $companies = Company::query()->orderBy("created_at", "desc")->get();
+        $companies = Company::query()->orderBy("created_at", "desc")->paginate(10);
         return view("panel.pages.company.index", compact("companies"));
     }
 

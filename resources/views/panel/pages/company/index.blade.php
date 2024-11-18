@@ -150,6 +150,8 @@
                         </table>
                     </div>
                 </div>
+
+                {{ $companies->links('panel.pagination.custom-pagination') }}
             </div>
         </div>
     </div>
@@ -157,10 +159,11 @@
 
 @push('scripts')
     <script>
+        /*
         const dataTableSearch = new simpleDatatables.DataTable("#products-list", {
             searchable: true,
             fixedHeight: false,
-        });
+        });*/
 
         document.querySelectorAll(".export").forEach(function (el) {
             el.addEventListener("click", function (e) {
