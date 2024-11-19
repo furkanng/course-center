@@ -5629,9 +5629,16 @@ fieldset:disabled .btn {
 .page-link.active,
 .active>.page-link {
   z-index: 3;
-  color: var(--bs-pagination-active-color);
-  background-color: var(--bs-pagination-active-bg);
-  border-color: var(--bs-pagination-active-border-color);
+  /*color: var(--bs-pagination-active-color);*/
+  /*background-color: var(--bs-pagination-active-bg);*/
+  /*border-color: var(--bs-pagination-active-border-color);*/
+
+    background: transparent;
+    background-image: linear-gradient(310deg, #7928CA 0%, #FF0080 100%);
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.09), 0 2px 3px -1px rgba(0, 0, 0, 0.07);
+    color: #fff;
+    border: none;
+    border-radius: 50% !important;
 }
 
 .page-link.disabled,
@@ -23771,6 +23778,10 @@ html {
 
 .page-item.active .page-link {
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.09), 0 2px 3px -1px rgba(0, 0, 0, 0.07);
+}
+
+.page-item.active span{
+    color: white !important;
 }
 
 .page-item .page-link,
