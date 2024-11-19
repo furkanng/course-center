@@ -32,41 +32,42 @@
                                    class="btn bg-gradient-primary btn-sm mb-0">+&nbsp; Yeni Kurum</a>
                                 <button type="button" class="btn btn-outline-primary btn-sm mb-0" data-bs-toggle="modal"
                                         data-bs-target="#import">
-                                    Import
+                                    İçe Aktar
                                 </button>
                                 <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog mt-lg-10">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="ModalLabel">Import CSV</h5>
+                                                <h5 class="modal-title" id="ModalLabel">CSV Yükle</h5>
                                                 <i class="fas fa-upload ms-3"></i>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>You can browse your computer for a file.</p>
-                                                <input type="text" placeholder="Browse file..."
+                                                <p class="text-sm">Kurum içe aktarırken mernis koduna göre aktarılacaktır.</p>
+                                                <p class="text-sm">Aynı mernis koduna sahip olan kurum olmaması gerekmektedir.</p>
+                                                <p class="text-sm">Kurum tür kodu sistemde olmayan kurumların türü karşılıksız olacaktır.</p>
+                                                <p class="text-sm">Kurum adı, il, ilçe, adres, telefon,mernis, kurum tür kodu zorunlu alanlardır</p>
+                                                <input type="file" name="file" required
                                                        class="form-control mb-3">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="importCheck" checked="">
-                                                    <label class="custom-control-label" for="importCheck">I accept the
-                                                        terms and conditions</label>
+                                                    <input class="form-check-input" type="checkbox" required
+                                                           id="importCheck">
+                                                    <label class="custom-control-label" for="importCheck">
+                                                        Tümünü kabul ediyorum.
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn bg-gradient-secondary btn-sm"
-                                                        data-bs-dismiss="modal">Close
+                                                        data-bs-dismiss="modal">Kapat
                                                 </button>
-                                                <button type="button" class="btn bg-gradient-primary btn-sm">Upload
+                                                <button type="button" class="btn bg-gradient-primary btn-sm">Yükle
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1" data-type="csv"
-                                        type="button" name="button">Export
-                                </button>
                             </div>
                         </div>
                     </div>
