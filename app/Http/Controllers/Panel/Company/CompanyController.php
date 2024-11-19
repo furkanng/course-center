@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Panel\Company;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyStoreRequest;
 use App\Models\Company;
+use App\Models\CompanyAdvert;
 use App\Models\CompanySss;
 use App\Models\CompanyType;
 use App\Models\Course;
@@ -20,9 +21,21 @@ class CompanyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): view
+    public function index(Request $request): view
     {
-        $companies = Company::query()->orderBy("created_at", "desc")->paginate(10);
+
+        $filter = $request->input('filter');
+
+        $query = $filter ? Company::where('name', 'LIKE', '%' . $filter . '%')
+                            ->orWhere('address', 'LIKE', '%' . $filter . '%')
+            ->orWhere('phone', 'LIKE', '%' . $filter . '%')
+            ->orWhere('city', 'LIKE', '%' . $filter . '%')
+            ->orWhere('district', 'LIKE', '%' . $filter . '%')
+            ->orderBy("created_at", "DESC"): Company::orderBy("created_at", "DESC");
+        $companies = $query->paginate(10);
+        $companies->appends(['filter' => $filter]);
+
+        //$companies = Company::query()->orderBy("created_at", "desc")->paginate(10);
         return view("panel.pages.company.index", compact("companies"));
     }
 

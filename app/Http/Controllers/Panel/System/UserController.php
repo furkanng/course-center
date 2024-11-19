@@ -15,10 +15,31 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): view
+    public function index(Request $request): view
     {
-        $users = User::query()->where('role', UserRole::GUEST)
-            ->orderBy("created_at", "desc")->get();
+
+        $filter = $request->input('filter');
+
+        $query = User::query()
+            ->where('role', UserRole::GUEST)
+            ->when($filter, function ($query, $filter) {
+                $query->where(function ($query) use ($filter) {
+                    $query->where('name', 'LIKE', '%' . $filter . '%')
+                        ->orWhere('email', 'LIKE', '%' . $filter . '%')
+                        ->orWhere('phone', 'LIKE', '%' . $filter . '%')
+                        ->orWhere('city', 'LIKE', '%' . $filter . '%')
+                        ->orWhere('district', 'LIKE', '%' . $filter . '%')
+                        ->orWhere('user_type', 'LIKE', '%' . $filter . '%');
+                });
+            })
+            ->orderBy('created_at', 'desc');
+
+        $users = $query->paginate(10);
+            $users->appends(['filter' => $filter]);
+
+
+
+
         return view("panel.pages.system.users.index", compact("users"));
     }
 

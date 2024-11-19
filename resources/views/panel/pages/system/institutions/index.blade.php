@@ -34,6 +34,14 @@
                     </div>
                 </div>
                 <div class="card-body px-0 pb-0">
+                    <div class="d-flex justify-content-end align-items-center mb-3">
+
+                        <div class="form-group col-md-2">
+                            <form action="{{ route('panel.system.institutions.index') }}" method="GET" >
+                                <input type="text" class="form-control"  name="filter" placeholder="Ara..." value="{{ request('filter') }}">
+                            </form>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-flush" id="datatable-user-list">
                             <thead class="thead-light">
@@ -109,6 +117,7 @@
                         </table>
                     </div>
                 </div>
+                {{ $users->links('panel.pagination.custom-pagination') }}
             </div>
         </div>
     </div>
@@ -117,9 +126,10 @@
 
 @push('scripts')
     <script>
+        /*
         const dataTableSearch = new simpleDatatables.DataTable("#datatable-user-list", {
             searchable: true,
             fixedHeight: false
-        });
+        });*/
     </script>
 @endpush

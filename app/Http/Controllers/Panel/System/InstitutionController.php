@@ -18,10 +18,30 @@ class InstitutionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    public function index(Request $request): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
-        $users = User::query()->where('role', UserRole::COMPANY)
-            ->orderBy("created_at", "desc")->get();
+        //UserRole::COMPANY
+        $filter = $request->input('filter');
+
+        $query = User::query()
+            ->where('role', UserRole::COMPANY)
+            ->when($filter, function ($query, $filter) {
+                $query->where(function ($query) use ($filter) {
+                    $query->where('name', 'LIKE', '%' . $filter . '%')
+                        ->orWhere('email', 'LIKE', '%' . $filter . '%')
+                        ->orWhere('phone', 'LIKE', '%' . $filter . '%')
+                        ->orWhere('city', 'LIKE', '%' . $filter . '%')
+                        ->orWhere('district', 'LIKE', '%' . $filter . '%')
+                        ->orWhere('user_type', 'LIKE', '%' . $filter . '%');
+                });
+            })
+            ->orderBy('created_at', 'desc');
+
+        $users = $query->paginate(10);
+        $users->appends(['filter' => $filter]);
+
+
+
         return view("panel.pages.system.institutions.index", compact("users"));
     }
 

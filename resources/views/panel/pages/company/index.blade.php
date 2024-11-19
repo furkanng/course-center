@@ -72,7 +72,17 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="card-body px-0 pb-0">
+                    <div class="d-flex justify-content-end align-items-center mb-3">
+
+                        <div class="form-group col-md-2">
+                            <form action="{{ route('panel.companies.company.index') }}" method="GET" >
+                            <input type="text" class="form-control"  name="filter" placeholder="Ara..." value="{{ request('filter') }}">
+                            </form>
+                        </div>
+                    </div>
+
                     <div class="table-responsive">
                         <table class="table table-flush" id="products-list">
                             <thead class="thead-light">
@@ -89,11 +99,12 @@
                             <tbody>
                             @foreach($companies as $company)
                                 <tr>
+
                                     <td>
                                         <div class="d-flex">
-                                            <div class="form-check my-auto">
-                                                <input class="form-check-input" type="checkbox" id="customCheck1">
-                                            </div>
+{{--                                            <div class="form-check my-auto">--}}
+{{--                                                <input class="form-check-input" type="checkbox" id="customCheck1">--}}
+{{--                                            </div>--}}
                                             <h6 class="ms-3 my-auto text-sm">{{$company->name}}</h6>
                                         </div>
                                     </td>
