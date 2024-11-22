@@ -36,36 +36,44 @@
                                 </button>
                                 <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog mt-lg-10">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="ModalLabel">CSV Yükle</h5>
-                                                <i class="fas fa-upload ms-3"></i>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p class="text-sm">Kurum içe aktarırken mernis koduna göre aktarılacaktır.</p>
-                                                <p class="text-sm">Aynı mernis koduna sahip olan kurum olmaması gerekmektedir.</p>
-                                                <p class="text-sm">Kurum tür kodu sistemde olmayan kurumların türü karşılıksız olacaktır.</p>
-                                                <p class="text-sm">Kurum adı, il, ilçe, adres, telefon,mernis, kurum tür kodu zorunlu alanlardır</p>
-                                                <input type="file" name="file" required
-                                                       class="form-control mb-3">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" required
-                                                           id="importCheck">
-                                                    <label class="custom-control-label" for="importCheck">
-                                                        Tümünü kabul ediyorum.
-                                                    </label>
+                                        <form class="form-submit" action="{{route("panel.companies.import")}}" method="POST"
+                                              enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="ModalLabel">CSV Yükle</h5>
+                                                    <i class="fas fa-upload ms-3"></i>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="text-sm">Kurum içe aktarırken mernis koduna göre
+                                                        aktarılacaktır.</p>
+                                                    <p class="text-sm">Aynı mernis koduna sahip olan kurum olmaması
+                                                        gerekmektedir.</p>
+                                                    <p class="text-sm">Kurum tür kodu sistemde olmayan kurumların türü
+                                                        karşılıksız olacaktır.</p>
+                                                    <p class="text-sm">Kurum adı, il, ilçe, adres, telefon,mernis, kurum
+                                                        tür kodu zorunlu alanlardır</p>
+                                                    <input type="file" name="file" required
+                                                           class="form-control mb-3">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" required
+                                                               id="importCheck">
+                                                        <label class="custom-control-label" for="importCheck">
+                                                            Tümünü kabul ediyorum.
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn bg-gradient-secondary btn-sm"
+                                                            data-bs-dismiss="modal">Kapat
+                                                    </button>
+                                                    <button type="submit" class="btn bg-gradient-primary btn-sm">Yükle
+                                                    </button>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn bg-gradient-secondary btn-sm"
-                                                        data-bs-dismiss="modal">Kapat
-                                                </button>
-                                                <button type="button" class="btn bg-gradient-primary btn-sm">Yükle
-                                                </button>
-                                            </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

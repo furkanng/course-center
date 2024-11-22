@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Panel\Company;
 
 use App\Http\Controllers\Controller;
+use App\Imports\CompanyImport;
+use App\Jobs\ImportCompanyJob;
 use App\Models\Company;
 use App\Models\CompanyComments;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CommentController extends Controller
 {
@@ -53,5 +56,18 @@ class CommentController extends Controller
         $model->delete();
 
         return redirect()->back()->with("success", "Silme işlemi başarılı");
+    }
+
+    public function import(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv,xls',
+        ]);
+
+        $filePath = $request->file('file')->store('imports', 'public');
+
+        Excel::queueImport(new CompanyImport(), $filePath, 'public');
+
+        return redirect()->back()->with("success", "Yükleme işlemi başarılı");
     }
 }
