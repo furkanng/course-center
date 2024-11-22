@@ -12,6 +12,14 @@ use Illuminate\View\View;
 
 class CompanyController extends Controller
 {
+    public function index(Request $request): View
+    {
+        $companies = Company::query()->where("status",true)
+            ->orderBy("created_at","desc")->paginate(20);
+
+        return view("front.pages.company.index",compact(["companies"]));
+    }
+
     public function show($seoLink): View
     {
         $link = Helper::parseUrl(SeoPrefix::COMPANY->value, $seoLink);

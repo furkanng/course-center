@@ -5,14 +5,11 @@ namespace App\Http\Controllers\Panel\Company;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyStoreRequest;
 use App\Models\Company;
-use App\Models\CompanyAdvert;
-use App\Models\CompanySss;
 use App\Models\CompanyType;
 use App\Models\Course;
 use App\Models\Feature;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 

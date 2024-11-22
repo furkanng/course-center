@@ -19,7 +19,7 @@ Route::get("/sayfalar/{seo_link}", [HomeController::class, "page"])->name("front
 
 Route::middleware(["AuthMiddleware", "auth", "FrontAuth"])->group(function () {
 
-    Route::post("comment/create/{userId}/{companyId}",[HomeController::class,"createComment"])->name("front.comment.create");
+    Route::post("comment/create/{userId}/{companyId}", [HomeController::class, "createComment"])->name("front.comment.create");
 
     Route::resource("profil", UserController::class)
         ->parameters(['profil' => 'id'])->names([
@@ -36,7 +36,8 @@ Route::middleware(["AuthMiddleware", "auth", "FrontAuth"])->group(function () {
 });
 
 Route::prefix(SeoPrefix::COMPANY->value)->group(function () {
+    Route::get("", [CompanyController::class, "index"])->name("front.company.index");
     Route::get("{seo_link}", [CompanyController::class, "show"])->name("front.company.show");
 });
 
-Route::post("teklif-al/{id}",[HomeController::class,"createContact"])->name("front.contact.create");
+Route::post("teklif-al/{id}", [HomeController::class, "createContact"])->name("front.contact.create");
