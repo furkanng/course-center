@@ -77,7 +77,9 @@
                             <nav>
                                 <ul class="menu-list d-flex justify-content-center">
                                     @foreach($courses as $course)
-                                        <li><a href="{{$course->link}}">{{strtoupper($course->name)}}</a></li>
+                                        @if($course->menu_status)
+                                            <li><a href="{{route('front.company.index',["courses"=> [$course->name]])}}">{{strtoupper($course->name)}}</a></li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             </nav>

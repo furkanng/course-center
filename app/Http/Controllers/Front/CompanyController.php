@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\Feature;
 use App\Service\Helper;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -14,11 +15,60 @@ class CompanyController extends Controller
 {
     public function index(Request $request): View
     {
-        $companies = Company::query()->where("status",true)
-            ->orderBy("created_at","desc")->paginate(20);
+        // Temel sorgu
+        $query = Company::query()->where("status", true);
 
-        return view("front.pages.company.index",compact(["companies"]));
+        // Filtreleme işlemleri
+        $query = $this->applyFilters($query, $request);
+
+        // Sorguyu çalıştır ve sonuçları al
+        $companies = $query->paginate(20)->appends($request->query());
+
+        // Görünümü render et
+        return view("front.pages.company.index", compact("companies"));
     }
+
+    /**
+     * Filtreleri uygula.
+     *
+     * @param Builder $query
+     * @param Request $request
+     * @return Builder
+     */
+    private function applyFilters(Builder $query, Request $request): Builder
+    {
+        // Arama filtresi
+        if ($request->filled('search')) {
+            $searchInput = $request->input('search');
+
+            // Şehir isimleri için regex kontrol
+            $query->where(function ($q) use ($searchInput) {
+                $q->orWhereRaw("city REGEXP ?", ["(^|\s)" . addslashes($searchInput) . "(\s|$)"])
+                    ->orWhereRaw("district REGEXP ?", ["(^|\s)" . addslashes($searchInput) . "(\s|$)"])
+                    ->orWhere('name', 'like', '%' . $searchInput . '%');
+            });
+        }
+
+        // Kurs filtresi
+        if ($request->filled('courses')) {
+            $query->whereHas('courses', function ($q) use ($request) {
+                $q->whereIn('name', $request->input('courses'));
+            });
+        }
+
+        // Şehir filtresi
+        if ($request->filled('city')) {
+            $query->where('city', 'like', '%' . $request->input('city') . '%');
+        }
+
+        // İlçe filtresi
+        if ($request->filled('district')) {
+            $query->where('district', 'like', '%' . $request->input('district') . '%');
+        }
+
+        return $query;
+    }
+
 
     public function show($seoLink): View
     {

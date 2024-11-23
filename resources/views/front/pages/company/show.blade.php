@@ -11,7 +11,7 @@
                             <div class="breadcrumb__list breadcrumb__list-2 mb-10">
                                 <span><a href="{{route("home")}}">Ana Sayfa</a></span>
                                 <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
-                                <span>Dershaneler</span>
+                                <span><a href="{{route("front.company.index")}}">Dershaneler</a></span>
                                 <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
                                 <span>{{$company->name}}</span>
                             </div>

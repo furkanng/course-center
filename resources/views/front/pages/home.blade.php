@@ -27,10 +27,10 @@
                                     <h2 class="slider__title-3">
                                         {{$language["text_5"]}}</h2>
 
-                                    <div class="slider__search mb-20">
-                                        <form action="#">
+                                    <div class="mb-20">
+                                        <form action="{{ route('front.company.index') }}" method="GET">
                                             <div class="slider__search-input p-relative">
-                                                <input type="text" placeholder="{{$language["text_6"]}}">
+                                                <input type="text" name="search" placeholder="{{$language["text_6"]}}">
                                                 <button type="submit">Ara</button>
                                                 <div class="slider__search-input-icon">
                                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -76,7 +76,7 @@
                         </div>
                         <p>{{$language["text_10"]}}</p>
                         <div class="category__btn">
-                            <a href="course-v1.html" class="tp-btn-5">{{$language["text_11"]}}</a>
+                            <a href="{{route("front.company.index")}}" class="tp-btn-5">{{$language["text_11"]}}</a>
                         </div>
                     </div>
                 </div>
@@ -88,13 +88,15 @@
                                     <div class="col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
                                         <div class="category__item text-center mb-45">
                                             <div class="category__icon">
-                                                <a href="{{$course->link}}">
+                                                <a href="{{route('front.company.index',["courses"=> [$course->name]])}}">
                                                     {!! $course->icons !!}
                                                 </a>
                                             </div>
                                             <div class="category__content">
                                                 <h4 class="category__title">
-                                                    <a href="{{$course->link}}">{{$course->name}}</a>
+                                                    <a href="{{route('front.company.index',["courses"=> [$course->name]])}}">
+                                                        {{$course->name}}
+                                                    </a>
                                                 </h4>
                                             </div>
                                         </div>
@@ -104,11 +106,11 @@
                             <div class="col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
                                 <div class="category__item text-center mb-45">
                                     <div class="category__icon add">
-                                        <a href="course-v1.html">+</a>
+                                        <a href="{{route("front.company.index")}}">+</a>
                                     </div>
                                     <div class="category__content">
                                         <h4 class="category__title add">
-                                            <a href="course-v1.html">Daha Fazla</a>
+                                            <a href="{{route("front.company.index")}}">Daha Fazla</a>
                                         </h4>
                                     </div>
                                 </div>
@@ -162,8 +164,7 @@
                                                         @endif
                                                     </div>
                                                     <h3 class="mt-auto">
-                                                        <a href="{{$company->link}}"
-                                                           class="stretched-link">
+                                                        <a href="{{$company->link}}">
                                                             <span style="font-size: medium">{{$company->name}}</span>
                                                         </a>
                                                     </h3>
@@ -217,7 +218,7 @@
                             <h4>{{$language["text_13"]}}</h4>
                         </div>
                         <div class="course__enroll-btn pt-5">
-                            <a href="contact.html" class="tp-btn-5 tp-btn-11">{{$language["text_14"]}}</a>
+                            <a href="tel:+905511074559" class="tp-btn-5 tp-btn-11">{{$language["text_14"]}}</a>
                         </div>
                     </div>
                 </div>

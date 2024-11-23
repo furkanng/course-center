@@ -42,13 +42,8 @@ function populateProvinces(provinces) {
         option.value = province.name;
         option.textContent = province.name;
 
-
-        if (selectedCity) {
-
-
-            if (province.name === selectedCity) {
-                option.selected = true;
-            }
+        if (selectedCity && province.name === selectedCity) {
+            option.selected = true;
         }
 
         citySelect.appendChild(option);
@@ -70,31 +65,6 @@ function populateProvinces(provinces) {
         }
     });
 }
-
-/*
-function populateProvinces(provinces) {
-    const citySelect = document.getElementById('citySelect');
-    citySelect.innerHTML = '<option value="">Seciniz</option>';
-    provinces.forEach(province => {
-        const option = document.createElement('option');
-        option.value = province.name;
-        option.textContent = province.name;
-        citySelect.appendChild(option);
-    });
-
-    $('select').niceSelect('update');
-
-    // İl seçimi değiştiğinde ilçeleri güncelleme
-    citySelect.addEventListener('change', function () {
-        const provinceId = this.value;
-        if (provinceId) {
-            fetchDistricts(provinceId);
-        } else {
-            document.getElementById('districtSelect').innerHTML = '<option value="">Önce ili seçiniz</option>';
-            $('select').niceSelect('update');
-        }
-    });
-}*/
 
 function fetchDistricts(provinceName) {
     fetch(`https://turkiyeapi.dev/api/v1/provinces?name=${provinceName}`)

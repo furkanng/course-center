@@ -36,7 +36,9 @@
                                     @foreach($courses as $course)
                                         @if($course->menu_status)
                                             <li>
-                                                <a href="{{$course->link}}">{{strtoupper($course->name)}}</a>
+                                                <a href="{{route('front.company.index',["courses"=> [$course->name]])}}">
+                                                    {{strtoupper($course->name)}}
+                                                </a>
                                             </li>
                                         @endif
                                     @endforeach

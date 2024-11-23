@@ -6,17 +6,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-xxl-8 col-xl-8 col-lg-8">
-                    <div class="course__tab-inner white-bg mb-50">
-                        <div class="row align-items-center">
-                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                <div class="course__tab-wrapper d-flex align-items-center">
-                                    <div class="course__view">
-                                        <h4>Showing 1 - 6 of 84</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-xxl-12">
                             <div class="course__tab-conent">
@@ -70,74 +59,136 @@
 
                     <div class="row">
                         <div class="col-xxl-12">
-                            {{ $companies->links('pagination::bootstrap-4') }}
+                            <div class="basic-pagination">
+                                <nav>
+                                    <ul>
+                                        <!-- Previous Page Link -->
+                                        @if ($companies->onFirstPage())
+                                            <li class="disabled">
+                                                <span><i class="far fa-angle-left"></i></span>
+                                            </li>
+                                        @else
+                                            <li>
+                                                <a href="{{ $companies->previousPageUrl() }}">
+                                                    <i class="far fa-angle-left"></i>
+                                                </a>
+                                            </li>
+                                        @endif
+
+                                        <!-- Pagination Elements -->
+                                        @php
+                                            $start = max($companies->currentPage() - 2, 1);
+                                            $end = min($companies->currentPage() + 2, $companies->lastPage());
+                                        @endphp
+                                        @if ($start > 1)
+                                            <li>
+                                                <a href="{{ $companies->url(1) }}">1</a>
+                                            </li>
+                                            @if ($start > 2)
+                                                <li class="disabled"><span>...</span></li>
+                                            @endif
+                                        @endif
+
+                                        @foreach (range($start, $end) as $page)
+                                            @if ($page == $companies->currentPage())
+                                                <li>
+                                                    <span class="current">{{ $page }}</span>
+                                                </li>
+                                            @else
+                                                <li>
+                                                    <a href="{{ $companies->url($page) }}">{{ $page }}</a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+
+                                        @if ($end < $companies->lastPage())
+                                            @if ($end < $companies->lastPage() - 1)
+                                                <li class="disabled"><span>...</span></li>
+                                            @endif
+                                            <li>
+                                                <a href="{{ $companies->url($companies->lastPage()) }}">{{ $companies->lastPage() }}</a>
+                                            </li>
+                                        @endif
+
+                                        <!-- Next Page Link -->
+                                        @if ($companies->hasMorePages())
+                                            <li>
+                                                <a href="{{ $companies->nextPageUrl() }}">
+                                                    <i class="far fa-angle-right"></i>
+                                                </a>
+                                            </li>
+                                        @else
+                                            <li class="disabled">
+                                                <span><i class="far fa-angle-right"></i></span>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="col-xxl-4 col-xl-4 col-lg-4">
                     <div class="course__sidebar pl-70">
-                        <div class="course__sidebar-widget white-bg">
-                            <div class="course__sidebar-search">
-                                <form action="#">
-                                    <input type="text" placeholder="Dershane Ara...">
-                                    <button type="submit">
-                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                             viewBox="0 0 584.4 584.4" style="enable-background:new 0 0 584.4 584.4;"
-                                             xml:space="preserve">
-                                       <g>
-                                           <g>
-                                               <path class="st0"
-                                                     d="M565.7,474.9l-61.1-61.1c-3.8-3.8-8.8-5.9-13.9-5.9c-6.3,0-12.1,3-15.9,8.3c-16.3,22.4-36,42.1-58.4,58.4    c-4.8,3.5-7.8,8.8-8.3,14.5c-0.4,5.6,1.7,11.3,5.8,15.4l61.1,61.1c12.1,12.1,28.2,18.8,45.4,18.8c17.1,0,33.3-6.7,45.4-18.8    C590.7,540.6,590.7,499.9,565.7,474.9z"/>
-                                               <path class="st1"
-                                                     d="M254.6,509.1c140.4,0,254.5-114.2,254.5-254.5C509.1,114.2,394.9,0,254.6,0C114.2,0,0,114.2,0,254.5    C0,394.9,114.2,509.1,254.6,509.1z M254.6,76.4c98.2,0,178.1,79.9,178.1,178.1s-79.9,178.1-178.1,178.1S76.4,352.8,76.4,254.5    S156.3,76.4,254.6,76.4z"/>
-                                           </g>
-                                       </g>
-                                    </svg>
-                                    </button>
-                                </form>
+                        <form action="{{ route('front.company.index') }}" method="GET">
+                            <div class="course__sidebar-widget white-bg">
+                                <div class="course__sidebar-search">
+                                    <input name="search" value="{{ request('search') }}" type="text"
+                                           placeholder="Dershane Ara...">
+                                </div>
                             </div>
-                        </div>
-                        <div class="course__sidebar-widget white-bg">
-                            <div class="course__sidebar-info">
-                                <h3 class="course__sidebar-title">Kurslar</h3>
-                                <ul>
-                                    @foreach($courses as $course)
-                                        <li>
-                                            <div class="course__sidebar-check mb-10 d-flex align-items-center">
-                                                <input class="m-check-input" type="checkbox" id="m-eng">
-                                                <label class="m-check-label"
-                                                       for="m-eng">{{strtoupper($course->name)}}</label>
+                            <div class="course__sidebar-widget white-bg">
+                                <div class="course__sidebar-info">
+                                    <h3 class="course__sidebar-title">Kurslar</h3>
+                                    <ul>
+                                        @foreach($courses as $course)
+                                            <li>
+                                                <div class="course__sidebar-check mb-10 d-flex align-items-center">
+                                                    <input class="m-check-input" type="checkbox"
+                                                           id="course_{{ $course->name }}" name="courses[]"
+                                                           value="{{ $course->name }}"
+                                                        {{ in_array($course->name, request('courses', [])) ? 'checked' : '' }}>
+                                                    <label class="m-check-label" for="course_{{ $course->name }}">{{ strtoupper($course->name) }}</label>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="course__sidebar-widget white-bg">
+                                <div class="course__sidebar-info">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="course__sidebar-check">
+                                                <label class="m-check-label" for="citySelect">İl</label>
+                                                <select name="city" id="citySelect" class="m-check-input"
+                                                        onchange="updateDistricts()"
+                                                        data-selected-city="{{ request('city') }}">
+                                                    <option
+                                                        value="" {{ request('city') == value("city") ? 'selected' : '' }}>
+                                                        Seçiniz
+                                                    </option>
+                                                </select>
                                             </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="course__sidebar-widget white-bg">
-                            <div class="course__sidebar-info">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="course__sidebar-check">
-                                            <label class="m-check-label" for="citySelect">İl</label>
-                                            <select name="city" id="citySelect" class="m-check-input"
-                                                    onchange="updateDistricts()">
-                                                <option value="">Seçiniz</option>
-                                            </select>
                                         </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="course__sidebar-check">
-                                            <label class="m-check-label" for="districtSelect">İlçe</label>
-                                            <select name="district" id="districtSelect" class="m-check-input">
-                                                <option value="">Önce ili seçiniz</option>
-                                            </select>
+                                        <div class="col">
+                                            <div class="course__sidebar-check">
+                                                <label class="m-check-label" for="districtSelect">İlçe</label>
+                                                <select name="district" id="districtSelect" class="m-check-input"
+                                                        data-selected-district="{{ request('district') }}">
+                                                    <option value="">Önce ili seçiniz</option>
+                                                </select>
+                                            </div>
                                         </div>
+                                        <button type="submit" class="btn btn-primary mb-4">Ara</button>
+                                        <button href="{{ route('front.company.index') }}">Tüm filtreleri temizle
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
