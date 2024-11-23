@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
         $this->setMailConfig();
     }
 
-    protected  function setMailConfig(): void
+    protected function setMailConfig(): void
     {
         $settingsConfigArray = DB::table('settings')->where("group_key", "=", "email_settings")->get();
         $settingsConfig = [];
