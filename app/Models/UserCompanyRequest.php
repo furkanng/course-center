@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Enums\UserStatus;
+use App\Mail\InfoMail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Mail;
 
 class UserCompanyRequest extends Model
 {
@@ -78,11 +80,35 @@ class UserCompanyRequest extends Model
                         "company_id" => $model->company_id,
                         "user_id" => $model->user_id,
                     ]);
+
+
+                    $data = [
+                        "site_url" => config("app.url"),
+                        "mail_title" => "Kurum Kayıt",
+                        "mail_content" => $model->company->name . ' ' . 'Kurumu hesabınıza tanımlanmıştır. Kurumunuzu panel üzerinden kontrol edebilirsiniz.',
+                    ];
+
+                    $address = $model->user->email;
+                    $subject = "Kurum Kayıt";
+
+
+                    Mail::to($address)->send(new InfoMail($data, $address, $subject));
                 }
 
                 if ($model->status == UserStatus::REJECTED) {
                     CompanyUser::query()->where("company_id", $model->company_id)
                         ->where("user_id", $model->user_id)->delete();
+
+                    $data = [
+                        "site_url" => config("app.url"),
+                        "mail_title" => "Kurum Kayıt",
+                        "mail_content" => $model->company->name . ' ' . 'Kurum başvurunuz reddedilmiştir. Detaylı bilgi için bizimle iletişime geçebilirsiniz',
+                    ];
+
+                    $address = $model->user->email;
+                    $subject = "Kurum Kayıt";
+
+                    Mail::to($address)->send(new InfoMail($data, $address, $subject));
                 }
             }
         });

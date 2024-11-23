@@ -3,7 +3,7 @@
 
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-    <title>{{env("APP_NAME")}} Bilgi Mail</title>
+    <title>Reset Password Email Template</title>
     <meta name="description" content="Reset Password Email Template.">
     <style type="text/css">
         a:hover {
@@ -49,9 +49,7 @@
                                     <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
                                         {{$data["mail_content"]}}
                                     </p>
-                                    <a href="{{$data["renew_link"]}}"
-                                       style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Şifreyi
-                                        Yenile</a>
+
                                 </td>
                             </tr>
                             <tr>

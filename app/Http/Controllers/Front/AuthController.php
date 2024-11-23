@@ -6,6 +6,7 @@ use App\Enums\UserRole;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Mail\InfoMail;
 use App\Mail\ResetMail;
 use App\Models\InstitutionalRegister;
 use App\Models\PasswordReset;
@@ -149,6 +150,18 @@ class AuthController extends Controller
                     "company_type" => $user->company_type
                 ]);
 
+                $data = [
+                    "site_url" => config("app.url"),
+                    "mail_title" => "Hoşgeldiniz",
+                    "mail_content" => $user->name . ' ' . 'Kayıt başvurunuz alınmıştır. En kısa sürede dönüş sağlıyacağız',
+                ];
+
+                $address = $user->email;
+                $subject = "Kayıt Başvurusu";
+
+
+                Mail::to($address)->send(new InfoMail($data, $address, $subject));
+
                 return redirect()->back()->with("companyRegister", "Kayıt Başarılı");
 
             case UserRole::GUEST->value:
@@ -160,6 +173,19 @@ class AuthController extends Controller
                         'kvkk_approve' => $request->has('kvkk_approve')
                     ]
                 ))->save();
+
+
+                $data = [
+                    "site_url" => config("app.url"),
+                    "mail_title" => "Hoşgeldiniz",
+                    "mail_content" => $user->name . ' ' . 'Kaydınız alınmıştır. Aradığınız eğitim kurumunu en kısa sürede bulucağınızdan eminiz',
+                ];
+
+                $address = $user->email;
+                $subject = "Hoşgeldiniz Mesajı";
+
+
+                Mail::to($address)->send(new InfoMail($data, $address, $subject));
 
                 return redirect()->route('home')->with("success", "Kayıt Başarılı");
         }
