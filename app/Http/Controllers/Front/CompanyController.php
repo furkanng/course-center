@@ -39,13 +39,12 @@ class CompanyController extends Controller
     {
         // Arama filtresi
         if ($request->filled('search')) {
-            $searchInput = $request->input('search');
+            $search = $request->input('search');
 
-            // Şehir isimleri için regex kontrol
-            $query->where(function ($q) use ($searchInput) {
-                $q->orWhereRaw("city REGEXP ?", ["(^|\s)" . addslashes($searchInput) . "(\s|$)"])
-                    ->orWhereRaw("district REGEXP ?", ["(^|\s)" . addslashes($searchInput) . "(\s|$)"])
-                    ->orWhere('name', 'like', '%' . $searchInput . '%');
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('city', 'like', '%' . $search . '%')
+                    ->orWhere('district', 'like', '%' . $search . '%');
             });
         }
 

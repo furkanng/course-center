@@ -45,7 +45,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        
+
     }
     &__overlay{
         position: absolute;
@@ -74,7 +74,7 @@
                 background: -ms-linear-gradient(0deg, #0C0C0D 0.03%, rgba(12, 12, 13, 0) 72.59%, rgba(12, 12, 13, 0.2) 99.96%);
                 background: -moz-linear-gradient(0deg, #0C0C0D 0.03%, rgba(12, 12, 13, 0) 72.59%, rgba(12, 12, 13, 0.2) 99.96%);
                 background: -webkit-linear-gradient(0deg, #0C0C0D 0.03%, rgba(12, 12, 13, 0) 72.59%, rgba(12, 12, 13, 0.2) 99.96%);
-                
+
             }
         }
     }
@@ -296,7 +296,7 @@
                 top: 7%;
                 left: 0;
             }
-            
+
         }
         &-3{
             position: absolute;
@@ -421,7 +421,6 @@
                 position: absolute;
                 top: 50%;
                 left: 25px;
-                @include transform(translateY(-52%));
             }
         }
     }

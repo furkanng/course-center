@@ -2407,13 +2407,8 @@ input[type=color] {
 }
 .slider__search-input-icon {
   position: absolute;
-  top: 50%;
+  top: 25%;
   left: 25px;
-  -webkit-transform: translateY(-52%);
-  -moz-transform: translateY(-52%);
-  -ms-transform: translateY(-52%);
-  -o-transform: translateY(-52%);
-  transform: translateY(-52%);
 }
 .slider__list ul li {
   list-style: none;
