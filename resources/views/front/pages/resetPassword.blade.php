@@ -24,15 +24,8 @@
                         </div>
                         -->
                         <div class="sign__form">
-                            <form action="{{route("loginPost")}}" method="POST">
+                            <form method="POST" action="{{route("user.reset",["reset_token"=> $reset_token])}}">
                                 @csrf
-                                <div class="sign__input-wrapper mb-25">
-                                    <h5>Email Adresi</h5>
-                                    <div class="sign__input">
-                                        <input type="text" name="email" placeholder="Mail adresi">
-                                        <i class="fal fa-envelope"></i>
-                                    </div>
-                                </div>
                                 <div class="sign__input-wrapper mb-10">
                                     <h5>Şifre</h5>
                                     <div class="sign__input">
@@ -40,15 +33,16 @@
                                         <i class="fal fa-lock"></i>
                                     </div>
                                 </div>
-                                <div class="sign__action d-sm-flex justify-content-between mb-30">
-                                    <div class="sign__forgot">
-                                        <a href="{{route("user.forgot.get")}}">Şifremi Unuttum?</a>
+                                <div class="sign__input-wrapper mb-10">
+                                    <h5>Şifre Tekrar</h5>
+                                    <div class="sign__input">
+                                        <input type="password" name="password_confirmation" placeholder="Şifre">
+                                        <i class="fal fa-lock"></i>
                                     </div>
                                 </div>
-                                <button type="submit" class="tp-btn  w-100"><span></span> Giriş Yap</button>
-                                <div class="sign__new text-center mt-20">
-                                    <p>Hesabınız yok mu? <a href="{{route("register")}}">Kayıt Ol</a></p>
-                                </div>
+
+                                <button type="submit" class="tp-btn  w-100"><span></span> Gönder</button>
+
                             </form>
                         </div>
                     </div>

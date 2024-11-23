@@ -11,6 +11,12 @@ Route::get("/", [HomeController::class, "home"])->name("home");
 Route::get("/giris-yap", [HomeController::class, "login"])->name("login")->middleware("LoginCacheMiddleware");
 Route::post("/giris-yap", [AuthController::class, "loginPost"])->name("loginPost");
 
+Route::post('sifremi-unuttum', [AuthController::class, 'forgotPassword'])->name('user.forgot');
+Route::get('sifremi-unuttum', [AuthController::class, 'forgotPasswordGet'])->name('user.forgot.get');
+Route::get('sifre-yenileme', [AuthController::class, 'resetPasswordGet'])->name('user.reset.get');
+Route::post('sifre-yenileme', [AuthController::class, 'resetPassword'])->name('user.reset');
+
+
 Route::post("/kayit-ol", [AuthController::class, "registerPost"])->name("registerPost");
 Route::get("/kayit-ol", [HomeController::class, "register"])->name("register");
 Route::get("/cikis-yap", [AuthController::class, "logout"])->name("logout");
