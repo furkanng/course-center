@@ -1,6 +1,6 @@
 @extends('front.layout.app')
 
-@section('title', 'Profilim')
+@section('title', $company->name)
 @section('content')
     <section class="course__area pt-30 pb-90">
         <div class="container">

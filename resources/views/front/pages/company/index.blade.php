@@ -1,6 +1,6 @@
 @extends('front.layout.app')
 
-@section('title', 'Kurumlar')
+@section('title', 'Dershaneler')
 @section('content')
     <section class="course__area pt-115 pb-90 grey-bg-3">
         <div class="container">
@@ -150,7 +150,8 @@
                                                            id="course_{{ $course->name }}" name="courses[]"
                                                            value="{{ $course->name }}"
                                                         {{ in_array($course->name, request('courses', [])) ? 'checked' : '' }}>
-                                                    <label class="m-check-label" for="course_{{ $course->name }}">{{ strtoupper($course->name) }}</label>
+                                                    <label class="m-check-label"
+                                                           for="course_{{ $course->name }}">{{ strtoupper($course->name) }}</label>
                                                 </div>
                                             </li>
                                         @endforeach
@@ -183,8 +184,9 @@
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary mb-4">Ara</button>
-                                        <button href="{{ route('front.company.index') }}">Tüm filtreleri temizle
-                                        </button>
+                                        <a href="{{ route('front.company.index') }}" class="btn">
+                                            Tüm filtreleri temizle
+                                        </a>
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,6 @@
 @extends('front.layout.app')
 
-@section('title', 'Ana Sayfa')
+@section('title', env("APP_NAME"))
 @section('content')
     <!-- slider area start -->
     <section class="slider__area">
@@ -63,7 +63,6 @@
         </div>
     </section>
     <!-- slider area end -->
-
 
     <section class="category__area pt-105 pb-70">
         <div class="container">

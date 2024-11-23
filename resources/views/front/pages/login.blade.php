@@ -1,6 +1,6 @@
 @extends('front.layout.app')
 
-@section('title', 'Home Page')
+@section('title', 'Giriş yap')
 @section('content')
     <section class="signup__area p-relative z-index-1 pt-100 pb-145">
         <div class="sign__shape">
@@ -15,14 +15,6 @@
             <div class="row">
                 <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
                     <div class="sign__wrapper white-bg">
-                        <!--
-                        <div class="sign__header mb-35">
-                            <div class="sign__in text-center">
-                                <a href="#" class="sign__social text-start mb-15"><i class="fab fa-facebook-f"></i>Sign in with Facebook</a>
-                                <p> <span>........</span> Or, <a href="sign-in.html">sign in</a> with your email<span> ........</span> </p>
-                            </div>
-                        </div>
-                        -->
                         <div class="sign__form">
                             <form action="{{route("loginPost")}}" method="POST">
                                 @csrf

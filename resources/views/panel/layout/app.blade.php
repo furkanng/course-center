@@ -67,7 +67,7 @@
 </main>
 
 <!-- Sağ Sekme -->
-@include("panel.inc.fixed")
+
 <!-- Sağ Sekme Son -->
 
 <!--   Core JS Files   -->
