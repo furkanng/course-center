@@ -32,6 +32,14 @@
 
                 </div>
                 <div class="card-body px-0 pb-0">
+                    <div class="d-flex justify-content-end align-items-center mb-3">
+
+                        <div class="form-group col-md-2">
+                            <form action="{{ route('merchant.companies.request.index') }}" method="GET" >
+                                <input type="text" class="form-control"  name="filter" placeholder="Ara..." value="{{ request('filter') }}">
+                            </form>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-flush" id="products-list">
                             <thead class="thead-light">
@@ -76,6 +84,7 @@
                         </table>
                     </div>
                 </div>
+                {{ $companies->links('panel.pagination.custom-pagination') }}
             </div>
         </div>
     </div>
@@ -89,10 +98,11 @@
         });
     </script>
     <script>
+        /*
         const dataTableSearch = new simpleDatatables.DataTable("#products-list", {
             searchable: true,
             fixedHeight: false,
-        });
+        });*/
 
         if (document.getElementById('choices-category-edit')) {
             var element = document.getElementById('choices-category-edit');

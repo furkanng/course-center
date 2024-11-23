@@ -16,17 +16,34 @@ class RequestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $companies = Company::query()->where('status', true);
+        $filter = $request->input('filter');
 
-        $companies->doesntHave('users');
+        $query = Company::query()
+            ->where('status', true)
+            ->doesntHave('users');
 
-        $companies = $companies->orderBy('created_at', 'desc')->get();
+
+        if ($filter) {
+            $query->where(function ($subQuery) use ($filter) {
+                $subQuery->where('name', 'LIKE', '%' . $filter . '%')
+                    ->orWhere('address', 'LIKE', '%' . $filter . '%')
+                    ->orWhere('phone', 'LIKE', '%' . $filter . '%')
+                    ->orWhere('city', 'LIKE', '%' . $filter . '%')
+                    ->orWhere('district', 'LIKE', '%' . $filter . '%');
+            });
+
+        }
+
+        $companies = $query->orderBy('created_at', 'desc')->paginate(10);
+        $companies->appends(['filter' => $filter]);
 
         $companyTypes = CompanyType::all();
 
         return view('merchant.pages.company.request', compact(['companies', 'companyTypes']));
+
+
     }
 
 
