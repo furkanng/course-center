@@ -31,13 +31,6 @@ class ImagesSeeder extends Seeder
                     "created_at" => now(),
                     "updated_at" => now(),
                 ],
-                [
-                    'key' => 'advisor',
-                    'image' => 'advisor.jpg',
-                    "image_url" => config("app.url") . "/images/advisor.jpg",
-                    "created_at" => now(),
-                    "updated_at" => now(),
-                ],
             ];
 
         FrontImage::query()->insert($defaultData);
