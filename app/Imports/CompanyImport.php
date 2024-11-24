@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
-use Maatwebsite\Excel\Concerns\WithEvents; // Add this
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Events\BeforeImport; // Add this
+use Maatwebsite\Excel\Events\BeforeImport;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class CompanyImport implements ToModel, WithHeadingRow, SkipsEmptyRows, ShouldQueue, WithChunkReading, WithEvents
@@ -47,6 +47,6 @@ class CompanyImport implements ToModel, WithHeadingRow, SkipsEmptyRows, ShouldQu
 
     public function chunkSize(): int
     {
-        return 1000;
+        return 200;
     }
 }

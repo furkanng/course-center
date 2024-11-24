@@ -14,23 +14,25 @@
 @endsection
 
 @section('content')
-    <form class="form-submit" action="{{route("merchant.companies.company.update",["id" => $company->id])}}"
-          method="POST"
+    <form class="form-submit" action="{{route("merchant.companies.company.update",["id" => $company->id])}}" method="POST"
           enctype="multipart/form-data">
         @csrf
         @method("PUT")
         <div id="form">
+
             <div class="row">
                 <div class="col-lg-6">
                     <h4>Kurum bilgileri</h4>
-                    <p>Kurum ile alakalı düzenlemeler yapabilirsiniz.</p>
+                    <p>Sistem üzerinde var olan kurum ile alakalı düzenlemeleri yapabilirsiniz.</p>
                 </div>
                 <div class="col-lg-6 text-right d-flex flex-column justify-content-center">
-                    <button type="button" class="btn bg-gradient-primary mb-0 ms-lg-auto me-lg-0 me-auto mt-lg-0 mt-2">
+                    <button type="submit" class="btn bg-gradient-primary mb-0 ms-lg-auto me-lg-0 me-auto mt-lg-0 mt-2">
                         Kaydet
                     </button>
                 </div>
             </div>
+
+
             <div class="row mt-4">
                 <div class="col-lg-4">
                     <div class="card h-100">
@@ -44,7 +46,7 @@
                                 @if(is_null($company->image) || empty($company->image))
                                     <div class="col-12">
                                         <img class="w-100 border-radius-lg shadow-lg mt-3"
-                                             src="{{ \App\Service\Helper::getNoImage() }}"
+                                             src="{{ \App\Service\Helper::getNoImage()}}"
                                              alt="kapak_resmi">
                                     </div>
                                 @else
@@ -57,13 +59,7 @@
 
                                 <div class="col-12 mt-4">
                                     <div class="d-flex">
-                                        <form
-                                            action="{{ route('merchant.companies.company.update', ['id' => $company->id]) }}"
-                                            method="POST"
-                                            enctype="multipart/form-data"
-                                            id="image-upload-form">
-                                            @csrf
-                                            @method('PUT')
+                                        <form>
                                             <input type="file" name="image" class="form-control" id="image-input"
                                                    hidden>
                                             <button class="btn bg-gradient-primary btn-sm mb-0 me-2" type="button"
@@ -132,9 +128,9 @@
                                 </div>
                                 <div class="col-3">
                                     <label class="mt-4">Durum</label>
-                                    <select class="form-control" disabled name="status" required>
-                                        <option {{$company->status == 1 ? 'selected' : ''}}>Aktif</option>
-                                        <option {{$company->status == 0 ? 'selected' : ''}}>Pasif</option>
+                                    <select class="form-control" name="status" required>
+                                        <option value="1" {{$company->status == 1 ? 'selected' : ''}}>Aktif</option>
+                                        <option value="0" {{$company->status == 0 ? 'selected' : ''}}>Pasif</option>
                                     </select>
                                 </div>
                             </div>
@@ -205,8 +201,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <h5 class="font-weight-bolder mb-4">Kurslar</h5>
-                                    <select class="form-control" name="courses[]" name="choices-tags"
-                                            id="choices-tags-edit" multiple>
+                                    <select class="form-control" name="courses[]" id="choices-tags-edit" multiple>
                                         @foreach($courses as $course)
                                             <option value="{{ $course->id }}"
                                                 {{ in_array($course->id, $company->courses->pluck('id')->toArray()) ? 'selected' : '' }}>
@@ -218,7 +213,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="row mt-4">
@@ -235,7 +229,8 @@
                                     <iframe
                                         src="{{$company->info?->map}}"
                                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 1px solid gray;"
-                                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                        allowfullscreen="" loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade">
                                     </iframe>
                                 </div>
                             </div>
@@ -256,7 +251,7 @@
                             </p>
                             <x-sss-form-modal
                                 modalId="sssFormModalCreate"
-                                action="{{ route('merchant.companies.sss.store',['company' => $company->id]) }}"
+                                action="{{ route('panel.companies.sss.store',['company' => $company->id]) }}"
                                 method="POST"
                                 question=""
                                 answer=""
@@ -433,7 +428,7 @@
                                         </button>
                                         <x-price-form-modal
                                             modalId="priceFormModalEdit{{$price->id}}"
-                                            action="{{ route('merchant.companies.price.update',['id' => $price->id]) }}"
+                                            action="{{ route('panel.companies.price.update',['id' => $price->id]) }}"
                                             method="PUT"
                                             title="{{$price->price_title}}"
                                             price="{{$price->price}}"
@@ -462,7 +457,6 @@
     </style>
 @endpush
 @push('scripts')
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             let uploadButton = document.getElementById('upload-button');

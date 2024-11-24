@@ -77,7 +77,7 @@
                 <div class="card-header pb-0 p-3">
                     <h6 class="mb-0">Evraklar</h6>
                     <p class="form-text text-muted text-xs ms-1 d-inline">
-                        Kurumun sizin olduğunu beyan etmek için istenen evrakları yükleyiniz
+                        Kurumun sizin olduğunu beyan etmek için istenen evrakları yükleyiniz. (sadece jpeg, png, jpg)
                     </p>
                 </div>
                 <div class="card-body p-3">
