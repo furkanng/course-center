@@ -327,6 +327,13 @@
                                 <span class="sidenav-normal"> Kullanıcı Talepleri </span>
                             </a>
                         </li>
+                        <li class="nav-item {{ request()->routeIs('panel.contacts.bulletin.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.contacts.bulletin.*') ? 'active' : '' }}"
+                               href="{{route("panel.contacts.bulletin.index")}}">
+                                <span class="sidenav-mini-icon"> B </span>
+                                <span class="sidenav-normal"> Bülten </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>

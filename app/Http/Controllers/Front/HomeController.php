@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Enums\SeoPrefix;
 use App\Http\Controllers\Controller;
+use App\Models\Bulletin;
 use App\Models\Company;
 use App\Models\CompanyComments;
 use App\Models\CompanyType;
@@ -79,5 +80,18 @@ class HomeController extends Controller
         ])->save();
 
         return redirect()->back()->with("success", "Yorum Gönderildi");
+    }
+
+    public function createBulletin(Request $request): RedirectResponse
+    {
+        $request->validate([
+            "email" => "required",
+        ]);
+
+        Bulletin::query()->create([
+            "email" => $request->get("email"),
+        ]);
+
+        return redirect()->back()->with("success", "Abone Olundu");
     }
 }

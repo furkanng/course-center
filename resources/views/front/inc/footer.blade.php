@@ -16,9 +16,10 @@
                                 <div class="footer__widget-info">
                                     <div class="footer__subscribe footer__subscribe-3">
                                         <p>{{$language['text_1']}}</p>
-                                        <form action="#">
+                                        <form action="{{route("front.bulletin.create")}}" method="POST">
+                                            @csrf
                                             <div class="footer__subscribe-input">
-                                                <input type="text" placeholder="Email">
+                                                <input type="text" name="email" placeholder="E posta">
                                                 <button type="submit"
                                                         class="tp-btn-subscribe">{{$language['text_2']}}</button>
                                             </div>

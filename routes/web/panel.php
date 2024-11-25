@@ -11,6 +11,7 @@ use App\Http\Controllers\Panel\Company\TypeController;
 use App\Http\Controllers\Panel\Config\FrontImagesController;
 use App\Http\Controllers\Panel\Config\LanguageController;
 use App\Http\Controllers\Panel\Config\PageController;
+use App\Http\Controllers\Panel\Contact\BulletinController;
 use App\Http\Controllers\Panel\Contact\UserCompanyController;
 use App\Http\Controllers\Panel\HomeController;
 use App\Http\Controllers\Panel\Setting\ApiController;
@@ -241,5 +242,22 @@ Route::prefix("contacts")->group(function () {
             'update' => 'panel.contacts.users.update',
             'edit' => 'panel.contacts.users.edit',
             'destroy' => 'panel.contacts.users.destroy',
+        ]);
+
+    Route::resource("users", UserCompanyController::class)
+        ->parameters(['users' => 'id'])->names([
+            'index' => 'panel.contacts.users.index',
+            'create' => 'panel.contacts.users.create',
+            'show' => 'panel.contacts.users.show',
+            'store' => 'panel.contacts.users.store',
+            'update' => 'panel.contacts.users.update',
+            'edit' => 'panel.contacts.users.edit',
+            'destroy' => 'panel.contacts.users.destroy',
+        ]);
+
+    Route::resource("bulletin", BulletinController::class)
+        ->parameters(['bulletin' => 'id'])->names([
+            'index' => 'panel.contacts.bulletin.index',
+            'destroy' => 'panel.contacts.bulletin.destroy',
         ]);
 });
