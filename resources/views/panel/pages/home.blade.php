@@ -118,12 +118,8 @@
                                 <tbody>
                                 @foreach($lastCompanies as $company)
                                 <tr>
-                                    <td class="w-30">
+                                    <td>
                                         <div class="d-flex px-2 py-1 align-items-center">
-                                            <div>
-                                                <img src="{{$company->image_url}}"
-                                                     alt="">
-                                            </div>
                                             <div class="ms-4">
                                                 <p class="text-xs font-weight-bold mb-0">İsim:</p>
                                                 <h6 class="text-sm mb-0">{{ Str::limit($company->name, 30, '...') }}</h6>
@@ -142,12 +138,6 @@
                                             <h6 class="text-sm mb-0">{{$company->district}}</h6>
                                         </div>
                                     </td>
-                                    <td class="align-middle text-sm">
-                                        <div class="col text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Telefon:</p>
-                                            <h6 class="text-sm mb-0">{{$company->phone}}</h6>
-                                        </div>
-                                    </td>
                                 </tr>
                                 @endforeach
                                 </tbody>
@@ -158,7 +148,7 @@
             </div>
         </div>
     </div>
-   
+
     <div class="row mt-4" style="display:none;">
         <div class="col-lg-5 mb-lg-0 mb-4">
             <div class="card z-index-2">
@@ -329,7 +319,7 @@
             </div>
         </div>
     </div >
-    
+
     <div class="row">
         <div class="col-12">
             <div id="globe" class="position-absolute end-0 top-10 mt-sm-3 mt-7 me-lg-7">
