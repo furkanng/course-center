@@ -55,6 +55,12 @@
 
     <x-spinner />
 
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <x-alert type="danger" :message="$error" />
+        @endforeach
+    @endif
+
     @if(session('success'))
         <x-alert type="success" :message="session('success')" />
     @endif
