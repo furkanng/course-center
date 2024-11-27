@@ -27,20 +27,9 @@
                 </li>
 
                 @yield("navigation-bar")
-                {{--
-                 <li class="breadcrumb-item text-sm">
-                    <a class="opacity-5 text-dark" href="javascript:;">Pages</a>
-                </li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Default</li>
-                --}}
-
-
             </ol>
 
             @yield("navigation-name")
-            {{--
-            <h6 class="font-weight-bolder mb-0">Default</h6>
-            --}}
         </nav>
         <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none ">
             <a href="javascript:;" class="nav-link text-body p-0">
@@ -54,9 +43,16 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-
+                @if(auth()->user()->role === \App\Enums\UserRole::ADMIN)
+                    <form class="form-submit" method="POST" action="{{route("panel.cache")}}">
+                        @csrf
+                        <button type="submit" name="button" class="btn btn-sm btn-light m-0 ms-2">
+                            Cache Temizle
+                        </button>
+                    </form>
+                @endif
             </div>
-            <ul class="navbar-nav  justify-content-end">
+            <ul class="navbar-nav justify-content-end">
 
                 <li class="nav-item d-flex align-items-center">
                     <a href="{{route("logout")}}"

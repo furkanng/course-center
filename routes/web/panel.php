@@ -27,6 +27,7 @@ use App\Http\Controllers\Panel\Company\UserController as CompanyUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/", [HomeController::class, "home"])->name("panel.home");
+Route::post("cache-clear", [HomeController::class, "cache"])->name("panel.cache");
 
 Route::prefix("site-config")->group(function () {
     Route::resource('languages', LanguageController::class)

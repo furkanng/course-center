@@ -17,17 +17,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 
 class AuthController extends Controller
 {
 
 
-    public function forgotPasswordGet()
+    public function forgotPasswordGet(): View
     {
         return view('front.pages.forgotPassword');
     }
 
-    public function forgotPassword(Request $request)
+    public function forgotPassword(Request $request): RedirectResponse
     {
         $user = User::query()->where("email", $request->email)->first();
 
@@ -69,13 +70,13 @@ class AuthController extends Controller
         }
     }
 
-    public function resetPasswordGet(Request $request)
+    public function resetPasswordGet(Request $request): View
     {
         $reset_token = $request->query('reset_token');
         return view('front.pages.resetPassword', compact("reset_token"));
     }
 
-    public function resetPassword(Request $request)
+    public function resetPassword(Request $request): RedirectResponse
     {
         if (($request->has("reset_token"))) {
 
