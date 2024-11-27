@@ -33,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         $this->cacheSettingData();
         $this->cachePageData();
         $this->setMailConfig();
+        $this->setSmsConfig();
     }
 
     protected function setMailConfig(): void
@@ -58,6 +59,30 @@ class AppServiceProvider extends ServiceProvider
         ];
 
         Config::set('mail', $mail);
+    }
+
+    protected function setSmsConfig(): void
+    {
+        $settingsConfigArray = DB::table('settings')->where("group_key", "=", "sms_settings")->get();
+        $settingsConfig = [];
+
+        foreach ($settingsConfigArray as $config) {
+            $settingsConfig[$config->key] = $config->value;
+        }
+
+        $smsConfig = [
+            'default' => 'netgsm',
+            'providers' => [
+                'netgsm' => [
+                    'baseUrl' => $settingsConfig['sms_base_url'] ?? '',
+                    'userCode' => $settingsConfig['sms_username'] ?? '',
+                    'password' => $settingsConfig['sms_password'] ?? '',
+                    'msgHeader' => $settingsConfig['sms_msg_header'] ?? '',
+                ],
+            ],
+        ];
+
+        Config::set('sms', $smsConfig);
     }
 
     protected function cachePageData(): void

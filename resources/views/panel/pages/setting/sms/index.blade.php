@@ -45,7 +45,7 @@
 
                     <div class="mt-4">
                         <label for="projectName" class="form-label">Message Header</label>
-                        <input type="text" name="sms_msgHeader" value="{{\App\Models\Setting::get("sms_msg_header")}}"
+                        <input type="text" name="sms_msg_header" value="{{\App\Models\Setting::get("sms_msg_header")}}"
                                class="form-control" id="projectName">
                     </div>
 

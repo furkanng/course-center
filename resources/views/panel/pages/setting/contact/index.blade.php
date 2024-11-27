@@ -22,12 +22,6 @@
                     @csrf
 
                     <div class="mt-4">
-                        <label for="projectName" class="form-label">İletişim Başlık</label>
-                        <input type="text" name="contact_title" value="{{\App\Models\Setting::get("contact_title")}}"
-                               class="form-control">
-                    </div>
-
-                    <div class="mt-4">
                         <label for="projectName" class="form-label">Telefon</label>
                         <input type="text" name="contact_phone" value="{{\App\Models\Setting::get("contact_phone")}}"
                                class="form-control">

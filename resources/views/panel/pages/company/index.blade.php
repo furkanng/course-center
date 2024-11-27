@@ -135,22 +135,22 @@
                                     <td class="text-sm">
                                         <a href="{{route("panel.companies.comment.index",["company" => $company->id])}}"
                                            class="mx-2" data-bs-toggle="tooltip"
-                                           data-bs-original-title="comments">
+                                           data-bs-original-title="Yorumlar">
                                             <i class="fa fa-comment text-secondary"></i>
                                         </a>
                                         <a href="{{route("panel.companies.user.index",["company" => $company->id])}}"
                                            class="mx-2" data-bs-toggle="tooltip"
-                                           data-bs-original-title="New İmage">
+                                           data-bs-original-title="Kullanıcılar">
                                             <i class="fa fa-user text-secondary"></i>
                                         </a>
                                         <a href="{{route("panel.companies.image.index",["company" => $company->id])}}"
                                            class="mx-2" data-bs-toggle="tooltip"
-                                           data-bs-original-title="New İmage">
+                                           data-bs-original-title="Resimler">
                                             <i class="fa fa-image text-secondary"></i>
                                         </a>
                                         <a href="{{route("panel.companies.company.edit",["id" => $company->id])}}"
                                            class="mx-2" data-bs-toggle="tooltip"
-                                           data-bs-original-title="Edit product">
+                                           data-bs-original-title="Detaylar">
                                             <i class="fas fa-edit text-secondary"></i>
                                         </a>
                                         <a href="#" class="mx-2" data-bs-toggle="modal"
