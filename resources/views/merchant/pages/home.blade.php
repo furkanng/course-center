@@ -50,7 +50,7 @@
                     <div class="card ">
                         <div class="card-header pb-0 p-3">
                             <div class="d-flex justify-content-between">
-                                <h6 class="mb-2">Son Kurumlarım</h6>
+                                <h6 class="mb-2">Kurumlarım</h6>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -60,10 +60,6 @@
                                     <tr>
                                         <td class="w-30">
                                             <div class="d-flex px-2 py-1 align-items-center">
-                                                <div>
-                                                    <img src="{{$company->image_url}}"
-                                                         alt="">
-                                                </div>
                                                 <div class="ms-4">
                                                     <p class="text-xs font-weight-bold mb-0">İsim:</p>
                                                     <h6 class="text-sm mb-0">{{ Str::limit($company->name, 30, '...') }}</h6>
@@ -82,13 +78,6 @@
                                                 <h6 class="text-sm mb-0">{{$company->district}}</h6>
                                             </div>
                                         </td>
-                                        <td class="align-middle text-sm">
-                                            <div class="col text-center">
-                                                <p class="text-xs font-weight-bold mb-0">Telefon:</p>
-                                                <h6 class="text-sm mb-0">{{$company->phone}}</h6>
-                                            </div>
-                                        </td>
-                                    </tr>
                                 @endforeach
                                 </tbody>
                             </table>
