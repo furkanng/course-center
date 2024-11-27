@@ -162,7 +162,7 @@ class AuthController extends Controller
 
                 Mail::to($address)->send(new InfoMail($data, $address, $subject));
 
-                return redirect()->back()->with("companyRegister", "Kayıt Başarılı");
+                return redirect()->back()->with("registerSuccess", true);
 
             case UserRole::GUEST->value:
 

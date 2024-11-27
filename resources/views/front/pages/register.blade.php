@@ -3,6 +3,11 @@
 @section('title', 'Kayıt Ol')
 
 @section('content')
+    <x-company-register
+        title="Kayıt"
+        body="Kurum kaydı başarıyla oluşturuldu onay bekleniyor..."
+    >
+    </x-company-register>
     <section class="signup__area p-relative z-index-1 pt-100 pb-145">
         <div class="sign__shape">
             <img class="man-1" src="{{asset("front/assets/img/icon/sign/man-1.png")}}" alt="">
@@ -18,7 +23,7 @@
                 <div class="col-xxl-8 offset-xxl-2 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
                     <div class="sign__wrapper white-bg">
                         <div class="sign__form">
-                            <form action="{{route("registerPost")}}" method="POST">
+                            <form class="form-submit" action="{{route("registerPost")}}" method="POST">
                                 @csrf
                                 <div class="sign__input-wrapper mb-25 d-flex justify-content-center">
                                     <div class="radio-inputs" id="role">
@@ -297,29 +302,14 @@
 
     </style>
 
-    @if(session('companyRegister'))
-        <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification"
-             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h6 class="modal-title" id="modal-title-notification">Bilgilendirme Mesajı</h6>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="py-3 text-center">
-                            <i class="ni ni-bell-55 ni-3x"></i>
-                            <h4 class="text-gradient text-danger mt-4">Lütfen Okuyunuz !</h4>
-                            <p>Kayıt başvurunuz alınmıştır. En kısa sürede size dönüş sağlayacağız.</p>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tamam</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    @if(session('registerSuccess'))
+
+        <script>
+            $(document).ready(function () {
+                $('#registerModal').modal('show');
+            });
+
+        </script>
 
     @endif
 
@@ -336,11 +326,6 @@
                 fetchProvinces();
                 formatPhoneNumber();
 
-                // Eğer bir modal varsa göster
-                @if(session('companyRegister'))
-                var myModal = new bootstrap.Modal(document.getElementById('modal-notification'));
-                myModal.show();
-                @endif
             });
 
             function updateUserTypeOptionsInline() {

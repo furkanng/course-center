@@ -16,7 +16,7 @@
                 <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
                     <div class="sign__wrapper white-bg">
                         <div class="sign__form">
-                            <form action="{{route("loginPost")}}" method="POST">
+                            <form class="form-submit" action="{{route("loginPost")}}" method="POST">
                                 @csrf
                                 <div class="sign__input-wrapper mb-25">
                                     <h5>Email Adresi</h5>
