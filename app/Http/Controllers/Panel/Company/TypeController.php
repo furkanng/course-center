@@ -34,7 +34,7 @@ class TypeController extends Controller
     {
         $request->validate([
             "name" => "required",
-            "code" => "required|numeric|unique:companies_types,code",
+            "code" => "required|numeric|unique:company_type,code",
         ]);
 
         if ($request->has("menu_code")) {

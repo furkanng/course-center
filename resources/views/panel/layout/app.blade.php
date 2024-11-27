@@ -448,6 +448,28 @@
     });
 </script>
 
+<script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        grecaptcha.ready(function() {
+            grecaptcha.execute('{{ env('RECAPTCHA_SITE_KEY') }}', {action: 'submit'}).then(function(token) {
+                // Formlara otomatik olarak token ekle
+                const forms = document.querySelectorAll('form');
+                forms.forEach(form => {
+                    let input = form.querySelector('input[name="g-recaptcha-response"]');
+                    if (!input) {
+                        input = document.createElement('input');
+                        input.setAttribute('type', 'hidden');
+                        input.setAttribute('name', 'g-recaptcha-response');
+                        form.appendChild(input);
+                    }
+                    input.value = token;
+                });
+            });
+        });
+    });
+</script>
+
 
 @stack('style')
 @stack('scripts')

@@ -18,6 +18,7 @@
                                         <p>{{$language['text_1']}}</p>
                                         <form action="{{route("front.bulletin.create")}}" method="POST">
                                             @csrf
+
                                             <div class="footer__subscribe-input">
                                                 <input type="text" name="email" placeholder="E posta">
                                                 <button type="submit"
