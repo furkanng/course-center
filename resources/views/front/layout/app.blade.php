@@ -39,14 +39,14 @@
 </div>
 <!-- back to top end -->
 
-<x-spinner />
+<x-spinner/>
 
 @if(session('success'))
-    <x-alert type="success" :message="session('success')" />
+    <x-alert type="success" :message="session('success')"/>
 @endif
 
 @if(session('error'))
-    <x-alert type="danger" :message="session('error')" />
+    <x-alert type="danger" :message="session('error')"/>
 @endif
 
 @if(session('registerSuccess'))
@@ -213,8 +213,62 @@
 
     @yield('content')
 
-</main>
+    <div class="floating-icons">
+        <div class="telefon">
+            <a href="tel:905511074559" title="Telefon" alt="Telefon" class="nolink">
+                <i class="fas fa-phone"></i>
+            </a>
+        </div>
+        <div class="whatsapp">
+            <a href="https://api.whatsapp.com/send?phone=905511074559" target="_blank" class="nolink" title="WhatsApp"
+               alt="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
 
+</main>
+<style>
+    .floating-icons {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .floating-icons div {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .floating-icons a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        color: white;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    .floating-icons .telefon {
+        background-color: #3b5998; /* Telefon için mavi renk */
+    }
+
+    .floating-icons .whatsapp {
+        background-color: #25d366; /* WhatsApp için yeşil renk */
+    }
+
+</style>
 <!-- footer area start -->
 @include('front.inc.footer')
 <!-- footer area end -->
@@ -248,9 +302,9 @@
 
 <script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        grecaptcha.ready(function() {
-            grecaptcha.execute('{{ env('RECAPTCHA_SITE_KEY') }}', {action: 'submit'}).then(function(token) {
+    document.addEventListener('DOMContentLoaded', function () {
+        grecaptcha.ready(function () {
+            grecaptcha.execute('{{ env('RECAPTCHA_SITE_KEY') }}', {action: 'submit'}).then(function (token) {
                 // Formlara otomatik olarak token ekle
                 const forms = document.querySelectorAll('form');
                 forms.forEach(form => {
