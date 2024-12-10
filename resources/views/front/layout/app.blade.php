@@ -49,16 +49,7 @@
     <x-alert type="danger" :message="session('error')"/>
 @endif
 
-@if(session('registerSuccess'))
 
-    <script>
-        $(document).ready(function () {
-            $('#registerModal').modal('show');
-        });
-
-    </script>
-
-@endif
 
 <!-- header area start -->
 @include('front.inc.header')
@@ -295,6 +286,7 @@
 <script src="{{asset('front/assets/js/imagesloaded-pkgd.js')}}"></script>
 <script src="{{asset('front/assets/js/ajax-form.js')}}"></script>
 <script src="{{asset('front/assets/js/main.js')}}"></script>
+<script src="{{asset("panel/assets/js/core/bootstrap.min.js")}}"></script>
 <script src="{{asset("front/assets/js/service.js")}}"></script>
 
 <script src="{{asset("panel/assets/js/form-spinner.js")}}"></script>

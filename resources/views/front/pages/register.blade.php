@@ -4,7 +4,7 @@
 
 @section('content')
     <x-company-register
-        title="Kayıt"
+        title="Kayıt Başarılı"
         body="Kurum kaydı başarıyla oluşturuldu onay bekleniyor..."
     >
     </x-company-register>
@@ -305,8 +305,15 @@
     @if(session('registerSuccess'))
 
         <script>
+            /*
             $(document).ready(function () {
                 $('#registerModal').modal('show');
+            });*/
+
+            document.addEventListener("DOMContentLoaded", function () {
+                //var registerModal = document.getElementById('registerModal');
+                var registerModal = new bootstrap.Modal(document.getElementById('registerModal'));
+                registerModal.show();
             });
 
         </script>
