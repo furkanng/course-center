@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-    {
+    {/*
         $this->cacheLanguageData();
         $this->cacheImagesData();
         $this->cacheCourseData();
@@ -37,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
             $this->setMailConfig();
             $this->setSmsConfig();
         }
+*/
     }
 
     protected function setMailConfig(): void

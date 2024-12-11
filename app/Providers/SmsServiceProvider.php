@@ -29,12 +29,13 @@ class SmsServiceProvider extends ServiceProvider
      * Bootstrap services.
      */
     public function boot(): void
-    {
+    {/*
         config()->set('sms.providers.netgsm', [
             'baseUrl' => Setting::get("sms_base_url"),
             'userCode' => Setting::get("sms_username"),
             'password' => Setting::get("sms_password"),
             'msgHeader' => Setting::get("sms_msg_header"),
         ]);
+*/
     }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -11,9 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('pages', function (Blueprint $table) {
-            $table->renameColumn('permanent_name', 'key');
-        });
+        DB::statement('ALTER TABLE `pages` CHANGE `permanent_name` `key` VARCHAR(255)');
     }
 
     /**
@@ -21,8 +20,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('pages', function (Blueprint $table) {
-            $table->renameColumn('key', 'permanent_name');
-        });
+        DB::statement('ALTER TABLE `pages` CHANGE `key` `permanent_name` VARCHAR(255)');
     }
 };
