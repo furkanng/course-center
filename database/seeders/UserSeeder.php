@@ -20,12 +20,12 @@ class UserSeeder extends Seeder
         $defaultData =
             [
                 "id" => 1,
-                "name" => "Furkan Güzelgörür",
-                "phone" => "5373664765",
-                "email" => "admin@admin.com",
-                "city" => "Kahramanmaraş",
-                "district" => "onikişubat",
-                "password" => '$2y$10$WGerOaCXGZy2rPNkQ6QYreHCKcp/FotVhwT7CE75L2PFb1Knh5KoO',
+                "name" => "Sefa Çolakoğlu",
+                "phone" => "5511074559",
+                "email" => "sefa@admin.com",
+                "city" => "İstanbul",
+                "district" => "Anadolu",
+                "password" => '$2y$10$6ks0bcef923EmvNfpgis5OoSCaKUGURwvnkBP20O/ktVkclH0Wz72',
                 "role" => UserRole::ADMIN,
                 "user_type" => UserType::ADMIN,
                 "status" => true,

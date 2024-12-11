@@ -29,7 +29,7 @@ class LanguageSeeder extends Seeder
                 ],
                 [
                     'key' => 'text_3',
-                    'value' => '© Tüm hakları saklıdır.',
+                    'value' => 'Hangiderslig.com bir RESEND İLETİŞİM markasıdır © Tüm hakları saklıdır.',
                     "language" => 'tr'
                 ],
                 [

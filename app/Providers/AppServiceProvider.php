@@ -32,8 +32,11 @@ class AppServiceProvider extends ServiceProvider
         $this->cacheCourseData();
         $this->cacheSettingData();
         $this->cachePageData();
-        $this->setMailConfig();
-        $this->setSmsConfig();
+        if (DB::table("settings")->first())
+        {
+            $this->setMailConfig();
+            $this->setSmsConfig();
+        }
     }
 
     protected function setMailConfig(): void

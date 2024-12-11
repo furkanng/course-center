@@ -6,7 +6,7 @@ enum SeoPrefix: string
 {
     case PAGE = "sayfalar";
 
-    case COMPANY = "dershaneler";
+    case COMPANY = "dersligler";
 
     case COURSE = "kurslar";
 
@@ -14,7 +14,7 @@ enum SeoPrefix: string
     {
         return match ($this) {
             self::PAGE        => 'Sayfalar',
-            self::COMPANY      => 'Dershaneler',
+            self::COMPANY      => 'Dersligler',
             self::COURSE       => 'Kurslar',
         };
     }

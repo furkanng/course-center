@@ -33,7 +33,7 @@ class SettingSeeder extends Seeder
                 ['title' => 'Set Site Logo', 'key' => 'site_logo', 'value' => '', "type" => 'image', "group_key" => 'general_settings'],
                 ['title' => 'Set Site Footer Logo', 'key' => 'site_footer_logo', 'value' => '', "type" => 'image', "group_key" => 'general_settings'],
                 ['title' => 'Set Site Favicon', 'key' => 'site_favicon', 'value' => '', "type" => 'file', "group_key" => 'general_settings'],
-                ['title' => 'Set Site Title', 'key' => 'site_title', 'value' => 'Hangi Dershane', "type" => 'text', "group_key" => 'general_settings'],
+                ['title' => 'Set Site Title', 'key' => 'site_title', 'value' => 'Hangi Derslig', "type" => 'text', "group_key" => 'general_settings'],
                 ['title' => 'Set Site Keywords', 'key' => 'site_keywords', 'value' => 'hangi dershane, hangidershane.com, dershane', "type" => 'text', "group_key" => 'general_settings'],
                 ['title' => 'Set Site Description', 'key' => 'site_description', 'value' => 'Hangi dershanede aradığınız dershaneyi anında bulun', "type" => 'text', "group_key" => 'general_settings'],
                 ['title' => 'Set Url Facebook', 'key' => 'media_facebook', 'value' => '', "type" => 'text', "group_key" => 'socialMedia_settings'],
