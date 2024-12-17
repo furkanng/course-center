@@ -6,6 +6,7 @@ use App\Enums\Sms;
 use App\Models\Setting;
 use App\Service\SmsService\NetGsm\NetGsmProvider;
 use App\Service\SmsService\SmsProviderInterface;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class SmsServiceProvider extends ServiceProvider
@@ -29,13 +30,15 @@ class SmsServiceProvider extends ServiceProvider
      * Bootstrap services.
      */
     public function boot(): void
-    {/*
-        config()->set('sms.providers.netgsm', [
-            'baseUrl' => Setting::get("sms_base_url"),
-            'userCode' => Setting::get("sms_username"),
-            'password' => Setting::get("sms_password"),
-            'msgHeader' => Setting::get("sms_msg_header"),
-        ]);
-*/
+    {
+        if (DB::table("settings")->first())
+        {
+            config()->set('sms.providers.netgsm', [
+                'baseUrl' => Setting::get("sms_base_url"),
+                'userCode' => Setting::get("sms_username"),
+                'password' => Setting::get("sms_password"),
+                'msgHeader' => Setting::get("sms_msg_header"),
+            ]);
+        }
     }
 }

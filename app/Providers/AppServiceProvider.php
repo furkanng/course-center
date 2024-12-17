@@ -26,18 +26,17 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-    {/*
-        $this->cacheLanguageData();
-        $this->cacheImagesData();
-        $this->cacheCourseData();
-        $this->cacheSettingData();
-        $this->cachePageData();
+    {
         if (DB::table("settings")->first())
         {
+            $this->cacheLanguageData();
+            $this->cacheImagesData();
+            $this->cacheCourseData();
+            $this->cacheSettingData();
+            $this->cachePageData();
             $this->setMailConfig();
             $this->setSmsConfig();
         }
-*/
     }
 
     protected function setMailConfig(): void

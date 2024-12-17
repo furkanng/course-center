@@ -5,10 +5,8 @@ namespace App\Models;
 use App\Enums\SeoPrefix;
 use App\Traits\ImageTrait;
 use App\Traits\SeoTrait;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -21,8 +19,6 @@ class Company extends Model
 
     protected string $prefix = SeoPrefix::COMPANY->value;
 
-    protected int $width = 370;
-    protected int $height = 230;
     protected bool $watermark = true;
 
     protected $fillable = [

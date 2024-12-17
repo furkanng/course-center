@@ -59,27 +59,27 @@
 
                                 <div class="col-12 mt-4">
                                     <div class="d-flex">
-                                        <form>
-                                            <input type="file" name="image" class="form-control" id="image-input"
-                                                   hidden>
-                                            <button class="btn bg-gradient-primary btn-sm mb-0 me-2" type="button"
-                                                    id="upload-button">
+                                        <!-- Kapak Resmi Yükleme Formu -->
+                                        <form id="image-upload-form" method="POST" enctype="multipart/form-data"
+                                              action="{{ route('merchant.companies.company.update', ['id' => $company->id]) }}">
+                                            @csrf
+                                            <input type="file" name="image" class="form-control" id="image-input" hidden>
+                                            <button class="btn bg-gradient-primary btn-sm mb-0 me-2" type="button" id="upload-button">
                                                 Yükle
                                             </button>
                                         </form>
 
-                                        <button class="btn btn-outline-dark btn-sm mb-0"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal-{{ $company->id }}">
-                                            Kaldır
-                                        </button>
+                                        <!-- Kapak Resmi Silme Formu -->
+                                        <form method="POST"
+                                              action="{{ route('merchant.companies.company.image.delete', ['id' => $company->id]) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-outline-dark btn-sm mb-0" type="submit">
+                                                Kaldır
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
-                                <x-delete-modal modalId="deleteModal-{{ $company->id }}"
-                                                title="Silme Onayı"
-                                                body="Bu öğeyi silmek istediğinizden emin misiniz?"
-                                                action="{{ route('merchant.companies.company.image.delete', ['id' => $company->id]) }}">
-                                </x-delete-modal>
                             </div>
                         </div>
                     </div>
@@ -187,10 +187,8 @@
                             <div class="row">
                                 <div class="col-12">
                                     <h5 class="font-weight-bolder mb-4">Kurum Hakkında</h5>
-                                    <div id="edit-about-edit" class="h-50 mb-4">
-                                        {!! $company->info?->about !!}
-                                    </div>
-                                    <input type="hidden" name="about" id="about">
+                                    <textarea type="text" name="about" placeholder="Kurum hakkında yazısı giriniz"
+                                              class="form-control">{!! $company->info?->about !!}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -220,7 +218,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="font-weight-bolder">Konum</h5>
-                            <label class="mt-4">Google Harita Kodu</label>
+                            <label class="mt-4">Google Harita Kodu (iframe kodu giriniz)</label>
                             <input class="form-control" type="text" name="map" value="{{$company->info?->map}}"/>
 
                             <div class="mt-4">
@@ -459,22 +457,15 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Yükleme düğmesine tıklandığında dosya seçici tetiklenir
             let uploadButton = document.getElementById('upload-button');
             let fileInput = document.getElementById('image-input');
-            let form = document.getElementById('image-upload-form');
 
-            uploadButton.addEventListener('click', function () {
-                fileInput.click();
-            });
-
-        });
-    </script>
-
-    <script>
-        var form = document.querySelector('.form-submit');
-        form.addEventListener('submit', function () {
-            var aboutInput = document.getElementById('about');
-            aboutInput.value = quill.root.innerHTML;
+            if (uploadButton && fileInput) {
+                uploadButton.addEventListener('click', function () {
+                    fileInput.click();
+                });
+            }
         });
     </script>
 
@@ -487,13 +478,6 @@
         if (document.getElementById('edit-about-edit')) {
             var quill = new Quill('#edit-about-edit', {
                 theme: 'snow'
-            });
-        }
-
-        if (document.getElementById('choices-category-edit')) {
-            var element = document.getElementById('choices-category-edit');
-            new Choices(element, {
-                searchEnabled: false
             });
         }
 

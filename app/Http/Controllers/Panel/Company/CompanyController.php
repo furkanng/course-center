@@ -23,13 +23,13 @@ class CompanyController extends Controller
 
         $filter = $request->input('filter');
 
-        $query = $filter ? Company::where('name', 'LIKE', '%' . $filter . '%')
+        $query = $filter ? Company::query()->where('name', 'LIKE', '%' . $filter . '%')
                             ->orWhere('address', 'LIKE', '%' . $filter . '%')
             ->orWhere('phone', 'LIKE', '%' . $filter . '%')
             ->orWhere('city', 'LIKE', '%' . $filter . '%')
             ->orWhere('district', 'LIKE', '%' . $filter . '%')
             ->orderBy("created_at", "DESC"): Company::orderBy("created_at", "DESC");
-        $companies = $query->paginate(10);
+        $companies = $query->paginate(20);
         $companies->appends(['filter' => $filter]);
 
         //$companies = Company::query()->orderBy("created_at", "desc")->paginate(10);

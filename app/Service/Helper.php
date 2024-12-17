@@ -91,4 +91,52 @@ class Helper
     {
         return collect($urls)->map(fn($url) => trim($url, '/'))->implode('/');
     }
+
+    public static function formatTurkishString($string): string
+    {
+        // Türkçe'ye özel büyükten küçüğe harf dönüşüm tablosu
+        $turkishToLower = [
+            'I' => 'ı',
+            'İ' => 'i',
+            'Ç' => 'ç',
+            'Ğ' => 'ğ',
+            'Ö' => 'ö',
+            'Ş' => 'ş',
+            'Ü' => 'ü',
+            'A' => 'a',
+            'B' => 'b',
+            'C' => 'c',
+            'D' => 'd',
+            'E' => 'e',
+            'F' => 'f',
+            'G' => 'g',
+            'H' => 'h',
+            'J' => 'j',
+            'K' => 'k',
+            'L' => 'l',
+            'M' => 'm',
+            'N' => 'n',
+            'O' => 'o',
+            'P' => 'p',
+            'R' => 'r',
+            'S' => 's',
+            'T' => 't',
+            'U' => 'u',
+            'V' => 'v',
+            'Y' => 'y',
+            'Z' => 'z',
+        ];
+
+        $lowercaseString = strtr($string, $turkishToLower);
+
+        $firstLetter = mb_strtoupper(mb_substr($lowercaseString, 0, 1, 'UTF-8'), 'UTF-8');
+        $restOfString = mb_substr($lowercaseString, 1, null, 'UTF-8');
+
+        return $firstLetter . $restOfString;
+    }
+
+
+
+
+
 }

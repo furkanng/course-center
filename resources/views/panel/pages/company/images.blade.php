@@ -84,20 +84,17 @@
     </div>
 @endsection
 
-@push("style")
-
-@endpush
-
 @push('scripts')
     <script>
         if (Dropzone.instances.length > 0) {
             Dropzone.instances.forEach(dz => dz.destroy());
         }
 
-        Dropzone.autoDiscover = false;
+        Dropzone.autoDiscover = true;
         var dropzoneElement = document.getElementById('dropzone');
 
-        var myDropzone = new Dropzone(dropzoneElement, {
+
+        var myDropzone = new Dropzone("#dropzone", {
             url: "{{ route('panel.companies.image.store', ['company' => $company->id]) }}",
             method: 'post',
             headers: {
@@ -105,7 +102,14 @@
             },
             paramName: "image",
             addRemoveLinks: true,
+            success: function(file, response){
+                console.log("Resim yüklendi", response);
+            },
+            error: function(file, response){
+                console.log("Hata oluştu", response);
+            }
         });
+
     </script>
 
     <script>
