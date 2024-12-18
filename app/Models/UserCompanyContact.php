@@ -16,7 +16,9 @@ class UserCompanyContact extends Model
         "customer_name",
         "customer_email",
         "customer_phone",
-        "review"
+        "customer_content",
+        "review",
+        "assign"
     ];
 
     public function company(): BelongsTo

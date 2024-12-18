@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Panel\Contact;
+namespace App\Http\Controllers\Merchant\Contact;
 
 use App\Http\Controllers\Controller;
+use App\Models\CompanyUser;
 use App\Models\UserCompanyContact;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class UserCompanyController extends Controller
@@ -15,17 +17,24 @@ class UserCompanyController extends Controller
      */
     public function index(): View
     {
+        $user = Auth::user();
+
+        $companyIds = $user->companies->pluck('id');
+
         $users = UserCompanyContact::query()
+            ->whereIn("company_id", $companyIds)
+            ->where("assign",true)
             ->orderBy('review', 'ASC')
             ->paginate(20);
 
-        return view('panel.pages.contact.user.index', compact(["users"]));
+        return view('merchant.pages.contact.user.index', compact("users"));
     }
+
 
     public function show($id): View
     {
         $user = UserCompanyContact::query()->findOrFail($id);
-        return view('panel.pages.contact.user.show', compact(["user"]));
+        return view('merchant.pages.contact.user.show', compact(["user"]));
     }
 
     /**
@@ -38,12 +47,6 @@ class UserCompanyController extends Controller
         if ($request->has("review")){
             $model->update([
                 "review" => !$request->get("review"),
-            ]);
-        }
-
-        if ($request->has("assign")){
-            $model->update([
-                "assign" => !$request->get("assign")
             ]);
         }
 

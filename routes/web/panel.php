@@ -234,16 +234,6 @@ Route::prefix("companies")->group(function () {
 });
 
 Route::prefix("contacts")->group(function () {
-    Route::resource("users", UserCompanyController::class)
-        ->parameters(['users' => 'id'])->names([
-            'index' => 'panel.contacts.users.index',
-            'create' => 'panel.contacts.users.create',
-            'show' => 'panel.contacts.users.show',
-            'store' => 'panel.contacts.users.store',
-            'update' => 'panel.contacts.users.update',
-            'edit' => 'panel.contacts.users.edit',
-            'destroy' => 'panel.contacts.users.destroy',
-        ]);
 
     Route::resource("users", UserCompanyController::class)
         ->parameters(['users' => 'id'])->names([

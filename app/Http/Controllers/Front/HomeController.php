@@ -57,6 +57,7 @@ class HomeController extends Controller
             "customer_name" => $request->get("name"),
             "customer_email" => $request->get("email"),
             "customer_phone" => $request->get("phone"),
+            "customer_content" => $request->get("content"),
             "review" => false,
         ])->save();
 

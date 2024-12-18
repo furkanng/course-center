@@ -22,7 +22,7 @@
                         <div>
                             <h5 class="mb-0">Kullanıcılar Listesi</h5>
                             <p class="text-sm mb-0">
-                                İletişim talebinde bulunan tüm kullanıcıları görebilirsiniz
+                                İletişim talebinde bulunan tüm kullanıcıları görebilirsiniz. Kayıt yapıldıysa butona tıklayınız kayıt yapıldı olarak işaretleyiniz.
                             </p>
                         </div>
                     </div>
@@ -48,9 +48,6 @@
                                     Kayıt Yaptırdı
                                 </th>
                                 <th>
-                                    Kuruma İlet
-                                </th>
-                                <th>
                                     İşlemler
                                 </th>
                             </tr>
@@ -68,13 +65,13 @@
                                         {{$user->customer_phone}}
                                     </td>
                                     <td class="text-sm">
-                                        <a href="{{route("panel.companies.company.edit",["id" =>$user->company->id])}}"
+                                        <a href="{{route("merchant.companies.company.edit",["id" =>$user->company->id])}}"
                                            target="_blank">
                                             {{$user->company->name}}
                                         </a>
                                     </td>
                                     <td class="text-sm">
-                                        <form class="form-submit" action="{{route("panel.contacts.users.update",["id"=> $user->id])}}"
+                                        <form class="form-submit" action="{{route("merchant.contacts.users.update",["id"=> $user->id])}}"
                                               method="POST">
                                             @csrf
                                             @method("PUT")
@@ -86,19 +83,7 @@
                                     </td>
 
                                     <td class="text-sm">
-                                        <form class="form-submit" action="{{route("panel.contacts.users.update",["id"=> $user->id])}}"
-                                              method="POST">
-                                            @csrf
-                                            @method("PUT")
-                                            <input name="assign" value="{{$user->assign}}" hidden="">
-                                            <button type="submit" class="btn {{$user->assign ? 'btn-info' : 'btn-danger'}} btn-sm">
-                                                {{$user->assign ? 'Evet' : 'Hayır'}}
-                                            </button>
-                                        </form>
-                                    </td>
-
-                                    <td class="text-sm">
-                                        <a href="{{route("panel.contacts.users.show",["id" => $user->id])}}"
+                                        <a href="{{route("merchant.contacts.users.show",["id" => $user->id])}}"
                                            class="mx-2" data-bs-toggle="tooltip"
                                            data-bs-original-title="Detaylar">
                                             <i class="fas fa-edit text-secondary"></i>

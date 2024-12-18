@@ -6,6 +6,7 @@ use App\Http\Controllers\Merchant\Company\MyRequestController;
 use App\Http\Controllers\Merchant\Company\PriceController;
 use App\Http\Controllers\Merchant\Company\RequestController;
 use App\Http\Controllers\Merchant\Company\SssController;
+use App\Http\Controllers\Merchant\Contact\UserCompanyController;
 use App\Http\Controllers\Merchant\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -83,3 +84,16 @@ Route::prefix("companies")->group(function () {
 
 });
 
+Route::prefix("contacts")->group(function () {
+
+    Route::resource("users", UserCompanyController::class)
+        ->parameters(['users' => 'id'])->names([
+            'index' => 'merchant.contacts.users.index',
+            'create' => 'merchant.contacts.users.create',
+            'show' => 'merchant.contacts.users.show',
+            'store' => 'merchant.contacts.users.store',
+            'update' => 'merchant.contacts.users.update',
+            'edit' => 'merchant.contacts.users.edit',
+            'destroy' => 'merchant.contacts.users.destroy',
+        ]);
+});

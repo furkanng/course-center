@@ -577,6 +577,13 @@
                                                     class="fa-light fa-phone"></i></span>
                                         </div>
                                     </div>
+                                    <div class="col-xl-12">
+                                        <div class="course__popup-input">
+                                            <input type="text" name="content" placeholder="Mesajınız">
+                                            <span class="course__popup-input-icon"><i
+                                                    class="fa-light fa-comment"></i></span>
+                                        </div>
+                                    </div>
                                     <div class="col-xxl-12">
                                         <div class="course__popup-btn">
                                             <button type="submit" class="tp-btn w-100">İletişime Geç</button>
