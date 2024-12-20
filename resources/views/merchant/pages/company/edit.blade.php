@@ -108,7 +108,7 @@
                             <div class="row">
                                 <div class="col-3">
                                     <label class="mt-4">İl</label>
-                                    <select class="form-control" name="city" data-selected-city="{{ $company->city }}"
+                                    <select class="form-control" name="city" data-selected-city="{{ \App\Service\Helper::formatTurkishString($company->city) }}"
                                             id="citySelect" required
                                             onchange="updateDistricts()">
                                         <option value="">Seciniz</option>
@@ -117,7 +117,7 @@
                                 <div class="col-3">
                                     <label class="mt-4">İlçe</label>
                                     <select class="form-control" name="district"
-                                            data-selected-district="{{ $company->district}}" required
+                                            data-selected-district="{{ \App\Service\Helper::formatTurkishString($company->district) }}" required
                                             id="districtSelect">
                                         <option value="">Önce ili seçiniz</option>
                                     </select>
