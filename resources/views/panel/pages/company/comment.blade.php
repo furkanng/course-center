@@ -25,8 +25,9 @@
                                 Bu kuruma ait olan tüm yorumları görebilirsiniz.
                             </p>
                         </div>
+                        <a href="{{route("panel.companies.comment.create",["company" => $company->id])}}"
+                           class="btn bg-gradient-primary btn-sm mb-0">+&nbsp; Yeni Yorum</a>
                     </div>
-
                 </div>
                 <div class="card-body px-0 pb-0">
                     <div class="table-responsive">
@@ -69,7 +70,7 @@
                                 <x-delete-modal modalId="deleteModal-{{ $comment->id }}"
                                                 title="Silme Onayı"
                                                 body="Bu öğeyi silmek istediğinizden emin misiniz?"
-                                                action="{{ route('panel.companies.company.destroy',
+                                                action="{{ route('panel.companies.comment.destroy',
                                                 ['id' => $comment->id]) }}">
                                 </x-delete-modal>
                             @endforeach

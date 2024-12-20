@@ -29,4 +29,18 @@ class Course extends Model
     {
         return $this->belongsToMany(Company::class, 'company_course');
     }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::updating(function ($course) {
+            if ($course->isDirty('status') && $course->status == 0) {
+                $course->companies()->detach();
+            }
+        });
+        static::deleting(function ($course) {
+            $course->companies()->detach();
+        });
+    }
 }
