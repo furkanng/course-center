@@ -50,6 +50,13 @@
                                         aria-controls="nav-password" aria-selected="false"><i
                                         class="fa-regular fa-lock"></i>Şifre Değiştir
                                 </button>
+
+                                <button class="nav-link" id="nav-favorite-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-favorite" type="button" role="tab"
+                                        aria-controls="nav-favorite" aria-selected="false"><i
+                                        class="fa-regular fa-star"></i>Favoriler
+                                </button>
+
                                 <a href="{{route("logout")}}">
                                     <button class="nav-link"><i class="fa-regular fa-arrow-right-from-bracket"></i>
                                         Çıkış Yap
@@ -161,6 +168,42 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="tab-pane fade" id="nav-favorite" role="tabpanel" aria-labelledby="nav-favorite-tab">
+                                <div class="password__change">
+                                    <div class="password__change-top">
+                                        <h3 class="password__change-title">Favorilerim</h3>
+                                    </div>
+                                    <div class="password__form white-bg">
+                                        @if ($favorites->count() > 0)
+                                            <div class="row favorite__list">
+                                                @foreach ($favorites as $favorite)
+                                                    <div class="col-md-5 favorite__item">
+                                                        <div class="card h-100 shadow-sm">
+                                                            <div class="card-header bg-primary text-white">
+                                                                <h5 class="card-title mb-0">{{ $favorite->name }}</h5>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <p class="card-text text-muted">{{ $favorite->city }}</p>
+                                                            </div>
+                                                            <div class="card-footer bg-light d-flex justify-content-between">
+                                                                <a target="_blank" href="{{ $favorite->link }}" class="btn btn-outline-primary btn-sm">Detaylar</a>
+                                                                <button onclick="removeFavorite({{ $favorite->id }}, this)" class="btn btn-outline-danger btn-sm">Favoriden Kaldır</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                            <div class="pagination__container">
+                                                {{ $favorites->links() }}
+                                            </div>
+                                        @else
+                                            <p class="text-muted">Henüz favorilere eklenmiş bir Kurum yok.</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -225,6 +268,61 @@
     </div>
 @endsection
 
+@push('style')
+    <style>
+        .favorite__list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .favorite__item {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 15px;
+        }
+
+        .card-body {
+            padding: 15px;
+            background: #fff;
+        }
+
+        .card-footer {
+            padding: 10px 15px;
+        }
+
+        .btn {
+            padding: 5px 15px;
+            font-size: 14px;
+        }
+
+        .pagination__container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .text-muted {
+            color: #6c757d;
+        }
+    </style>
+@endpush
+
 @push('scripts')
 
     <script>
@@ -241,6 +339,29 @@
             $('select').niceSelect();
 
         });
+    </script>
+    <script>
+        async function removeFavorite(companyId, button) {
+            try {
+                const response = await fetch("{{ route('front.favorite.toggle') }}", {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                    },
+                    body: JSON.stringify({ companyId }),
+                });
+
+                if (response.ok) {
+                    const parentItem = button.closest('.favorite__item');
+                    parentItem.remove();
+                } else {
+                    console.error('İstek başarısız:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Favori kaldırma hatası:', error);
+            }
+        }
     </script>
 
 @endpush

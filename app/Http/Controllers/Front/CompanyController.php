@@ -9,6 +9,7 @@ use App\Models\Feature;
 use App\Service\Helper;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class CompanyController extends Controller
@@ -83,6 +84,12 @@ class CompanyController extends Controller
 
         $totalReviews = $comments->count();
 
+        $isFavorite = false;
+
+        if (Auth::check()) {
+            $isFavorite = auth()->user()->favorite()->where('company_id', $company->id)->exists();
+        }
+
         $ratings = [];
         for ($i = 1; $i <= 5; $i++) {
             $count = $comments->where('rating', $i)->count();
@@ -103,7 +110,8 @@ class CompanyController extends Controller
             'comments',
             'averageRating',
             'totalReviews',
-            'ratings'
+            'ratings',
+            'isFavorite'
         ]));
     }
 }

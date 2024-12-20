@@ -105,4 +105,9 @@ class Company extends Model
     {
         return $this->hasMany(CompanyComments::class)->where("status",true)->orderBy("created_at");
     }
+
+    public function favorite(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'user_favorites');
+    }
 }

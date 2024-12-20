@@ -12,8 +12,10 @@ use App\Models\Page;
 use App\Models\UserCompanyContact;
 use App\Service\Helper;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -95,4 +97,25 @@ class HomeController extends Controller
 
         return redirect()->back()->with("success", "Abone Olundu");
     }
+
+    public function toggleFavorite(Request $request): JsonResponse
+    {
+        $user = auth()->user();
+        $companyId = $request->input('companyId');
+
+        if (!$user || !$companyId) {
+            return response()->json(['success' => false, 'message' => 'Geçersiz istek'], 400);
+        }
+
+        $isFavorited = $user->favorite()->where('company_id', $companyId)->exists();
+
+        if ($isFavorited) {
+            $user->favorite()->detach($companyId);
+            return response()->json(['success' => true, 'favorited' => false, 'message' => 'Favoriden çıkarıldı']);
+        } else {
+            $user->favorite()->attach($companyId);
+            return response()->json(['success' => true, 'favorited' => true, 'message' => 'Favorilere eklendi']);
+        }
+    }
+
 }

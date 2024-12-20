@@ -17,7 +17,8 @@ class UserController extends Controller
     public function index(): View
     {
         $user = Auth::user();
-        return view("front.pages.user.index", compact(["user"]));
+        $favorites = $user->favorite()->paginate(6);
+        return view("front.pages.user.index", compact(["user", "favorites"]));
     }
 
     /**

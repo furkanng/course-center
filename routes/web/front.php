@@ -48,3 +48,4 @@ Route::prefix(SeoPrefix::COMPANY->value)->group(function () {
 
 Route::post("teklif-al/{id}", [HomeController::class, "createContact"])->name("front.contact.create");
 Route::post("bulletin", [HomeController::class, "createBulletin"])->name("front.bulletin.create");
+Route::put("favorite-toggle", [HomeController::class, "toggleFavorite"])->name("front.favorite.toggle");

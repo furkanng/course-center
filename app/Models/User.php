@@ -90,4 +90,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(CompanyComments::class);
     }
+
+    public function favorite(): BelongsToMany
+    {
+        return $this->belongsToMany(Company::class, 'user_favorites');
+    }
 }

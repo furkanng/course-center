@@ -31,7 +31,7 @@
                                 <h5>Son Hareketler:</h5>
                                 <p>{{ $company->updated_at->format('d-m-Y') }}</p>
                             </div>
-                            <div class="course__rating-2 mb-30">
+                            <div class="course__rating-2 mb-30 mr-80">
                                 <h5>Puan:</h5>
                                 <div class="course__rating-inner d-flex align-items-center">
                                     <ul class="d-flex align-items-center list-unstyled">
@@ -45,6 +45,30 @@
                                     <p class="ms-3">{{ number_format($averageRating, 1) }}</p>
                                 </div>
                             </div>
+                            @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role == \App\Enums\UserRole::GUEST)
+                                <div class="course__rating-2 mb-30">
+                                    <div class="course__action-item d-flex align-items-center">
+                                        <button class="course__action-btn d-flex align-items-center {{ $isFavorite ? 'active' : '' }}"
+                                                id="favoriteButton"
+                                                onclick="toggleFavorite({{$company->id}}, this)"
+                                                data-favorited="{{ $isFavorite ? 'true' : 'false' }}">
+                                            <h5 class="mr-10">Favoriye Ekle:</h5>
+                                            <div class="course__action-icon mr-5">
+                                        <span>
+                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M6.86447 1.72209L7.74447 3.49644C7.86447 3.74343 8.18447 3.98035 8.45447 4.02572L10.0495 4.29288C11.0695 4.46426 11.3095 5.2103 10.5745 5.94625L9.33447 7.19636C9.12447 7.40807 9.00947 7.81637 9.07447 8.10873L9.42947 9.65625C9.70947 10.8812 9.06447 11.355 7.98947 10.7148L6.49447 9.82259C6.22447 9.66129 5.77947 9.66129 5.50447 9.82259L4.00947 10.7148C2.93947 11.355 2.28947 10.8761 2.56947 9.65625L2.92447 8.10873C2.98947 7.81637 2.87447 7.40807 2.66447 7.19636L1.42447 5.94625C0.694466 5.2103 0.929466 4.46426 1.94947 4.29288L3.54447 4.02572C3.80947 3.98035 4.12947 3.74343 4.24947 3.49644L5.12947 1.72209C5.60947 0.759304 6.38947 0.759304 6.86447 1.72209Z"
+                                                    stroke="#5F6160" stroke-width="1.3" stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                />
+                                            </svg>
+                                        </span>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                         @if(count($company->images) == 0)
                             <div class="course__img w-img mb-30">
@@ -617,6 +641,25 @@
             }
         }
     </style>
+    <style>
+        .course__action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .course__action-btn.active svg path {
+            stroke: #FF0000;
+        }
+
+        .course__action-btn span:last-child {
+            margin-left: 5px;
+        }
+    </style>
+
 @endpush
 
 @push('scripts')
@@ -638,6 +681,31 @@
                 },
             });
         });
+    </script>
+    <script>
+        async function toggleFavorite(companyId, button) {
+            const isFavorited = button.dataset.favorited === "true";
+
+            try {
+                const response = await fetch("{{ route('front.favorite.toggle') }}", {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                    },
+                    body: JSON.stringify({ companyId }),
+                });
+
+                if (response.ok) {
+                    button.dataset.favorited = isFavorited ? "false" : "true";
+                    button.classList.toggle('active');
+                } else {
+                    console.error('İstek başarısız:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Favori işleme hatası:', error);
+            }
+        }
     </script>
     <script>
         document.querySelectorAll('.rating-stars input').forEach((input) => {
