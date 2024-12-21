@@ -78,6 +78,11 @@ class CompanyController extends Controller
             return $mainMenu;
         });
 
+        $relatedCompany = Company::query()
+            ->where('company_type', $company->company_type)
+            ->limit(10)
+            ->get();
+
         $comments = $company->comments;
 
         $averageRating = $comments->avg('rating');
@@ -111,7 +116,8 @@ class CompanyController extends Controller
             'averageRating',
             'totalReviews',
             'ratings',
-            'isFavorite'
+            'isFavorite',
+            'relatedCompany'
         ]));
     }
 }

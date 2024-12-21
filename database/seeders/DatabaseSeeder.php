@@ -16,14 +16,14 @@ class DatabaseSeeder extends Seeder
         DB::table("link_list")->truncate();
 
         $this->call([
-            UserSeeder::class,
-            SettingSeeder::class,
-            CoursesSeeder::class,
-            CompanyTypeSeeder::class,
-            PageSeeder::class,
+            //UserSeeder::class,
+            //SettingSeeder::class,
+            //CoursesSeeder::class,
+            //CompanyTypeSeeder::class,
+            //PageSeeder::class,
             LanguageSeeder::class,
-            ImagesSeeder::class,
-            FeatureSeeder::class,
+            //ImagesSeeder::class,
+            //FeatureSeeder::class,
         ]);
     }
 }

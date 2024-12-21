@@ -13,8 +13,6 @@ class LanguageSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table("language")->delete();
-
         $defaultData =
             [
                 [
@@ -92,8 +90,23 @@ class LanguageSeeder extends Seeder
                     'value' => 'Öne çıkan dershaneler',
                     "language" => 'tr'
                 ],
+                [
+                    'key' => 'text_16',
+                    'value' => 'Benzer Kurumlar',
+                    "language" => 'tr'
+                ],
+                [
+                    'key' => 'text_17',
+                    'value' => 'Benzer kurumlara burdan ulaşabilirsiniz.',
+                    "language" => 'tr'
+                ],
             ];
 
-        Language::query()->insert($defaultData);
+        foreach ($defaultData as $data) {
+            if (!Language::query()->where('key', $data['key'])->exists()) {
+                Language::query()->create($data);
+            }
+        }
+
     }
 }

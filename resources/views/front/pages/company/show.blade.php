@@ -48,10 +48,11 @@
                             @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role == \App\Enums\UserRole::GUEST)
                                 <div class="course__rating-2 mb-30">
                                     <div class="course__action-item d-flex align-items-center">
-                                        <button class="course__action-btn d-flex align-items-center {{ $isFavorite ? 'active' : '' }}"
-                                                id="favoriteButton"
-                                                onclick="toggleFavorite({{$company->id}}, this)"
-                                                data-favorited="{{ $isFavorite ? 'true' : 'false' }}">
+                                        <button
+                                            class="course__action-btn d-flex align-items-center {{ $isFavorite ? 'active' : '' }}"
+                                            id="favoriteButton"
+                                            onclick="toggleFavorite({{$company->id}}, this)"
+                                            data-favorited="{{ $isFavorite ? 'true' : 'false' }}">
                                             <h5 class="mr-10">Favoriye Ekle:</h5>
                                             <div class="course__action-icon mr-5">
                                         <span>
@@ -72,7 +73,7 @@
                         </div>
                         @if(count($company->images) == 0)
                             <div class="course__img w-img mb-30">
-                                <img src="{{\App\Service\Helper::getNoImage()}}" style="width: 770px; height: 450px"
+                                <img src="{{\App\Service\Helper::getNoImage()}}"
                                      alt="">
                             </div>
                         @else
@@ -472,6 +473,61 @@
                                         </ul>
                                     </div>
                                 @endif
+
+                                <div class="course__related mt-80">
+                                    <div class="row">
+                                        <div class="col-xxl-12">
+                                            <div class="section__title-wrapper mb-40">
+                                                <h2 class="section__title">{{$language['text_16']}}</h2>
+                                                <p>{{$language['text_17']}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xxl-12">
+                                            <div class="course__slider swiper-container pb-60">
+                                                <div class="swiper-wrapper">
+                                                    @foreach($relatedCompany as $related)
+                                                        <div class="swiper-slide">
+                                                            <div class="course__item-2 transition-3 white-bg mb-30 fix">
+                                                                <div class="card h-100">
+                                                                    <a href="{{$related->link}}">
+                                                                        <div class="course__thumb-2 w-img">
+                                                                            @if($related->image)
+                                                                                <img src="{{$related->image_url}}" class="card-img-top" alt="">
+                                                                            @else
+                                                                                <img src="{{ asset("images/noImage2.webp") }}" class="card-img-top" alt="">
+                                                                            @endif
+                                                                        </div>
+                                                                    </a>
+                                                                    <div class="card-body d-flex flex-column">
+                                                                        <div class="course__top-2 d-flex flex-wrap mb-2">
+                                                                            @if(count($related->courses) > 0)
+                                                                                @foreach($related->courses->take(5) as $course)
+                                                                                    <div class="course__tag-2 mr-10 {{ \App\Service\Helper::randColor() }}">
+                                                                                        <a>{{ strtoupper($course->name) }}</a>
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            @endif
+                                                                        </div>
+                                                                        <h3 class="mt-auto">
+                                                                            <a href="{{$related->link}}" class="stretched-link">
+                                                                                <span style="font-size: medium">{{$related->name}}</span>
+                                                                            </a>
+                                                                        </h3>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <!-- Add Pagination -->
+                                                <div class="swiper-pagination"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -667,6 +723,8 @@
         document.addEventListener("DOMContentLoaded", function () {
             new Swiper(".swiper-container", {
                 loop: true,
+                slidesPerView: 2,
+                spaceBetween: 20,
                 navigation: {
                     nextEl: ".swiper-button-next",
                     prevEl: ".swiper-button-prev",
@@ -693,7 +751,7 @@
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': "{{ csrf_token() }}",
                     },
-                    body: JSON.stringify({ companyId }),
+                    body: JSON.stringify({companyId}),
                 });
 
                 if (response.ok) {
