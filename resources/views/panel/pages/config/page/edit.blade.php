@@ -54,10 +54,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label class="course">Adres</label>
-                                    <div id="edit-deschiption-edit" class="h-100">
-                                        {!! $page->content !!}
-                                    </div>
-                                    <input type="hidden" name="content" id="content">
+                                    <textarea name="content" id="content" rows="10" cols="80">{!! $page->content !!}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -93,6 +90,9 @@
             var contentInput = document.getElementById('content');
             contentInput.value = quill.root.innerHTML;
         });
+    </script>
+    <script>
+        CKEDITOR.replace('content');
     </script>
 @endpush
 

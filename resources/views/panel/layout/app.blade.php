@@ -21,6 +21,9 @@
     <link href="{{asset("panel/assets/css/nucleo-icons.css")}}" rel="stylesheet"/>
     <!-- CSS Files -->
     <link id="pagestyle" href="{{asset("panel/assets/css/soft-ui-dashboard.css?v=1.1.0")}}" rel="stylesheet"/>
+
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -475,8 +478,6 @@
         });
     });
 </script>
-
-
 @stack('style')
 @stack('scripts')
 </body>
