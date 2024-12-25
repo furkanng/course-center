@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table("link_list")->truncate();
+        //DB::table("link_list")->truncate();
 
         $this->call([
             //UserSeeder::class,
