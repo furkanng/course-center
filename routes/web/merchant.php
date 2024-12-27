@@ -7,6 +7,8 @@ use App\Http\Controllers\Merchant\Company\PriceController;
 use App\Http\Controllers\Merchant\Company\RequestController;
 use App\Http\Controllers\Merchant\Company\SssController;
 use App\Http\Controllers\Merchant\Contact\UserCompanyController;
+use App\Http\Controllers\Merchant\Finance\PaymentController;
+use App\Http\Controllers\Merchant\Finance\PlanController;
 use App\Http\Controllers\Merchant\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -83,6 +85,22 @@ Route::prefix("companies")->group(function () {
         ]);
 
 });
+
+Route::prefix("finance")->group(function () {
+
+    Route::resource("plans", PlanController::class)
+        ->parameters(['plans' => 'id'])->names([
+            'index' => 'merchant.finance.plans.index',
+            'show' => 'merchant.finance.plans.show',
+        ])->only(["index","show"]);
+
+    Route::post("plans/payment/{plan_id}",[PaymentController::class, "store"])->name("merchant.finance.plans.payment");
+
+    Route::get("plans/payment/success",[PaymentController::class, "success"])->name("merchant.finance.plans.payment.success");
+    Route::get("plans/payment/error",[PaymentController::class, "error"])->name("merchant.finance.plans.payment.error");
+
+});
+
 
 Route::prefix("contacts")->group(function () {
 

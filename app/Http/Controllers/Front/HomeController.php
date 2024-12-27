@@ -8,6 +8,7 @@ use App\Models\Bulletin;
 use App\Models\Company;
 use App\Models\CompanyComments;
 use App\Models\CompanyType;
+use App\Models\MostSearch;
 use App\Models\Page;
 use App\Models\UserCompanyContact;
 use App\Service\Helper;
@@ -15,20 +16,26 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
     public function home(): View
     {
-        $previewCompanies = Company::query()
+        $mostSearch = MostSearch::query()
             ->where("status", true)
-            ->orderBy("created_at", "desc")
-            ->take(6)
+            ->where(function ($query) {
+                $query->whereNull("remaining_date")
+                    ->orWhere("remaining_date", ">", now());
+            })
+            ->orderBy("order")
+            ->with('company')
             ->get();
+
+        $previewCompanies = $mostSearch->pluck('company');
 
         return view("front.pages.home", compact(["previewCompanies"]));
     }
+
 
     public function login(): View
     {

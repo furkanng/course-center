@@ -6,7 +6,7 @@
         <a class="navbar-brand m-0"
            href="{{route("panel.home")}}">
             <img src="{{asset("panel/assets/img/logo-ct-dark.png")}}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">Hangi Dershane</span>
+            <span class="ms-1 font-weight-bold">Hangi Derslig</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -59,6 +59,20 @@
                                href="{{route("panel.config.pages.index")}}">
                                 <span class="sidenav-mini-icon"> S </span>
                                 <span class="sidenav-normal"> Sayfa Yönetimi </span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ request()->routeIs('panel.config.most-search.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.config.most-search.*') ? 'active' : '' }}"
+                               href="{{route("panel.config.most-search.index")}}">
+                                <span class="sidenav-mini-icon"> E </span>
+                                <span class="sidenav-normal"> En Çok Arananlar </span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ request()->routeIs('panel.config.plans.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.config.plans.*') ? 'active' : '' }}"
+                               href="{{route("panel.config.plans.index")}}">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal"> Ödeme Planları </span>
                             </a>
                         </li>
                     </ul>

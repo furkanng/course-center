@@ -1,21 +1,20 @@
 <?php
 
 use App\Events\SmsEvent;
+use App\Http\Controllers\Merchant\Finance\PaymentController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
 
+
+Route::group(['prefix'=>'payment'],function (){
+
+    Route::post('notification',[PaymentController::class,'notification']);
+
+});
+
+/*
 Route::get("furkan", function () {
 
     $users = User::query()->where("role","admin")->get();

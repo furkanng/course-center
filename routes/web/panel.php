@@ -10,7 +10,9 @@ use App\Http\Controllers\Panel\Company\SssController;
 use App\Http\Controllers\Panel\Company\TypeController;
 use App\Http\Controllers\Panel\Config\FrontImagesController;
 use App\Http\Controllers\Panel\Config\LanguageController;
+use App\Http\Controllers\Panel\Config\MostSearchController;
 use App\Http\Controllers\Panel\Config\PageController;
+use App\Http\Controllers\Panel\Config\PlanController;
 use App\Http\Controllers\Panel\Contact\BulletinController;
 use App\Http\Controllers\Panel\Contact\UserCompanyController;
 use App\Http\Controllers\Panel\HomeController;
@@ -51,6 +53,26 @@ Route::prefix("site-config")->group(function () {
             'update' => 'panel.config.pages.update',
             'edit' => 'panel.config.pages.edit',
             'destroy' => 'panel.config.pages.destroy',
+        ]);
+
+    Route::resource('most-search', MostSearchController::class)
+        ->parameters(['most-search' => 'id'])->names([
+            'index' => 'panel.config.most-search.index',
+            'create' => 'panel.config.most-search.create',
+            'store' => 'panel.config.most-search.store',
+            'update' => 'panel.config.most-search.update',
+            'edit' => 'panel.config.most-search.edit',
+            'destroy' => 'panel.config.most-search.destroy',
+        ]);
+
+    Route::resource('plans', PlanController::class)
+        ->parameters(['plans' => 'id'])->names([
+            'index' => 'panel.config.plans.index',
+            'create' => 'panel.config.plans.create',
+            'store' => 'panel.config.plans.store',
+            'update' => 'panel.config.plans.update',
+            'edit' => 'panel.config.plans.edit',
+            'destroy' => 'panel.config.plans.destroy',
         ]);
 });
 

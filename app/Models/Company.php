@@ -86,6 +86,11 @@ class Company extends Model
             ->orderBy("order");
     }
 
+    public function mostSearch(): HasMany
+    {
+        return $this->hasMany(MostSearch::class, 'company_id', "id");
+    }
+
     public function price(): HasMany
     {
         return $this->hasMany(CompanyPrice::class, 'company_id', "id");
@@ -103,7 +108,7 @@ class Company extends Model
 
     public function comments(): HasMany
     {
-        return $this->hasMany(CompanyComments::class)->where("status",true)->orderBy("created_at");
+        return $this->hasMany(CompanyComments::class)->where("status", true)->orderBy("created_at");
     }
 
     public function favorite(): BelongsToMany

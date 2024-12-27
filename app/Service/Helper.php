@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class Helper
@@ -134,6 +135,24 @@ class Helper
 
         return $firstLetter . $restOfString;
     }
+
+    public static function getRemainingTimeAttribute($time): string
+    {
+        $now = Carbon::now();
+
+        $remaining = $time ? Carbon::parse($time) : null;
+
+        if (!$remaining) {
+            return 'Süre belirlenmemiş';
+        }
+
+        if ($remaining->isPast()) {
+            return 'Süre bitmiş';
+        }
+
+        return $remaining->diffForHumans($now, ['parts' => 3]);
+    }
+
 
 
 
