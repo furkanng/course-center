@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="example-number-input" class="form-control-label">Email</label>
+                                    <label for="example-number-input" class="form-control-label">E Mail</label>
                                     <input class="form-control" type="text" name="email" style="width: 100%"
                                            value="{{$user->email}}"
                                            id="email">
@@ -80,9 +80,7 @@
                                                 id="districtSelect">
                                             <option value="">Önce ili seçiniz</option>
                                         </select>
-
                                     </div>
-
                                 </div>
                             </div>
                             <div class="col-md-6">

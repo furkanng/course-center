@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Merchant\Account\OrderController;
+use App\Http\Controllers\Merchant\Account\ProfileController;
 use App\Http\Controllers\Merchant\Company\CompanyController;
 use App\Http\Controllers\Merchant\Company\CompanyImageController;
 use App\Http\Controllers\Merchant\Company\MyRequestController;
@@ -92,12 +94,12 @@ Route::prefix("finance")->group(function () {
         ->parameters(['plans' => 'id'])->names([
             'index' => 'merchant.finance.plans.index',
             'show' => 'merchant.finance.plans.show',
-        ])->only(["index","show"]);
+        ])->only(["index", "show"]);
 
-    Route::post("plans/payment/{plan_id}",[PaymentController::class, "store"])->name("merchant.finance.plans.payment");
+    Route::post("plans/payment/{plan_id}", [PaymentController::class, "store"])->name("merchant.finance.plans.payment");
 
-    Route::get("plans/payment/success",[PaymentController::class, "success"])->name("merchant.finance.plans.payment.success");
-    Route::get("plans/payment/error",[PaymentController::class, "error"])->name("merchant.finance.plans.payment.error");
+    Route::get("plans/payment/success", [PaymentController::class, "success"])->name("merchant.finance.plans.payment.success");
+    Route::get("plans/payment/error", [PaymentController::class, "error"])->name("merchant.finance.plans.payment.error");
 
 });
 
@@ -114,4 +116,14 @@ Route::prefix("contacts")->group(function () {
             'edit' => 'merchant.contacts.users.edit',
             'destroy' => 'merchant.contacts.users.destroy',
         ]);
+});
+
+Route::prefix("account")->group(function () {
+
+    Route::get("profile", [ProfileController::class, "index"])->name("merchant.account.profile.index");
+    Route::post("profile-delete", [ProfileController::class, "delete"])->name("merchant.account.profile.delete");
+    Route::post("profile-update-password", [ProfileController::class, "updatePassword"])->name("merchant.account.profile.updatePassword");
+    Route::post("profile-update", [ProfileController::class, "update"])->name("merchant.account.profile.update");
+
+    Route::get("orders", [OrderController::class, "index"])->name("merchant.account.order.index");
 });

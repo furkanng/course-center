@@ -13,12 +13,10 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <!-- Nucleo Icons -->
     <link href="{{asset("panel/assets/css/nucleo-icons.css")}}" rel="stylesheet"/>
-    <link href="{{asset("panel/assets/css/nucleo-icons.css")}}" rel="stylesheet"/>
     <link href="{{asset("panel/assets/css/style.css")}}" rel="stylesheet"/>
     <link rel="stylesheet" href="{{asset("front/assets/css/nice-select.css")}}">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="{{asset("panel/assets/css/nucleo-icons.css")}}" rel="stylesheet"/>
     <!-- CSS Files -->
     <link id="pagestyle" href="{{asset("panel/assets/css/soft-ui-dashboard.css?v=1.1.0")}}" rel="stylesheet"/>
 
