@@ -8,10 +8,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Plan;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class PaymentController extends Controller
 {
-    public function store(Request $request,$planId)
+    public function store(Request $request, $planId)
     {
         $plan = Plan::query()->findOrFail($planId);
 
@@ -35,9 +36,9 @@ class PaymentController extends Controller
             "plan_type" => $plan->type->value,
             "shipping_address" => json_encode($shippingAddress),
             "payment_type" => "paytr",
-            "payment_status" => PaymentStatus::UNPAID->value,
+            "payment_status" => PaymentStatus::UNPAID,
             "price" => $plan->price,
-            "status" => OrderStatus::PENDING->value,
+            "status" => OrderStatus::PENDING,
             "viewed" => false,
             "code" => $random_id,
         ])->save();
@@ -73,12 +74,12 @@ class PaymentController extends Controller
         ## Başarılı ödeme sonrası müşterinizin yönlendirileceği sayfa
         ## !!! Bu sayfa siparişi onaylayacağınız sayfa değildir! Yalnızca müşterinizi bilgilendireceğiniz sayfadır!
         ## !!! Siparişi onaylayacağız sayfa "Bildirim URL" sayfasıdır (Bakınız: 2.ADIM Klasörü).
-        $merchant_ok_url = "https://dershane.test/user/merchant/finance/plans/payment/success";
+        $merchant_ok_url = "https://hangiderslig.com/user/merchant/finance/plans/payment/success";
         #
         ## Ödeme sürecinde beklenmedik bir hata oluşması durumunda müşterinizin yönlendirileceği sayfa
         ## !!! Bu sayfa siparişi iptal edeceğiniz sayfa değildir! Yalnızca müşterinizi bilgilendireceğiniz sayfadır!
         ## !!! Siparişi iptal edeceğiniz sayfa "Bildirim URL" sayfasıdır (Bakınız: 2.ADIM Klasörü).
-        $merchant_fail_url = "https://dershane.test/user/merchant/finance/plans/payment/error";
+        $merchant_fail_url = "https://hangiderslig.com/user/merchant/finance/plans/payment/error";
         #
         ## Müşterinin sepet/sipariş içeriği
         $user_basket = base64_encode(json_encode(array(
@@ -108,7 +109,7 @@ class PaymentController extends Controller
         ## !!! Eğer bu örnek kodu sunucuda değil local makinanızda çalıştırıyorsanız
         ## buraya dış ip adresinizi (https://www.whatismyip.com/) yazmalısınız. Aksi halde geçersiz paytr_token hatası alırsınız.
         //$user_ip = $ip;
-        $user_ip = '176.88.120.18';
+        $user_ip = $ip;
         ##
 
         ## İşlem zaman aşımı süresi - dakika cinsinden
@@ -184,7 +185,7 @@ class PaymentController extends Controller
 
     public function notification(Request $request)
     {
-        $data = request()->all();
+        $data = $request->all();
         ####################### DÜZENLEMESİ ZORUNLU ALANLAR #######################
         ## API Entegrasyon Bilgileri - Mağaza paneline giriş yaparak BİLGİ sayfasından alabilirsiniz.
 
@@ -209,20 +210,19 @@ class PaymentController extends Controller
         ## 2) Eğer sipariş zaten daha önceden onaylandıysa veya iptal edildiyse  echo "OK"; exit; yaparak sonlandırın.
 
 
-           $order = Order::query()->where("code",$data['merchant_oid'])->first();
+        $order = Order::query()->where("code", $data['merchant_oid'])->first();
 
-           if($order->payment_status == PaymentStatus::PAID->value){
-                echo "OK";
-                exit;
-            }
-
+        if ($order->payment_status == PaymentStatus::PAID->value) {
+            echo "OK";
+            exit;
+        }
 
         if ($data['status'] == 'success') { ## Ödeme Onaylandı
 
-            $order = Order::query()->where("code",$data['merchant_oid'])->first();
+            $order = Order::query()->where("code", $data['merchant_oid'])->first();
             $order->forceFill([
-                "payment_status" => PaymentStatus::PAID->value,
-            ]);
+                "payment_status" => PaymentStatus::PAID,
+            ])->save();
             ## BURADA YAPILMASI GEREKENLER
             ## 1) Siparişi onaylayın.
             ## 2) Eğer müşterinize mesaj / SMS / e-posta gibi bilgilendirme yapacaksanız bu aşamada yapmalısınız.
@@ -230,9 +230,9 @@ class PaymentController extends Controller
             ## değişebilir. Güncel tutarı $data['total_amount'] değerinden alarak muhasebe işlemlerinizde kullanabilirsiniz.
 
         } else { ## Ödemeye Onay Verilmedi
-            $order = Order::query()->where("code",$data['merchant_oid'])->first();
+            $order = Order::query()->where("code", $data['merchant_oid'])->first();
             $order->forceFill([
-                "payment_detail" => $data['failed_reason_msg'].$data['failed_reason_code'],
+                "payment_detail" => $data['failed_reason_msg'] . $data['failed_reason_code'],
             ]);
             ## BURADA YAPILMASI GEREKENLER
             ## 1) Siparişi iptal edin.
@@ -249,12 +249,12 @@ class PaymentController extends Controller
     }
 
 
-    public function success()
+    public function success(): View
     {
         return view("merchant.pages.finance.payment.success");
     }
 
-    public function error()
+    public function error(): View
     {
         return view("merchant.pages.finance.payment.error");
     }

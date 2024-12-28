@@ -6,8 +6,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-
-
 Route::group(['prefix'=>'payment'],function (){
 
     Route::post('notification',[PaymentController::class,'notification']);
