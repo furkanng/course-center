@@ -26,25 +26,31 @@ trait ImageTrait
 
     protected function processImage(): void
     {
-        if ($this->isDirty('image') && !empty($this->image)) {
-            $manager = new ImageManager(new Driver());
-            $image = $manager->read($this->image);
+        $images = is_array($this->image) ? $this->image : [$this->image];
+        foreach ($images as $imageData) {
+            if ($this->isDirty('image') && !empty($imageData)) {
+                $manager = new ImageManager(new Driver());
 
-            if ($this->width || $this->height) {
-                $image->resize($this->width, $this->height);
+                $image = $manager->read($imageData);
+
+
+                if ($this->width || $this->height) {
+                    $image->resize($this->width, $this->height);
+                }
+
+                if ($this->watermark) {
+                    $watermark = $manager->read(Storage::disk("images")->get("watermark.png"));
+                    $image->place($watermark, 'center', 0, 0, 50);
+                }
+
+                $encoded = $image->toJpeg()->toDataUri();
+                // $encoded = $image->encode('jpeg');
+                $filename = $this->getFileName();
+
+                $url = Storage::disk(config("filesystems.default"))->putFileAs($this->getTable(), $encoded, $filename);
+
+                $this->updateImageAttributes($filename, $url);
             }
-
-            if ($this->watermark) {
-                $watermark = $manager->read(Storage::disk("images")->get("watermark.png"));
-                $image->place($watermark, 'center', 0, 0, 50);
-            }
-
-            $encoded = $image->toJpeg()->toDataUri();
-            $filename = $this->getFileName();
-
-            $url = Storage::disk(config("filesystems.default"))->putFileAs($this->getTable(), $encoded, $filename);
-
-            $this->updateImageAttributes($filename, $url);
         }
     }
 

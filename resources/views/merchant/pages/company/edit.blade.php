@@ -398,7 +398,7 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{$price->price_title->label()}}</h6>
+                                                <h6 class="mb-0 text-sm">{{$price->price_fields->price_title}}</h6>
                                             </div>
                                         </div>
                                     </td>
@@ -426,9 +426,9 @@
                                         </button>
                                         <x-price-form-modal
                                             modalId="priceFormModalEdit{{$price->id}}"
-                                            action="{{ route('panel.companies.price.update',['id' => $price->id]) }}"
+                                            action="{{ route('merchant.companies.price.update',['id' => $price->id]) }}"
                                             method="PUT"
-                                            title="{{$price->price_title}}"
+                                            title="{{$price->price_field_id}}"
                                             price="{{$price->price}}"
                                             discounted="{{$price->discounted_price}}"
                                             status="{{$price->status}}">

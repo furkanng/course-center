@@ -36,9 +36,25 @@ class CompanyImageController extends Controller
      */
     public function store(Request $request, $id): RedirectResponse
     {
-        $model = new CompanyImage();
-        $model->fill($request->all());
-        $model->forceFill(["company_id" => $id, "status" => false])->save();
+        if ($request->hasFile('image')) {
+
+            $images = $request->file('image');
+
+            foreach ($images as $image) {
+
+                $model = new CompanyImage();
+
+
+                $model->company_id = $id;
+                $model->status = true;
+
+
+                $model->image = $image;
+
+
+                $model->save();
+            }
+        }
 
         return redirect()->back()->with("success", "İşlem Başarılı");
     }

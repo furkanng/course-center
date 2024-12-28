@@ -293,6 +293,14 @@
                                 <span class="sidenav-normal"> Tipler  </span>
                             </a>
                         </li>
+
+                        <li class="nav-item {{ request()->routeIs('panel.companies.price_types.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.companies.price_types.*') ? 'active' : '' }}"
+                               href="{{route("panel.companies.price_types.index")}}">
+                                <span class="sidenav-mini-icon"> TL </span>
+                                <span class="sidenav-normal"> Fiyat Tipleri  </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>

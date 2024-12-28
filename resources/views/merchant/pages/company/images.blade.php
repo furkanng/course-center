@@ -19,7 +19,7 @@
             <div class="card card-body mt-4">
                 <h6 class="mb-0">Resim Ekle & Düzenle</h6>
                 <hr class="horizontal dark my-3">
-                <label class="mt-4 form-label">Resim yüklemek için tıklayınız</label>
+                <label class="mt-4 form-label">Resim yüklemek için tıklayınız <span style="color:red">(Tek seferde görsel yükleme sınırı 20 adettir!) </span></label>
                 <form action="/file-upload" class="form-control dropzone" id="dropzone">
                     <div class="fallback">
                         <input name="image" type="file" multiple/>
@@ -81,17 +81,34 @@
             Dropzone.instances.forEach(dz => dz.destroy());
         }
 
-        Dropzone.autoDiscover = false;
+        Dropzone.autoDiscover = true;
         var dropzoneElement = document.getElementById('dropzone');
 
-        var myDropzone = new Dropzone(dropzoneElement, {
+        var myDropzone = new Dropzone("#dropzone", {
             url: "{{ route('merchant.companies.image.store', ['company' => $company->id]) }}",
             method: 'post',
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
             },
             paramName: "image",
+            uploadMultiple: true,
             addRemoveLinks: true,
+            parallelUploads: 20,
+            success: function(file, response){
+                console.log("Resim yüklendi", response);
+            },
+            error: function(file, response){
+                console.log("Hata oluştu", response);
+            },
+            init: function () {
+                this.on("addedfile", function (file) {
+                    console.log("Dosya eklendi:", file);
+                });
+
+                this.on("queuecomplete", function () {
+                    console.log("Tüm dosyalar yüklendi.");
+                });
+            }
         });
     </script>
 @endpush

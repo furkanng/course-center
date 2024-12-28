@@ -15,12 +15,12 @@
                     @method($method)
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Fiyat Başlık:</label>
-                        <select class="form-control" name="price_title" required>
+                        <select class="form-control" name="price_field_id" required>
                             <option>Seçiniz</option>
-                            @foreach(\App\Enums\CompanyPrice::cases() as $companyPrice)
-                                <option value="{{$title == '' ? $companyPrice->value : $title}}"
-                                    {{$companyPrice->value === $title ? 'selected' : ''}}>
-                                    {{$companyPrice->label()}}
+                            @foreach(\App\Models\PriceField::where('status','1')->get() as $priceField)
+                                <option value="{{$priceField->id}}"
+                                    {{$priceField->id == $title ? 'selected' : ''}}>
+                                    {{$priceField->price_title}}
                                 </option>
                             @endforeach
                         </select>

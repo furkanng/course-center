@@ -25,8 +25,10 @@ use App\Http\Controllers\Panel\System\CourseController;
 use App\Http\Controllers\Panel\System\InstitutionalRequestController;
 use App\Http\Controllers\Panel\System\InstitutionController;
 use App\Http\Controllers\Panel\System\UserController;
+use App\Http\Controllers\Panel\Company\PriceTypesController;
 use App\Http\Controllers\Panel\Company\UserController as CompanyUserController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get("/", [HomeController::class, "home"])->name("panel.home");
 Route::post("cache-clear", [HomeController::class, "cache"])->name("panel.cache");
@@ -249,6 +251,16 @@ Route::prefix("companies")->group(function () {
             'store' => 'panel.companies.type.store',
             'update' => 'panel.companies.type.update',
             'edit' => 'panel.companies.type.edit',
+        ]);
+
+    Route::resource("priceTypes", PriceTypesController::class)
+        ->parameters(['priceTypes' => 'id'])->names([
+            'index' => 'panel.companies.price_types.index',
+            'create' => 'panel.companies.price_types.create',
+            'store' => 'panel.companies.price_types.store',
+            'update' => 'panel.companies.price_types.update',
+            'edit' => 'panel.companies.price_types.edit',
+            'destroy' => 'panel.companies.price_types.destroy',
         ]);
 
     Route::post("type/delete", [TypeController::class, "delete"])

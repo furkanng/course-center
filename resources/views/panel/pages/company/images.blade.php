@@ -19,12 +19,28 @@
             <div class="card card-body mt-4">
                 <h6 class="mb-0">Resim Ekle & Düzenle</h6>
                 <hr class="horizontal dark my-3">
-                <label class="mt-4 form-label">Resim yüklemek için tıklayınız</label>
+                <label class="mt-4 form-label">Resim yüklemek için tıklayınız  <span style="color:red">(Tek seferde görsel yükleme sınırı 20 adettir!) </span> </label>
+
+{{--                <form id="image-upload-form" method="POST" enctype="multipart/form-data"--}}
+{{--                      action="{{ route('panel.companies.image.store', ['company' => $company->id]) }}">--}}
+{{--                    @csrf--}}
+{{--                    <input type="file" name="image[]" class="form-control" id="image-input" hidden multiple>--}}
+{{--                    <button class="btn bg-gradient-primary btn-sm mb-0 me-2" type="button" id="upload-button">--}}
+{{--                        Yükle--}}
+{{--                    </button>--}}
+{{--                    <button type="submit" class="btn bg-gradient-primary mb-0 ms-lg-auto me-lg-0 me-auto mt-lg-0 mt-2">--}}
+{{--                        Kaydet--}}
+{{--                    </button>--}}
+{{--                </form>--}}
+
+
                 <form action="/file-upload" class="form-control dropzone" id="dropzone">
                     <div class="fallback">
                         <input name="image" type="file" multiple/>
                     </div>
                 </form>
+
+
             </div>
         </div>
     </div>
@@ -86,6 +102,20 @@
 
 @push('scripts')
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Yükleme düğmesine tıklandığında dosya seçici tetiklenir
+            let uploadButton = document.getElementById('upload-button');
+            let fileInput = document.getElementById('image-input');
+
+            if (uploadButton && fileInput) {
+                uploadButton.addEventListener('click', function () {
+                    fileInput.click();
+                });
+            }
+
+
+        });
+
         if (Dropzone.instances.length > 0) {
             Dropzone.instances.forEach(dz => dz.destroy());
         }
@@ -101,12 +131,23 @@
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
             },
             paramName: "image",
+            uploadMultiple: true,
             addRemoveLinks: true,
+            parallelUploads: 20,
             success: function(file, response){
                 console.log("Resim yüklendi", response);
             },
             error: function(file, response){
                 console.log("Hata oluştu", response);
+            },
+            init: function () {
+                this.on("addedfile", function (file) {
+                    console.log("Dosya eklendi:", file);
+                });
+
+                this.on("queuecomplete", function () {
+                    console.log("Tüm dosyalar yüklendi.");
+                });
             }
         });
 

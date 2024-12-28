@@ -32,7 +32,7 @@ class PriceController extends Controller
     {
         $request->validate([
             "price" => "required",
-            "price_title" => "required",
+            "price_field_id" => "required",
             "status" => "required",
         ]);
 
@@ -66,7 +66,7 @@ class PriceController extends Controller
     {
         $request->validate([
             "price" => "required",
-            "price_title" => "required",
+            "price_field_id" => "required",
             "status" => "required",
         ]);
 
