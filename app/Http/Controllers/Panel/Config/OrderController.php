@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MostSearch;
 use App\Models\Order;
 use App\Models\Plan;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -78,14 +79,26 @@ class OrderController extends Controller
 
         switch ($order->plan->type):
             case PaymentType::MOST_SEARCHED:
-                $model = new MostSearch();
-                $model->forceFill([
-                    "company_id" => 1,
-                    "added_by" => "System",
-                    "order_id" => $order->id,
-                    "remaining_date" => $order->plan->period->days(),
-                    "status" => true,
-                ])->save();
+                $companyIds = json_decode($order->companies, true);
+
+                if (!is_array($companyIds)) {
+                    $companyIds = [$companyIds];
+                }
+
+                $daysToAdd = $order->plan->period->days();
+                $remainingDate = $daysToAdd !== null ? Carbon::now()->addDays($daysToAdd) : null;
+
+                foreach ($companyIds as $companyId) {
+                    $model = new MostSearch();
+                    $model->forceFill([
+                        "company_id" => $companyId,
+                        "added_by" => "System",
+                        "order_id" => $order->id,
+                        "remaining_date" => $remainingDate,
+                        "status" => true,
+                    ])->save();
+                }
+
                 break;
         endswitch;
 

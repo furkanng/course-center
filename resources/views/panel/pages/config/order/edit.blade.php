@@ -61,8 +61,8 @@
                                 <table class="table text-right">
                                     <thead class="bg-default">
                                     <tr>
-                                        <th scope="col" class="pe-2 text-start ps-2">Ürün Adı</th>
-                                        <th scope="col" class="pe-2" colspan="2"></th>
+                                        <th scope="col" class="pe-2 text-start ps-2">Reklam Adı</th>
+                                        <th scope="col" class="pe-2" colspan="2">Reklam Adedi</th>
                                         <th scope="col" class="pe-2" colspan="2"></th>
                                         <th scope="col" class="pe-2">Fiyat</th>
                                     </tr>
@@ -70,7 +70,7 @@
                                     <tbody>
                                     <tr>
                                         <td class="text-start">{{$order->plan->name}}</td>
-                                        <td class="ps-4" colspan="2"></td>
+                                        <td class="ps-4" colspan="2">{{$order->piece}} Kurum</td>
                                         <td class="ps-4" colspan="2"></td>
                                         <td class="ps-4">{{$order->price}} ₺</td>
                                     </tr>

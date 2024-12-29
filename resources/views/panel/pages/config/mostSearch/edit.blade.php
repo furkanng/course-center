@@ -45,7 +45,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <div class="form-check form-switch">
+                                    <div class="form-check form-switch mt-4">
                                         <input class="form-check-input" name="status" type="checkbox"
                                                id="flexSwitchCheckDefault" {{ old('status', $company->status) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Durum</label>
@@ -60,7 +60,14 @@
                                 </div>
                             </div>
                         </div>
-
+                        @if(!empty($company->order_id))
+                            <a href="{{route("panel.config.orders.edit",["id" => $company->order_id])}}"
+                               target="_blank">
+                                <button class="btn bg-gradient-info mb-0" type="button" name="button">
+                                    Sipariş Detayı
+                                </button>
+                            </a>
+                        @endif
                         <button type="submit" class="btn bg-gradient-primary my-2">Güncelle</button>
                     </form>
                 </div>

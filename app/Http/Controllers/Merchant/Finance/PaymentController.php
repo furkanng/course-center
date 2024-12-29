@@ -53,7 +53,7 @@ class PaymentController extends Controller
             "shipping_address" => json_encode($shippingAddress),
             "payment_type" => "paytr",
             "payment_status" => PaymentStatus::UNPAID,
-            "price" => $plan->price,
+            "price" => $totalPrice,
             "status" => OrderStatus::PENDING,
             "viewed" => false,
             "code" => $orderId,
