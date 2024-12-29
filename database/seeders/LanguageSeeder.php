@@ -100,6 +100,16 @@ class LanguageSeeder extends Seeder
                     'value' => 'Benzer kurumlara burdan ulaşabilirsiniz.',
                     "language" => 'tr'
                 ],
+                [
+                    'key' => 'text_18',
+                    'value' => 'Teşşekür Ederiz.',
+                    "language" => 'tr'
+                ],
+                [
+                    'key' => 'text_19',
+                    'value' => 'Herhangi bir sorunuzda altta verilen mail adresinden bize ulaşabilirsiniz',
+                    "language" => 'tr'
+                ],
             ];
 
         foreach ($defaultData as $data) {

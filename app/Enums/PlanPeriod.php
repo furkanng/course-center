@@ -28,5 +28,20 @@ enum PlanPeriod: string
             self::YEAR_2 => '2 Yıl',
         };
     }
+
+    public function days(): ?int
+    {
+        return match ($this) {
+            self::PERMANENT => null,
+            self::DAY_1 => 1,
+            self::WEEK_1 => 7,
+            self::WEEK_2 => 14,
+            self::MONTH_1 => 30,
+            self::MONTH_2 => 60,
+            self::MONTH_6 => 180,
+            self::YEAR_1 => 365,
+            self::YEAR_2 => 730,
+        };
+    }
 }
 

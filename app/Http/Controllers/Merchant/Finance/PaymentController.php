@@ -7,6 +7,7 @@ use App\Enums\PaymentStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Plan;
+use App\Service\Helper;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -14,7 +15,22 @@ class PaymentController extends Controller
 {
     public function store(Request $request, $planId)
     {
+        $request->validate([
+            "name" => "required|string",
+            "email" => "required|email",
+            "address" => "required|string",
+            "phone" => "required",
+            "postal_code" => "required",
+            "city" => "required",
+            "district" => "required",
+            "companies" => "required"
+        ]);
+
+        $companies = $request->get("companies");
+
         $plan = Plan::query()->findOrFail($planId);
+
+        $totalPrice = count($companies) * $plan->price;
 
         $shippingAddress = [
             "name" => $request->get("name"),
@@ -27,7 +43,7 @@ class PaymentController extends Controller
             "order_notes" => $request->get("notes"),
         ];
 
-        $random_id = "11" . rand(1, 999) . rand(1, 88) * rand(1, 50);
+        $orderId = Helper::generateRandomCode();
 
         $order = new Order();
         $order->forceFill([
@@ -40,7 +56,9 @@ class PaymentController extends Controller
             "price" => $plan->price,
             "status" => OrderStatus::PENDING,
             "viewed" => false,
-            "code" => $random_id,
+            "code" => $orderId,
+            "companies" => json_encode($companies),
+            "piece" => count($companies),
         ])->save();
 
         ## 1. ADIM için örnek kodlar ##
@@ -57,33 +75,33 @@ class PaymentController extends Controller
         $email = $request->get("email");
         #
         ## Tahsil edilecek tutar.
-        $payment_amount = $plan->price * 100; //9.99 için 9.99 * 100 = 999 gönderilmelidir.
+        $payment_amount = $totalPrice * 100; //9.99 için 9.99 * 100 = 999 gönderilmelidir.
         #
         ## Sipariş numarası: Her işlemde benzersiz olmalıdır!! Bu bilgi bildirim sayfanıza yapılacak bildirimde geri gönderilir.
-        $merchant_oid = $random_id;
+        $merchant_oid = $orderId;
         #
         ## Müşterinizin sitenizde kayıtlı veya form aracılığıyla aldığınız ad ve soyad bilgisi
         $user_name = $request->get("name");
         #
         ## Müşterinizin sitenizde kayıtlı veya form aracılığıyla aldığınız adres bilgisi
-        $user_address = $request->get("address");
+        $user_address = $request->get("address") . $request->get("city") . $request->get("district") . $request->get("postal_code");
         #
         ## Müşterinizin sitenizde kayıtlı veya form aracılığıyla aldığınız telefon bilgisi
-        $user_phone = $request->get("phone");
+        $user_phone = Helper::validatePhone($request->get("phone"));
         #
         ## Başarılı ödeme sonrası müşterinizin yönlendirileceği sayfa
         ## !!! Bu sayfa siparişi onaylayacağınız sayfa değildir! Yalnızca müşterinizi bilgilendireceğiniz sayfadır!
         ## !!! Siparişi onaylayacağız sayfa "Bildirim URL" sayfasıdır (Bakınız: 2.ADIM Klasörü).
-        $merchant_ok_url = "https://hangiderslig.com/user/merchant/finance/plans/payment/success";
+        $merchant_ok_url = Helper::parseUrl(config("app.url") . "/user/merchant/finance/plans/payment/success");
         #
         ## Ödeme sürecinde beklenmedik bir hata oluşması durumunda müşterinizin yönlendirileceği sayfa
         ## !!! Bu sayfa siparişi iptal edeceğiniz sayfa değildir! Yalnızca müşterinizi bilgilendireceğiniz sayfadır!
         ## !!! Siparişi iptal edeceğiniz sayfa "Bildirim URL" sayfasıdır (Bakınız: 2.ADIM Klasörü).
-        $merchant_fail_url = "https://hangiderslig.com/user/merchant/finance/plans/payment/error";
+        $merchant_fail_url = Helper::parseUrl(config("app.url") . "/user/merchant/finance/plans/payment/error");
         #
         ## Müşterinin sepet/sipariş içeriği
         $user_basket = base64_encode(json_encode(array(
-            array($plan->name, $payment_amount, 1)
+            array($plan->name, $plan->price, count($companies))
         )));
 
 

@@ -16,7 +16,7 @@
             <h1 class="text-success"><i class="fas fa-check-circle"></i></h1>
             <h3 class="mt-3">Ödemeniz Başarıyla Tamamlandı!</h3>
             <p class="text-muted">
-                Ödemeniz başarıyla gerçekleştirilmiştir. Sipariş detaylarınızı kontrol etmek için <a href="">sipariş geçmişi</a> sayfasını ziyaret edebilirsiniz.
+                Ödemeniz başarıyla gerçekleştirilmiştir. Sipariş detaylarınızı kontrol etmek için <a href="{{route("merchant.account.order.index")}}">sipariş geçmişi</a> sayfasını ziyaret edebilirsiniz.
             </p>
             <a href="{{ route('merchant.home') }}" class="btn btn-primary mt-3">Ana Sayfaya Dön</a>
         </div>

@@ -75,6 +75,13 @@
                                 <span class="sidenav-normal"> Ödeme Planları </span>
                             </a>
                         </li>
+                        <li class="nav-item {{ request()->routeIs('panel.config.orders.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.config.orders.*') ? 'active' : '' }}"
+                               href="{{route("panel.config.orders.index")}}">
+                                <span class="sidenav-mini-icon"> S </span>
+                                <span class="sidenav-normal"> Siparişler </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>

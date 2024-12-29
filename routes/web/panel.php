@@ -11,6 +11,7 @@ use App\Http\Controllers\Panel\Company\TypeController;
 use App\Http\Controllers\Panel\Config\FrontImagesController;
 use App\Http\Controllers\Panel\Config\LanguageController;
 use App\Http\Controllers\Panel\Config\MostSearchController;
+use App\Http\Controllers\Panel\Config\OrderController;
 use App\Http\Controllers\Panel\Config\PageController;
 use App\Http\Controllers\Panel\Config\PlanController;
 use App\Http\Controllers\Panel\Contact\BulletinController;
@@ -76,6 +77,18 @@ Route::prefix("site-config")->group(function () {
             'edit' => 'panel.config.plans.edit',
             'destroy' => 'panel.config.plans.destroy',
         ]);
+    Route::resource('orders', OrderController::class)
+        ->parameters(['orders' => 'id'])->names([
+            'index' => 'panel.config.orders.index',
+            'create' => 'panel.config.orders.create',
+            'store' => 'panel.config.orders.store',
+            'show' => 'panel.config.orders.show',
+            'update' => 'panel.config.orders.update',
+            'edit' => 'panel.config.orders.edit',
+            'destroy' => 'panel.config.orders.destroy',
+        ]);
+
+    Route::post("orders/accept/{order_id}", [OrderController::class, "accept"])->name("panel.config.orders.accept");
 });
 
 Route::prefix("system")->group(function () {
@@ -170,7 +183,7 @@ Route::prefix("companies")->group(function () {
             'destroy' => 'panel.companies.company.destroy',
         ]);
 
-    Route::post("import",[CommentController::class,"import"])->name("panel.companies.import");
+    Route::post("import", [CommentController::class, "import"])->name("panel.companies.import");
 
     Route::resource("company.sss", SssController::class)
         ->parameters(['sss' => 'id'])->names([

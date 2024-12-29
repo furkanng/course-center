@@ -103,7 +103,6 @@ Route::prefix("finance")->group(function () {
 
 });
 
-
 Route::prefix("contacts")->group(function () {
 
     Route::resource("users", UserCompanyController::class)

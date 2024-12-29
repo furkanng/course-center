@@ -100,4 +100,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class, 'user_id');
     }
+
+    public function companyCount(): int
+    {
+        return $this->companies()->count();
+    }
+
 }
