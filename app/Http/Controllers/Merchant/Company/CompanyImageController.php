@@ -17,6 +17,8 @@ class CompanyImageController extends Controller
      */
     public function index($id): View
     {
+        auth()->user()->companies()->findOrFail($id);
+
         $company = Company::query()->findOrFail($id);
         $images = $company->images;
 
@@ -36,6 +38,8 @@ class CompanyImageController extends Controller
      */
     public function store(Request $request, $id): RedirectResponse
     {
+        auth()->user()->companies()->findOrFail($id);
+
         if ($request->hasFile('image')) {
 
             $images = $request->file('image');
@@ -88,6 +92,8 @@ class CompanyImageController extends Controller
      */
     public function destroy(string $id): RedirectResponse
     {
+        auth()->user()->companies()->findOrFail($id);
+
         $model = CompanyImage::query()->findOrFail($id);
         $model->delete();
 

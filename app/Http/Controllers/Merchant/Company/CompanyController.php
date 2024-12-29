@@ -76,6 +76,8 @@ class CompanyController extends Controller
      */
     public function edit(string $id): View
     {
+        auth()->user()->companies()->findOrFail($id);
+
         $features = Feature::query()->where("status", true)->get();
         $courses = Course::query()->where("status", true)->get();
         $companyTypes = CompanyType::all();
@@ -115,6 +117,8 @@ class CompanyController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        auth()->user()->companies()->findOrFail($id);
+
         $company = Company::query()->findOrFail($id);
         $company->fill($request->all())->save();
 
@@ -159,6 +163,8 @@ class CompanyController extends Controller
 
     public function imageDelete(string $id): RedirectResponse
     {
+        auth()->user()->companies()->findOrFail($id);
+
         $company = Company::query()->findOrFail($id);
 
         Storage::disk(config("filesystems.default"))->delete("companies/" . $company->image);

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\UserCompanyRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -49,7 +50,7 @@ class MyRequestController extends Controller
      */
     public function edit(string $id): View
     {
-        $request = UserCompanyRequest::query()->findOrFail($id);
+        $request = UserCompanyRequest::query()->where("company_id", $id)->where("user_id", Auth::user()->id)->firstOrFail();
         return view('merchant.pages.company.myRequestEdit', compact(["request"]));
     }
 
@@ -65,7 +66,8 @@ class MyRequestController extends Controller
             "permit" => "mimes:jpeg,png,jpg",
         ]);
 
-        $model = UserCompanyRequest::query()->findOrFail($id);
+        $model = UserCompanyRequest::query()->where("company_id", $id)
+            ->where("user_id", Auth::user()->id)->firstOrFail();
 
         if ($request->hasFile("id_card_front")) {
             $url = Storage::disk(config("filesystems.default"))

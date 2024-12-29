@@ -32,6 +32,8 @@ class SssController extends Controller
      */
     public function store(Request $request, $id): RedirectResponse
     {
+        auth()->user()->companies()->findOrFail($id);
+
         $request->validate([
             "question" => "required",
             "answer" => "required",
@@ -66,6 +68,8 @@ class SssController extends Controller
      */
     public function update(Request $request, string $id): RedirectResponse
     {
+        auth()->user()->companies()->findOrFail($id);
+
         $request->validate([
             "question" => "required",
             "answer" => "required",
@@ -83,6 +87,8 @@ class SssController extends Controller
      */
     public function destroy(string $id): RedirectResponse
     {
+        auth()->user()->companies()->findOrFail($id);
+
         $model = CompanySss::query()->findOrFail($id);
         $model->delete();
 

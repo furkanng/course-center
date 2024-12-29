@@ -30,6 +30,8 @@ class PriceController extends Controller
      */
     public function store(Request $request, $id): RedirectResponse
     {
+        auth()->user()->companies()->findOrFail($id);
+
         $request->validate([
             "price" => "required",
             "price_field_id" => "required",
@@ -64,6 +66,8 @@ class PriceController extends Controller
      */
     public function update(Request $request, string $id): RedirectResponse
     {
+        auth()->user()->companies()->findOrFail($id);
+
         $request->validate([
             "price" => "required",
             "price_field_id" => "required",
@@ -81,6 +85,8 @@ class PriceController extends Controller
      */
     public function destroy(string $id): RedirectResponse
     {
+        auth()->user()->companies()->findOrFail($id);
+
         $model = CompanyPrice::query()->findOrFail($id);
         $model->delete();
 
