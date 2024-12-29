@@ -37,7 +37,9 @@ class CompanyController extends Controller
         if ($request->filled('search')) {
             $search = $request->input('search');
 
-           $query->whereRaw('MATCH (name, city, district) AGAINST (? IN NATURAL LANGUAGE MODE)', [$search]);
+           //$query->whereRaw('MATCH (name, city, district) AGAINST (? IN NATURAL LANGUAGE MODE)', [$search]);
+
+            $query->whereRaw('MATCH (name, city, district) AGAINST (? IN BOOLEAN MODE)', ['*' . $search . '*']);
 
         }
 

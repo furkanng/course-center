@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/", [HomeController::class, "home"])->name("merchant.home");
 
-Route::prefix("companies")->group(function () {
+Route::prefix("companies")->middleware('CheckCompanyUser')->group(function () {
 
     Route::resource("company", CompanyController::class)
         ->parameters(['company' => 'id'])->names([
@@ -88,7 +88,7 @@ Route::prefix("companies")->group(function () {
 
 });
 
-Route::prefix("finance")->group(function () {
+Route::prefix("finance")->middleware('CheckCompanyUser')->group(function () {
 
     Route::resource("plans", PlanController::class)
         ->parameters(['plans' => 'id'])->names([
@@ -103,7 +103,7 @@ Route::prefix("finance")->group(function () {
 
 });
 
-Route::prefix("contacts")->group(function () {
+Route::prefix("contacts")->middleware('CheckCompanyUser')->group(function () {
 
     Route::resource("users", UserCompanyController::class)
         ->parameters(['users' => 'id'])->names([
@@ -117,7 +117,7 @@ Route::prefix("contacts")->group(function () {
         ]);
 });
 
-Route::prefix("account")->group(function () {
+Route::prefix("account")->middleware('CheckCompanyUser')->group(function () {
 
     Route::get("profile", [ProfileController::class, "index"])->name("merchant.account.profile.index");
     Route::post("profile-delete", [ProfileController::class, "delete"])->name("merchant.account.profile.delete");
