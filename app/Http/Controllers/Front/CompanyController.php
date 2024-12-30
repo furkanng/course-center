@@ -39,7 +39,12 @@ class CompanyController extends Controller
 
            //$query->whereRaw('MATCH (name, city, district) AGAINST (? IN NATURAL LANGUAGE MODE)', [$search]);
 
-            $query->whereRaw('MATCH (name, city, district) AGAINST (? IN BOOLEAN MODE)', ['*' . $search . '*']);
+          //  $query->whereRaw('MATCH (name, city, district) AGAINST (? IN BOOLEAN MODE)', ['*' . $search . '*']);
+            $query->where(function($q) use ($search) {
+                $q->whereRaw('name COLLATE utf8mb4_turkish_ci LIKE ?', ['%' . $search . '%'])
+                    ->orWhereRaw('city COLLATE utf8mb4_turkish_ci LIKE ?', ['%' . $search . '%'])
+                    ->orWhereRaw('district COLLATE utf8mb4_turkish_ci LIKE ?', ['%' . $search . '%']);
+            });
 
         }
 

@@ -391,7 +391,7 @@
                                                                          alt="Price Image" class="img-fluid"
                                                                          style="width: 50px; height: 50px;">
                                                                     <div class="course__member-name ml-20">
-                                                                        <h5>{{ $price->price_title->label() }}</h5>
+                                                                        <h5>{{$price->price_fields->price_title }}</h5>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -723,7 +723,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             new Swiper(".swiper-container", {
                 loop: true,
-                slidesPerView: 2,
+                slidesPerView: 1,
                 spaceBetween: 20,
                 navigation: {
                     nextEl: ".swiper-button-next",
