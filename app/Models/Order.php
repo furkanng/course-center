@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
+use App\Enums\PaymentType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,8 +17,9 @@ class Order extends Model
     protected $table = "orders";
 
     protected $casts = [
-      "payment_status" => PaymentStatus::class,
-      "status" => OrderStatus::class
+        "payment_status" => PaymentStatus::class,
+        "status" => OrderStatus::class,
+        "plan_type" => PaymentType::class,
     ];
 
     protected $fillable = [

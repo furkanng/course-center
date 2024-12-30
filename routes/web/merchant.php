@@ -88,7 +88,7 @@ Route::prefix("companies")->group(function () {
 
 });
 
-Route::prefix("finance")->middleware('CheckCompanyUser')->group(function () {
+Route::prefix("finance")->group(function () {
 
     Route::resource("plans", PlanController::class)
         ->parameters(['plans' => 'id'])->names([
@@ -125,4 +125,5 @@ Route::prefix("account")->group(function () {
     Route::post("profile-update", [ProfileController::class, "update"])->name("merchant.account.profile.update");
 
     Route::get("orders", [OrderController::class, "index"])->name("merchant.account.order.index");
+    Route::get("orders/billing/{order_id}", [OrderController::class, "billing"])->name("merchant.account.order.billing");
 });

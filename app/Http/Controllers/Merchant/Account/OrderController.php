@@ -15,4 +15,13 @@ class OrderController extends Controller
 
         return view('merchant.pages.account.order.index', compact(["orders"]));
     }
+
+
+    public function billing($orderId): View
+    {
+        auth()->user()->orders()->findOrFail($orderId);
+
+        $order = Order::query()->findOrFail($orderId);
+        return view('merchant.pages.account.order.edit', compact('order'));
+    }
 }
