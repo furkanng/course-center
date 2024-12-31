@@ -69,7 +69,7 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td class="text-start">{{$order->plan->name}}</td>
+                                        <td class="text-start">{{$order->plan->name ?? "Misafir Kayıt"}}</td>
                                         <td class="ps-4" colspan="2">{{$order->piece}} Kurum</td>
                                         <td class="ps-4" colspan="2"></td>
                                         <td class="ps-4">{{$order->price}} ₺</td>
