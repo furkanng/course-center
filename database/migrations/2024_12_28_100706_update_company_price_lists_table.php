@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('company_price_lists', function (Blueprint $table) {
 
-           // $table->dropColumn('price_title');
+            $table->dropColumn('price_title');
 
             $table->foreignId('price_field_id')
                 ->constrained('price_fields')
