@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             LanguageSeeder::class,
             //ImagesSeeder::class,
             //FeatureSeeder::class,
-            CompanyPriceTypes::class
+            //CompanyPriceTypes::class
         ]);
     }
 }
