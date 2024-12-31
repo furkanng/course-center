@@ -77,6 +77,7 @@ Route::prefix("site-config")->group(function () {
             'edit' => 'panel.config.plans.edit',
             'destroy' => 'panel.config.plans.destroy',
         ]);
+
     Route::resource('orders', OrderController::class)
         ->parameters(['orders' => 'id'])->names([
             'index' => 'panel.config.orders.index',

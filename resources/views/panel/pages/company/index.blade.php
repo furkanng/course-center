@@ -36,7 +36,8 @@
                                 </button>
                                 <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog mt-lg-10">
-                                        <form class="form-submit" action="{{route("panel.companies.import")}}" method="POST"
+                                        <form class="form-submit" action="{{route("panel.companies.import")}}"
+                                              method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-content">
@@ -85,8 +86,9 @@
                     <div class="d-flex justify-content-end align-items-center mb-3">
 
                         <div class="form-group col-md-2">
-                            <form action="{{ route('panel.companies.company.index') }}" method="GET" >
-                            <input type="text" class="form-control"  name="filter" placeholder="Ara..." value="{{ request('filter') }}">
+                            <form action="{{ route('panel.companies.company.index') }}" method="GET">
+                                <input type="text" class="form-control" name="filter" placeholder="Ara..."
+                                       value="{{ request('filter') }}">
                             </form>
                         </div>
                     </div>
@@ -95,6 +97,7 @@
                         <table class="table table-flush" id="products-list">
                             <thead class="thead-light">
                             <tr>
+                                <th>ID</th>
                                 <th>Kurum</th>
                                 <th>Kurum Tipi</th>
                                 <th>Mernis</th>
@@ -107,13 +110,13 @@
                             <tbody>
                             @foreach($companies as $company)
                                 <tr>
-
+                                    <td class="text-sm">{{$company->id}}</td>
                                     <td>
                                         <div class="d-flex">
-{{--                                            <div class="form-check my-auto">--}}
-{{--                                                <input class="form-check-input" type="checkbox" id="customCheck1">--}}
-{{--                                            </div>--}}
-                                            <h6 class="ms-3 my-auto text-sm">{{$company->name}}</h6>
+                                            {{--                                            <div class="form-check my-auto">--}}
+                                            {{--                                                <input class="form-check-input" type="checkbox" id="customCheck1">--}}
+                                            {{--                                            </div>--}}
+                                            <h6 class="my-auto text-sm">{{$company->name}}</h6>
                                         </div>
                                     </td>
                                     <td class="text-sm">{{$company->getCompanyTypeName()}}</td>
@@ -121,14 +124,14 @@
                                     <td class="text-sm">{{$company->city}}</td>
                                     <td>
                                         <span
-                                            class="badge {{count($company->users) === 0 ? "badge-danger" : "badge-info"}}
+                                                class="badge {{count($company->users) === 0 ? "badge-danger" : "badge-info"}}
                                              badge-sm">
                                             {{count($company->users) === 0  ? "Sahipsiz" : "Atandı"}}
                                         </span>
                                     </td>
                                     <td>
                                         <span
-                                            class="badge {{$company->status ? "badge-success" : "badge-danger"}} badge-sm">
+                                                class="badge {{$company->status ? "badge-success" : "badge-danger"}} badge-sm">
                                             {{$company->status ? "Yayında" : "Pasif"}}
                                         </span>
                                     </td>

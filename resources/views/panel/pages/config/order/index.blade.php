@@ -37,10 +37,10 @@
                             <thead class="thead-light">
                             <tr>
                                 <th>
-                                    Ürün Adı
+                                    Reklam Adı
                                 </th>
                                 <th>
-                                    Ürün Tipi
+                                    Reklam Tipi
                                 </th>
                                 <th>
                                     Fiyat
@@ -62,14 +62,14 @@
                                     <td class="text-sm">
                                         <div class="d-flex px-2">
                                             <div class="my-auto">
-                                                <h6 class="mb-0 text-xs">{{$order->plan->name}}</h6>
+                                                <h6 class="mb-0 text-xs">{{$order->plan->name ?? "Misafir Kayıt"}}</h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="text-sm">
                                         <div class="d-flex px-2">
                                             <div class="my-auto">
-                                                <h6 class="mb-0 text-xs">{{$order->plan->type->label()}}</h6>
+                                                <h6 class="mb-0 text-xs">{{$order->plan_type->label()}}</h6>
                                             </div>
                                         </div>
                                     </td>

@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Merchant\Finance;
 use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
 use App\Http\Controllers\Controller;
+use App\Mail\PaymentErrorMail;
+use App\Mail\PaymentSuccessMail;
 use App\Models\Order;
 use App\Models\Plan;
 use App\Service\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class PaymentController extends Controller
@@ -241,6 +244,8 @@ class PaymentController extends Controller
             $order->forceFill([
                 "payment_status" => PaymentStatus::PAID,
             ])->save();
+
+            Mail::to(json_decode($order->shipping_address, true)["email"])->send(new PaymentSuccessMail($order, json_decode($order->shipping_address, true)["email"], "Sipariş Faturası"));
             ## BURADA YAPILMASI GEREKENLER
             ## 1) Siparişi onaylayın.
             ## 2) Eğer müşterinize mesaj / SMS / e-posta gibi bilgilendirme yapacaksanız bu aşamada yapmalısınız.
@@ -252,6 +257,9 @@ class PaymentController extends Controller
             $order->forceFill([
                 "payment_detail" => $data['failed_reason_msg'] . $data['failed_reason_code'],
             ]);
+
+            Mail::to(json_decode($order->shipping_address, true)["email"])->send(new PaymentErrorMail($data['failed_reason_msg'], json_decode($order->shipping_address, true)["email"], "Sipariş Faturası"));
+
             ## BURADA YAPILMASI GEREKENLER
             ## 1) Siparişi iptal edin.
             ## 2) Eğer ödemenin onaylanmama sebebini kayıt edecekseniz aşağıdaki değerleri kullanabilirsiniz.

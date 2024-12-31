@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('plan_id');
+            $table->integer('plan_id')->nullable();
             $table->string("plan_type");
             $table->text('shipping_address')->comment("fatura adresi");
             $table->string("payment_type")->comment("ödeme türü");

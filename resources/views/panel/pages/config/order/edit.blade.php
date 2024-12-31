@@ -69,8 +69,8 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td class="text-start">{{$order->plan->name}}</td>
-                                        <td class="ps-4" colspan="2">{{$order->piece}} Kurum</td>
+                                        <td class="text-start">{{$order->plan->name ?? "Misafir Kayıt"}}</td>
+                                        <td class="ps-4" colspan="2">{{$order->piece}}</td>
                                         <td class="ps-4" colspan="2"></td>
                                         <td class="ps-4">{{$order->price}} ₺</td>
                                     </tr>
@@ -105,25 +105,27 @@
                                     Müşteri
                                 </button>
                             </a>
-                            <a href="{{route("panel.config.plans.edit",["id" => $order->plan_id])}}"
-                               target="_blank">
-                                <button class="btn bg-gradient-secondary mt-lg-7 mb-0" type="button" name="button">
-                                    Plan
-                                </button>
-                            </a>
-                            @if($order->status == \App\Enums\OrderStatus::PENDING)
-                                <a href="" data-bs-toggle="modal"
-                                   data-bs-target="#confirmModal-{{ $order->id }}">
-                                    <button class="btn bg-gradient-primary mt-lg-7 mb-0" type="submit" name="button">
-                                        Onayla
+                            @if(isset($order->plan))
+                                <a href="{{route("panel.config.plans.edit",["id" => $order->plan_id])}}"
+                                   target="_blank">
+                                    <button class="btn bg-gradient-secondary mt-lg-7 mb-0" type="button" name="button">
+                                        Plan
                                     </button>
                                 </a>
-                            @else
-                                <button class="btn bg-gradient-success mt-lg-7 mb-0" type="button" name="button">
-                                    Onaylandı
-                                </button>
+                                @if($order->status == \App\Enums\OrderStatus::PENDING)
+                                    <a href="" data-bs-toggle="modal"
+                                       data-bs-target="#confirmModal-{{ $order->id }}">
+                                        <button class="btn bg-gradient-primary mt-lg-7 mb-0" type="submit"
+                                                name="button">
+                                            Onayla
+                                        </button>
+                                    </a>
+                                @else
+                                    <button class="btn bg-gradient-success mt-lg-7 mb-0" type="button" name="button">
+                                        Onaylandı
+                                    </button>
+                                @endif
                             @endif
-
                             <button class="btn bg-gradient-info mt-lg-7 mb-0" onClick="window.print()" type="button"
                                     name="button">Yazdır
                             </button>

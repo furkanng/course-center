@@ -2,13 +2,18 @@
 
 use App\Events\SmsEvent;
 use App\Http\Controllers\Merchant\Finance\PaymentController;
+use App\Mail\InfoMail;
+use App\Mail\PaymentErrorMail;
+use App\Mail\PaymentSuccessMail;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix'=>'payment'],function (){
+Route::group(['prefix' => 'payment'], function () {
 
-    Route::post('notification',[PaymentController::class,'notification']);
+    Route::post('notification', [PaymentController::class, 'notification']);
 
 });
 
@@ -25,7 +30,7 @@ Route::get("furkan", function () {
     );
 
 });
-
+*/
 /*
 public function sendSms()
     {
