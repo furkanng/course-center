@@ -21,9 +21,11 @@ class CommentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id): View
+    public function index(string $id): View
     {
-        $company = Company::query()->findOrFail($id);
+        $company = Company::query()
+            ->with('comments')
+            ->findOrFail($id);
         $comments = $company->comments;
 
         return view("panel.pages.company.comment", compact(["comments", "company"]));

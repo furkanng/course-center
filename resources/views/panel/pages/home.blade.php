@@ -26,15 +26,14 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Toplam Misafir Kullanıcılar</p>
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Aktif Kurum</p>
                                         <h5 class="font-weight-bolder mb-0">
-                                           {{$guestUserCount}}
+                                            {{$companiesCount}}
                                         </h5>
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                         <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
                                     </div>
                                 </div>
@@ -46,15 +45,14 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Toplam Kurum Kullanıcıları</p>
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Aktif Misafir</p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            {{$companyUserCount}}
+                                            {{$guestUserCount}}
                                         </h5>
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                         <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
                                     </div>
                                 </div>
@@ -68,15 +66,14 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Toplam Kurumlar</p>
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Aktif Kurum Üye</p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            {{$companiesCount}}
+                                            {{$companyUserCount}}
                                         </h5>
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                         <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
                                     </div>
                                 </div>
@@ -88,15 +85,14 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Kurumsal Kayıt Başvuruları</p>
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Bekleyen Başvuru</p>
                                         <h5 class="font-weight-bolder mb-0">
                                             {{$userCompanyRequestCount}}
                                         </h5>
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                         <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
                                     </div>
                                 </div>
@@ -110,35 +106,35 @@
                     <div class="card ">
                         <div class="card-header pb-0 p-3">
                             <div class="d-flex justify-content-between">
-                                <h6 class="mb-2">Son Eklenen Kurumlar</h6>
+                                <h6 class="mb-2">Revaçta Olanlar</h6>
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table align-items-center ">
+                            <table class="table align-items-center">
                                 <tbody>
-                                @foreach($lastCompanies as $company)
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1 align-items-center">
-                                            <div class="ms-4">
-                                                <p class="text-xs font-weight-bold mb-0">İsim:</p>
-                                                <h6 class="text-sm mb-0">{{ Str::limit($company->name, 30, '...') }}</h6>
+                                @foreach($visits as $visit)
+                                    <tr>
+                                        <td class="w-30">
+                                            <div class="d-flex py-1 align-items-center">
+                                                <div class="ms-2">
+                                                    <p class="text-xs font-weight-bold mb-0">Kurum:</p>
+                                                    <h6 class="text-sm mb-0">{{$visit->name}}</h6>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Şehir:</p>
-                                            <h6 class="text-sm mb-0">{{$company->city}}</h6>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">İlçe:</p>
-                                            <h6 class="text-sm mb-0">{{$company->district}}</h6>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>
+                                            <div class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0">Tıklanma:</p>
+                                                <h6 class="text-sm mb-0">{{$visit->total_visits}}</h6>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0">Tekil:</p>
+                                                <h6 class="text-sm mb-0">{{$visit->unique_visits}}</h6>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 @endforeach
                                 </tbody>
                             </table>
@@ -149,7 +145,7 @@
         </div>
     </div>
 
-    <div class="row mt-4" style="display:none;">
+    <div class="row mt-4">
         <div class="col-lg-5 mb-lg-0 mb-4">
             <div class="card z-index-2">
                 <div class="card-body p-3">
@@ -158,14 +154,12 @@
                             <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
                         </div>
                     </div>
-                    <h6 class="ms-2 mt-4 mb-0"> Active Users </h6>
-                    <p class="text-sm ms-2"> (<span class="font-weight-bolder">+23%</span>) than last week </p>
+                    <h6 class="ms-2 mt-4 mb-0"> Raporlar </h6>
                     <div class="container border-radius-lg">
                         <div class="row">
                             <div class="col-3 py-3 ps-0">
                                 <div class="d-flex mb-2">
-                                    <div
-                                        class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
+                                    <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
                                         <svg width="10px" height="10px" viewBox="0 0 40 44" version="1.1"
                                              xmlns="http://www.w3.org/2000/svg"
                                              xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -186,9 +180,9 @@
                                             </g>
                                         </svg>
                                     </div>
-                                    <p class="text-xs mt-1 mb-0 font-weight-bold">Users</p>
+                                    <p class="text-xs mt-1 mb-0 font-weight-bold">Kullanıcı</p>
                                 </div>
-                                <h4 class="font-weight-bolder">36K</h4>
+                                <h4 class="font-weight-bolder">{{\App\Models\User::count()}}</h4>
                                 <div class="progress w-75">
                                     <div class="progress-bar bg-dark w-60" role="progressbar" aria-valuenow="60"
                                          aria-valuemin="0" aria-valuemax="100"></div>
@@ -196,8 +190,7 @@
                             </div>
                             <div class="col-3 py-3 ps-0">
                                 <div class="d-flex mb-2">
-                                    <div
-                                        class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-info text-center me-2 d-flex align-items-center justify-content-center">
+                                    <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-info text-center me-2 d-flex align-items-center justify-content-center">
                                         <svg width="10px" height="10px" viewBox="0 0 40 40" version="1.1"
                                              xmlns="http://www.w3.org/2000/svg"
                                              xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -223,9 +216,9 @@
                                             </g>
                                         </svg>
                                     </div>
-                                    <p class="text-xs mt-1 mb-0 font-weight-bold">Clicks</p>
+                                    <p class="text-xs mt-1 mb-0 font-weight-bold">Tıklanma</p>
                                 </div>
-                                <h4 class="font-weight-bolder">2m</h4>
+                                <h4 class="font-weight-bolder">{{\App\Models\PageVisit::count()}}</h4>
                                 <div class="progress w-75">
                                     <div class="progress-bar bg-dark w-90" role="progressbar" aria-valuenow="90"
                                          aria-valuemin="0" aria-valuemax="100"></div>
@@ -233,8 +226,7 @@
                             </div>
                             <div class="col-3 py-3 ps-0">
                                 <div class="d-flex mb-2">
-                                    <div
-                                        class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-warning text-center me-2 d-flex align-items-center justify-content-center">
+                                    <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-warning text-center me-2 d-flex align-items-center justify-content-center">
                                         <svg width="10px" height="10px" viewBox="0 0 43 36" version="1.1"
                                              xmlns="http://www.w3.org/2000/svg"
                                              xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -255,9 +247,9 @@
                                             </g>
                                         </svg>
                                     </div>
-                                    <p class="text-xs mt-1 mb-0 font-weight-bold">Sales</p>
+                                    <p class="text-xs mt-1 mb-0 font-weight-bold">Satış</p>
                                 </div>
-                                <h4 class="font-weight-bolder">435$</h4>
+                                <h4 class="font-weight-bolder">{{rtrim(\App\Models\Order::sum("price"), ".00")}} ₺</h4>
                                 <div class="progress w-75">
                                     <div class="progress-bar bg-dark w-30" role="progressbar" aria-valuenow="30"
                                          aria-valuemin="0" aria-valuemax="100"></div>
@@ -265,8 +257,7 @@
                             </div>
                             <div class="col-3 py-3 ps-0">
                                 <div class="d-flex mb-2">
-                                    <div
-                                        class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-danger text-center me-2 d-flex align-items-center justify-content-center">
+                                    <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-danger text-center me-2 d-flex align-items-center justify-content-center">
                                         <svg width="10px" height="10px" viewBox="0 0 40 40" version="1.1"
                                              xmlns="http://www.w3.org/2000/svg"
                                              xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -289,9 +280,9 @@
                                             </g>
                                         </svg>
                                     </div>
-                                    <p class="text-xs mt-1 mb-0 font-weight-bold">Items</p>
+                                    <p class="text-xs mt-1 mb-0 font-weight-bold">Kurs</p>
                                 </div>
-                                <h4 class="font-weight-bolder">43</h4>
+                                <h4 class="font-weight-bolder">{{\App\Models\Course::count()}}</h4>
                                 <div class="progress w-75">
                                     <div class="progress-bar bg-dark w-50" role="progressbar" aria-valuenow="50"
                                          aria-valuemin="0" aria-valuemax="100"></div>
@@ -305,10 +296,11 @@
         <div class="col-lg-7">
             <div class="card z-index-2">
                 <div class="card-header pb-0">
-                    <h6>Sales overview</h6>
+                    <h6>Aylık Artış Grafiği</h6>
                     <p class="text-sm">
                         <i class="fa fa-arrow-up text-success"></i>
-                        <span class="font-weight-bold">4% more</span> in 2021
+                        Toplam Artış: <span class="font-weight-bold">{{ $totalIncrease }}</span>,
+                        Tekil Artış: <span class="font-weight-bold">{{ $uniqueIncrease }}</span>
                     </p>
                 </div>
                 <div class="card-body p-3">
@@ -318,19 +310,186 @@
                 </div>
             </div>
         </div>
-    </div >
-
+    </div>
     <div class="row">
         <div class="col-12">
             <div id="globe" class="position-absolute end-0 top-10 mt-sm-3 mt-7 me-lg-7">
-                <canvas width="700" height="600"
-                        class="w-lg-100 h-lg-100 w-75 h-75 me-lg-0 me-n10 mt-lg-5"></canvas>
+                <canvas width="700" height="600" class="w-lg-100 h-lg-100 w-75 h-75 me-lg-0 me-n10 mt-lg-5"></canvas>
             </div>
         </div>
     </div>
-
 @endsection
 
 @push('scripts')
+    <script>
+        var ctx = document.getElementById("chart-bars").getContext("2d");
 
+        new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: {!! json_encode($salesChartData["SalesChartData"]['labels']) !!},
+                datasets: [{
+                    label: "Satış",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    borderRadius: 4,
+                    borderSkipped: false,
+                    backgroundColor: "#fff",
+                    data: {!! json_encode($salesChartData["SalesChartData"]['sales']) !!},
+                    maxBarThickness: 6
+                },],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                        },
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: Math.max(...{!! json_encode($salesChartData["SalesChartData"]['sales']) !!}) + 50,
+                            beginAtZero: true,
+                            padding: 15,
+                            font: {
+                                size: 14,
+                                family: "Open Sans",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                            color: "#fff"
+                        },
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false
+                        },
+                        ticks: {
+                            display: true,
+                            color: "#fff",
+                            font: {
+                                size: 12,
+                                family: "Open Sans",
+                            },
+                        },
+                    },
+                },
+            },
+        });
+    </script>
+    <script>
+        var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+        var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+        gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+        gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
+
+        var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+        gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+        gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
+
+        new Chart(ctx2, {
+            type: "line",
+            data: {
+                labels: {!! json_encode($chartData['labels']) !!},
+                datasets: [{
+                    label: "Toplam Artış",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    pointRadius: 0,
+                    borderColor: "#cb0c9f",
+                    borderWidth: 3,
+                    backgroundColor: gradientStroke1,
+                    fill: true,
+                    data: {!! json_encode($chartData['total_increase']) !!},
+                    maxBarThickness: 6
+                },
+                    {
+                        label: "Tekil Artış",
+                        tension: 0.4,
+                        borderWidth: 0,
+                        pointRadius: 0,
+                        borderColor: "#3A416F",
+                        borderWidth: 3,
+                        backgroundColor: gradientStroke2,
+                        fill: true,
+                        data: {!! json_encode($chartData['unique_increase']) !!},
+                        maxBarThickness: 6
+                    }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            padding: 10,
+                            color: '#b2b9bf',
+                            font: {
+                                size: 11,
+                                family: "Open Sans",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            color: '#b2b9bf',
+                            padding: 20,
+                            font: {
+                                size: 11,
+                                family: "Open Sans",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                },
+            },
+        });
+    </script>
 @endpush

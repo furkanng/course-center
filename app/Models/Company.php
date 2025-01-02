@@ -115,4 +115,9 @@ class Company extends Model
     {
         return $this->belongsToMany(User::class, 'user_favorites');
     }
+
+    public function visits(): HasMany
+    {
+        return $this->hasMany(PageVisit::class, 'seo_link', 'url');
+    }
 }

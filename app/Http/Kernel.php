@@ -6,6 +6,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\FrontAuthMiddleware;
 use App\Http\Middleware\LoginCacheMiddleware;
+use App\Http\Middleware\LogPageVisit;
 use App\Http\Middleware\MerchantMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -75,5 +76,6 @@ class Kernel extends HttpKernel
         'AdminMiddleware' => AdminMiddleware::class,
         'MerchantMiddleware' => MerchantMiddleware::class,
         'FrontAuth' => FrontAuthMiddleware::class,
+        'PageVisit' => LogPageVisit::class,
     ];
 }

@@ -7,45 +7,48 @@ use App\Http\Controllers\Front\AuthController;
 use App\Http\Controllers\Front\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get("/", [HomeController::class, "home"])->name("home");
-Route::get("/giris-yap", [HomeController::class, "login"])->name("login")->middleware("LoginCacheMiddleware");
-Route::post("/giris-yap", [AuthController::class, "loginPost"])->name("loginPost");
+Route::middleware('PageVisit')->group(function () {
+    Route::get("/", [HomeController::class, "home"])->name("home");
+    Route::get("/giris-yap", [HomeController::class, "login"])->name("login")->middleware("LoginCacheMiddleware");
+    Route::post("/giris-yap", [AuthController::class, "loginPost"])->name("loginPost");
 
-Route::post('sifremi-unuttum', [AuthController::class, 'forgotPassword'])->name('user.forgot');
-Route::get('sifremi-unuttum', [AuthController::class, 'forgotPasswordGet'])->name('user.forgot.get');
-Route::get('sifre-yenileme', [AuthController::class, 'resetPasswordGet'])->name('user.reset.get');
-Route::post('sifre-yenileme', [AuthController::class, 'resetPassword'])->name('user.reset');
+    Route::post('sifremi-unuttum', [AuthController::class, 'forgotPassword'])->name('user.forgot');
+    Route::get('sifremi-unuttum', [AuthController::class, 'forgotPasswordGet'])->name('user.forgot.get');
+    Route::get('sifre-yenileme', [AuthController::class, 'resetPasswordGet'])->name('user.reset.get');
+    Route::post('sifre-yenileme', [AuthController::class, 'resetPassword'])->name('user.reset');
 
 
-Route::post("/kayit-ol", [AuthController::class, "registerPost"])->name("registerPost");
-Route::get("/kayit-ol", [HomeController::class, "register"])->name("register");
-Route::get("/cikis-yap", [AuthController::class, "logout"])->name("logout");
+    Route::post("/kayit-ol", [AuthController::class, "registerPost"])->name("registerPost");
+    Route::get("/kayit-ol", [HomeController::class, "register"])->name("register");
+    Route::get("/cikis-yap", [AuthController::class, "logout"])->name("logout");
 
-Route::get("/sayfalar/{seo_link}", [HomeController::class, "page"])->name("front.page");
+    Route::get("/sayfalar/{seo_link}", [HomeController::class, "page"])->name("front.page");
 
-Route::middleware(["AuthMiddleware", "auth", "FrontAuth"])->group(function () {
+    Route::middleware(["AuthMiddleware", "auth", "FrontAuth"])->group(function () {
 
-    Route::post("comment/create/{userId}/{companyId}", [HomeController::class, "createComment"])->name("front.comment.create");
+        Route::post("comment/create/{userId}/{companyId}", [HomeController::class, "createComment"])->name("front.comment.create");
 
-    Route::resource("profil", UserController::class)
-        ->parameters(['profil' => 'id'])->names([
-            'index' => 'front.profil.index',
-            'create' => 'front.profil.create',
-            'store' => 'front.profil.store',
-            'show' => 'front.profil.show',
-            'update' => 'front.profil.update',
-            'edit' => 'front.profil.edit',
-            'destroy' => 'front.profil.destroy',
-        ]);
-    Route::put("profil/{id}/update-password", [UserController::class, "updatePassword"])->name("front.profil.updatePassword");
-    Route::put("profil/{id}/update-permission", [UserController::class, "updatePermission"])->name("front.profil.updatePermission");
+        Route::resource("profil", UserController::class)
+            ->parameters(['profil' => 'id'])->names([
+                'index' => 'front.profil.index',
+                'create' => 'front.profil.create',
+                'store' => 'front.profil.store',
+                'show' => 'front.profil.show',
+                'update' => 'front.profil.update',
+                'edit' => 'front.profil.edit',
+                'destroy' => 'front.profil.destroy',
+            ]);
+        Route::put("profil/{id}/update-password", [UserController::class, "updatePassword"])->name("front.profil.updatePassword");
+        Route::put("profil/{id}/update-permission", [UserController::class, "updatePermission"])->name("front.profil.updatePermission");
+    });
+
+    Route::prefix(SeoPrefix::COMPANY->value)->group(function () {
+        Route::get("", [CompanyController::class, "index"])->name("front.company.index");
+        Route::get("{seo_link}", [CompanyController::class, "show"])->name("front.company.show");
+    });
+
+    Route::post("teklif-al/{id}", [HomeController::class, "createContact"])->name("front.contact.create");
+    Route::post("bulletin", [HomeController::class, "createBulletin"])->name("front.bulletin.create");
+    Route::put("favorite-toggle", [HomeController::class, "toggleFavorite"])->name("front.favorite.toggle");
+
 });
-
-Route::prefix(SeoPrefix::COMPANY->value)->group(function () {
-    Route::get("", [CompanyController::class, "index"])->name("front.company.index");
-    Route::get("{seo_link}", [CompanyController::class, "show"])->name("front.company.show");
-});
-
-Route::post("teklif-al/{id}", [HomeController::class, "createContact"])->name("front.contact.create");
-Route::post("bulletin", [HomeController::class, "createBulletin"])->name("front.bulletin.create");
-Route::put("favorite-toggle", [HomeController::class, "toggleFavorite"])->name("front.favorite.toggle");
