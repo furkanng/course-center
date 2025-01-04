@@ -1,6 +1,6 @@
 @extends('front.layout.app')
 
-@section('title', 'Dershaneler')
+@section('title', 'Eğitim Kurumları')
 @section('content')
     <section class="course__area pt-115 pb-90 grey-bg-3">
         <div class="container">
@@ -136,7 +136,7 @@
                             <div class="course__sidebar-widget white-bg">
                                 <div class="course__sidebar-search">
                                     <input name="search" value="{{ request('search') }}" type="text"
-                                           placeholder="Dershane Ara...">
+                                           placeholder="Eğitim Kurumu Ara...">
                                 </div>
                             </div>
                             <div class="course__sidebar-widget white-bg">

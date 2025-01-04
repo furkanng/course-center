@@ -56,7 +56,7 @@
                                     @foreach($pages as $page)
                                         @if($page->where('permanent',true))
                                             <li>
-                                                <a href="{{$page->link}}">{{$page->title}}</a>
+                                                <a href="{{url($page->link)}}">{{$page->title}}</a>
                                             </li>
                                         @endif
                                     @endforeach
