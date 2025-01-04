@@ -7,7 +7,8 @@
         <div class="slider__active swiper-container">
             <div class="swiper-wrapper">
                 <div
-                    class="slider__item swiper-slide p-relative slider__height slider__height-3 d-flex align-items-center z-index-1">
+                    class="slider__item p-relative slider__height slider__height-3 d-flex align-items-center z-index-1"
+                    style="width: 100%; height: 100%">
                     <div class="slider__bg slider__overlay include-bg"
                          data-background="{{$image["slider_resim"]}}"></div>
                     <div class="container">

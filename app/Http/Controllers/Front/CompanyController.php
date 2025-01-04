@@ -36,16 +36,13 @@ class CompanyController extends Controller
     {
         if ($request->filled('search')) {
             $search = $request->input('search');
+            $searchUpper = mb_strtoupper($search, 'UTF-8');
 
-           //$query->whereRaw('MATCH (name, city, district) AGAINST (? IN NATURAL LANGUAGE MODE)', [$search]);
-
-          //  $query->whereRaw('MATCH (name, city, district) AGAINST (? IN BOOLEAN MODE)', ['*' . $search . '*']);
-            $query->where(function($q) use ($search) {
-                $q->whereRaw('name COLLATE utf8mb4_turkish_ci LIKE ?', ['%' . $search . '%'])
-                    ->orWhereRaw('city COLLATE utf8mb4_turkish_ci LIKE ?', ['%' . $search . '%'])
-                    ->orWhereRaw('district COLLATE utf8mb4_turkish_ci LIKE ?', ['%' . $search . '%']);
+            $query->where(function($q) use ($search, $searchUpper) {
+                $q->whereRaw('name COLLATE utf8mb4_turkish_ci LIKE ? OR UPPER(name) COLLATE utf8mb4_turkish_ci LIKE ?', ['%' . $search . '%', '%' . $searchUpper . '%'])
+                    ->orWhereRaw('city COLLATE utf8mb4_turkish_ci LIKE ? OR UPPER(city) COLLATE utf8mb4_turkish_ci LIKE ?', ['%' . $search . '%', '%' . $searchUpper . '%'])
+                    ->orWhereRaw('district COLLATE utf8mb4_turkish_ci LIKE ? OR UPPER(district) COLLATE utf8mb4_turkish_ci LIKE ?', ['%' . $search . '%', '%' . $searchUpper . '%']);
             });
-
         }
 
         if ($request->filled('courses')) {
@@ -55,11 +52,15 @@ class CompanyController extends Controller
         }
 
         if ($request->filled('city')) {
-            $query->where('city', 'like', '%' . $request->input('city') . '%');
+            $city = $request->input('city');
+            $cityUpper = mb_strtoupper($city, 'UTF-8');
+            $query->whereRaw('city COLLATE utf8mb4_turkish_ci LIKE ? OR UPPER(city) COLLATE utf8mb4_turkish_ci LIKE ?', ['%' . $city . '%', '%' . $cityUpper . '%']);
         }
 
         if ($request->filled('district')) {
-            $query->where('district', 'like', '%' . $request->input('district') . '%');
+            $district = $request->input('district');
+            $districtUpper = mb_strtoupper($district, 'UTF-8');
+            $query->whereRaw('district COLLATE utf8mb4_turkish_ci LIKE ? OR UPPER(district) COLLATE utf8mb4_turkish_ci LIKE ?', ['%' . $district . '%', '%' . $districtUpper . '%']);
         }
 
         return $query;

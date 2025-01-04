@@ -17,8 +17,7 @@ class LogPageVisit
     {
         PageVisit::query()->create([
             'ip_address' => $request->ip(),
-            'url' => $request->fullUrl(),
-            'referrer' => $request->header('referer'),
+            'url' => $request->url(),
             'user_agent' => $request->header('User-Agent'),
             'seo_link' => $request->path(),
             'visited_at' => now(),
