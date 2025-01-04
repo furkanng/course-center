@@ -139,7 +139,7 @@ class OrderController extends Controller
         $timeout_limit = "5";
 
         ## Hata mesajlarının ekrana basılması için entegrasyon ve test sürecinde 1 olarak bırakın. Daha sonra 0 yapabilirsiniz.
-        $debug_on = 1;
+        $debug_on = 0;
 
         ## Mağaza canlı modda iken test işlem yapmak için 1 olarak gönderilebilir.
         $test_mode = 0;
