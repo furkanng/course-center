@@ -59,6 +59,14 @@ class HomeController extends Controller
 
     public function createContact(Request $request, $id): RedirectResponse
     {
+        $request->validate([
+            "company_id" => "required",
+            "customer_name" => "required",
+            "customer_email" => "required",
+            "customer_phone" => "required",
+            "customer_content" => "required",
+        ]);
+
         $model = new UserCompanyContact();
         $model->forceFill([
             "company_id" => $id,
