@@ -491,7 +491,7 @@
                                                         <div class="swiper-slide">
                                                             <div class="course__item-2 transition-3 white-bg mb-30 fix">
                                                                 <div class="card h-100">
-                                                                    <a href="{{$related->link}}">
+                                                                    <a href="{{url($related->link)}}">
                                                                         <div class="course__thumb-2 w-img">
                                                                             @if($related->image)
                                                                                 <img src="{{$related->image_url}}" class="card-img-top" alt="">
@@ -511,7 +511,7 @@
                                                                             @endif
                                                                         </div>
                                                                         <h3 class="mt-auto">
-                                                                            <a href="{{$related->link}}" class="stretched-link">
+                                                                            <a href="{{url($related->link)}}" class="stretched-link">
                                                                                 <span style="font-size: medium">{{$related->name}}</span>
                                                                             </a>
                                                                         </h3>
