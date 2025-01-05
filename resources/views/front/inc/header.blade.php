@@ -6,8 +6,7 @@
                     <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-6 d-none d-lg-block">
                         <div class="header__call d-flex align-items-start">
                             <div class="header__call-icon mr-10">
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M1.045 25.495C1.045 26.035 1.165 26.59 1.42 27.13C1.675 27.67 2.005 28.18 2.44 28.66C3.175 29.47 3.985 30.055 4.9 30.43C5.8 30.805 6.775 31 7.825 31C9.355 31 10.99 30.64 12.715 29.905C14.44 29.17 16.165 28.18 17.875 26.935C19.6 25.675 21.235 24.28 22.795 22.735C24.34 21.175 25.735 19.54 26.98 17.83C28.21 16.12 29.2 14.41 29.92 12.715C30.64 11.005 31 9.37 31 7.81C31 6.79 30.82 5.815 30.46 4.915C30.1 4 29.53 3.16 28.735 2.41C27.775 1.465 26.725 1 25.615 1C25.195 1 24.775 1.09 24.4 1.27C24.01 1.45 23.665 1.72 23.395 2.11L19.915 7.015C19.645 7.39 19.45 7.735 19.315 8.065C19.18 8.38 19.105 8.695 19.105 8.98C19.105 9.34 19.21 9.7 19.42 10.045C19.615 10.39 19.9 10.75 20.26 11.11L21.4 12.295C21.565 12.46 21.64 12.655 21.64 12.895C21.64 13.015 21.625 13.12 21.595 13.24C21.55 13.36 21.505 13.45 21.475 13.54C21.205 14.035 20.74 14.68 20.08 15.46C19.405 16.24 18.685 17.035 17.905 17.83C17.095 18.625 16.315 19.36 15.52 20.035C14.74 20.695 14.095 21.145 13.585 21.415C13.51 21.445 13.42 21.49 13.315 21.535C13.195 21.58 13.075 21.595 12.94 21.595C12.685 21.595 12.49 21.505 12.325 21.34L11.185 20.215C10.81 19.84 10.45 19.555 10.105 19.375C9.76 19.165 9.415 19.06 9.04 19.06C8.755 19.06 8.455 19.12 8.125 19.255C7.795 19.39 7.45 19.585 7.075 19.84L2.11 23.365C1.72 23.635 1.45 23.95 1.285 24.325C1.135 24.7 1.045 25.075 1.045 25.495Z"
                                         stroke="#007A70" stroke-width="1.5" stroke-miterlimit="10"/>
@@ -19,32 +18,31 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-6">
                         <div class="logo text-lg-center">
-                            <a href="{{route("home")}}">
+                            <a href="{{route('home')}}">
                                 <img src="{{$image["logo"]}}" alt="logo">
                             </a>
                         </div>
                     </div>
+
                     <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-8 col-6">
                         <div class="header__bottom-right d-flex justify-content-end align-items-center pl-30">
-                            <div class="d-none d-md-flex align-items-center ml-20 pl-20">
+                            <div class="d-flex align-items-center ml-20 pl-20">
                                 <div class="header__login-icon mr-10">
                                     <a href="{{route('login')}}">
-                                        <svg width="16" height="18" viewBox="0 0 12 14" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="16" height="18" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M5.99995 6.83333C7.61078 6.83333 8.91662 5.5275 8.91662 3.91667C8.91662 2.30584 7.61078 1 5.99995 1C4.38912 1 3.08328 2.30584 3.08328 3.91667C3.08328 5.5275 4.38912 6.83333 5.99995 6.83333Z"
-                                                stroke="#031220" stroke-width="1.2" stroke-linecap="round"
-                                                stroke-linejoin="round"/>
+                                                stroke="#031220" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                                             <path
                                                 d="M11.0108 12.6667C11.0108 10.4092 8.76497 8.58333 5.99997 8.58333C3.23497 8.58333 0.989136 10.4092 0.989136 12.6667"
-                                                stroke="#031220" stroke-width="1.2" stroke-linecap="round"
-                                                stroke-linejoin="round"/>
+                                                stroke="#031220" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
                                     </a>
                                 </div>
-                                <div class="header__login-content">
+                                <div class="header__login-content d-none d-lg-block">
                                     <p>
                                         <a href="{{route('login')}}">
                                             @if(auth()->user())
@@ -56,9 +54,9 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="header__hamburger ml-50 d-lg-none">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#offcanvasmodal"
-                                        class="hamurger-btn">
+
+                            <div class="header__hamburger d-lg-none ml-20 mt-2">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#offcanvasmodal" class="hamurger-btn">
                                     <span></span>
                                     <span></span>
                                     <span></span>
@@ -67,6 +65,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         <div class="header__menu theme-bg-3 d-none d-lg-block">
