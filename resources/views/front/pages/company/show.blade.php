@@ -494,25 +494,32 @@
                                                                     <a href="{{url($related->link)}}">
                                                                         <div class="course__thumb-2 w-img">
                                                                             @if($related->image)
-                                                                                <img src="{{$related->image_url}}" class="card-img-top" alt="">
+                                                                                <img src="{{$related->image_url}}"
+                                                                                     class="card-img-top" alt="">
                                                                             @else
-                                                                                <img src="{{ asset("images/noImage2.webp") }}" class="card-img-top" alt="">
+                                                                                <img
+                                                                                    src="{{ asset("images/noImage2.webp") }}"
+                                                                                    class="card-img-top" alt="">
                                                                             @endif
                                                                         </div>
                                                                     </a>
                                                                     <div class="card-body d-flex flex-column">
-                                                                        <div class="course__top-2 d-flex flex-wrap mb-2">
+                                                                        <div
+                                                                            class="course__top-2 d-flex flex-wrap mb-2">
                                                                             @if(count($related->courses) > 0)
                                                                                 @foreach($related->courses->take(5) as $course)
-                                                                                    <div class="course__tag-2 mr-10 {{ \App\Service\Helper::randColor() }}">
+                                                                                    <div
+                                                                                        class="course__tag-2 mr-10 {{ \App\Service\Helper::randColor() }}">
                                                                                         <a>{{ strtoupper($course->name) }}</a>
                                                                                     </div>
                                                                                 @endforeach
                                                                             @endif
                                                                         </div>
                                                                         <h3 class="mt-auto">
-                                                                            <a href="{{url($related->link)}}" class="stretched-link">
-                                                                                <span style="font-size: medium">{{$related->name}}</span>
+                                                                            <a href="{{url($related->link)}}"
+                                                                               class="stretched-link">
+                                                                                <span
+                                                                                    style="font-size: medium">{{$related->name}}</span>
                                                                             </a>
                                                                         </h3>
                                                                     </div>
@@ -639,27 +646,50 @@
                                 <div class="row gx-3">
                                     <div class="col-xl-12">
                                         <div class="course__popup-input">
-                                            <input type="text" name="name" placeholder="Ad Soyad">
+                                            <input type="text" name="customer_name" required placeholder="Ad Soyad">
                                             <span class="course__popup-input-icon"><i
                                                     class="fa-light fa-user"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
                                         <div class="course__popup-input">
-                                            <input type="email" name="email" placeholder="Email">
+                                            <input type="email" name="customer_email" required placeholder="E Mail">
                                             <span class="course__popup-input-icon"><i class="fa-light fa-envelope"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="course__popup-input">
+                                            <select class="select-furkan" name="customer_city" id="citySelect" required
+                                                    onchange="updateDistricts()">
+                                                <option value="">Seciniz</option>
+                                            </select>
+                                            <span class="course__popup-input-icon icon-furkan"><i
+                                                    class="fa-light fa-home"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="course__popup-input">
+                                            <select class="select-furkan" name="customer_district" required
+                                                    id="districtSelect">
+                                                <option value="">Önce ili seçiniz</option>
+                                            </select>
+                                            <span class="course__popup-input-icon icon-furkan"><i
+                                                    class="fa-light fa-home"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
                                         <div class="course__popup-input">
-                                            <input type="text" name="phone" placeholder="Telefon">
+                                            <input type="text" name="customer_phone" required
+                                                   placeholder="Telefon"
+                                                   oninput="formatPhoneNumber(this)"
+                                                   maxlength="10">
                                             <span class="course__popup-input-icon"><i
                                                     class="fa-light fa-phone"></i></span>
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
                                         <div class="course__popup-input">
-                                            <input type="text" name="content" placeholder="Mesajınız">
+                                            <input type="text" name="customer_content" placeholder="Mesajınız">
                                             <span class="course__popup-input-icon"><i
                                                     class="fa-light fa-comment"></i></span>
                                         </div>
@@ -715,10 +745,40 @@
             margin-left: 5px;
         }
     </style>
+    <style>
+        .select-furkan {
+            margin-top: 4px;
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            text-align: left;
+            padding: 0 20px;
+            padding-left: 40px;
+            border: 1px solid #e4e4e4;
+            background-color: white;
+        }
 
+        .icon-furkan {
+            margin-top: 1.5rem;
+        }
+    </style>
 @endpush
 
 @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Telefon numarası alanı düzenleme
+            var phoneInput = document.getElementById('phone');
+            if (phoneInput && phoneInput.value) {
+                formatPhoneNumber(phoneInput);
+            }
+
+            // İl ve İlçe bilgilerinin doldurulması
+            fetchProvinces();
+            formatPhoneNumber();
+
+        });
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             new Swiper(".swiper-container", {

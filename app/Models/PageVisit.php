@@ -13,11 +13,10 @@ class PageVisit extends Model
     protected $fillable = [
         'ip_address',
         'url',
-        'referrer',
         'user_agent',
-        'user_id',
         'visited_at',
         'seo_link',
+        'device_type',
     ];
 
     public function company(): BelongsTo

@@ -17,6 +17,8 @@ class UserCompanyContact extends Model
         "customer_email",
         "customer_phone",
         "customer_content",
+        "customer_city",
+        "customer_district",
         "review",
         "assign"
     ];

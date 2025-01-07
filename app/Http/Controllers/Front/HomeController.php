@@ -60,24 +60,27 @@ class HomeController extends Controller
     public function createContact(Request $request, $id): RedirectResponse
     {
         $request->validate([
-            "company_id" => "required",
             "customer_name" => "required",
             "customer_email" => "required",
+            "customer_city" => "required",
+            "customer_district" => "required",
             "customer_phone" => "required",
-            "customer_content" => "required",
         ]);
 
         $model = new UserCompanyContact();
         $model->forceFill([
             "company_id" => $id,
-            "customer_name" => $request->get("name"),
-            "customer_email" => $request->get("email"),
-            "customer_phone" => $request->get("phone"),
-            "customer_content" => $request->get("content"),
+            "customer_name" => $request->get("customer_name"),
+            "customer_email" => $request->get("customer_email"),
+            "customer_phone" => $request->get("customer_phone"),
+            "customer_content" => $request->get("customer_content"),
+            "customer_city" => $request->get("customer_city"),
+            "customer_district" => $request->get("customer_district"),
             "review" => false,
+            "assign" => false,
         ])->save();
 
-        return redirect()->back()->with("success", "İşlem Başarılı");
+        return redirect()->back()->with("success", "Başvurunuz Alınmıştır.");
     }
 
     public function createComment(Request $request, $userId, $companyId): RedirectResponse

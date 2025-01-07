@@ -125,7 +125,18 @@ Route::prefix("account")->group(function () {
     Route::post("profile-update", [ProfileController::class, "update"])->name("merchant.account.profile.update");
 
     Route::get("orders", [OrderController::class, "index"])->name("merchant.account.order.index");
-    Route::get("order/payment/{order_id}", [OrderController::class, "payment"])->name("merchant.account.order.payment");
+    Route::get("order/payment/{order_id}/list", [OrderController::class, "payment"])->name("merchant.account.order.payment");
     Route::post("order/payment/{order_id}", [OrderController::class, "paymentPost"])->name("merchant.account.order.payment");
     Route::get("orders/billing/{order_id}", [OrderController::class, "billing"])->name("merchant.account.order.billing");
+});
+
+Route::prefix("reports")->group(function () {
+
+    Route::prefix("companies")->group(function () {
+        Route::get("/", [\App\Http\Controllers\Merchant\Report\CompanyController::class, "index"])
+            ->name("merchant.reports.companies.index");
+        Route::get("/{company_id}", [\App\Http\Controllers\Merchant\Report\CompanyController::class, "show"])
+            ->name("merchant.reports.companies.show");
+    });
+
 });

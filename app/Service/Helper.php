@@ -2,7 +2,9 @@
 
 namespace App\Service;
 
+use App\Models\Company;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
 class Helper
@@ -177,6 +179,41 @@ class Helper
         }
 
         return $code;
+    }
+
+    public static function calculateCompletionRate($companyId): int
+    {
+        $rating = 0;
+
+        // Şirketi getirme
+        $company = Company::findOrFail($companyId);
+
+        // Şirket tablosunun kolonlarını al
+        $columns = Schema::getColumnListing('companies');
+
+        // Kolonları kontrol et
+        foreach ($columns as $column) {
+            if (!empty($company->$column)) {
+                $rating++;
+            }
+        }
+
+        // İlişkili verileri kontrol et
+        $relations = ['users', 'price', 'sss', 'features', 'info', 'images', 'courses'];
+
+        foreach ($relations as $relation) {
+            if (method_exists($company, $relation) && $company->$relation()->exists()) {
+                $rating++;
+            }
+        }
+
+        // Maksimum doluluk oranını hesapla
+        $maxRating = count($columns) + count($relations);
+
+        // Yüzdelik oranı hesapla ve tam sayıya yuvarla
+        $completionRate = ($rating / $maxRating) * 100;
+
+        return (int)round($completionRate);
     }
 
 

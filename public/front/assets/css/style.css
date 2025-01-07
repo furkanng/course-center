@@ -4720,6 +4720,16 @@ input[type=color] {
   padding-left: 40px;
   border: 1px solid #e4e4e4;
 }
+
+.course__popup-input input {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: left;
+    padding: 0 20px;
+    padding-left: 40px;
+    border: 1px solid #e4e4e4;
+}
 .course__popup-input input::placeholder {
   color: #6f7172;
 }

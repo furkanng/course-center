@@ -300,3 +300,14 @@ Route::prefix("contacts")->group(function () {
             'destroy' => 'panel.contacts.bulletin.destroy',
         ]);
 });
+
+Route::prefix("reports")->group(function () {
+
+    Route::prefix("companies")->group(function () {
+        Route::get("/", [\App\Http\Controllers\Panel\Report\CompanyController::class, "index"])
+            ->name("panel.reports.companies.index");
+        Route::get("/{company_id}", [\App\Http\Controllers\Panel\Report\CompanyController::class, "show"])
+            ->name("panel.reports.companies.show");
+    });
+
+});

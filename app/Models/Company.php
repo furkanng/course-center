@@ -106,6 +106,11 @@ class Company extends Model
         return $this->hasMany(UserCompanyRequest::class, 'company_id', "id");
     }
 
+    public function contact(): HasMany
+    {
+        return $this->hasMany(UserCompanyContact::class, 'company_id', "id");
+    }
+
     public function comments(): HasMany
     {
         return $this->hasMany(CompanyComments::class)->where("status", true)->orderBy("created_at");
