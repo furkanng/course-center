@@ -96,11 +96,13 @@
                             <div class="footer__bottom-link">
                                 <ul>
                                     <li>{{ $language["text_3"] }}</li>
+                                    {{--
                                     <li>
                                         <a href="https://furkanguzelgorur.com" target="_blank">
                                             Furkan Güzelgörür Yazılım
                                         </a>
                                     </li>
+                                    --}}
                                 </ul>
                             </div>
                         </div>

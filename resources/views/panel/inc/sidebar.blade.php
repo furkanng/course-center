@@ -64,8 +64,15 @@
                         <li class="nav-item {{ request()->routeIs('panel.config.most-search.*') ? 'active' : '' }}">
                             <a class="nav-link {{ request()->routeIs('panel.config.most-search.*') ? 'active' : '' }}"
                                href="{{route("panel.config.most-search.index")}}">
-                                <span class="sidenav-mini-icon"> E </span>
+                                <span class="sidenav-mini-icon"> Ea </span>
                                 <span class="sidenav-normal"> En Çok Arananlar </span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ request()->routeIs('panel.config.most-preference.*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('panel.config.most-preference.*') ? 'active' : '' }}"
+                               href="{{route("panel.config.most-preference.index")}}">
+                                <span class="sidenav-mini-icon"> ET </span>
+                                <span class="sidenav-normal"> En Çok Tercih Edilenler </span>
                             </a>
                         </li>
                         <li class="nav-item {{ request()->routeIs('panel.config.plans.*') ? 'active' : '' }}">

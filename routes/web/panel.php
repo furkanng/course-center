@@ -10,6 +10,7 @@ use App\Http\Controllers\Panel\Company\SssController;
 use App\Http\Controllers\Panel\Company\TypeController;
 use App\Http\Controllers\Panel\Config\FrontImagesController;
 use App\Http\Controllers\Panel\Config\LanguageController;
+use App\Http\Controllers\Panel\Config\MostPreferenceController;
 use App\Http\Controllers\Panel\Config\MostSearchController;
 use App\Http\Controllers\Panel\Config\OrderController;
 use App\Http\Controllers\Panel\Config\PageController;
@@ -66,6 +67,16 @@ Route::prefix("site-config")->group(function () {
             'update' => 'panel.config.most-search.update',
             'edit' => 'panel.config.most-search.edit',
             'destroy' => 'panel.config.most-search.destroy',
+        ]);
+
+    Route::resource('most-preference', MostPreferenceController::class)
+        ->parameters(['most-preference' => 'id'])->names([
+            'index' => 'panel.config.most-preference.index',
+            'create' => 'panel.config.most-preference.create',
+            'store' => 'panel.config.most-preference.store',
+            'update' => 'panel.config.most-preference.update',
+            'edit' => 'panel.config.most-preference.edit',
+            'destroy' => 'panel.config.most-preference.destroy',
         ]);
 
     Route::resource('plans', PlanController::class)

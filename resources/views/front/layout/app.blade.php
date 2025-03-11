@@ -12,7 +12,8 @@
     <link href="{{asset("panel/assets/css/style.css")}}" rel="stylesheet"/>
 
     <!-- Swipper js -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
     <!-- CSS here -->
     <link rel="stylesheet" href="{{asset('front/assets/css/bootstrap.css')}}">

@@ -65,6 +65,35 @@
     </section>
     <!-- slider area end -->
 
+    <section class="certificate__area pb-60 pt-60">
+        <div class="container">
+            <div class="certificate__inner grey-bg-9 p-relative">
+                <div class="certificate__thumb">
+                    <img style="width: 523px; height: 400px" src="https://hangiderslig.com/storage/company_images/173559394695.jpeg" alt="">
+                </div>
+                <div class="row">
+                    <div class="col-xxl-7">
+                        <div class="certificate__content">
+                            <div class="section__title-wrapper mb-10">
+                                <span class="section__title-pre-3">{{$language["text_20"]}}</span>
+                                <h2 class="section__title section__title-44">ÖZEL KURSOLOJİ ÖZEL ÖĞRETİM KURSU</h2>
+                            </div>
+                            <p>Tüm sınavlara hazırlık bizden yapılır</p>
+                            <div class="certificate__links d-sm-flex align-items-center">
+                                <a href="https://www.youtube.com/watch?v=4XGLPTtn4xQ" class="play-video popup-video"><i class="fa-solid fa-eye"></i>İncele</a>
+
+                                <ul>
+                                    <li><a href="tel:+905511074559">Bize Ulaşın</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
     <section class="category__area pt-105 pb-70">
         <div class="container">
             <div class="row">
@@ -225,6 +254,12 @@
             </div>
         </div>
     </section>
-    <!-- course area end -->
+    <!-- course area
+    <section class="category__area pt-105 pb-70">
+        <div class="container">
 
+            <x-front-banner/>
+        </div>
+    </section>
+    -->
 @endsection

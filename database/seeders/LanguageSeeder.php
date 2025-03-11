@@ -110,6 +110,11 @@ class LanguageSeeder extends Seeder
                     'value' => 'Herhangi bir sorunuzda altta verilen mail adresinden bize ulaşabilirsiniz',
                     "language" => 'tr'
                 ],
+                [
+                    'key' => 'text_20',
+                    'value' => 'En Çok Tercih Edilen Eğitim Kurumu',
+                    "language" => 'tr'
+                ],
             ];
 
         foreach ($defaultData as $data) {
