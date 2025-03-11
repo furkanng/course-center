@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label class="course">Adres</label>
+                                    <label class="course">İçerik</label>
                                     <textarea name="content" id="content" rows="10" cols="80">{!! $page->content !!}</textarea>
                                 </div>
                             </div>

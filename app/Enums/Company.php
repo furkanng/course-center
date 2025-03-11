@@ -4,7 +4,7 @@ namespace App\Enums;
 
 enum Company: string
 {
-    case MAX_USER_COMPANY_COUNT = '3';
+    case MAX_USER_COMPANY_COUNT = '100';
 
     public function label(): string
     {

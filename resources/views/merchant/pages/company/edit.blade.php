@@ -187,7 +187,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <h5 class="font-weight-bolder mb-4">Kurum Hakkında</h5>
-                                    <textarea type="text" name="about" placeholder="Kurum hakkında yazısı giriniz"
+                                    <textarea type="text" id="about" rows="10" name="about" placeholder="Kurum hakkında yazısı giriniz"
                                               class="form-control">{!! $company->info?->about !!}</textarea>
                                 </div>
                             </div>
@@ -517,6 +517,9 @@
         formatPhoneNumber();
 
         $('select').niceSelect();
+    </script>
+    <script>
+        CKEDITOR.replace('about');
     </script>
 @endpush
 

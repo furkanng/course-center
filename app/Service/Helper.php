@@ -99,7 +99,7 @@ class Helper
     {
         // Türkçe'ye özel büyükten küçüğe harf dönüşüm tablosu
         $turkishToLower = [
-            'I' => 'ı',
+            'I' => 'i',
             'İ' => 'i',
             'Ç' => 'ç',
             'Ğ' => 'ğ',
@@ -132,7 +132,12 @@ class Helper
 
         $lowercaseString = strtr($string, $turkishToLower);
 
-        $firstLetter = mb_strtoupper(mb_substr($lowercaseString, 0, 1, 'UTF-8'), 'UTF-8');
+        if (mb_substr($lowercaseString, 0, 1, 'UTF-8') == "i"){
+            $firstLetter = "İ";
+        }else{
+            $firstLetter = mb_strtoupper(mb_substr($lowercaseString, 0, 1, 'UTF-8'), 'UTF-8');
+        }
+
         $restOfString = mb_substr($lowercaseString, 1, null, 'UTF-8');
 
         return $firstLetter . $restOfString;
