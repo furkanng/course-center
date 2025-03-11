@@ -211,7 +211,7 @@
             </a>
         </div>
         <div class="whatsapp">
-            <a href="https://api.whatsapp.com/send?phone=905511074559" target="_blank" class="nolink" title="WhatsApp"
+            <a href="https://api.whatsapp.com/send?phone=902166067510" target="_blank" class="nolink" title="WhatsApp"
                alt="WhatsApp">
                 <i class="fab fa-whatsapp"></i>
             </a>
