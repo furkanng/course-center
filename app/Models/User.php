@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\UserRole;
 use App\Enums\UserType;
+use App\Events\SmsEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -104,6 +105,20 @@ class User extends Authenticatable
     public function companyCount(): int
     {
         return $this->companies()->count();
+    }
+
+    protected static function booted(): void
+    {
+        static::created(function ($model) {
+            $user = User::query()->findOrFail(1);
+            event(
+                new SmsEvent(
+                    $user, "Hangiderslig kullanıcı kayıt oldu : $model->name",
+                    User::class,
+                    false
+                )
+            );
+        });
     }
 
 }

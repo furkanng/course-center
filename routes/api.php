@@ -17,20 +17,24 @@ Route::group(['prefix' => 'payment'], function () {
 
 });
 
-/*
-Route::get("furkan", function () {
 
-    $users = User::query()->where("role","admin")->get();
+Route::get("furkan", function () {
+/*
+    $user = User::query()->findOrFail(5);
     event(
         new SmsEvent(
-            $users, "test mesajı 3 furkanng",
+            $user, "Hangiderslig kullanıcı kayıt oldu : $user->name",
             User::class,
-            true
+            false
         )
     );
 
-});
+    return response()->json([
+        "message" => "ok",
+    ]);
 */
+});
+
 /*
 public function sendSms()
     {

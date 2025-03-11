@@ -24,12 +24,11 @@ class SmsEvent
         protected $batch = null
     )
     {
-        $this->return = ['builder', $this->users];
     }
 
     protected function process(): array
     {
-        return $this->return;
+        return ['builder', $this->users];
     }
 
     /**
@@ -45,6 +44,17 @@ class SmsEvent
 
         if ($type === 'builder') {
             ini_set('memory_limit', '2048M');
+
+            // Kullanıcıların koleksiyon olduğunu kontrol et
+            if (!is_object($users) || !method_exists($users, 'lazy')) {
+                // Eğer koleksiyon değilse, koleksiyona çevir
+                if (is_array($users)) {
+                    $users = collect($users);
+                } else {
+                    // Tek bir kullanıcı ise, onu içeren bir koleksiyon oluştur
+                    $users = collect([$users]);
+                }
+            }
 
             $jobs = $users
                 ->lazy()
@@ -64,5 +74,4 @@ class SmsEvent
             }
         }
     }
-
 }
